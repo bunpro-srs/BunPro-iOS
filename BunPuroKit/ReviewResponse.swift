@@ -14,16 +14,16 @@ public struct ReviewResponse: Codable {
     
     public var nextReviewDate: Date? {
         
-        let allDates = data.flatMap { $0.attributes.lastStudiedAt }
+        let allDates = data.flatMap { $0.attributes.nextReviewDate }
         
-        let tmp = allDates.reduce(Date.distantPast, { $0 > $1 ? $0 : $1 }).localizedDate
+        let tmp = allDates.reduce(Date.distantFuture, { $0 < $1 ? $0 : $1 })
         return tmp == Date.distantPast ? nil: tmp
     }
     
     public var reviewsWithinNextHour: Int {
         
         let date = Date()
-        let result = data.filter({ $0.attributes.complete && $0.attributes.nextReviewDate.localizedDate.hours(from: date) <= 0 })
+        let result = data.filter({ $0.attributes.complete && $0.attributes.nextReviewDate.hours(from: date) <= 0 })
         return result.count
     }
     
@@ -43,10 +43,5 @@ extension Date {
     func isTomorrow() -> Bool {
         
         return Calendar.current.isDateInTomorrow(self)
-    }
-    
-    var localizedDate: Date {
-        
-        return addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT()))
     }
 }

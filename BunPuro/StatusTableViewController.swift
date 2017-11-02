@@ -78,12 +78,16 @@ class StatusTableViewController: UITableViewController {
     private func setup(reviews response: ReviewResponse?) {
         
         if let nextReviewDate = response?.nextReviewDate {
-            dateComponentsFormatter.unitsStyle = .short
-//            dateComponentsFormatter.includesApproximationPhrase = true
-            dateComponentsFormatter.includesTimeRemainingPhrase = true
-            dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
             
-            self.nextReviewLabel.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
+            if nextReviewDate > Date() {
+                dateComponentsFormatter.unitsStyle = .short
+                dateComponentsFormatter.includesTimeRemainingPhrase = true
+                dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
+                
+                self.nextReviewLabel.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
+            } else {
+                self.nextDayLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
+            }
         }
         
         nextHourLabel.text = "\(response?.reviewsWithinNextHour ?? 0)"

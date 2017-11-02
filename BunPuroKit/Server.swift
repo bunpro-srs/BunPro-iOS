@@ -52,13 +52,14 @@ struct CustomDecoder {
     
     static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T : Decodable {
         
-        formatter.timeZone = TimeZone(abbreviation: "CST")
-        
+        formatter.locale = Locale(identifier: "en_US")
+
         if hasMilliseconds {
-            formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         } else {
-            formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         }
+        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         
