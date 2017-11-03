@@ -36,7 +36,7 @@ struct UserNotificationCenter {
                                             content: content, trigger: trigger)
         center.add(request, withCompletionHandler: { (error) in
             if let error = error {
-                // Something went wrong
+                print(error)
             }
             
             print("Added notification for: \(date)")

@@ -1,0 +1,57 @@
+/* Class = "UILabel"; text = "N2 and N1 comming soon."; ObjectID = "6Vc-Lo-xIJ"; */
+"6Vc-Lo-xIJ.text" = "N2 and N1 comming soon.";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "7zn-LV-HCd"; */
+"7zn-LV-HCd.text" = "Detail";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "9iS-9p-zzX"; */
+"9iS-9p-zzX.text" = "Detail";
+
+/* Class = "UILabel"; text = "N4"; ObjectID = "BF1-YK-x1d"; */
+"BF1-YK-x1d.text" = "N4";
+
+/* Class = "UILabel"; text = "N3"; ObjectID = "Dr3-cV-SGp"; */
+"Dr3-cV-SGp.text" = "N3";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "G7M-ZD-5rX"; */
+"G7M-ZD-5rX.text" = "Detail";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "IzM-nP-Glc"; */
+"IzM-nP-Glc.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
+"J16-bo-Kj0.title" = "Loading...";
+
+/* Class = "UILabel"; text = "Next Day"; ObjectID = "N0O-ez-tJ9"; */
+"N0O-ez-tJ9.text" = "Next Day";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "QlM-tg-lb6"; */
+"QlM-tg-lb6.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "N5"; ObjectID = "aX1-aW-D3c"; */
+"aX1-aW-D3c.text" = "N5";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "frx-CG-Qat"; */
+"frx-CG-Qat.text" = "Detail";
+
+/* Class = "UILabel"; text = "Next Review"; ObjectID = "hQw-yU-T0H"; */
+"hQw-yU-T0H.text" = "Next Review";
+
+/* Class = "UITableViewSection"; headerTitle = "Progress"; ObjectID = "l8k-ny-fjF"; */
+"l8k-ny-fjF.headerTitle" = "Progress";
+
+/* Class = "UITextField"; placeholder = "API Key"; ObjectID = "lSF-ga-drx"; */
+"lSF-ga-drx.placeholder" = "API Key";
+
+/* Class = "UITableViewSection"; headerTitle = "Reviews"; ObjectID = "mDD-up-LSi"; */
+"mDD-up-LSi.headerTitle" = "Reviews";
+
+/* Class = "UILabel"; text = "Next Hour"; ObjectID = "s4X-iH-s5S"; */
+"s4X-iH-s5S.text" = "Next Hour";
+
+/* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
+"v4v-7c-p8j.title" = "Status";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "wT0-cB-9X3"; */
+"wT0-cB-9X3.text" = "Detail";
+

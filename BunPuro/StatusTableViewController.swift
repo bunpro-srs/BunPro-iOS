@@ -11,6 +11,8 @@ import BunPuroKit
 
 class StatusTableViewController: UITableViewController {
     
+    @IBOutlet weak var nextReviewTitleLabel: UILabel!
+    
     @IBOutlet weak var nextReviewLabel: UILabel!
     @IBOutlet weak var nextHourLabel: UILabel!
     @IBOutlet weak var nextDayLabel: UILabel!
@@ -58,6 +60,8 @@ class StatusTableViewController: UITableViewController {
         setup(user: userResponse)
         setup(progress: progressResponse)
         setup(reviews: reviewResponse)
+        
+        updateLastUpdatedStatus()
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
@@ -92,8 +96,13 @@ class StatusTableViewController: UITableViewController {
                 self.setup(progress: userProgress)
                 
                 self.refreshControl?.endRefreshing()
+                self.updateLastUpdatedStatus()
             }
         }
+    }
+    
+    private func updateLastUpdatedStatus() {
+        refreshControl?.attributedTitle = NSAttributedString(string: String.localizedStringWithFormat(NSLocalizedString("status.lastupdate", comment: "The last time an update was made."), DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)))
     }
     
     private func setup(user response: UserResponse?) {
@@ -108,6 +117,8 @@ class StatusTableViewController: UITableViewController {
         guard let response = response else { return }
         
         if let nextReviewDate = response.nextReviewDate {
+            
+            self.nextReviewTitleLabel.textColor = UIColor(named: "Main Tint")
             
             if nextReviewDate > Date() {
                 
@@ -125,6 +136,7 @@ class StatusTableViewController: UITableViewController {
                     self?.setup(reviews: self?.reviewResponse)
                 })
             } else {
+                self.nextReviewTitleLabel.textColor = view.tintColor
                 self.nextReviewLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }

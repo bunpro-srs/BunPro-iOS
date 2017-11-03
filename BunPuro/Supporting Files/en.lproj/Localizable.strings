@@ -1,0 +1,12 @@
+/* No comment provided by engineer. */
+"notification.review.message" = "New Reviews are available.";
+
+/* No comment provided by engineer. */
+"notification.review.title" = "Reviews";
+
+/* The string that indicates that a review is available */
+"reviewtime.now" = "Now";
+
+/* The last time an update was made. */
+"status.lastupdate" = "Last update: %@";
+

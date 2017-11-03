@@ -264,6 +264,7 @@
                         <outlet property="nextDayLabel" destination="9iS-9p-zzX" id="Acl-xX-edP"/>
                         <outlet property="nextHourLabel" destination="frx-CG-Qat" id="Ake-oO-4QW"/>
                         <outlet property="nextReviewLabel" destination="wT0-cB-9X3" id="3bx-95-71H"/>
+                        <outlet property="nextReviewTitleLabel" destination="hQw-yU-T0H" id="l18-TC-Fky"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90t-Ga-spj" userLabel="First Responder" sceneMemberID="firstResponder"/>

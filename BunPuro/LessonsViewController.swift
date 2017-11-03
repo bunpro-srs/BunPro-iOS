@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  LessonsViewController.swift
 //  BunPuro
 //
 //  Created by Andreas Braun on 26.10.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class LessonsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
