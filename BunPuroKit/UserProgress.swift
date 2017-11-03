@@ -8,10 +8,10 @@ public struct UserProgress: Codable {
         public let current: Int
         public let max: Int
         
-        public var progress: Double {
+        public var progress: Float {
             guard max > 0 else { return 0.0 }
             
-            return Double(current) / Double(max)
+            return Float(current) / Float(max)
         }
         
         public var localizedProgress: String? {

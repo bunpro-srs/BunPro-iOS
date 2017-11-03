@@ -16,8 +16,13 @@ class StatusTableViewController: UITableViewController {
     @IBOutlet weak var nextDayLabel: UILabel!
     
     @IBOutlet weak var n5DetailLabel: UILabel!
+    @IBOutlet weak var n5ProgressView: UIProgressView!
+    
     @IBOutlet weak var n4DetailLabel: UILabel!
+    @IBOutlet weak var n4ProgressView: UIProgressView!
+    
     @IBOutlet weak var n3DetailLabel: UILabel!
+    @IBOutlet weak var n3ProgressView: UIProgressView!
     
     var userResponse: UserResponse?
     var progressResponse: UserProgress?
@@ -25,9 +30,30 @@ class StatusTableViewController: UITableViewController {
     
     private let dateComponentsFormatter = DateComponentsFormatter()
     
+    private var timer: Timer? = nil { didSet { timer?.tolerance = 10.0 } }
+    private var becomeInactiveObserver: NSObjectProtocol?
+    private var becomeActiveObserver: NSObjectProtocol?
+    
+    deinit {
+        if becomeActiveObserver != nil {
+            NotificationCenter.default.removeObserver(becomeActiveObserver!)
+        }
+        
+        if becomeInactiveObserver != nil {
+            NotificationCenter.default.removeObserver(becomeInactiveObserver!)
+        }
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        becomeActiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) in
+            self?.setup(reviews: self?.reviewResponse)
+        }
+        
+        becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
+            self?.timer?.invalidate()
+        }
         
         setup(user: userResponse)
         setup(progress: progressResponse)
@@ -72,33 +98,53 @@ class StatusTableViewController: UITableViewController {
     
     private func setup(user response: UserResponse?) {
         
-        self.navigationItem.title = response?.user.name ?? self.navigationItem.title
+        guard let response = response else { return }
+        
+        self.navigationItem.title = response.user.name
     }
     
     private func setup(reviews response: ReviewResponse?) {
         
-        if let nextReviewDate = response?.nextReviewDate {
+        guard let response = response else { return }
+        
+        if let nextReviewDate = response.nextReviewDate {
             
             if nextReviewDate > Date() {
+                
+                UserNotificationCenter.shared.scheduleNextReviewNotification(at: nextReviewDate)
+                
                 dateComponentsFormatter.unitsStyle = .short
                 dateComponentsFormatter.includesTimeRemainingPhrase = true
                 dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
                 
                 self.nextReviewLabel.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
+                
+                timer?.invalidate()
+                
+                timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { [weak self] (_) in
+                    self?.setup(reviews: self?.reviewResponse)
+                })
             } else {
-                self.nextDayLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
+                self.nextReviewLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }
         
-        nextHourLabel.text = "\(response?.reviewsWithinNextHour ?? 0)"
-        nextDayLabel.text = "\(response?.reviewsTomorrow ?? 0)"
+        nextHourLabel.text = "\(response.reviewsWithinNextHour)"
+        nextDayLabel.text = "\(response.reviewsTomorrow)"
     }
     
     private func setup(progress response: UserProgress?) {
         
-        n5DetailLabel.text = response?.n5.localizedProgress ?? "none"
-        n4DetailLabel.text = response?.n4.localizedProgress ?? "none"
-        n3DetailLabel.text = response?.n3.localizedProgress ?? "none"
+        guard let response = response else { return }
+        
+        n5DetailLabel.text = response.n5.localizedProgress ?? n5DetailLabel.text
+        n5ProgressView.progress = response.n5.progress
+        
+        n4DetailLabel.text = response.n4.localizedProgress ?? n4DetailLabel.text
+        n4ProgressView.progress = response.n4.progress
+        
+        n3DetailLabel.text = response.n3.localizedProgress ?? n3DetailLabel.text
+        n3ProgressView.progress = response.n3.progress
     }
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
 		2EAD9DD81FA25DF100CE52CF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD71FA25DF100CE52CF /* SecondViewController.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
+				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
 				2EF752121FAA3644000A2975 /* TokenViewController.swift */,
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
 				2EAD9DD71FA25DF100CE52CF /* SecondViewController.swift */,
@@ -492,6 +495,7 @@
 			files = (
 				2EF752131FAA3644000A2975 /* TokenViewController.swift in Sources */,
 				2EAD9DD81FA25DF100CE52CF /* SecondViewController.swift in Sources */,
+				2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
