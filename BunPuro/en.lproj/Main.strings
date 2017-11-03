@@ -38,7 +38,7 @@
 "hQw-yU-T0H.text" = "Next Review";
 
 /* Class = "UITableViewSection"; headerTitle = "Progress"; ObjectID = "l8k-ny-fjF"; */
-"l8k-ny-fjF.headerTitle" = "Progress";
+"l8k-ny-fjF.headerTitle" = "Lessons";
 
 /* Class = "UITextField"; placeholder = "API Key"; ObjectID = "lSF-ga-drx"; */
 "lSF-ga-drx.placeholder" = "API Key";

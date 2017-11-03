@@ -10,6 +10,14 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
+/*
+ bunpro.jp/api/v1/users/[:key]                  <- Gets user info
+ bunpro.jp/api/v1/users/[:key]/user_progress    <- Gets lesson progress
+ bunpro.jp/api/v1/users/[:key]/all_reviews      <- Gets all reviews for user
+ bunpro.jp/api/v1/users/[:key]/current_reviews  <- Gets current reviews
+ bunpro.jp/api/v1/grammar_points/[:key]         <- Gets all grammar points
+ */
+
 public struct Server {
     
     enum ServerError: Error {
@@ -18,20 +26,50 @@ public struct Server {
     
     public static var apiToken: String!
     
-    public static func updatedUser(completion: @escaping (UserResponse?, Error?) -> Void) {
+    public static var userResponse: UserResponse?
+    public static var userProgress: UserProgress?
+    public static var reviewResponse: ReviewResponse?
+    
+    public static func updatedUser(completion: @escaping (Error?) -> Void) {
         
-        guard apiToken != nil else { completion(nil, ServerError.noAPIToken); return }
+        guard apiToken != nil else {
+            
+            DispatchQueue.main.async {
+                completion(ServerError.noAPIToken)
+            }
+            return
+        }
         
-        let userProcedure = UserProcedure(completion: completion)
+        let userProcedure = UserProcedure { (response, error) in
+            
+            DispatchQueue.main.async {
+                self.userResponse = response
+                completion(error)
+            }
+        }
         
         NetworkHandler.shared.queue.add(operation: userProcedure)
     }
     
-    public static func updatedStatus(completion: @escaping (UserResponse?, UserProgress?, ReviewResponse?, Error?) -> Void) {
+    public static func updatedStatus(completion: @escaping (Error?) -> Void) {
         
-        guard apiToken != nil else { completion(nil, nil, nil, ServerError.noAPIToken); return }
+        guard apiToken != nil else {
+            
+            DispatchQueue.main.async {
+                completion(ServerError.noAPIToken)
+            }
+            return
+        }
         
-        let statusProcedure = StatusProcedure(completion: completion)
+        let statusProcedure = StatusProcedure { (userResponse, userProgress, reviewResponse, error) in
+            
+            DispatchQueue.main.async {
+                self.userResponse = userResponse
+                self.userProgress = userProgress
+                self.reviewResponse = reviewResponse
+                completion(error)
+            }
+        }
         
         NetworkHandler.shared.queue.add(operation: statusProcedure)
     }

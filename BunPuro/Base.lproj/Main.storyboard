@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -113,30 +114,30 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Progress" id="l8k-ny-fjF">
+                            <tableViewSection headerTitle="Lessons" id="l8k-ny-fjF">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="yDE-5X-cUz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="yDE-5X-cUz">
                                         <rect key="frame" x="0.0" y="188" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yDE-5X-cUz" id="VX5-nM-xt0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HK3-J1-mQ1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.5"/>
                                                     <color key="progressTintColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqI-vr-cFI">
-                                                    <rect key="frame" x="20" y="12" width="335" height="20.5"/>
+                                                    <rect key="frame" x="20" y="12" width="321" height="20.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="N5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX1-aW-D3c">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7M-ZD-5rX">
-                                                            <rect key="frame" x="291" y="0.0" width="44" height="20.5"/>
+                                                            <rect key="frame" x="277" y="0.0" width="44" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -151,33 +152,39 @@
                                                 <constraint firstAttribute="trailing" secondItem="HK3-J1-mQ1" secondAttribute="trailing" id="acV-nA-LYX"/>
                                                 <constraint firstItem="PqI-vr-cFI" firstAttribute="leading" secondItem="VX5-nM-xt0" secondAttribute="leading" constant="20" symbolic="YES" id="bdg-Nf-fm2"/>
                                                 <constraint firstItem="HK3-J1-mQ1" firstAttribute="top" secondItem="VX5-nM-xt0" secondAttribute="top" id="grw-Pv-ly9"/>
-                                                <constraint firstAttribute="trailing" secondItem="PqI-vr-cFI" secondAttribute="trailing" constant="20" symbolic="YES" id="loh-2b-LOD"/>
+                                                <constraint firstAttribute="trailing" secondItem="PqI-vr-cFI" secondAttribute="trailing" id="loh-2b-LOD"/>
                                                 <constraint firstAttribute="bottom" secondItem="PqI-vr-cFI" secondAttribute="bottom" constant="11" id="tYp-1x-LAB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bja-Sc-W04" kind="show" identifier="showN5Grammar" id="H9G-Fc-TSe">
+                                                <segue key="commit" inheritsFrom="parent" id="fK9-wY-OpZ"/>
+                                                <segue key="preview" inheritsFrom="commit" id="TiM-rY-l1a"/>
+                                            </segue>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="UhJ-X3-ec4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="UhJ-X3-ec4">
                                         <rect key="frame" x="0.0" y="232" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UhJ-X3-ec4" id="ALL-7a-j8W">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="O0x-Fp-Jk4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.5"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t25-sq-JeB">
-                                                    <rect key="frame" x="20" y="12" width="335" height="20.5"/>
+                                                    <rect key="frame" x="20" y="12" width="321" height="20.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="N4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BF1-YK-x1d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzM-nP-Glc">
-                                                            <rect key="frame" x="291" y="0.0" width="44" height="20.5"/>
+                                                            <rect key="frame" x="277" y="0.0" width="44" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -187,7 +194,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="O0x-Fp-Jk4" secondAttribute="bottom" id="00y-gm-ydC"/>
-                                                <constraint firstAttribute="trailing" secondItem="t25-sq-JeB" secondAttribute="trailing" constant="20" symbolic="YES" id="4iS-Zb-XE6"/>
+                                                <constraint firstAttribute="trailing" secondItem="t25-sq-JeB" secondAttribute="trailing" id="4iS-Zb-XE6"/>
                                                 <constraint firstItem="O0x-Fp-Jk4" firstAttribute="leading" secondItem="ALL-7a-j8W" secondAttribute="leading" id="VN2-Q5-FCj"/>
                                                 <constraint firstAttribute="bottom" secondItem="t25-sq-JeB" secondAttribute="bottom" constant="11" id="VY2-0b-6MQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="O0x-Fp-Jk4" secondAttribute="trailing" id="bLb-EU-jGH"/>
@@ -196,29 +203,35 @@
                                                 <constraint firstItem="O0x-Fp-Jk4" firstAttribute="top" secondItem="ALL-7a-j8W" secondAttribute="top" id="tbV-If-KDi"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bja-Sc-W04" kind="show" identifier="showN4Grammar" id="cKR-F2-Eqv">
+                                                <segue key="commit" inheritsFrom="parent" id="8A8-12-MKP"/>
+                                                <segue key="preview" inheritsFrom="commit" id="oIl-kD-VvS"/>
+                                            </segue>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="k9m-pC-Xpq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="k9m-pC-Xpq">
                                         <rect key="frame" x="0.0" y="276" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k9m-pC-Xpq" id="PHY-bn-8EW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Vra-P4-KwT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.5"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aH-cC-TKs">
-                                                    <rect key="frame" x="20" y="12" width="335" height="20.5"/>
+                                                    <rect key="frame" x="20" y="12" width="321" height="20.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="N3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dr3-cV-SGp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zn-LV-HCd">
-                                                            <rect key="frame" x="291" y="0.0" width="44" height="20.5"/>
+                                                            <rect key="frame" x="277" y="0.0" width="44" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -234,9 +247,15 @@
                                                 <constraint firstItem="Vra-P4-KwT" firstAttribute="leading" secondItem="PHY-bn-8EW" secondAttribute="leading" id="VPh-cg-Wzi"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vra-P4-KwT" secondAttribute="trailing" id="cRn-nu-sEc"/>
                                                 <constraint firstAttribute="bottom" secondItem="Vra-P4-KwT" secondAttribute="bottom" id="dwa-zO-4HJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="8aH-cC-TKs" secondAttribute="trailing" constant="20" symbolic="YES" id="dxt-ip-TEe"/>
+                                                <constraint firstAttribute="trailing" secondItem="8aH-cC-TKs" secondAttribute="trailing" id="dxt-ip-TEe"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bja-Sc-W04" kind="show" identifier="showN3Grammar" id="g7g-eb-XgO">
+                                                <segue key="commit" inheritsFrom="parent" id="qtn-72-cfV"/>
+                                                <segue key="preview" inheritsFrom="commit" id="jxb-sd-7f3"/>
+                                            </segue>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -270,6 +289,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90t-Ga-spj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1655" y="-293"/>
+        </scene>
+        <!--N5-->
+        <scene sceneID="c8e-hS-toG">
+            <objects>
+                <tableViewController id="bja-Sc-W04" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="A0a-sO-8ZX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LdK-8Y-0GH">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LdK-8Y-0GH" id="Elu-qW-m1c">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bja-Sc-W04" id="MOe-pM-gHH"/>
+                            <outlet property="delegate" destination="bja-Sc-W04" id="9Zb-Dl-r1b"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="N5" id="idR-FT-oYU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRH-N2-0nk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2458" y="-294"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -363,5 +411,8 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="g7g-eb-XgO"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

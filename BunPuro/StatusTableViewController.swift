@@ -26,10 +26,6 @@ class StatusTableViewController: UITableViewController {
     @IBOutlet weak var n3DetailLabel: UILabel!
     @IBOutlet weak var n3ProgressView: UIProgressView!
     
-    var userResponse: UserResponse?
-    var progressResponse: UserProgress?
-    var reviewResponse: ReviewResponse?
-    
     private let dateComponentsFormatter = DateComponentsFormatter()
     
     private var timer: Timer? = nil { didSet { timer?.tolerance = 10.0 } }
@@ -50,16 +46,16 @@ class StatusTableViewController: UITableViewController {
         super.viewDidLoad()
         
         becomeActiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) in
-            self?.setup(reviews: self?.reviewResponse)
+            self?.setup(reviews: Server.reviewResponse)
         }
         
         becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
             self?.timer?.invalidate()
         }
         
-        setup(user: userResponse)
-        setup(progress: progressResponse)
-        setup(reviews: reviewResponse)
+        setup(user: Server.userResponse)
+        setup(progress: Server.userProgress)
+        setup(reviews: Server.reviewResponse)
         
         updateLastUpdatedStatus()
     }
@@ -69,11 +65,20 @@ class StatusTableViewController: UITableViewController {
         refreshStatus()
     }
     
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        if indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 2) {
+            return nil
+        }
+        
+        return indexPath
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         if indexPath.section == 0 && indexPath.row == 0 {
+            
+            tableView.deselectRow(at: indexPath, animated: true)
             
             let alertController = UIAlertController(title: "Uh oh", message: "Not yet implemented ;_;", preferredStyle: .alert)
             
@@ -86,18 +91,16 @@ class StatusTableViewController: UITableViewController {
     }
     
     private func refreshStatus() {
-                
-        Server.updatedStatus { (userResponse, userProgress, reviewResponse, error) in
+        
+        Server.updatedStatus { (error) in
+            guard error == nil else { self.refreshControl?.endRefreshing(); return }
             
-            DispatchQueue.main.async {
-                
-                self.setup(user: userResponse)
-                self.setup(reviews: reviewResponse)
-                self.setup(progress: userProgress)
-                
-                self.refreshControl?.endRefreshing()
-                self.updateLastUpdatedStatus()
-            }
+            self.setup(user: Server.userResponse)
+            self.setup(progress: Server.userProgress)
+            self.setup(reviews: Server.reviewResponse)
+            
+            self.refreshControl?.endRefreshing()
+            self.updateLastUpdatedStatus()
         }
     }
     
@@ -133,7 +136,7 @@ class StatusTableViewController: UITableViewController {
                 timer?.invalidate()
                 
                 timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { [weak self] (_) in
-                    self?.setup(reviews: self?.reviewResponse)
+                    self?.setup(reviews: Server.reviewResponse)
                 })
             } else {
                 self.nextReviewTitleLabel.textColor = view.tintColor
@@ -159,4 +162,25 @@ class StatusTableViewController: UITableViewController {
         n3ProgressView.progress = response.n3.progress
     }
     
+}
+
+extension StatusTableViewController: SegueHandler {
+    
+    enum SegueIdentifier: String {
+        case showN5Grammar
+        case showN4Grammar
+        case showN3Grammar
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segueIdentifier(for: segue) {
+        case .showN5Grammar:
+            segue.destination.content?.title = "N5"
+        case .showN4Grammar:
+            segue.destination.content?.title = "N4"
+        case .showN3Grammar:
+            segue.destination.content?.title = "N3"
+        }
+    }
 }

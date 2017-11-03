@@ -13,7 +13,6 @@
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
-		2EAD9DD81FA25DF100CE52CF /* LessonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD71FA25DF100CE52CF /* LessonsViewController.swift */; };
 		2EAD9DDB1FA25DF100CE52CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD91FA25DF100CE52CF /* Main.storyboard */; };
 		2EAD9DDD1FA25DF100CE52CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */; };
 		2EAD9DE01FA25DF100CE52CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAD9DDE1FA25DF100CE52CF /* LaunchScreen.storyboard */; };
@@ -112,7 +111,6 @@
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewController.swift; sourceTree = "<group>"; };
-		2EAD9DD71FA25DF100CE52CF /* LessonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsViewController.swift; sourceTree = "<group>"; };
 		2EAD9DDA1FA25DF100CE52CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAD9DDF1FA25DF100CE52CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
 				2EF752121FAA3644000A2975 /* TokenViewController.swift */,
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
-				2EAD9DD71FA25DF100CE52CF /* LessonsViewController.swift */,
 				2E3074A01FACF9A20078725B /* Protocols */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
@@ -524,7 +521,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EF752131FAA3644000A2975 /* TokenViewController.swift in Sources */,
-				2EAD9DD81FA25DF100CE52CF /* LessonsViewController.swift in Sources */,
 				2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,

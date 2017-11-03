@@ -45,21 +45,13 @@ class TokenViewController: UIViewController, SegueHandler {
             
             Server.apiToken = token
             
-            Server.updatedStatus(completion: { (userResponse, userProgress, reviews, error) in
-                guard let userResponse = userResponse,
-                    let userProgress = userProgress,
-                    let reviews = reviews else {
-                        DispatchQueue.main.async {
-                            self.displayTokenError()
-                        }
-                        return
-                }
+            Server.updatedStatus(completion: { (error) in
+                
+                guard error == nil else { self.displayTokenError(); return }
                 
                 Keychain()[KeychainAccessKey] = token
                 
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: SegueIdentifier.presentTabBarController, sender: (userResponse, userProgress, reviews))
-                }
+                self.performSegue(withIdentifier: SegueIdentifier.presentTabBarController, sender: self)
             })
             
         } else {
@@ -87,17 +79,7 @@ class TokenViewController: UIViewController, SegueHandler {
         
         switch segueIdentifier(for: segue) {
         case .presentTabBarController:
-            
-            guard let (userResponse, progessResponse, reviewResponse) = sender as? (UserResponse, UserProgress, ReviewResponse) else {
-                fatalError("No data provided.")
-            }
-            
-            let tabBarController = segue.destination as? UITabBarController
-            let statusViewController = tabBarController?.viewControllers?.first?.content as? StatusTableViewController
-            
-            statusViewController?.userResponse = userResponse
-            statusViewController?.progressResponse = progessResponse
-            statusViewController?.reviewResponse = reviewResponse
+            break // Nothing to setup
         }
     }
 
