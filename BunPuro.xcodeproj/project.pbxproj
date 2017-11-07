@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E01D1FB1FB23DE200E8632D /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D1FA1FB23DE200E8632D /* Lesson.swift */; };
+		2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */; };
+		2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */; };
+		2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2011FB2503000E8632D /* ProgressProcedure.swift */; };
+		2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */; };
+		2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */; };
+		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
+		2E01D20A1FB2528A00E8632D /* UpdateProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2091FB2528A00E8632D /* UpdateProcedure.swift */; };
+		2E01D20C1FB254A100E8632D /* GrammarPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20B1FB254A100E8632D /* GrammarPoint.swift */; };
+		2E01D20E1FB2561300E8632D /* GrammarPointsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20D1FB2561300E8632D /* GrammarPointsProcedure.swift */; };
+		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E3074951FACF9650078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074971FACF9650078725B /* InfoPlist.strings */; };
 		2E30749C1FACF9660078725B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E30749E1FACF9660078725B /* Localizable.strings */; };
@@ -23,7 +34,6 @@
 		2EAD9E1A1FA26EB400CE52CF /* BunPuroKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EAD9E0A1FA26EB400CE52CF /* BunPuroKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; };
 		2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2EAD9E271FA26EF000CE52CF /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E261FA26EF000CE52CF /* ResourceType.swift */; };
 		2EAD9E291FA26F0800CE52CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E281FA26F0800CE52CF /* User.swift */; };
 		2EAD9E2B1FA26F1100CE52CF /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */; };
 		2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2C1FA26F6C00CE52CF /* Server.swift */; };
@@ -102,6 +112,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E01D1FA1FB23DE200E8632D /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarLevelTableViewController.swift; sourceTree = "<group>"; };
+		2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProcedure.swift; sourceTree = "<group>"; };
+		2E01D2011FB2503000E8632D /* ProgressProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressProcedure.swift; sourceTree = "<group>"; };
+		2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsProcedure.swift; sourceTree = "<group>"; };
+		2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsProcedure.swift; sourceTree = "<group>"; };
+		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
+		2E01D2091FB2528A00E8632D /* UpdateProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProcedure.swift; sourceTree = "<group>"; };
+		2E01D20B1FB254A100E8632D /* GrammarPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPoint.swift; sourceTree = "<group>"; };
+		2E01D20D1FB2561300E8632D /* GrammarPointsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsProcedure.swift; sourceTree = "<group>"; };
+		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074961FACF9650078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -127,7 +148,6 @@
 		2EAD9E101FA26EB400CE52CF /* BunPuroKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunPuroKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E171FA26EB400CE52CF /* BunPuroKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroKitTests.swift; sourceTree = "<group>"; };
 		2EAD9E191FA26EB400CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAD9E261FA26EF000CE52CF /* ResourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		2EAD9E281FA26F0800CE52CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
@@ -191,6 +211,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E01D1FE1FB24FAC00E8632D /* Procedures */ = {
+			isa = PBXGroup;
+			children = (
+				2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */,
+				2E01D2011FB2503000E8632D /* ProgressProcedure.swift */,
+				2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */,
+				2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */,
+				2E01D20D1FB2561300E8632D /* GrammarPointsProcedure.swift */,
+				2E01D2071FB2524500E8632D /* StatusProcedure.swift */,
+				2E01D2091FB2528A00E8632D /* UpdateProcedure.swift */,
+			);
+			path = Procedures;
+			sourceTree = "<group>";
+		};
 		2E30749F1FACF96E0078725B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +279,8 @@
 				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
 				2EF752121FAA3644000A2975 /* TokenViewController.swift */,
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
+				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
+				2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */,
 				2E3074A01FACF9A20078725B /* Protocols */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
@@ -277,9 +313,11 @@
 				2E3074971FACF9650078725B /* InfoPlist.strings */,
 				2EAD9E0A1FA26EB400CE52CF /* BunPuroKit.h */,
 				2EAD9E2C1FA26F6C00CE52CF /* Server.swift */,
-				2EAD9E261FA26EF000CE52CF /* ResourceType.swift */,
+				2E01D1FE1FB24FAC00E8632D /* Procedures */,
 				2EAD9E281FA26F0800CE52CF /* User.swift */,
 				2EE4E78C1FA2835C0020E828 /* Review.swift */,
+				2E01D1FA1FB23DE200E8632D /* Lesson.swift */,
+				2E01D20B1FB254A100E8632D /* GrammarPoint.swift */,
 				2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */,
 				2EE4E78E1FA283650020E828 /* UserProgress.swift */,
 				2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */,
@@ -526,8 +564,10 @@
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
+				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
+				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,11 +591,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E01D20A1FB2528A00E8632D /* UpdateProcedure.swift in Sources */,
+				2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */,
+				2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */,
+				2E01D1FB1FB23DE200E8632D /* Lesson.swift in Sources */,
 				2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */,
 				2EAD9E291FA26F0800CE52CF /* User.swift in Sources */,
-				2EAD9E271FA26EF000CE52CF /* ResourceType.swift in Sources */,
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
+				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
 				2EBDC0951FA877DF00CC643D /* ReviewResponse.swift in Sources */,
+				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
+				2E01D20C1FB254A100E8632D /* GrammarPoint.swift in Sources */,
+				2E01D20E1FB2561300E8632D /* GrammarPointsProcedure.swift in Sources */,
+				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,
 				2EAD9E2B1FA26F1100CE52CF /* UserResponse.swift in Sources */,
 				2EE4E78F1FA283650020E828 /* UserProgress.swift in Sources */,
 			);

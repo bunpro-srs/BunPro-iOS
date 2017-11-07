@@ -4,7 +4,6 @@ public struct Review: Codable {
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
-        case type
         case attributes
     }
     
@@ -30,7 +29,6 @@ public struct Review: Codable {
     }
     
     public let identifier: String
-    public let type: ResourceType
     public let attributes: ReviewAttributes
 
 }

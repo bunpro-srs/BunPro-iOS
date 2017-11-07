@@ -41,6 +41,7 @@ class StatusTableViewController: UITableViewController {
             NotificationCenter.default.removeObserver(becomeInactiveObserver!)
         }
     }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -58,6 +59,13 @@ class StatusTableViewController: UITableViewController {
         setup(reviews: Server.reviewResponse)
         
         updateLastUpdatedStatus()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        setup(reviews: Server.reviewResponse)
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
@@ -121,7 +129,7 @@ class StatusTableViewController: UITableViewController {
         
         if let nextReviewDate = response.nextReviewDate {
             
-            self.nextReviewTitleLabel.textColor = UIColor(named: "Main Tint")
+            self.nextReviewTitleLabel.textColor = UIColor.black
             
             if nextReviewDate > Date() {
                 
@@ -139,7 +147,7 @@ class StatusTableViewController: UITableViewController {
                     self?.setup(reviews: Server.reviewResponse)
                 })
             } else {
-                self.nextReviewTitleLabel.textColor = view.tintColor
+                self.nextReviewTitleLabel.textColor = UIColor(named: "Main Tint")
                 self.nextReviewLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }
@@ -176,11 +184,17 @@ extension StatusTableViewController: SegueHandler {
         
         switch segueIdentifier(for: segue) {
         case .showN5Grammar:
-            segue.destination.content?.title = "N5"
+            let destination = segue.destination.content as? GrammarLevelTableViewController
+            destination?.level = 5
+            destination?.title = "N5"
         case .showN4Grammar:
-            segue.destination.content?.title = "N4"
+            let destination = segue.destination.content as? GrammarLevelTableViewController
+            destination?.level = 4
+            destination?.title = "N4"
         case .showN3Grammar:
-            segue.destination.content?.title = "N3"
+            let destination = segue.destination.content as? GrammarLevelTableViewController
+            destination?.level = 3
+            destination?.title = "N3"
         }
     }
 }

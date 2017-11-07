@@ -45,7 +45,7 @@ class TokenViewController: UIViewController, SegueHandler {
             
             Server.apiToken = token
             
-            Server.updatedStatus(completion: { (error) in
+            Server.update(completion: { (error) in
                 
                 guard error == nil else { self.displayTokenError(); return }
                 
