@@ -19,10 +19,19 @@ class GrammarLevelTableViewController: UITableViewController {
         return Server.grammarPointResponse?.grammarPoints ?? []
     }()
     
+    private var searchController: UISearchController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        definesPresentationContext = true
 
         lessons = Server.lessonResponse?.lessons.filter({ $0.level == self.level }) ?? []
+        
+        searchController = UISearchController(searchResultsController: nil)
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     // MARK: - Table view data source
