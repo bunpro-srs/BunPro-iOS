@@ -8,45 +8,49 @@
 
 import UIKit
 import BunPuroKit
+import CoreData
 
 class GrammarLevelTableViewController: UITableViewController {
 
     var level: Int = 5
     
-    private var lessons: [Lesson] = []
-    
-    private lazy var grammarPoints: [GrammarPoint] = {
-        return Server.grammarPointResponse?.grammarPoints ?? []
+    private lazy var fetchedResultsController: NSFetchedResultsController<Lesson> = {
+        let request: NSFetchRequest<Lesson> = Lesson.fetchRequest()
+        request.predicate = NSPredicate(format: "%K = %d", #keyPath(Lesson.jlpt.level), level)
+        
+        let sort = NSSortDescriptor(key: #keyPath(Lesson.order), ascending: true)
+        request.sortDescriptors = [sort]
+        
+        return NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
-    
-    private var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        definesPresentationContext = true
-
-        lessons = Server.lessonResponse?.lessons.filter({ $0.level == self.level }) ?? []
-        
-        searchController = UISearchController(searchResultsController: nil)
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+                
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print(error)
+        }
     }
 
     // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lessons.count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath)
 
-        let lesson = lessons[indexPath.row]
+        let lesson = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = "\(indexPath.row + 1)"
-        cell.detailTextLabel?.text = "\(lesson.grammarPointIds.count)"
+        cell.textLabel?.text = "\(lesson.order)"
+        cell.detailTextLabel?.text = "\(lesson.grammar?.count ?? 0)"
 
         return cell
     }
@@ -65,11 +69,7 @@ extension GrammarLevelTableViewController: SegueHandler {
             
             let destination = segue.destination.content as? GrammarPointsTableViewController
             destination?.title = "\(indexPath.row + 1)"
-            destination?.grammarPoints = self.grammarPoints(for: lessons[indexPath.row].grammarPointIds)
+            destination?.lesson = fetchedResultsController.object(at: indexPath)
         }
-    }
-    
-    private func grammarPoints(for ids: [String]) -> [GrammarPoint] {
-        return grammarPoints.filter({ ids.contains($0.id) })
     }
 }

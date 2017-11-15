@@ -100,7 +100,7 @@ class StatusTableViewController: UITableViewController {
     
     private func refreshStatus() {
         
-        Server.updatedStatus { (error) in
+        Server.updateStatus { (error) in
             guard error == nil else { self.refreshControl?.endRefreshing(); return }
             
             self.setup(user: Server.userResponse)

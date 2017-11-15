@@ -9,6 +9,7 @@
 import UIKit
 import BunPuroKit
 import KeychainAccess
+import CoreData
 
 private let KeychainAccessKey = "APIToken"
 
@@ -45,14 +46,52 @@ class TokenViewController: UIViewController, SegueHandler {
             
             Server.apiToken = token
             
-            Server.update(completion: { (error) in
+            Server.updateStatus { (error) in
                 
                 guard error == nil else { self.displayTokenError(); return }
                 
                 Keychain()[KeychainAccessKey] = token
                 
                 self.performSegue(withIdentifier: SegueIdentifier.presentTabBarController, sender: self)
-            })
+                
+                Server.updateJLPT { (jlpts, error) in
+                    guard error == nil else { return }
+                    guard let jlpts = jlpts else { return }
+                    
+                    let context = AppDelegate.coreDataStack.managedObjectContext
+                    
+                    context.perform {
+                        jlpts.forEach { (jlpt) in
+                            
+                            let newJPLT = JLPT(context: context)
+                            
+                            newJPLT.level = Int64(jlpt.level)
+                            newJPLT.name = jlpt.name
+                            
+                            jlpt.lessons.forEach { (lesson) in
+                                
+                                let newLesson = Lesson(context: context)
+                                
+                                newLesson.id = lesson.id
+                                newLesson.order = Int64(lesson.order)
+                                newLesson.jlpt = newJPLT
+                                
+                                lesson.grammar.forEach { (grammar) in
+                                    
+                                    let newGrammar = Grammar(context: context)
+                                    
+                                    newGrammar.id = grammar.id
+                                    newGrammar.lesson = newLesson
+                                    newGrammar.title = grammar.title
+                                    newGrammar.meaning = grammar.meaning
+                                }
+                            }
+                        }
+                        
+                        AppDelegate.coreDataStack.save()
+                    }
+                }
+            }
             
         } else {
             activityIndicator.stopAnimating()

@@ -33,10 +33,8 @@ public struct Server {
     public static var userResponse: UserResponse?
     public static var userProgress: UserProgress?
     public static var reviewResponse: ReviewResponse?
-    public static var lessonResponse: LessonResponse?
-    public static var grammarPointResponse: GrammarPointResponse?
     
-    public static func updatedStatus(completion: @escaping (Error?) -> Void) {
+    public static func updateStatus(indicator: NetworkActivityIndicatorProtocol?, completion: @escaping (Error?) -> Void) {
         
         guard apiToken != nil else {
             
@@ -56,33 +54,28 @@ public struct Server {
             }
         }
         
+        statusProcedure.indicator = indicator
+        
         NetworkHandler.shared.queue.add(operation: statusProcedure)
     }
     
-    public static func update(completion: @escaping (Error?) -> Void) {
+    public static func updateJLPT(completion: @escaping ([JLPT]?, Error?) -> Void) {
         guard apiToken != nil else {
             
             DispatchQueue.main.async {
-                completion(ServerError.noAPIToken)
+                completion(nil, ServerError.noAPIToken)
             }
             return
         }
         
-        let updateProcedure = UpdateProcedure {
-            (userResponse, userProgress, reviewResponse, lessonResponse, grammarPointResponse, error) in
+        let grammarProcedure = LessonsProcedure { (jlpts, error) in
             
             DispatchQueue.main.async {
-                self.userResponse = userResponse
-                self.userProgress = userProgress
-                self.reviewResponse = reviewResponse
-                self.lessonResponse = lessonResponse
-                self.grammarPointResponse = grammarPointResponse
-                completion(error)
+                completion(jlpts, error)
             }
         }
         
-        
-        NetworkHandler.shared.queue.add(operation: updateProcedure)
+        NetworkHandler.shared.queue.add(operation: grammarProcedure)
     }
 }
 

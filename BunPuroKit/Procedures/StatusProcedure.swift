@@ -15,6 +15,12 @@ class StatusProcedure: GroupProcedure, OutputProcedure {
     var output: Pending<ProcedureResult<(UserResponse, UserProgress, ReviewResponse)>> = .pending
     
     let completion: ((UserResponse?, UserProgress?, ReviewResponse?, Error?) -> Void)?
+    var indicator: NetworkActivityIndicatorProtocol? {
+        didSet {
+            guard let indicator = indicator else { return }
+            add(observer: NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: indicator)))
+        }
+    }
     
     private let _userNetworkProcedure = UserProcedure()
     private let _progressNetworkProcedure = ProgressProcedure()
@@ -25,8 +31,6 @@ class StatusProcedure: GroupProcedure, OutputProcedure {
         self.completion = completion
         
         super.init(operations: [_userNetworkProcedure, _progressNetworkProcedure, _reviewsNetworkProcedure])
-        
-        self.add(observer: NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: UIApplication.shared)))
     }
     
     override func procedureDidFinish(withErrors: [Error]) {
