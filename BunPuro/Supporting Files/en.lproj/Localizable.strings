@@ -10,3 +10,5 @@
 /* The last time an update was made. */
 "status.lastupdate" = "Last update: %@";
 
+/* Updating prompt */
+"status.updating" = "Updating...";

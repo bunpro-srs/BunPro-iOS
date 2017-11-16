@@ -15,6 +15,7 @@ public class CoreDataStack {
     
     public lazy var managedObjectContext: NSManagedObjectContext = {
         self.storeContainer.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        self.storeContainer.viewContext.stalenessInterval = 0
         return self.storeContainer.viewContext
     }()
     
@@ -22,7 +23,7 @@ public class CoreDataStack {
         self.modelName = modelName
     }
     
-    private lazy var storeContainer: NSPersistentContainer = {
+    public lazy var storeContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: self.modelName)
         
         container.loadPersistentStores { (storeDescription, error) in
@@ -33,10 +34,6 @@ public class CoreDataStack {
         
         return container
     }()
-    
-    public func newBackgroundContext() -> NSManagedObjectContext {
-        return self.storeContainer.newBackgroundContext()
-    }
     
     public func save() {
         guard managedObjectContext.hasChanges else { return }

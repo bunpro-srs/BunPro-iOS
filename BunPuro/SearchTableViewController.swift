@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BunPuroKit
 import CoreData
 
 class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -49,24 +50,71 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         searchController.searchBar.showsCancelButton = false
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
         
-        navigationItem.titleView = searchController.searchBar
-        searchController.searchBar.sizeToFit()
+        navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
         fetchedResultsController = newFetchedResultsController()
+        
         performFetch()
+        
+        loadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func loadData() {
         
-        searchController.isActive = true
-        searchController.becomeFirstResponder()
+        let stack = AppDelegate.coreDataStack
+
+        Server.updateJLPT { (jlpts, error) in
+            guard error == nil else { return }
+            guard let jlpts = jlpts else { return }
+            
+            stack.storeContainer.performBackgroundTask { (context) in
+                
+                context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+                
+                jlpts.forEach { (jlpt) in
+                    
+                    let newJPLT = JLPT(context: context)
+                    
+                    newJPLT.level = Int64(jlpt.level)
+                    newJPLT.name = jlpt.name
+                    
+                    jlpt.lessons.forEach { (lesson) in
+                        
+                        let newLesson = Lesson(context: context)
+                        
+                        newLesson.id = lesson.id
+                        newLesson.order = Int64(lesson.order)
+                        newLesson.jlpt = newJPLT
+                        
+                        lesson.grammar.forEach { (grammar) in
+                            
+                            let newGrammar = Grammar(context: context)
+                            
+                            newGrammar.id = grammar.id
+                            newGrammar.lesson = newLesson
+                            newGrammar.title = grammar.title
+                            newGrammar.meaning = grammar.meaning
+                        }
+                    }
+                }
+                do {
+                    try context.save()
+                    DispatchQueue.main.async {
+                        stack.save()
+                        
+                        self.performFetch(reload: true)
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
     
     private func performFetch(reload: Bool = false) {
+        
         do {
             try fetchedResultsController.performFetch()
             
