@@ -49,7 +49,7 @@ class GrammarLevelTableViewController: UITableViewController {
 
         let lesson = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = "\(lesson.order)"
+        cell.textLabel?.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), indexPath.row + 1)
         cell.detailTextLabel?.text = "\(lesson.grammar?.count ?? 0)"
 
         return cell
@@ -66,9 +66,10 @@ extension GrammarLevelTableViewController: SegueHandler {
         switch segueIdentifier(for: segue) {
         case .showGrammarLevel:
             guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("An index path is needed.") }
+            guard let cell = tableView.cellForRow(at: indexPath) else { fatalError("A cell is needed.") }
             
             let destination = segue.destination.content as? GrammarPointsTableViewController
-            destination?.title = "\(indexPath.row + 1)"
+            destination?.title = cell.textLabel?.text
             destination?.lesson = fetchedResultsController.object(at: indexPath)
         }
     }

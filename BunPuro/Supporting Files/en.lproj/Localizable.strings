@@ -12,3 +12,6 @@
 
 /* Updating prompt */
 "status.updating" = "Updating...";
+
+/* Level in a JLPT */
+"level.number" = "Level %d";
