@@ -15,6 +15,7 @@
 		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
 		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
+		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
 		2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */; };
 		2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */; };
 		2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
@@ -128,6 +129,7 @@
 		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
 		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGrammarProcedure.swift; sourceTree = "<group>"; };
 		2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarViewController.swift; sourceTree = "<group>"; };
 		2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarMeaningTableViewController.swift; sourceTree = "<group>"; };
 		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */,
 				2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */,
 				2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */,
+				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
 				2E3074A01FACF9A20078725B /* Protocols */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
@@ -598,6 +601,7 @@
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
+				2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
 				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,

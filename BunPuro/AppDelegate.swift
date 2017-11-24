@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BunPuroKit
 import UserNotifications
 
 @UIApplicationMain
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var coreDataStack = CoreDataStack(modelName: "BunPro")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        Server.reset()
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { (granted, error) in
             guard error == nil else {

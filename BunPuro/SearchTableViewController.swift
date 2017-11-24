@@ -66,73 +66,25 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         fetchedResultsController = newFetchedResultsController()
         
-        //loadData()
+        loadData()
     }
     
     private func loadData() {
         
-//        let stack = AppDelegate.coreDataStack
-//
-//        Server.updateJLPT { (jlpts, error) in
-//            guard error == nil else { return }
-//            guard let jlpts = jlpts else { return }
-//
-//            stack.storeContainer.performBackgroundTask { (context) in
-//
-//                context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//
-//                jlpts.forEach { (jlpt) in
-//
-//                    let newJPLT = JLPT(context: context)
-//
-//                    newJPLT.level = Int64(jlpt.level)
-//                    newJPLT.name = jlpt.name
-//
-//                    jlpt.lessons.forEach { (lesson) in
-//
-//                        let newLesson = Lesson(context: context)
-//
-//                        newLesson.id = lesson.id
-//                        newLesson.order = Int64(lesson.order)
-//                        newLesson.jlpt = newJPLT
-//
-//                        lesson.grammar.forEach { (grammar) in
-//
-//                            let newGrammar = Grammar(context: context)
-//
-//                            newGrammar.id = grammar.id
-//                            newGrammar.lesson = newLesson
-//                            newGrammar.title = grammar.title.htmlAttributedString?.string
-//                            newGrammar.meaning = grammar.meaning.htmlAttributedString?.string
-//                            newGrammar.caution = grammar.caution.htmlAttributedString?.string
-//                            newGrammar.structure = grammar.structure.htmlAttributedString?.string
-//
-//                            for link in grammar.supplementalLinks {
-//
-//                                let newLink = Link(context: context)
-//                                newLink.id = link.id
-//                                newLink.about = link.description
-//                                newLink.site = link.site
-//                                newLink.url = URL(string: link.link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
-//                                newLink.grammar = newGrammar
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    try context.save()
-//                    DispatchQueue.main.async {
-//                        stack.save()
-//                        self.tableView.reloadData()
-//                    }
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//        }
+        self.navigationItem.prompt = "Updating..."
+        
+        let updateProcedure = UpdateGrammarProcedure(presentingViewController: self)
+        
+        updateProcedure.completionBlock = {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.navigationItem.prompt = nil
+            }
+        }
+        
+        Server.add(procedure: updateProcedure)
     }
     
-
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,6 +97,10 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return fetchedResultsController.sections?[section].name ?? "Unknown"
+    }
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return ["5", "4", "3"]
     }
     
     // MARK: - UISearchController

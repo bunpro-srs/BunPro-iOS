@@ -46,6 +46,10 @@ public struct Server {
     
     static private var _token: Token?
     
+    public static func reset() {
+        token = nil
+    }
+    
     public static func add(procedure: Procedure) {
         NetworkHandler.shared.queue.add(operation: procedure)
     }

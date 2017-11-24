@@ -10,28 +10,52 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-let lessonsUrlString = "\(baseUrlString)lessons"
+private let lessonsUrlString = "\(baseUrlString)lessons"
 
-class LessonsProcedure: GroupProcedure, OutputProcedure {
+public class LessonsProcedure: GroupProcedure, OutputProcedure {
+    
+    public var output: Pending<ProcedureResult<[BunPuroKit.JLPT]>> = .pending
+    
+    public let completion: (([JLPT]?, Error?) -> Void)?
+    
+    private var _internalProcedure: _LessonsProcedure!
+    
+    public init(presentingViewController: UIViewController, completion: (([JLPT]?, Error?) -> Void)? = nil) {
+        
+        self.completion = completion
+        
+        super.init(operations: [])
+        
+        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        
+        addWillExecuteBlockObserver { (_, _) in
+            self._internalProcedure = _LessonsProcedure()
+            self.add(child: self._internalProcedure)
+        }
+    }
+    
+    override public func procedureDidFinish(withErrors: [Error]) {
+        output = _internalProcedure.output
+        completion?(output.value?.value, output.error)
+    }
+}
+
+class _LessonsProcedure: GroupProcedure, OutputProcedure {
     
     var output: Pending<ProcedureResult<[JLPT]>> = .pending
-    
-    let completion: (([JLPT]?, Error?) -> Void)?
     
     private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
     private let _transformProcedure: TransformProcedure<Data, [JLPT]>
     
-    init(token: Token, completion: (([JLPT]?, Error?) -> Void)? = nil) {
+    init() {
         
         let url = URL(string: lessonsUrlString)!
         var request = URLRequest(url: url)
-        request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
         
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, [JLPT]> { try CustomDecoder.decode(_LessonData.self, from: $0, hasMilliseconds: true).jlpt() }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
-        
-        self.completion = completion
         
         super.init(operations: [_networkProcedure, _transformProcedure])
         
@@ -39,11 +63,8 @@ class LessonsProcedure: GroupProcedure, OutputProcedure {
     }
     
     override func procedureDidFinish(withErrors: [Error]) {
-        
         print(errors)
         output = _transformProcedure.output
-        
-        completion?(output.value?.value, output.error)
     }
 }
 
