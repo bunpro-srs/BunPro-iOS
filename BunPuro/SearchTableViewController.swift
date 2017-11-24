@@ -10,21 +10,18 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
+class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating {
+    
+    enum SegueIdentifier: String {
+        case showGrammar
+    }
     
     private var searchController: UISearchController!
-    
-    private var fetchedResultsController: NSFetchedResultsController<Grammar>!
     
     private func newFetchedResultsController() -> NSFetchedResultsController<Grammar>? {
         let fetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
         
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            let titlePredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.title), searchText)
-            let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
-            
-            fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
-        }
+        fetchRequest.predicate = searchPredicate()
         
         let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.jlpt.level), ascending: false)
         let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.order), ascending: true)
@@ -40,6 +37,15 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         return controller
     }
     
+    private func searchPredicate() -> NSPredicate? {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return nil }
+        
+        let titlePredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.title), searchText)
+        let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
+        
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,90 +56,84 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         searchController.searchBar.showsCancelButton = false
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         
-        navigationItem.searchController = searchController
+        navigationItem.titleView = searchController.searchBar
+        searchController.searchBar.sizeToFit()
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.searchBar.placeholder = NSLocalizedString("search.grammar.placeholder", comment: "Search grammar placeholder")
         
         fetchedResultsController = newFetchedResultsController()
         
-        performFetch()
-        
-        loadData()
+        //loadData()
     }
     
     private func loadData() {
         
-        let stack = AppDelegate.coreDataStack
-
-        Server.updateJLPT { (jlpts, error) in
-            guard error == nil else { return }
-            guard let jlpts = jlpts else { return }
-            
-            stack.storeContainer.performBackgroundTask { (context) in
-                
-                context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-                
-                jlpts.forEach { (jlpt) in
-                    
-                    let newJPLT = JLPT(context: context)
-                    
-                    newJPLT.level = Int64(jlpt.level)
-                    newJPLT.name = jlpt.name
-                    
-                    jlpt.lessons.forEach { (lesson) in
-                        
-                        let newLesson = Lesson(context: context)
-                        
-                        newLesson.id = lesson.id
-                        newLesson.order = Int64(lesson.order)
-                        newLesson.jlpt = newJPLT
-                        
-                        lesson.grammar.forEach { (grammar) in
-                            
-                            let newGrammar = Grammar(context: context)
-                            
-                            newGrammar.id = grammar.id
-                            newGrammar.lesson = newLesson
-                            newGrammar.title = grammar.title
-                            newGrammar.meaning = grammar.meaning
-                        }
-                    }
-                }
-                do {
-                    try context.save()
-                    DispatchQueue.main.async {
-                        stack.save()
-                        
-                        self.performFetch(reload: true)
-                    }
-                } catch {
-                    print(error)
-                }
-            }
-        }
+//        let stack = AppDelegate.coreDataStack
+//
+//        Server.updateJLPT { (jlpts, error) in
+//            guard error == nil else { return }
+//            guard let jlpts = jlpts else { return }
+//
+//            stack.storeContainer.performBackgroundTask { (context) in
+//
+//                context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//
+//                jlpts.forEach { (jlpt) in
+//
+//                    let newJPLT = JLPT(context: context)
+//
+//                    newJPLT.level = Int64(jlpt.level)
+//                    newJPLT.name = jlpt.name
+//
+//                    jlpt.lessons.forEach { (lesson) in
+//
+//                        let newLesson = Lesson(context: context)
+//
+//                        newLesson.id = lesson.id
+//                        newLesson.order = Int64(lesson.order)
+//                        newLesson.jlpt = newJPLT
+//
+//                        lesson.grammar.forEach { (grammar) in
+//
+//                            let newGrammar = Grammar(context: context)
+//
+//                            newGrammar.id = grammar.id
+//                            newGrammar.lesson = newLesson
+//                            newGrammar.title = grammar.title.htmlAttributedString?.string
+//                            newGrammar.meaning = grammar.meaning.htmlAttributedString?.string
+//                            newGrammar.caution = grammar.caution.htmlAttributedString?.string
+//                            newGrammar.structure = grammar.structure.htmlAttributedString?.string
+//
+//                            for link in grammar.supplementalLinks {
+//
+//                                let newLink = Link(context: context)
+//                                newLink.id = link.id
+//                                newLink.about = link.description
+//                                newLink.site = link.site
+//                                newLink.url = URL(string: link.link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+//                                newLink.grammar = newGrammar
+//                            }
+//                        }
+//                    }
+//                }
+//                do {
+//                    try context.save()
+//                    DispatchQueue.main.async {
+//                        stack.save()
+//                        self.tableView.reloadData()
+//                    }
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//        }
     }
     
-    private func performFetch(reload: Bool = false) {
-        
-        do {
-            try fetchedResultsController.performFetch()
-            
-            if reload { tableView?.reloadData() }
-            
-        } catch {
-            print(error)
-        }
-    }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath)
@@ -147,11 +147,15 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         return fetchedResultsController.sections?[section].name ?? "Unknown"
     }
     
-    // UISearchController
+    // MARK: - UISearchController
 
     func updateSearchResults(for searchController: UISearchController) {
-        fetchedResultsController = newFetchedResultsController()
-        performFetch(reload: true)
+        NSFetchedResultsController<Grammar>.deleteCache(withName: nil)
+        fetchedResultsController.fetchRequest.predicate = searchPredicate()
+        
+        try? fetchedResultsController.performFetch()
+        
+        tableView.reloadData()
     }
     
     private func updateCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
@@ -160,43 +164,28 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         cell.textLabel?.text = grammar.title
         cell.detailTextLabel?.text = grammar.meaning
     }
-}
-
-extension SearchTableViewController: NSFetchedResultsControllerDelegate {
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
+    // MARK: - Navigation
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        default:
-            break
+        switch segueIdentifier(for: identifier) {
+        case .showGrammar:
+            return tableView.indexPathForSelectedRow != nil
         }
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .automatic)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-        case .update:
-            guard let cell = tableView.cellForRow(at: indexPath!) else { return }
-            updateCell(cell, at: indexPath!)
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        switch segueIdentifier(for: segue) {
+        case .showGrammar:
+            
+            guard let indexPath = tableView.indexPathForSelectedRow else {
+                fatalError("IndexPath must be provided")
+            }
+            
+            let destination = segue.destination.content as? GrammarViewController
+            destination?.grammar = fetchedResultsController.object(at: indexPath)
         }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
     }
 }

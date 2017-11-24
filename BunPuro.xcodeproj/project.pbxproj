@@ -15,7 +15,15 @@
 		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
 		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
-		2E27E58A1FBB5605002D906F /* Server+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27E5891FBB5605002D906F /* Server+Convenience.swift */; };
+		2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */; };
+		2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */; };
+		2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
+		2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */; };
+		2E1DCA2D1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */; };
+		2E1DCA2F1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */; };
+		2E1DCA321FC76AC6002E67D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */; };
+		2E1DCA331FC76AC6002E67D6 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */; };
+		2E2FE52D1FC349AC00DCC894 /* LoginProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */; };
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E3074951FACF9650078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074971FACF9650078725B /* InfoPlist.strings */; };
 		2E30749C1FACF9660078725B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E30749E1FACF9660078725B /* Localizable.strings */; };
@@ -32,8 +40,7 @@
 		2EAD9E1A1FA26EB400CE52CF /* BunPuroKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EAD9E0A1FA26EB400CE52CF /* BunPuroKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; };
 		2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2EAD9E291FA26F0800CE52CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E281FA26F0800CE52CF /* User.swift */; };
-		2EAD9E2B1FA26F1100CE52CF /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */; };
+		2EAD9E2B1FA26F1100CE52CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* User.swift */; };
 		2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2C1FA26F6C00CE52CF /* Server.swift */; };
 		2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
 		2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
@@ -51,7 +58,6 @@
 		2EE4E7931FA28F350020E828 /* ProcedureKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
 		2EE4E7951FA28F400020E828 /* ProcedureKitNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2EF752131FAA3644000A2975 /* TokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF752121FAA3644000A2975 /* TokenViewController.swift */; };
 		2EF752141FAA37D4000A2975 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; };
 		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
@@ -122,7 +128,15 @@
 		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
 		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		2E27E5891FBB5605002D906F /* Server+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Convenience.swift"; sourceTree = "<group>"; };
+		2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarViewController.swift; sourceTree = "<group>"; };
+		2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarMeaningTableViewController.swift; sourceTree = "<group>"; };
+		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
+		2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetchedResultsTableViewController.swift; sourceTree = "<group>"; };
+		2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarReadingsViewControllerTableViewController.swift; sourceTree = "<group>"; };
+		2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarExampleSentancesViewController.swift; sourceTree = "<group>"; };
+		2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProcedure.swift; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074961FACF9650078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -148,8 +162,7 @@
 		2EAD9E101FA26EB400CE52CF /* BunPuroKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunPuroKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E171FA26EB400CE52CF /* BunPuroKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroKitTests.swift; sourceTree = "<group>"; };
 		2EAD9E191FA26EB400CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAD9E281FA26F0800CE52CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		2EAD9E2A1FA26F1100CE52CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKitNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +174,6 @@
 		2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
 		2EE4E78C1FA2835C0020E828 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		2EE4E78E1FA283650020E828 /* UserProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
-		2EF752121FAA3644000A2975 /* TokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewController.swift; sourceTree = "<group>"; };
 		2EF752151FAA37D4000A2975 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
@@ -218,6 +230,7 @@
 		2E01D1FE1FB24FAC00E8632D /* Procedures */ = {
 			isa = PBXGroup;
 			children = (
+				2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */,
 				2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */,
 				2E01D2011FB2503000E8632D /* ProgressProcedure.swift */,
 				2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */,
@@ -231,7 +244,7 @@
 		2E27E5881FBB55EF002D906F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2E27E5891FBB5605002D906F /* Server+Convenience.swift */,
+				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,12 +302,16 @@
 			isa = PBXGroup;
 			children = (
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
+				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
 				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
-				2EF752121FAA3644000A2975 /* TokenViewController.swift */,
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
 				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
 				2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */,
 				2E01D2111FB2686600E8632D /* SearchTableViewController.swift */,
+				2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */,
+				2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */,
+				2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */,
+				2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
 				2E3074A01FACF9A20078725B /* Protocols */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
@@ -329,12 +346,13 @@
 				2EAD9E0A1FA26EB400CE52CF /* BunPuroKit.h */,
 				2EAD9E2C1FA26F6C00CE52CF /* Server.swift */,
 				2E01D1FE1FB24FAC00E8632D /* Procedures */,
-				2EAD9E281FA26F0800CE52CF /* User.swift */,
 				2EE4E78C1FA2835C0020E828 /* Review.swift */,
-				2EAD9E2A1FA26F1100CE52CF /* UserResponse.swift */,
+				2EAD9E2A1FA26F1100CE52CF /* User.swift */,
 				2EE4E78E1FA283650020E828 /* UserProgress.swift */,
 				2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */,
 				2EB4DB561FBCE27B00833897 /* Grammar.swift */,
+				2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */,
+				2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */,
 				2EAD9E0B1FA26EB400CE52CF /* Info.plist */,
 			);
 			path = BunPuroKit;
@@ -554,6 +572,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1DCA331FC76AC6002E67D6 /* LoginViewController.xib in Resources */,
 				2E3074951FACF9650078725B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,20 +591,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EF752131FAA3644000A2975 /* TokenViewController.swift in Sources */,
 				2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */,
-				2E27E58A1FBB5605002D906F /* Server+Convenience.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
+				2E1DCA2D1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift in Sources */,
+				2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */,
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
 				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
+				2E1DCA2F1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift in Sources */,
+				2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */,
 				2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */,
+				2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */,
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
+				2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,18 +632,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1DCA321FC76AC6002E67D6 /* LoginViewController.swift in Sources */,
 				2EFB5F9E1FB394F7004D3DF5 /* GrammarProcedure.swift in Sources */,
+				2E2FE52D1FC349AC00DCC894 /* LoginProcedure.swift in Sources */,
 				2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */,
 				2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */,
 				2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */,
 				2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */,
-				2EAD9E291FA26F0800CE52CF /* User.swift in Sources */,
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
 				2EBDC0951FA877DF00CC643D /* ReviewResponse.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
 				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,
-				2EAD9E2B1FA26F1100CE52CF /* UserResponse.swift in Sources */,
+				2EAD9E2B1FA26F1100CE52CF /* User.swift in Sources */,
 				2EE4E78F1FA283650020E828 /* UserProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

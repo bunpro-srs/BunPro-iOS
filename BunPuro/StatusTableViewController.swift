@@ -8,29 +8,31 @@
 
 import UIKit
 import BunPuroKit
+import ProcedureKit
 
 class StatusTableViewController: UITableViewController {
     
     @IBOutlet weak var nextReviewTitleLabel: UILabel!
     
-    @IBOutlet weak var nextReviewLabel: UILabel!
-    @IBOutlet weak var nextHourLabel: UILabel!
-    @IBOutlet weak var nextDayLabel: UILabel!
+    @IBOutlet weak var nextReviewLabel: UILabel! { didSet { nextReviewLabel.text = " " } }
+    @IBOutlet weak var nextHourLabel: UILabel! { didSet { nextHourLabel.text = " " } }
+    @IBOutlet weak var nextDayLabel: UILabel! { didSet { nextDayLabel.text = " " } }
     
-    @IBOutlet weak var n5DetailLabel: UILabel!
+    @IBOutlet weak var n5DetailLabel: UILabel! { didSet { n5DetailLabel.text = " " } }
     @IBOutlet weak var n5ProgressView: UIProgressView!
     
-    @IBOutlet weak var n4DetailLabel: UILabel!
+    @IBOutlet weak var n4DetailLabel: UILabel! { didSet { n4DetailLabel.text = " " } }
     @IBOutlet weak var n4ProgressView: UIProgressView!
     
-    @IBOutlet weak var n3DetailLabel: UILabel!
+    @IBOutlet weak var n3DetailLabel: UILabel! { didSet { n3DetailLabel.text = " " } }
     @IBOutlet weak var n3ProgressView: UIProgressView!
     
     private let dateComponentsFormatter = DateComponentsFormatter()
     
-    private var timer: Timer? = nil { didSet { timer?.tolerance = 10.0 } }
     private var becomeInactiveObserver: NSObjectProtocol?
     private var becomeActiveObserver: NSObjectProtocol?
+    
+    private var repeatProcedure: RepeatProcedure<StatusProcedure>?
     
     deinit {
         if becomeActiveObserver != nil {
@@ -47,18 +49,14 @@ class StatusTableViewController: UITableViewController {
         super.viewDidLoad()
         
         becomeActiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) in
-            self?.setup(reviews: Server.reviewResponse)
+            self?.refreshStatus()
         }
         
         becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
-            self?.timer?.invalidate()
+            self?.repeatProcedure?.cancel()
         }
         
-        setup(user: Server.userResponse)
-        setup(progress: Server.userProgress)
-        setup(reviews: Server.reviewResponse)
-        
-        updateLastUpdatedStatus()
+        refreshStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,27 +98,25 @@ class StatusTableViewController: UITableViewController {
     
     private func refreshStatus() {
         
-        Server.updateStatus { (error) in
-            guard error == nil else { self.refreshControl?.endRefreshing(); return }
-            
-            self.setup(user: Server.userResponse)
-            self.setup(progress: Server.userProgress)
-            self.setup(reviews: Server.reviewResponse)
-            
-            self.refreshControl?.endRefreshing()
-            self.updateLastUpdatedStatus()
+        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(60)) {
+            StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
+                
+                DispatchQueue.main.async {
+                    self.setup(user: user)
+                    self.setup(progress: progress)
+                    self.setup(reviews: reviews)
+                }
+            }
         }
+                
+        Server.add(procedure: repeatProcedure!)
     }
     
-    private func updateLastUpdatedStatus() {
-        refreshControl?.attributedTitle = NSAttributedString(string: String.localizedStringWithFormat(NSLocalizedString("status.lastupdate", comment: "The last time an update was made."), DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)))
-    }
-    
-    private func setup(user response: UserResponse?) {
+    private func setup(user: User?) {
         
-        guard let response = response else { return }
+        guard let user = user else { return }
         
-        self.navigationItem.title = response.user.name
+        self.navigationItem.title = user.name
     }
     
     private func setup(reviews response: ReviewResponse?) {
@@ -140,12 +136,6 @@ class StatusTableViewController: UITableViewController {
                 dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
                 
                 self.nextReviewLabel.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
-                
-                timer?.invalidate()
-                
-                timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { [weak self] (_) in
-                    self?.setup(reviews: Server.reviewResponse)
-                })
             } else {
                 self.nextReviewTitleLabel.textColor = UIColor(named: "Main Tint")
                 self.nextReviewLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
@@ -161,13 +151,13 @@ class StatusTableViewController: UITableViewController {
         guard let response = response else { return }
         
         n5DetailLabel.text = response.n5.localizedProgress ?? n5DetailLabel.text
-        n5ProgressView.progress = response.n5.progress
+        n5ProgressView.setProgress(response.n5.progress, animated: true)
         
         n4DetailLabel.text = response.n4.localizedProgress ?? n4DetailLabel.text
-        n4ProgressView.progress = response.n4.progress
+        n4ProgressView.setProgress(response.n4.progress, animated: true)
         
         n3DetailLabel.text = response.n3.localizedProgress ?? n3DetailLabel.text
-        n3ProgressView.progress = response.n3.progress
+        n3ProgressView.setProgress(response.n3.progress, animated: true)
     }
     
 }

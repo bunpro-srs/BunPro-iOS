@@ -1,24 +1,5 @@
 import Foundation
 
-// JLPT Level -> Lesson -> Grammar
-
-/* JLPT
- * -> name: String
- * -> lessons: [Lesson]
- */
-
-/* Lesson
- * -> order: Int
- * -> grammar: [Grammar]
- */
-
-/* Grammar
- * -> title: String
- * -> meaning: String
- * -> exampleSentences: [Sentence]
- * -> supplementalLinks: [Link]
- */
-
 public struct Grammar {
     
     struct Sentence {
@@ -26,21 +7,29 @@ public struct Grammar {
         let id: String
     }
     
-    struct Link {
+    public struct Link {
         
-        let id: String
+        public let id: String
+        public let site: String
+        public let description: String
+        public let link: String
     }
     
     public let id: String
     public let title: String
     public let meaning: String
+    public let caution: String
+    public let structure: String
 //    let exampleSentence: [Sentence]
-//    let supplementalLinks: [Link]
+    public let supplementalLinks: [Link]
     
-    public init(id: String, title: String, meaning: String) {
+    init(id: String, title: String, meaning: String, caution: String, structure: String, supplementalLinks: [Link]) {
         self.id = id
         self.title = title
         self.meaning = meaning
+        self.caution = caution
+        self.structure = structure
+        self.supplementalLinks = supplementalLinks
     }
 }
 

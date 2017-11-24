@@ -10,11 +10,16 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class GrammarPointsTableViewController: UITableViewController {
+class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler {
 
+    enum SegueIdentifier: String {
+        case showGrammar
+    }
+    
     var lesson: Lesson?
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Grammar> = {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         guard let lesson = self.lesson else { fatalError("Lesson needs to be provided.") }
         
@@ -24,28 +29,10 @@ class GrammarPointsTableViewController: UITableViewController {
         let sort = NSSortDescriptor(key: #keyPath(Grammar.id), ascending: true)
         request.sortDescriptors = [sort]
         
-        return NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            print(error)
-        }
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }
     
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath)
@@ -56,5 +43,17 @@ class GrammarPointsTableViewController: UITableViewController {
         cell.detailTextLabel?.text = point.meaning
 
         return cell
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .showGrammar:
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let controller = segue.destination.content as? GrammarViewController
+                controller?.grammar = fetchedResultsController.object(at: indexPath)
+            }
+        }
     }
 }

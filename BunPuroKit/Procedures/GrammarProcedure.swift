@@ -16,11 +16,13 @@ class GrammarProcedure: GroupProcedure, OutputProcedure {
     
     let completion: (([JLPT]?, Error?) -> Void)?
     
-    private let _lessonsNetworkProcedure = LessonsProcedure()
+    private let _lessonsNetworkProcedure: LessonsProcedure
     
-    init(completion: (([JLPT]?, Error?) -> Void)? = nil) {
+    init(token: Token, completion: (([JLPT]?, Error?) -> Void)? = nil) {
         
         self.completion = completion
+        
+        _lessonsNetworkProcedure = LessonsProcedure(token: token)
         
         super.init(operations: [_lessonsNetworkProcedure])
         

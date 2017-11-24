@@ -10,30 +10,62 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-class ReviewsProcedure: GroupProcedure, OutputProcedure {
+public enum ReviewCollection {
+    case all
+    case current
     
-    enum Collection: String {
-        case all = "all_reviews"
-        case current = "current_reviews"
+    var rawValue: String {
+        switch self {
+        case .all: return "all_reviews"
+        case .current: return "current_reviews"
+        }
     }
+}
+
+public class ReviewsProcedure: GroupProcedure, OutputProcedure {
     
-    var output: Pending<ProcedureResult<ReviewResponse>> = .pending
+    public var output: Pending<ProcedureResult<ReviewResponse>> = .pending
     
     let completion: ((ReviewResponse?, Error?) -> Void)?
+    
+    private var _internalProcedure: _ReviewsProcedure!
+    
+    init(presentingViewController: UIViewController, collection: ReviewCollection = .all, completion: ((ReviewResponse?, Error?) -> Void)? = nil) {
+        self.completion = completion
+        
+        super.init(operations: [])
+        
+        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        
+        addWillExecuteBlockObserver { (_, _) in
+            self._internalProcedure = _ReviewsProcedure(collection: collection)
+            self.add(child: self._internalProcedure)
+        }
+    }
+    
+    override public func procedureDidFinish(withErrors: [Error]) {
+        output = _internalProcedure.output
+        completion?(output.value?.value, output.error)
+    }
+}
+
+class _ReviewsProcedure: GroupProcedure, OutputProcedure {
+    
+    var output: Pending<ProcedureResult<ReviewResponse>> = .pending
     
     private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
     private let _transformProcedure: TransformProcedure<Data, ReviewResponse>
     
-    init(collection: Collection = .all, completion: ((ReviewResponse?, Error?) -> Void)? = nil) {
+    init(collection: ReviewCollection = .all) {
         
-        let url = URL(string: usersUrlString + Server.apiToken + "/" + collection.rawValue)!
-        let request = URLRequest(url: url)
+        let url = URL(string: baseUrlString + "/" + collection.rawValue)!
+        
+        var request = URLRequest(url: url)
+        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
         
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, ReviewResponse> { try CustomDecoder.decode(ReviewResponse.self, from: $0, hasMilliseconds: true) }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
-        
-        self.completion = completion
         
         super.init(operations: [_networkProcedure, _transformProcedure])
         
@@ -44,7 +76,5 @@ class ReviewsProcedure: GroupProcedure, OutputProcedure {
         
         print(errors)
         output = _transformProcedure.output
-        
-        completion?(output.value?.value, output.error)
     }
 }

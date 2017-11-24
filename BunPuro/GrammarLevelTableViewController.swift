@@ -10,39 +10,27 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class GrammarLevelTableViewController: UITableViewController {
+class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController<Lesson>, SegueHandler {
 
+    enum SegueIdentifier: String {
+        case showGrammarLevel
+    }
+    
     var level: Int = 5
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Lesson> = {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let request: NSFetchRequest<Lesson> = Lesson.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %d", #keyPath(Lesson.jlpt.level), level)
         
         let sort = NSSortDescriptor(key: #keyPath(Lesson.order), ascending: true)
         request.sortDescriptors = [sort]
-        
-        return NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
                 
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            print(error)
-        }
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath)
@@ -54,13 +42,8 @@ class GrammarLevelTableViewController: UITableViewController {
 
         return cell
     }
-}
-
-extension GrammarLevelTableViewController: SegueHandler {
     
-    enum SegueIdentifier: String {
-        case showGrammarLevel
-    }
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {

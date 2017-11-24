@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17C67b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17C79a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Grammar" representedClassName="Grammar" syncable="YES" codeGenerationType="class">
+        <attribute name="caution" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="structure" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="lesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="grammar" inverseEntity="Lesson" syncable="YES"/>
+        <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Link" inverseName="grammar" inverseEntity="Link" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -32,9 +35,22 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Link" representedClassName="Link" syncable="YES" codeGenerationType="class">
+        <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="grammar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Grammar" inverseName="links" inverseEntity="Grammar" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <elements>
-        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
         <element name="Lesson" positionX="-54" positionY="27" width="128" height="105"/>
+        <element name="Link" positionX="-54" positionY="45" width="128" height="120"/>
     </elements>
 </model>
