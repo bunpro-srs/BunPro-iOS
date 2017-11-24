@@ -9,7 +9,6 @@
 import UIKit
 import KeychainAccess
 import ProcedureKit
-import LocalAuthentication
 
 protocol LoginViewControllerDelegate: class {
     func loginViewControllerDidLogin(_ controller: LoginViewController)
@@ -17,7 +16,7 @@ protocol LoginViewControllerDelegate: class {
 
 class LoginViewController: UIViewController {
     
-    private enum CredentialsKey: String {
+    enum CredentialsKey: String {
         case email
         case password
         case token
@@ -55,14 +54,9 @@ class LoginViewController: UIViewController {
         let loginProcedure = LoginProcedure(username: email, password: password) { (token, error) in
             guard error == nil else { DispatchQueue.main.async { self.displayTokenError() }; return }
             
-            self.keychain[CredentialsKey.email.rawValue] = email
-            self.keychain[CredentialsKey.password.rawValue] = password
-            
             DispatchQueue.main.async {
                 self.activateUI()
             }
-            
-            Server.token = token
             
             self.delegate?.loginViewControllerDidLogin(self)
         }

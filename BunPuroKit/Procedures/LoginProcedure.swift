@@ -9,6 +9,7 @@
 import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
+import KeychainAccess
 
 public typealias Token = String
 private let loginUrlString = "\(baseUrlString)login/"
@@ -22,7 +23,13 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
     private let _transformProcedure: TransformProcedure<Data, Token>
     
+    private let email: String
+    private let password: String
+    
     init(username: String, password: String, completion: @escaping (Token?, Error?) -> Void) {
+        
+        self.email = username
+        self.password = password
         
         var components = URLComponents(string: loginUrlString)!
         
@@ -48,6 +55,14 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     override func procedureDidFinish(withErrors: [Error]) {
         
         print(errors)
+        
+        if errors.isEmpty {
+            let keychain = Keychain()
+            keychain[LoginViewController.CredentialsKey.email.rawValue] = email
+            keychain[LoginViewController.CredentialsKey.password.rawValue] = password
+            Server.token = _transformProcedure.output.value?.value
+        }
+        
         output = _transformProcedure.output
         
         completion(output.value?.value, output.error)

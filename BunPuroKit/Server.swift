@@ -9,6 +9,7 @@
 import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
+import KeychainAccess
 
 let baseUrlString = "https://bunpro.jp/api/v2/"
 
@@ -32,7 +33,18 @@ public struct Server {
     public static var userProgress: UserProgress?
     public static var reviewResponse: ReviewResponse?
     
-    static var token: Token?
+    static var token: Token? {
+        get {
+            return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token.rawValue]
+        }
+        
+        set {
+            _token = newValue
+            Keychain()[LoginViewController.CredentialsKey.token.rawValue] = newValue
+        }
+    }
+    
+    static private var _token: Token?
     
     public static func add(procedure: Procedure) {
         NetworkHandler.shared.queue.add(operation: procedure)

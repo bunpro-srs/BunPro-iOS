@@ -12,7 +12,7 @@ import ProcedureKitNetwork
 
 public class StatusProcedure: GroupProcedure, OutputProcedure {
         
-    public var output: Pending<ProcedureResult<(User, UserProgress, ReviewResponse)>> = .pending
+    public var output: Pending<ProcedureResult<(User?, UserProgress?, ReviewResponse?)>> = .pending
     
     public let completion: ((User?, UserProgress?, ReviewResponse?, Error?) -> Void)?
     public var indicator: NetworkActivityIndicatorProtocol? {
@@ -39,16 +39,20 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
     }
     
     override public func procedureDidFinish(withErrors: [Error]) {
-        guard let userResponse = _userNetworkProcedure.output.value?.value,
-            let userProgress = _progressNetworkProcedure.output.value?.value,
-            let reviewResponse = _reviewsNetworkProcedure.output.value?.value else {
+        guard withErrors.isEmpty else {
                 output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
                 completion?(nil, nil, nil, withErrors.first)
                 return
         }
         
-        output = Pending.ready(ProcedureResult.success((userResponse, userProgress, reviewResponse)))
+        let user = _userNetworkProcedure.output.value?.value
+        let progress = _progressNetworkProcedure.output.value?.value
+        let reviews = _reviewsNetworkProcedure.output.value?.value
         
-        completion?(userResponse, userProgress, reviewResponse, nil)
+        output = Pending.ready(ProcedureResult.success((user,
+                                                        progress,
+                                                        reviews)))
+        
+        completion?(user, progress, reviews, nil)
     }
 }

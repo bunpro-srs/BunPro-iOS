@@ -62,8 +62,8 @@ class StatusTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        
-        setup(reviews: Server.reviewResponse)
+
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
