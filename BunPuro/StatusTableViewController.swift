@@ -59,11 +59,6 @@ class StatusTableViewController: UITableViewController {
         refreshStatus()
     }
     
-    @IBAction func refresh(_ sender: UIRefreshControl) {
-        
-        refreshStatus()
-    }
-    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
         if indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 2) {
@@ -90,6 +85,8 @@ class StatusTableViewController: UITableViewController {
     }
     
     private func refreshStatus() {
+        
+        guard repeatProcedure == nil else { return }
         
         repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(60)) {
             StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in

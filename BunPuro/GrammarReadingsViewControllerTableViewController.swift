@@ -46,7 +46,6 @@ class GrammarReadingsViewControllerTableViewController: CoreDataFetchedResultsTa
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        
         guard let url = fetchedResultsController.object(at: indexPath).url else { return }
         
         let safariViewController = SFSafariViewController(url: url)

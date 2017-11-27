@@ -126,7 +126,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" insetsLayoutMarginsFromSafeArea="NO" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="HK3-J1-mQ1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
                                                     <color key="progressTintColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqI-vr-cFI">
@@ -151,7 +151,7 @@
                                                 <constraint firstItem="PqI-vr-cFI" firstAttribute="top" secondItem="VX5-nM-xt0" secondAttribute="top" constant="12" id="3Cy-Qy-pdA"/>
                                                 <constraint firstItem="HK3-J1-mQ1" firstAttribute="leading" secondItem="VX5-nM-xt0" secondAttribute="leading" id="IRJ-0y-yn5"/>
                                                 <constraint firstAttribute="bottom" secondItem="HK3-J1-mQ1" secondAttribute="bottom" id="XJu-dv-gNc"/>
-                                                <constraint firstAttribute="trailing" secondItem="HK3-J1-mQ1" secondAttribute="trailing" id="acV-nA-LYX"/>
+                                                <constraint firstAttribute="trailing" secondItem="HK3-J1-mQ1" secondAttribute="trailing" constant="-34" id="acV-nA-LYX"/>
                                                 <constraint firstItem="PqI-vr-cFI" firstAttribute="leading" secondItem="VX5-nM-xt0" secondAttribute="leading" constant="20" symbolic="YES" id="bdg-Nf-fm2"/>
                                                 <constraint firstItem="HK3-J1-mQ1" firstAttribute="top" secondItem="VX5-nM-xt0" secondAttribute="top" id="grw-Pv-ly9"/>
                                                 <constraint firstAttribute="trailing" secondItem="PqI-vr-cFI" secondAttribute="trailing" id="loh-2b-LOD"/>
@@ -283,7 +283,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90t-Ga-spj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1535" y="-351"/>
+            <point key="canvasLocation" x="1533.5999999999999" y="-351.27436281859076"/>
         </scene>
         <!--Search Table View Controller-->
         <scene sceneID="dgT-7E-fBS">

@@ -39,20 +39,40 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
     }
     
     override public func procedureDidFinish(withErrors: [Error]) {
-        guard withErrors.isEmpty else {
-                output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
-                completion?(nil, nil, nil, withErrors.first)
-                return
-        }
         
         let user = _userNetworkProcedure.output.value?.value
         let progress = _progressNetworkProcedure.output.value?.value
         let reviews = _reviewsNetworkProcedure.output.value?.value
         
+        defer {
+            
+            for error in withErrors {
+                
+                if let decodingError = error as? Swift.DecodingError {
+                    
+                    switch decodingError {
+                        
+                    case .typeMismatch(_, _), .valueNotFound(_, _):
+                        print("Server changed something!")
+                    case .keyNotFound(_, _):
+                        print("Login token changed")
+                        Server.reset()
+                    case .dataCorrupted(_):
+                        break // Seems to be a bug in swift...
+                    }
+                }
+            }
+            
+            completion?(user, progress, reviews, withErrors.first)
+        }
+        
+        guard withErrors.isEmpty else {
+                output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
+                return
+        }
+        
         output = Pending.ready(ProcedureResult.success((user,
                                                         progress,
                                                         reviews)))
-        
-        completion?(user, progress, reviews, nil)
     }
 }

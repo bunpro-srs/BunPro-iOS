@@ -84,7 +84,7 @@ fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure 
                             newLink.id = link.id
                             newLink.about = link.description
                             newLink.site = link.site
-                            newLink.url = URL(string: link.link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+                            newLink.url = URL(string: link.link.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
                             newLink.grammar = newGrammar
                         }
                     }

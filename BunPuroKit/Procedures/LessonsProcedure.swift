@@ -10,62 +10,34 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-private let lessonsUrlString = "\(baseUrlString)lessons"
-
 public class LessonsProcedure: GroupProcedure, OutputProcedure {
     
-    public var output: Pending<ProcedureResult<[BunPuroKit.JLPT]>> = .pending
+    public var output: Pending<ProcedureResult<[JLPT]>> {
+        get { return transformProcedure.output }
+        set { assertionFailure("\(#function) should never be called.") }
+    }
     
     public let completion: (([JLPT]?, Error?) -> Void)?
     
-    private var _internalProcedure: _LessonsProcedure!
+    private let lessonProcedure: _LessonsProcedure
+    private let transformProcedure: TransformProcedure<_LessonData, [JLPT]>
     
     public init(presentingViewController: UIViewController, completion: (([JLPT]?, Error?) -> Void)? = nil) {
         
         self.completion = completion
         
-        super.init(operations: [])
+        lessonProcedure = _LessonsProcedure(presentingViewController: presentingViewController)
+        transformProcedure = TransformProcedure<_LessonData, [JLPT]> { $0.jlpt() }
+        transformProcedure.injectResult(from: lessonProcedure)
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
-        
-        addWillExecuteBlockObserver { (_, _) in
-            self._internalProcedure = _LessonsProcedure()
-            self.add(child: self._internalProcedure)
-        }
-    }
-    
-    override public func procedureDidFinish(withErrors: [Error]) {
-        output = _internalProcedure.output
-        completion?(output.value?.value, output.error)
+        super.init(operations: [lessonProcedure, transformProcedure])
     }
 }
 
-class _LessonsProcedure: GroupProcedure, OutputProcedure {
+fileprivate class _LessonsProcedure: BunPuroProcedure<_LessonData> {
     
-    var output: Pending<ProcedureResult<[JLPT]>> = .pending
-    
-    private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
-    private let _transformProcedure: TransformProcedure<Data, [JLPT]>
-    
-    init() {
-        
-        let url = URL(string: lessonsUrlString)!
-        var request = URLRequest(url: url)
-        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
-        
-        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
-        _transformProcedure = TransformProcedure<Data, [JLPT]> { try CustomDecoder.decode(_LessonData.self, from: $0, hasMilliseconds: true).jlpt() }
-        _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
-        
-        super.init(operations: [_networkProcedure, _transformProcedure])
-        
-        self.add(observer: NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: UIApplication.shared)))
-    }
-    
-    override func procedureDidFinish(withErrors: [Error]) {
-        print(errors)
-        output = _transformProcedure.output
-    }
+    override var hasMilliseconds: Bool { return true }
+    override var url: URL { return URL(string: "\(baseUrlString)lessons")! }
 }
 
 fileprivate struct _Lesson: Codable {
