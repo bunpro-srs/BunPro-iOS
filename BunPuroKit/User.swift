@@ -1,10 +1,5 @@
 import Foundation
 
-public enum State: String, Codable {
-    case on = "On"
-    case off = "Off"
-}
-
 public enum Active: String, Codable {
     case yes = "Yes"
     case no = "No"
@@ -38,10 +33,10 @@ public struct User: Codable {
             public let createdAt: Date
             public let updatedAt: Date
             
-            public let bunnyMode: State
+            public let bunnyMode: Active
             public let furigana: FuriganaMode
             public let hideEnglish: Active
-            public let lightMode: State
+            public let lightMode: Active
         }
         
         private enum CodingKeys: String, CodingKey {
@@ -64,8 +59,8 @@ public struct User: Codable {
     public var createdAt: Date  { return attributes.createdAt }
     public var updatedAt: Date  { return attributes.updatedAt }
     
-    public var bunnyMode: State { return attributes.bunnyMode }
+    public var bunnyMode: Active { return attributes.bunnyMode }
     public var furigana: FuriganaMode { return attributes.furigana }
     public var hideEnglish: Active { return attributes.hideEnglish }
-    public var lightMode: State { return attributes.lightMode }
+    public var lightMode: Active { return attributes.lightMode }
 }

@@ -2,9 +2,12 @@ import Foundation
 
 public struct Grammar {
     
-    struct Sentence {
+    public struct Sentence {
         
-        let id: String
+        public let id: String
+        public let japanese: String
+        public let english: String
+        public let structure: String
     }
     
     public struct Link {
@@ -20,15 +23,16 @@ public struct Grammar {
     public let meaning: String
     public let caution: String
     public let structure: String
-//    let exampleSentence: [Sentence]
+    public let exampleSentences: [Sentence]
     public let supplementalLinks: [Link]
     
-    init(id: String, title: String, meaning: String, caution: String, structure: String, supplementalLinks: [Link]) {
+    init(id: String, title: String, meaning: String, caution: String, structure: String, exampleSentences: [Sentence], supplementalLinks: [Link]) {
         self.id = id
         self.title = title
         self.meaning = meaning
         self.caution = caution
         self.structure = structure
+        self.exampleSentences = exampleSentences
         self.supplementalLinks = supplementalLinks
     }
 }

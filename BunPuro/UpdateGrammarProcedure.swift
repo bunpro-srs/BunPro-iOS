@@ -87,6 +87,16 @@ fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure 
                             newLink.url = URL(string: link.link.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
                             newLink.grammar = newGrammar
                         }
+                        
+                        for sentence in grammar.exampleSentences {
+                            
+                            let newSentence = Sentence(context: context)
+                            newSentence.id = sentence.id
+                            newSentence.japanese = sentence.japanese
+                            newSentence.english = sentence.english
+                            newSentence.structure = sentence.structure
+                            newSentence.grammar = newGrammar
+                        }
                     }
                 }
             }

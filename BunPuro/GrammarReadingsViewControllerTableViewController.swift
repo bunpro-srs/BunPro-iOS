@@ -30,6 +30,8 @@ class GrammarReadingsViewControllerTableViewController: CoreDataFetchedResultsTa
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }
     
+    // MARK: - Table view data source
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath)
         
@@ -52,5 +54,4 @@ class GrammarReadingsViewControllerTableViewController: CoreDataFetchedResultsTa
 
         present(safariViewController, animated: true, completion: nil)
     }
-
 }

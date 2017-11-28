@@ -78,6 +78,7 @@ fileprivate struct _Lesson: Codable {
 fileprivate enum Type: String, Codable {
     case grammar = "grammar-points"
     case supplementalLinks = "supplemental-links"
+    case exampleSentence = "example-sentences"
 }
 
 fileprivate class Point: Codable {
@@ -133,8 +134,8 @@ fileprivate class _Grammar: Point {
             let data: [Data]
         }
         
-        let exampleSentences: ExampleSentences
         let lesson: Lesson
+        let exampleSentences: ExampleSentences
         let supplementalLinks: SupplementalLinks
     }
     
@@ -202,7 +203,50 @@ fileprivate class _SupplementalLink: Point {
     }
 }
 
-
+fileprivate class _ExampleSentence: Point {
+    
+    struct Attributes: Codable {
+        let japanese: String
+        let english: String
+        let structure: String
+    }
+    
+    struct Relationships: Codable {
+        
+        enum CodingKeys: String, CodingKey {
+            case grammar = "grammar-point"
+        }
+        
+        struct Grammar: Codable {
+            
+            struct Data: Codable {
+                
+                let id: String
+            }
+            
+            let data: Data
+        }
+        
+        let grammar: Grammar
+    }
+    
+    let attributes: Attributes
+    let relationships: Relationships
+    
+    enum CodingKeys : String, CodingKey {
+        case attributes
+        case relationships
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.attributes = try container.decode(Attributes.self, forKey: .attributes)
+        self.relationships = try container.decode(Relationships.self, forKey: .relationships)
+        
+        try super.init(from: decoder)
+    }
+}
 
 fileprivate enum IncludedWrapper: Codable {
     
@@ -212,6 +256,7 @@ fileprivate enum IncludedWrapper: Codable {
     
     case grammar(_Grammar)
     case link(_SupplementalLink)
+    case example(_ExampleSentence)
 
     enum CodingKeys : String, CodingKey {
         case type
@@ -221,6 +266,7 @@ fileprivate enum IncludedWrapper: Codable {
         switch self {
         case .grammar(let s): return s
         case .link(let m): return m
+        case .example(let e): return e
         }
     }
     
@@ -232,6 +278,8 @@ fileprivate enum IncludedWrapper: Codable {
             self = .grammar(try _Grammar(from: decoder))
         case .supplementalLinks:
             self = .link(try _SupplementalLink(from: decoder))
+        case .exampleSentence:
+            self = .example(try _ExampleSentence(from: decoder))
         }
     }
 }
@@ -247,6 +295,7 @@ fileprivate struct _LessonData: Codable {
     
     var grammar: [_Grammar]
     var supplemantalLinks: [_SupplementalLink]
+    var exampleSentences: [_ExampleSentence]
     
     func jlpt() -> [JLPT] {
         return [3, 4, 5].map { level -> JLPT in
@@ -259,11 +308,16 @@ fileprivate struct _LessonData: Codable {
                         return Grammar.Link(id: link.id, site: link.attributes.site, description: link.attributes.description, link: link.attributes.link)
                     }
                     
+                    let examples = self.exampleSentences.filter({ $0.relationships.grammar.data.id == g.id }).map { example -> Grammar.Sentence in
+                        return Grammar.Sentence(id: example.id, japanese: example.attributes.japanese, english: example.attributes.english, structure: example.attributes.structure)
+                    }
+                    
                     return Grammar(id: g.id,
                             title: g.attributes.title,
                             meaning: g.attributes.meaning,
                             caution: g.attributes.caution,
                             structure: g.attributes.structure,
+                            exampleSentences: examples,
                             supplementalLinks: links)
                 }
                 
@@ -285,6 +339,8 @@ fileprivate struct _LessonData: Codable {
         
         var grammarResults: [_Grammar] = []
         var linkResults: [_SupplementalLink] = []
+        var exampleResults: [_ExampleSentence] = []
+        
         var resultsContainer = try container.nestedUnkeyedContainer(forKey: .included)
         while !resultsContainer.isAtEnd {
             let wrapper = try resultsContainer.decode(IncludedWrapper.self)
@@ -292,10 +348,12 @@ fileprivate struct _LessonData: Codable {
             switch wrapper {
             case .grammar(let g): grammarResults.append(g)
             case .link(let l): linkResults.append(l)
+            case .example(let e): exampleResults.append(e)
             }
         }
         self.grammar = grammarResults
         self.supplemantalLinks = linkResults
+        self.exampleSentences = exampleResults
     }
     
     func encode(to encoder: Encoder) throws {

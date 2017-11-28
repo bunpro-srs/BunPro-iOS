@@ -54,6 +54,7 @@ class StatusTableViewController: UITableViewController {
         
         becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
             self?.repeatProcedure?.cancel()
+            self?.repeatProcedure = nil
         }
         
         refreshStatus()

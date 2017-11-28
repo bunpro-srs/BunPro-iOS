@@ -8,6 +8,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="lesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="grammar" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Link" inverseName="grammar" inverseEntity="Link" syncable="YES"/>
+        <relationship name="sentences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sentence" inverseName="grammar" inverseEntity="Sentence" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -47,10 +48,23 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Sentence" representedClassName="Sentence" syncable="YES" codeGenerationType="class">
+        <attribute name="english" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="japanese" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="structure" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="grammar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Grammar" inverseName="sentences" inverseEntity="Grammar" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <elements>
-        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
         <element name="Lesson" positionX="-54" positionY="27" width="128" height="105"/>
         <element name="Link" positionX="-54" positionY="45" width="128" height="120"/>
+        <element name="Sentence" positionX="-54" positionY="63" width="128" height="120"/>
     </elements>
 </model>
