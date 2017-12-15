@@ -25,6 +25,7 @@
 		2E1DCA2F1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */; };
 		2E1DCA321FC76AC6002E67D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */; };
 		2E1DCA331FC76AC6002E67D6 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */; };
+		2E21B3161FD9D4E500FE8320 /* SettingsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */; };
 		2E2FE52D1FC349AC00DCC894 /* LoginProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */; };
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E3074951FACF9650078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074971FACF9650078725B /* InfoPlist.strings */; };
@@ -46,6 +47,7 @@
 		2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2C1FA26F6C00CE52CF /* Server.swift */; };
 		2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
 		2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
+		2EB4564B1FE4559B003CDD65 /* LogoutProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */; };
 		2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4DB561FBCE27B00833897 /* Grammar.swift */; };
 		2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74031FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift */; };
 		2EBA74051FAA4C1500DE2A08 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; };
@@ -60,6 +62,8 @@
 		2EE4E7931FA28F350020E828 /* ProcedureKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
 		2EE4E7951FA28F400020E828 /* ProcedureKitNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */; };
+		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
 		2EF752141FAA37D4000A2975 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; };
 		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
@@ -139,6 +143,7 @@
 		2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarExampleSentancesViewController.swift; sourceTree = "<group>"; };
 		2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProcedure.swift; sourceTree = "<group>"; };
 		2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProcedure.swift; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074961FACF9650078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -169,6 +174,7 @@
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKitNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutProcedure.swift; sourceTree = "<group>"; };
 		2EB4DB561FBCE27B00833897 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
 		2EBA74031FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ContentViewController.swift"; sourceTree = "<group>"; };
 		2EBA74071FAA7A3000DE2A08 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
@@ -177,6 +183,8 @@
 		2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
 		2EE4E78C1FA2835C0020E828 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		2EE4E78E1FA283650020E828 /* UserProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
+		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2EF752151FAA37D4000A2975 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
@@ -233,12 +241,14 @@
 			isa = PBXGroup;
 			children = (
 				2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */,
+				2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */,
 				2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */,
 				2E01D2011FB2503000E8632D /* ProgressProcedure.swift */,
 				2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */,
 				2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */,
 				2E01D2071FB2524500E8632D /* StatusProcedure.swift */,
 				2E0F9BB61FCC877600738129 /* BunProProcedure.swift */,
+				2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */,
 			);
 			path = Procedures;
 			sourceTree = "<group>";
@@ -314,6 +324,8 @@
 				2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */,
 				2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */,
 				2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */,
+				2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */,
+				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
 				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
 				2E3074A01FACF9A20078725B /* Protocols */,
@@ -607,9 +619,11 @@
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E1DCA2F1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift in Sources */,
 				2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */,
+				2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */,
 				2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */,
 				2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */,
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
+				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
 				2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */,
@@ -639,10 +653,12 @@
 				2E1DCA321FC76AC6002E67D6 /* LoginViewController.swift in Sources */,
 				2E2FE52D1FC349AC00DCC894 /* LoginProcedure.swift in Sources */,
 				2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */,
+				2EB4564B1FE4559B003CDD65 /* LogoutProcedure.swift in Sources */,
 				2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */,
 				2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */,
 				2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */,
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
+				2E21B3161FD9D4E500FE8320 /* SettingsProcedure.swift in Sources */,
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
 				2EBDC0951FA877DF00CC643D /* ReviewResponse.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,

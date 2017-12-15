@@ -10,6 +10,8 @@ import UIKit
 import BunPuroKit
 import ProcedureKit
 
+private let updateInterval = TimeInterval(60)
+
 class StatusTableViewController: UITableViewController {
     
     @IBOutlet weak var nextReviewTitleLabel: UILabel!
@@ -89,7 +91,7 @@ class StatusTableViewController: UITableViewController {
         
         guard repeatProcedure == nil else { return }
         
-        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(60)) {
+        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(updateInterval)) {
             StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
                 
                 DispatchQueue.main.async {
@@ -108,6 +110,10 @@ class StatusTableViewController: UITableViewController {
         guard let user = user else { return }
         
         self.navigationItem.title = user.name
+        
+        let importProcedure = ImportAccountIntoCoreDataProcedure(user: user)
+        
+        Server.add(procedure: importProcedure)
     }
     
     private func setup(reviews response: ReviewResponse?) {

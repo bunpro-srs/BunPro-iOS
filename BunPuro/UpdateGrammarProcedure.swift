@@ -20,21 +20,17 @@ class UpdateGrammarProcedure: GroupProcedure {
         
         lessonProcedure = LessonsProcedure(presentingViewController: presentingViewController)
         importProcedure = ImportLessonsIntoCoreDataProcedure()
-        importProcedure.add(dependency: lessonProcedure)
+        importProcedure.injectResult(from: lessonProcedure)
         
         super.init(operations: [lessonProcedure, importProcedure])
         
         self.name = "Update Grammar"
-        
-        importProcedure.addWillExecuteBlockObserver { (i, _) in
-            i.input = self.lessonProcedure.output
-        }
     }
 }
 
 fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure {
     
-    var input: Pending<ProcedureResult<[BunPuroKit.JLPT]>> = .pending
+    var input: Pending<[BunPuroKit.JLPT]> = .pending
     
     let stack: CoreDataStack
     
@@ -47,7 +43,7 @@ fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure 
     
     override func execute() {
         guard !isCancelled else { return }
-        guard let jlpts = input.value?.value else { return }
+        guard let jlpts = input.value else { return }
         
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump

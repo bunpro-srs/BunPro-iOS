@@ -53,51 +53,6 @@ public struct Server {
     public static func add(procedure: Procedure) {
         NetworkHandler.shared.queue.add(operation: procedure)
     }
-        
-//    public static func updateStatus(indicator: NetworkActivityIndicatorProtocol?, completion: @escaping (Error?) -> Void) {
-//
-//        guard let token = token else {
-//
-//            DispatchQueue.main.async {
-//                completion(ServerError.noAPIToken)
-//            }
-//            return
-//        }
-//
-//        let statusProcedure = StatusProcedure(token: token) { (user, userProgress, reviewResponse, error) in
-//
-//            DispatchQueue.main.async {
-//                self.user = user
-//                self.userProgress = userProgress
-//                self.reviewResponse = reviewResponse
-//                completion(error)
-//            }
-//        }
-//
-//        statusProcedure.indicator = indicator
-//
-//        NetworkHandler.shared.queue.add(operation: statusProcedure)
-//    }
-//
-//    public static func updateJLPT(completion: @escaping ([JLPT]?, Error?) -> Void) {
-//
-//        guard let token = token else {
-//
-//            DispatchQueue.main.async {
-//                completion(nil, ServerError.noAPIToken)
-//            }
-//            return
-//        }
-//
-//        let grammarProcedure = LessonsProcedure(token: token) { (jlpts, error) in
-//
-//            DispatchQueue.main.async {
-//                completion(jlpts, error)
-//            }
-//        }
-//
-//        NetworkHandler.shared.queue.add(operation: grammarProcedure)
-//    }
 }
 
 class NetworkHandler {

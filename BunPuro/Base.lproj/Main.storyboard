@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -339,7 +339,7 @@
         <!--Settings-->
         <scene sceneID="b4v-X9-XeA">
             <objects>
-                <tableViewController id="z14-3N-uev" sceneMemberID="viewController">
+                <tableViewController id="z14-3N-uev" customClass="SettingsTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WKV-xq-end">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -454,6 +454,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="ch9-PZ-Wxg"/>
+                    <connections>
+                        <outlet property="bunnyModeDetailLabel" destination="3G8-gV-bVu" id="NfG-1i-lju"/>
+                        <outlet property="furiganaDetailLabel" destination="GfK-y4-FJ6" id="XyE-QG-uJn"/>
+                        <outlet property="hideEnglishDetailLabel" destination="khG-cj-vIc" id="LUa-dP-Fg7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgm-Rt-PwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -843,6 +848,7 @@
                     <connections>
                         <segue destination="Iyf-DW-p5E" kind="relationship" relationship="viewControllers" id="w4Q-6F-qjc"/>
                         <segue destination="jMr-YW-mZt" kind="relationship" relationship="viewControllers" id="I9k-Oh-F19"/>
+                        <segue destination="bxM-61-YKH" kind="relationship" relationship="viewControllers" id="MbF-md-GFf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

@@ -5,6 +5,11 @@ public enum Active: String, Codable {
     case no = "No"
 }
 
+public enum State: String, Codable {
+    case on = "On"
+    case off = "Off"
+}
+
 public enum FuriganaMode: String, Codable {
     case on = "On"
     case off = "Off"
@@ -33,10 +38,10 @@ public struct User: Codable {
             public let createdAt: Date
             public let updatedAt: Date
             
-            public let bunnyMode: Active
+            public let bunnyMode: State
             public let furigana: FuriganaMode
             public let hideEnglish: Active
-            public let lightMode: Active
+            public let lightMode: State
         }
         
         private enum CodingKeys: String, CodingKey {
@@ -59,8 +64,8 @@ public struct User: Codable {
     public var createdAt: Date  { return attributes.createdAt }
     public var updatedAt: Date  { return attributes.updatedAt }
     
-    public var bunnyMode: Active { return attributes.bunnyMode }
+    public var bunnyMode: State { return attributes.bunnyMode }
     public var furigana: FuriganaMode { return attributes.furigana }
     public var hideEnglish: Active { return attributes.hideEnglish }
-    public var lightMode: Active { return attributes.lightMode }
+    public var lightMode: State { return attributes.lightMode }
 }

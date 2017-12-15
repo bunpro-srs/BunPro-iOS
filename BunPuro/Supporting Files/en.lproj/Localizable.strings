@@ -18,3 +18,15 @@
 
 /* Search grammar placeholder */
 "search.grammar.placeholder" = "Search Grammar";
+
+/* Common cancel action */
+"general.cancel" = "Cancel";
+
+"furigana.on" = "Always";
+"furigana.off" = "Never";
+"furigana.wanikani" = "WaniKani";
+"active.yes" = "Yes";
+"active.no" = "No";
+"state.on" = "On";
+"state.off" = "Off";
+"settings.logout.action" = "Logout";
