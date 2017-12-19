@@ -36,9 +36,16 @@ class GrammarExampleSentancesViewController: CoreDataFetchedResultsTableViewCont
         
         let sentence = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = sentence.japanese
-        cell.detailTextLabel?.text = sentence.english
+        let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
+        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
+        cell.textLabel?.attributedText = sentence.japanese?.htmlAttributedString(font: japaneseFont)
+        cell.detailTextLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
         
         return cell
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }

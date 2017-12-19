@@ -37,8 +37,11 @@ class GrammarReadingsViewControllerTableViewController: CoreDataFetchedResultsTa
         
         let link = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = link.site
-        cell.detailTextLabel?.text = link.about
+        let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
+        let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
+        
+        cell.textLabel?.attributedText = link.site?.htmlAttributedString(font: font1)
+        cell.detailTextLabel?.attributedText = link.about?.htmlAttributedString(font: font2)
         
         return cell
     }

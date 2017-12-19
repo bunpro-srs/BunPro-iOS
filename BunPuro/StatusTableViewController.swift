@@ -9,6 +9,7 @@
 import UIKit
 import BunPuroKit
 import ProcedureKit
+import SafariServices
 
 private let updateInterval = TimeInterval(60)
 
@@ -77,13 +78,9 @@ class StatusTableViewController: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            let alertController = UIAlertController(title: "Uh oh", message: "Not yet implemented ;_;", preferredStyle: .alert)
+            let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: self)
             
-            let cancelAction = UIAlertAction(title: "OK...", style: .cancel, handler: nil)
-            
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true, completion: nil)
+            Server.add(procedure: reviewProcedure)
         }
     }
     
@@ -122,7 +119,7 @@ class StatusTableViewController: UITableViewController {
         
         if let nextReviewDate = response.nextReviewDate {
             
-            self.nextReviewTitleLabel.textColor = UIColor.black
+            self.nextReviewTitleLabel?.textColor = UIColor.black
             
             if nextReviewDate > Date() {
                 
@@ -132,15 +129,15 @@ class StatusTableViewController: UITableViewController {
                 dateComponentsFormatter.includesTimeRemainingPhrase = true
                 dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
                 
-                self.nextReviewLabel.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
+                self.nextReviewLabel?.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
             } else {
-                self.nextReviewTitleLabel.textColor = UIColor(named: "Main Tint")
-                self.nextReviewLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
+                self.nextReviewTitleLabel?.textColor = UIColor(named: "Main Tint")
+                self.nextReviewLabel?.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }
         
-        nextHourLabel.text = "\(response.reviewsWithinNextHour)"
-        nextDayLabel.text = "\(response.reviewsTomorrow)"
+        nextHourLabel?.text = "\(response.reviewsWithinNextHour)"
+        nextDayLabel?.text = "\(response.reviewsTomorrow)"
     }
     
     private func setup(progress response: UserProgress?) {
@@ -183,5 +180,12 @@ extension StatusTableViewController: SegueHandler {
             destination?.level = 3
             destination?.title = "N3"
         }
+    }
+}
+
+extension StatusTableViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

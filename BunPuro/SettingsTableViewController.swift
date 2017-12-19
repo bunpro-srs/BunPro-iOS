@@ -20,9 +20,9 @@ class SettingsTableViewController: UITableViewController {
     private let queue = ProcedureQueue()
     private var settings: SetSettingsProcedure.Settings? {
         didSet {
-            furiganaDetailLabel.text = settings?.furigana.localizedString
-            hideEnglishDetailLabel.text = settings?.english.localizedString
-            bunnyModeDetailLabel.text = settings?.bunnyMode.localizedString
+            furiganaDetailLabel?.text = settings?.furigana.localizedString
+            hideEnglishDetailLabel?.text = settings?.english.localizedString
+            bunnyModeDetailLabel?.text = settings?.bunnyMode.localizedString
         }
     }
     
@@ -179,6 +179,11 @@ class SettingsTableViewController: UITableViewController {
         }
         
         Server.add(procedure: settingsProcedure)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }
 
