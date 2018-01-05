@@ -297,6 +297,61 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		2E6755871FFFE9C100BD10EB /* Procedures */ = {
+			isa = PBXGroup;
+			children = (
+				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
+				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
+			);
+			path = Procedures;
+			sourceTree = "<group>";
+		};
+		2E6755881FFFE9FF00BD10EB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2EB4564C1FE4710C003CDD65 /* DetailCell.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2E6755891FFFEA1200BD10EB /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		2E67558A1FFFEA2900BD10EB /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
+				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
+				2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		2E67558B1FFFEA3C00BD10EB /* Grammar */ = {
+			isa = PBXGroup;
+			children = (
+				2E01D2111FB2686600E8632D /* SearchTableViewController.swift */,
+				2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */,
+				2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */,
+				2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */,
+				2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */,
+			);
+			path = Grammar;
+			sourceTree = "<group>";
+		};
+		2E67558C1FFFEA5000BD10EB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		2EAD9DC71FA25DF100CE52CF = {
 			isa = PBXGroup;
 			children = (
@@ -327,19 +382,12 @@
 			children = (
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
-				2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */,
-				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
-				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
-				2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */,
-				2E01D2111FB2686600E8632D /* SearchTableViewController.swift */,
-				2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */,
-				2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */,
-				2E1DCA2E1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift */,
-				2E1DCA2C1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift */,
-				2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */,
-				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
-				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
-				2EB4564C1FE4710C003CDD65 /* DetailCell.swift */,
+				2E67558A1FFFEA2900BD10EB /* Status */,
+				2E67558B1FFFEA3C00BD10EB /* Grammar */,
+				2E67558C1FFFEA5000BD10EB /* Settings */,
+				2E6755891FFFEA1200BD10EB /* Notification */,
+				2E6755871FFFE9C100BD10EB /* Procedures */,
+				2E6755881FFFE9FF00BD10EB /* UI */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
 				2E3074A01FACF9A20078725B /* Protocols */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
