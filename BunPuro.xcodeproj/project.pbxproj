@@ -33,6 +33,7 @@
 		2E3EE1161FE91EFD0027C924 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1141FE91EFD0027C924 /* ReviewViewController.swift */; };
 		2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */; };
 		2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EE11A1FE925C30027C924 /* Main.storyboard */; };
+		2E3EE11D1FF4EF870027C924 /* String+FuriganaAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */; };
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
@@ -157,6 +158,7 @@
 		2E3EE1141FE91EFD0027C924 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewControllerProcedure.swift; sourceTree = "<group>"; };
 		2E3EE11A1FE925C30027C924 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FuriganaAttributedString.swift"; sourceTree = "<group>"; };
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
+				2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
 				2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */,
+				2E3EE11D1FF4EF870027C924 /* String+FuriganaAttributedString.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
 				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,

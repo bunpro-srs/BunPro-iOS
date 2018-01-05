@@ -32,14 +32,15 @@ class GrammarExampleSentancesViewController: CoreDataFetchedResultsTableViewCont
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
         
         let sentence = fetchedResultsController.object(at: indexPath)
         
         let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
         let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
-        cell.textLabel?.attributedText = sentence.japanese?.htmlAttributedString(font: japaneseFont)
-        cell.detailTextLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
+        
+        cell.nameLabel?.attributedText = sentence.japanese?.htmlAttributedString(font: japaneseFont)
+        cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
         
         return cell
     }
