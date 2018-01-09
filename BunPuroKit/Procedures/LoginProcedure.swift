@@ -16,12 +16,12 @@ private let loginUrlString = "\(baseUrlString)login/"
 
 class LoginProcedure: GroupProcedure, OutputProcedure {
     
-    var output: Pending<ProcedureResult<Token>> = .pending
+    var output: Pending<ProcedureResult<TokenResponse>> = .pending
     
     let completion: (Token?, Error?) -> Void
     
     private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
-    private let _transformProcedure: TransformProcedure<Data, Token>
+    private let _transformProcedure: TransformProcedure<Data, TokenResponse>
     
     private let email: String
     private let password: String
@@ -42,9 +42,9 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         request.httpMethod = "POST"
         
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
-        _transformProcedure = TransformProcedure<Data, Token> {
+        _transformProcedure = TransformProcedure<Data, TokenResponse> {
             print(try! JSONSerialization.jsonObject(with: $0, options: []))
-            return try JSONDecoder().decode(TokenResponse.self, from: $0).token }
+            return try JSONDecoder().decode(TokenResponse.self, from: $0) }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
         
         self.completion = completion
@@ -58,26 +58,37 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         
         print(errors)
         
-        if errors.isEmpty {
+        if errors.isEmpty, _transformProcedure.output.success?.errors == nil {
             let keychain = Keychain()
             keychain[LoginViewController.CredentialsKey.email.rawValue] = email
             keychain[LoginViewController.CredentialsKey.password.rawValue] = password
-            Server.token = _transformProcedure.output.value?.value
+            Server.token = _transformProcedure.output.success?.token
         }
         
         output = _transformProcedure.output
         
-        completion(output.value?.value, output.error)
+        completion(output.success?.token, output.success?.errors?.first?.error)
     }
 }
 
-fileprivate struct TokenResponse: Codable {
+struct TokenResponse: Codable {
+    
+    struct TokenError: Codable {
+        let detail: String
+        
+        var error: NSError {
+            
+            return NSError(domain: "bunpro.login", code: -1, userInfo: [NSLocalizedDescriptionKey: detail])
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case token = "bunpro_api_token"
+        case errors
     }
     
-    let token: String
+    let token: Token?
+    let errors: [TokenError]?
 }
 
 public enum BunPuroLoginError: Error {

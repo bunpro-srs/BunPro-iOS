@@ -28,12 +28,20 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet private weak var errorLogButton: UIButton!
+    
+    private var failedAttempts: Int = 0
+    private var failedAttemptErrors: [Error] = []
+    
     weak var delegate: LoginViewControllerDelegate?
     
     private let keychain = Keychain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        errorLogButton.isHidden = true
+        
         emailTextField.text = keychain[string: CredentialsKey.email.rawValue]
         passwordTextField.text = keychain[string: CredentialsKey.password.rawValue]
         
@@ -52,7 +60,7 @@ class LoginViewController: UIViewController {
         loginButton.isEnabled = false
         
         let loginProcedure = LoginProcedure(username: email, password: password) { (token, error) in
-            guard error == nil else { DispatchQueue.main.async { self.displayTokenError() }; return }
+            guard error == nil else { DispatchQueue.main.async { self.displayTokenError(error) }; return }
             
             DispatchQueue.main.async {
                 self.activateUI()
@@ -64,7 +72,14 @@ class LoginViewController: UIViewController {
         NetworkHandler.shared.queue.add(operation: loginProcedure)
     }
     
-    private func displayTokenError() {
+    private func displayTokenError(_ error: Error?) {
+        
+        failedAttempts += 1
+        
+        if let error = error, failedAttempts == 3 {
+            failedAttemptErrors.append(error)
+            errorLogButton.isHidden = false
+        }
         
         activateUI()
     }
@@ -83,6 +98,16 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
         validateCredentials()
+    }
+    
+    @IBAction func errorLogButtonPressed(_ sender: UIButton) {
+        
+        let controller = ErrorViewController(nibName: String(describing: ErrorViewController.self), bundle: Bundle(for: ErrorViewController.self))
+        controller.errors = failedAttemptErrors
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        
+        present(navigationController, animated: true)
     }
 
 }

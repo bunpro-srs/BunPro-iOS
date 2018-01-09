@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="6de-lu-dcF" id="eeb-5g-8Kv"/>
                 <outlet property="emailTextField" destination="2f8-tT-gDj" id="3ak-B3-lbs"/>
+                <outlet property="errorLogButton" destination="me0-HR-o9M" id="5PZ-0k-823"/>
                 <outlet property="loginButton" destination="IdF-NY-1SC" id="AEC-h4-XF7"/>
                 <outlet property="passwordTextField" destination="3gi-Ws-khY" id="1A2-8h-NIy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -52,12 +53,21 @@
                         </button>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="me0-HR-o9M">
+                    <rect key="frame" x="295" y="617" width="64" height="30"/>
+                    <state key="normal" title="Error Log"/>
+                    <connections>
+                        <action selector="errorLogButtonPressed:" destination="-1" eventType="touchUpInside" id="GfV-E1-OHJ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qqf-30-jyM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7WT-Gg-AaK"/>
                 <constraint firstItem="qqf-30-jyM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="8Yo-CS-800"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qqf-30-jyM" secondAttribute="trailing" constant="20" id="GHZ-RC-bYb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="me0-HR-o9M" secondAttribute="trailing" constant="16" id="GOb-Yp-1av"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="me0-HR-o9M" secondAttribute="bottom" constant="20" id="nGq-oJ-yCX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
