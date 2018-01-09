@@ -50,6 +50,10 @@ public struct Server {
         token = nil
     }
     
+    public static func logout() {
+        add(procedure: LogoutProcedure())
+    }
+    
     public static func add(procedure: Procedure) {
         NetworkHandler.shared.queue.add(operation: procedure)
     }

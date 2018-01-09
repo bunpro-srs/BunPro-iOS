@@ -743,13 +743,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="hKr-Pt-Zus">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hKr-Pt-Zus">
                                             <rect key="frame" x="16" y="4" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
                                                     <attributes>
-                                                        <font key="NSFont" metaFont="system" size="17"/>
+                                                        <font key="NSFont" size="17" name=".AppleSystemUIFont"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -1033,7 +1034,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cKR-F2-Eqv"/>
-        <segue reference="ihl-cV-sJZ"/>
+        <segue reference="JRI-lB-ITC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

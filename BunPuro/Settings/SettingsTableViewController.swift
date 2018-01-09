@@ -135,7 +135,8 @@ class SettingsTableViewController: UITableViewController {
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
                 let logoutAction = UIAlertAction(title: NSLocalizedString("settings.logout.action", comment: "Logout confirmation"), style: .destructive) { (_) in
-                    
+                    Server.logout()
+                    self.tabBarController?.selectedIndex = 0
                 }
                 
                 let cancelAction = UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)

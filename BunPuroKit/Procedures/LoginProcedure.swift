@@ -42,9 +42,7 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         request.httpMethod = "POST"
         
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
-        _transformProcedure = TransformProcedure<Data, TokenResponse> {
-            print(try! JSONSerialization.jsonObject(with: $0, options: []))
-            return try JSONDecoder().decode(TokenResponse.self, from: $0) }
+        _transformProcedure = TransformProcedure<Data, TokenResponse> { try JSONDecoder().decode(TokenResponse.self, from: $0) }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
         
         self.completion = completion

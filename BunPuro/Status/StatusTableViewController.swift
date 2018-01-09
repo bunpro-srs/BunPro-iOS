@@ -34,8 +34,12 @@ class StatusTableViewController: UITableViewController {
     
     private var becomeInactiveObserver: NSObjectProtocol?
     private var becomeActiveObserver: NSObjectProtocol?
+    private var logoutObserver: NSObjectProtocol?
     
-    private var repeatProcedure: RepeatProcedure<StatusProcedure>?
+//    private var repeatProcedure: RepeatProcedure<StatusProcedure>?
+    
+    private var statusUpdateProcedure: StatusProcedure?
+    private weak var statusUpdateTimer: Timer?
     
     deinit {
         if becomeActiveObserver != nil {
@@ -44,6 +48,10 @@ class StatusTableViewController: UITableViewController {
         
         if becomeInactiveObserver != nil {
             NotificationCenter.default.removeObserver(becomeInactiveObserver!)
+        }
+        
+        if logoutObserver != nil {
+            NotificationCenter.default.removeObserver(logoutObserver!)
         }
     }
     
@@ -56,10 +64,31 @@ class StatusTableViewController: UITableViewController {
         }
         
         becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
-            self?.repeatProcedure?.cancel()
-            self?.repeatProcedure = nil
+//            self?.repeatProcedure?.cancel()
+//            self?.repeatProcedure = nil
+            
+            self?.statusUpdateProcedure?.cancel()
+            self?.statusUpdateProcedure = nil
+            
+            self?.statusUpdateTimer?.invalidate()
         }
         
+        logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
+            self?.statusUpdateProcedure?.cancel()
+            self?.statusUpdateProcedure = nil
+            self?.statusUpdateTimer?.invalidate()
+            
+            self?.scheduleUpdateProcedure()
+            self?.refreshStatus()
+            
+            DispatchQueue.main.async {
+                self?.setup(user: nil)
+                self?.setup(progress: nil)
+                self?.setup(reviews: nil)
+            }
+        }
+        
+        scheduleUpdateProcedure()
         refreshStatus()
     }
     
@@ -86,25 +115,52 @@ class StatusTableViewController: UITableViewController {
     
     private func refreshStatus() {
         
-        guard repeatProcedure == nil else { return }
+        statusUpdateTimer?.invalidate()
         
-        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(updateInterval)) {
-            StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
+        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { (_) in
+            self.scheduleUpdateProcedure()
+        }
+        
+//        guard repeatProcedure == nil else { return }
+//
+//        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(updateInterval)) {
+//            StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
+//
+//                DispatchQueue.main.async {
+//                    self.setup(user: user)
+//                    self.setup(progress: progress)
+//                    self.setup(reviews: reviews)
+//                }
+//            }
+//        }
+//
+//        Server.add(procedure: repeatProcedure!)
+    }
+    
+    private func scheduleUpdateProcedure() {
+        
+        guard statusUpdateProcedure == nil else { return }
+        
+        statusUpdateProcedure = StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
+            
+            DispatchQueue.main.async {
+                self.setup(user: user)
+                self.setup(progress: progress)
+                self.setup(reviews: reviews)
                 
-                DispatchQueue.main.async {
-                    self.setup(user: user)
-                    self.setup(progress: progress)
-                    self.setup(reviews: reviews)
-                }
+                self.statusUpdateProcedure = nil
             }
         }
-                
-        Server.add(procedure: repeatProcedure!)
+        
+        Server.add(procedure: statusUpdateProcedure!)
     }
     
     private func setup(user: User?) {
         
-        guard let user = user else { return }
+        guard let user = user else {
+            self.navigationItem.title = NSLocalizedString("Loading...", comment: "")
+            return
+        }
         
         self.navigationItem.title = user.name
         
@@ -115,11 +171,17 @@ class StatusTableViewController: UITableViewController {
     
     private func setup(reviews response: ReviewResponse?) {
         
-        guard let response = response else { return }
+        guard let response = response else {
+            nextReviewTitleLabel?.textColor = UIColor.black
+            nextReviewLabel?.text = nil
+            nextHourLabel?.text = nil
+            nextDayLabel?.text = nil
+            return
+        }
         
         if let nextReviewDate = response.nextReviewDate {
             
-            self.nextReviewTitleLabel?.textColor = UIColor.black
+            nextReviewTitleLabel?.textColor = UIColor.black
             
             if nextReviewDate > Date() {
                 
@@ -129,10 +191,10 @@ class StatusTableViewController: UITableViewController {
                 dateComponentsFormatter.includesTimeRemainingPhrase = true
                 dateComponentsFormatter.allowedUnits = [.day, .hour, .minute]
                 
-                self.nextReviewLabel?.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
+                nextReviewLabel?.text = dateComponentsFormatter.string(from: Date(), to: nextReviewDate)
             } else {
-                self.nextReviewTitleLabel?.textColor = UIColor(named: "Main Tint")
-                self.nextReviewLabel?.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
+                nextReviewTitleLabel?.textColor = UIColor(named: "Main Tint")
+                nextReviewLabel?.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }
         
@@ -142,16 +204,14 @@ class StatusTableViewController: UITableViewController {
     
     private func setup(progress response: UserProgress?) {
         
-        guard let response = response else { return }
+        n5DetailLabel.text = response?.n5.localizedProgress
+        n5ProgressView.setProgress(response?.n5.progress ?? 0, animated: true)
         
-        n5DetailLabel.text = response.n5.localizedProgress ?? n5DetailLabel.text
-        n5ProgressView.setProgress(response.n5.progress, animated: true)
+        n4DetailLabel.text = response?.n4.localizedProgress
+        n4ProgressView.setProgress(response?.n4.progress ?? 0, animated: true)
         
-        n4DetailLabel.text = response.n4.localizedProgress ?? n4DetailLabel.text
-        n4ProgressView.setProgress(response.n4.progress, animated: true)
-        
-        n3DetailLabel.text = response.n3.localizedProgress ?? n3DetailLabel.text
-        n3ProgressView.setProgress(response.n3.progress, animated: true)
+        n3DetailLabel.text = response?.n3.localizedProgress
+        n3ProgressView.setProgress(response?.n3.progress ?? 0, animated: true)
     }
     
 }
