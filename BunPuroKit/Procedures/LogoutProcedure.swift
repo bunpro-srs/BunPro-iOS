@@ -24,6 +24,8 @@ class LogoutProcedure: Procedure {
         Server.token = nil
         
         NotificationCenter.default.post(name: .ServerDidLogoutNotification, object: nil)
+        
+        finish()
     }
 }
 
