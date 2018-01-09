@@ -10,7 +10,7 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class ReviewViewControllerProcedure: Procedure {
+public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
     
     public let presentingViewController: UIViewController
     
@@ -29,8 +29,16 @@ public class ReviewViewControllerProcedure: Procedure {
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ReviewViewControllerProcedure.self))
 
-        let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure")
+        let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
+        (controller.visibleViewController as? ReviewViewController)?.delegate = self
         
         presentingViewController.present(controller, animated: true, completion: nil)
+    }
+    
+    func revieViewControllerDidFinish(_ controller: ReviewViewController) {
+        
+        presentingViewController.dismiss(animated: true) {
+            self.finish()
+        }
     }
 }

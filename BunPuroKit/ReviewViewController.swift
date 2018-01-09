@@ -9,8 +9,14 @@
 import UIKit
 import WebKit
 
+protocol ReviewViewControllerDelegate: class {
+    func revieViewControllerDidFinish(_ controller: ReviewViewController)
+}
+
 class ReviewViewController: UIViewController {
 
+    weak var delegate: ReviewViewControllerDelegate?
+    
     @IBOutlet private weak var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -25,6 +31,6 @@ class ReviewViewController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        delegate?.revieViewControllerDidFinish(self)
     }
 }

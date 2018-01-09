@@ -106,6 +106,10 @@ class StatusTableViewController: UITableViewController {
             
             let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: self)
             
+            reviewProcedure.completionBlock = {
+                self.scheduleUpdateProcedure()
+            }
+            
             Server.add(procedure: reviewProcedure)
         }
     }
@@ -120,8 +124,6 @@ class StatusTableViewController: UITableViewController {
     }
     
     private func scheduleUpdateProcedure() {
-        
-        guard statusUpdateProcedure == nil else { return }
         
         statusUpdateProcedure = StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
             
