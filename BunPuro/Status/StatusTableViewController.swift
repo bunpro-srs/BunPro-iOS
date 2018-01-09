@@ -36,8 +36,6 @@ class StatusTableViewController: UITableViewController {
     private var becomeActiveObserver: NSObjectProtocol?
     private var logoutObserver: NSObjectProtocol?
     
-//    private var repeatProcedure: RepeatProcedure<StatusProcedure>?
-    
     private var statusUpdateProcedure: StatusProcedure?
     private weak var statusUpdateTimer: Timer?
     
@@ -64,8 +62,6 @@ class StatusTableViewController: UITableViewController {
         }
         
         becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
-//            self?.repeatProcedure?.cancel()
-//            self?.repeatProcedure = nil
             
             self?.statusUpdateProcedure?.cancel()
             self?.statusUpdateProcedure = nil
@@ -74,6 +70,7 @@ class StatusTableViewController: UITableViewController {
         }
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
+            
             self?.statusUpdateProcedure?.cancel()
             self?.statusUpdateProcedure = nil
             self?.statusUpdateTimer?.invalidate()
@@ -120,21 +117,6 @@ class StatusTableViewController: UITableViewController {
         statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { (_) in
             self.scheduleUpdateProcedure()
         }
-        
-//        guard repeatProcedure == nil else { return }
-//
-//        repeatProcedure = RepeatProcedure(dispatchQueue: nil, max: nil, wait: WaitStrategy.constant(updateInterval)) {
-//            StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
-//
-//                DispatchQueue.main.async {
-//                    self.setup(user: user)
-//                    self.setup(progress: progress)
-//                    self.setup(reviews: reviews)
-//                }
-//            }
-//        }
-//
-//        Server.add(procedure: repeatProcedure!)
     }
     
     private func scheduleUpdateProcedure() {
