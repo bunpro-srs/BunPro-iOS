@@ -39,6 +39,9 @@ class StatusTableViewController: UITableViewController {
     private var statusUpdateProcedure: StatusProcedure?
     private weak var statusUpdateTimer: Timer?
     
+    private var didReloadOnFirstAppearance: Bool = false
+    private var nextReviewDate: Date?
+    
     deinit {
         if becomeActiveObserver != nil {
             NotificationCenter.default.removeObserver(becomeActiveObserver!)
@@ -58,6 +61,7 @@ class StatusTableViewController: UITableViewController {
         super.viewDidLoad()
         
         becomeActiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) in
+            self?.scheduleUpdateProcedure()
             self?.refreshStatus()
         }
         
@@ -84,18 +88,35 @@ class StatusTableViewController: UITableViewController {
                 self?.setup(reviews: nil)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        scheduleUpdateProcedure()
-        refreshStatus()
+        if !didReloadOnFirstAppearance {
+            scheduleUpdateProcedure()
+            refreshStatus()
+            
+            didReloadOnFirstAppearance = true
+        }
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
-        if indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 2) {
-            return nil
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                if let nextReviewDate = nextReviewDate {
+                    return nextReviewDate < Date() ? indexPath : nil
+                }
+                return nil
+            default: return nil
+            }
+            
+        default:
+            return indexPath
         }
-        
-        return indexPath
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -134,6 +155,15 @@ class StatusTableViewController: UITableViewController {
                 
                 self.statusUpdateProcedure = nil
             }
+            
+            if let error = error as? Swift.DecodingError {
+                switch error {
+                case .keyNotFound(_, _):
+                    self.scheduleUpdateProcedure()
+                default:
+                    print(error)
+                }
+            }
         }
         
         Server.add(procedure: statusUpdateProcedure!)
@@ -165,6 +195,7 @@ class StatusTableViewController: UITableViewController {
         
         if let nextReviewDate = response.nextReviewDate {
             
+            self.nextReviewDate = nextReviewDate
             nextReviewTitleLabel?.textColor = UIColor.black
             
             if nextReviewDate > Date() {
