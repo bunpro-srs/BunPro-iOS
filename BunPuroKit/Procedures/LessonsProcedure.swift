@@ -17,20 +17,32 @@ public class LessonsProcedure: GroupProcedure, OutputProcedure {
         set { assertionFailure("\(#function) should never be called.") }
     }
     
+    public let initialImport: Bool
+    
     public let completion: (([JLPT]?, Error?) -> Void)?
     
-    private let lessonProcedure: _LessonsProcedure
+    private var lessonProcedure: _LessonsProcedure?
+    private var initialImportProcedure: _InitialImportProcedure?
     private let transformProcedure: TransformProcedure<_LessonData, [JLPT]>
     
-    public init(presentingViewController: UIViewController, completion: (([JLPT]?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, initialImport: Bool = false, completion: (([JLPT]?, Error?) -> Void)? = nil) {
         
+        self.initialImport = initialImport
         self.completion = completion
         
-        lessonProcedure = _LessonsProcedure(presentingViewController: presentingViewController)
-        transformProcedure = TransformProcedure<_LessonData, [JLPT]> { $0.jlpt() }
-        transformProcedure.injectResult(from: lessonProcedure)
-        
-        super.init(operations: [lessonProcedure, transformProcedure])
+        if initialImport {
+            initialImportProcedure = _InitialImportProcedure()
+            transformProcedure = TransformProcedure<_LessonData, [JLPT]> { $0.jlpt() }
+            transformProcedure.injectResult(from: initialImportProcedure!)
+            
+            super.init(operations: [initialImportProcedure!, transformProcedure])
+        } else {
+            lessonProcedure = _LessonsProcedure(presentingViewController: presentingViewController)
+            transformProcedure = TransformProcedure<_LessonData, [JLPT]> { $0.jlpt() }
+            transformProcedure.injectResult(from: lessonProcedure!)
+            
+            super.init(operations: [lessonProcedure!, transformProcedure])
+        }
     }
 }
 
@@ -38,6 +50,28 @@ fileprivate class _LessonsProcedure: BunPuroProcedure<_LessonData> {
     
     override var hasMilliseconds: Bool { return true }
     override var url: URL { return URL(string: "\(baseUrlString)lessons")! }
+}
+
+fileprivate class _InitialImportProcedure: GroupProcedure, OutputProcedure {
+    
+    public var output: Pending<ProcedureResult<_LessonData>> {
+        get { return _transformProcedure.output }
+        set { assertionFailure("\(#function) should not be called") }
+    }
+    
+    private var _transformProcedure: TransformProcedure<Data, _LessonData>!
+    
+    init() {
+        
+        _transformProcedure = TransformProcedure<Data, _LessonData> { try CustomDecoder.decode(_LessonData.self, from: $0, hasMilliseconds: true) }
+        
+        let fileUrl = Bundle(for: _InitialImportProcedure.self).url(forResource: "InitialDatabase", withExtension: "json")!
+        let data = try! Data(contentsOf: fileUrl)
+        
+        _transformProcedure.input = .ready(data)
+        
+        super.init(operations: [_transformProcedure])
+    }
 }
 
 fileprivate struct _Lesson: Codable {

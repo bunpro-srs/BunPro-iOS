@@ -10,6 +10,7 @@ import UIKit
 import BunPuroKit
 import ProcedureKit
 import SafariServices
+import CoreData
 
 private let updateInterval = TimeInterval(60)
 
@@ -163,6 +164,23 @@ class StatusTableViewController: UITableViewController {
                 default:
                     print(error)
                 }
+            }
+        }
+        
+        if !didReloadOnFirstAppearance {
+            
+            let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
+            
+            let context = AppDelegate.coreDataStack.managedObjectContext
+            
+            do {
+                if try context.fetch(request).isEmpty {
+                    let updateGrammarProcedure = UpdateGrammarProcedure(presentingViewController: self, initialImport: true)
+                                        
+                    Server.add(procedure: updateGrammarProcedure)
+                }
+            } catch {
+                print("Could not load grammar points")
             }
         }
         

@@ -15,6 +15,10 @@
 		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
 		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
+		2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02BF2006A95C005D33FD /* InitialDatabase.json */; };
+		2E02F8AD2007D2580068D8BF /* BunPro.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */; };
+		2E02F8AE2007D2580068D8BF /* BunPro.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */; };
+		2E02F8AF2007D2580068D8BF /* BunPro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AC2007D2580068D8BF /* BunPro.sqlite */; };
 		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
 		2E0F9BB71FCC877600738129 /* BunProProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F9BB61FCC877600738129 /* BunProProcedure.swift */; };
 		2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */; };
@@ -140,6 +144,9 @@
 		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
 		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-shm"; sourceTree = "<group>"; };
+		2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-wal"; sourceTree = "<group>"; };
+		2E02F8AC2007D2580068D8BF /* BunPro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BunPro.sqlite; sourceTree = "<group>"; };
 		2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGrammarProcedure.swift; sourceTree = "<group>"; };
 		2E0F9BB61FCC877600738129 /* BunProProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunProProcedure.swift; sourceTree = "<group>"; };
 		2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +206,7 @@
 		2EE4E78E1FA283650020E828 /* UserProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
+		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
 		2EF752151FAA37D4000A2975 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
@@ -286,6 +294,9 @@
 				2EAD9DE11FA25DF100CE52CF /* Info.plist */,
 				2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */,
 				2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */,
+				2E02F8AC2007D2580068D8BF /* BunPro.sqlite */,
+				2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */,
+				2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -438,6 +449,7 @@
 				2E3EE1141FE91EFD0027C924 /* ReviewViewController.swift */,
 				2E3EE11A1FE925C30027C924 /* Main.storyboard */,
 				2EAD9E0B1FA26EB400CE52CF /* Info.plist */,
+				2EEE02BF2006A95C005D33FD /* InitialDatabase.json */,
 			);
 			path = BunPuroKit;
 			sourceTree = "<group>";
@@ -632,6 +644,9 @@
 			files = (
 				2E30749C1FACF9660078725B /* Localizable.strings in Resources */,
 				2EAD9DE01FA25DF100CE52CF /* LaunchScreen.storyboard in Resources */,
+				2E02F8AD2007D2580068D8BF /* BunPro.sqlite-shm in Resources */,
+				2E02F8AF2007D2580068D8BF /* BunPro.sqlite in Resources */,
+				2E02F8AE2007D2580068D8BF /* BunPro.sqlite-wal in Resources */,
 				2E3074901FACF9640078725B /* InfoPlist.strings in Resources */,
 				2EAD9DDD1FA25DF100CE52CF /* Assets.xcassets in Resources */,
 				2EAD9DDB1FA25DF100CE52CF /* Main.storyboard in Resources */,
@@ -658,6 +673,7 @@
 			files = (
 				2E1DCA331FC76AC6002E67D6 /* LoginViewController.xib in Resources */,
 				2E7737BA20052754006B8FA7 /* ErrorViewController.xib in Resources */,
+				2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */,
 				2E3074951FACF9650078725B /* InfoPlist.strings in Resources */,
 				2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */,
 			);
