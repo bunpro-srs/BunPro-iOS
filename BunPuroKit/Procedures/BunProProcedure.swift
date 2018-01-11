@@ -37,10 +37,11 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
     override public func execute() {
         
         guard !isCancelled else { return }
+        guard let token = Server.token else { finish(withError: ServerError.noAPIToken); super.execute(); return }
         
         var request = URLRequest(url: url)
         
-        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
         
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, T> { try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds) }
