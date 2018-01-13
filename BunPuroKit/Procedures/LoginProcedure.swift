@@ -120,6 +120,8 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
                 let controller = LoginViewController(nibName: String(describing: LoginViewController.self), bundle: Bundle(for: LoginViewController.self))
                 controller.delegate = self
                 
+                controller.modalPresentationStyle = .formSheet
+                
                 presentingViewController.present(controller, animated: true, completion: nil)
             }
         } else {

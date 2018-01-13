@@ -16,22 +16,32 @@ private let updateInterval = TimeInterval(60)
 
 class StatusTableViewController: UITableViewController {
     
-    @IBOutlet weak var nextReviewTitleLabel: UILabel!
+    @IBOutlet private weak var lastUpdateLabel: UILabel!  { didSet { lastUpdateLabel.text = " " } }
     
-    @IBOutlet weak var nextReviewLabel: UILabel! { didSet { nextReviewLabel.text = " " } }
-    @IBOutlet weak var nextHourLabel: UILabel! { didSet { nextHourLabel.text = " " } }
-    @IBOutlet weak var nextDayLabel: UILabel! { didSet { nextDayLabel.text = " " } }
+    @IBOutlet private weak var nextReviewTitleLabel: UILabel!
     
-    @IBOutlet weak var n5DetailLabel: UILabel! { didSet { n5DetailLabel.text = " " } }
-    @IBOutlet weak var n5ProgressView: UIProgressView!
+    @IBOutlet private weak var nextReviewLabel: UILabel! { didSet { nextReviewLabel.text = " " } }
+    @IBOutlet private weak var nextHourLabel: UILabel! { didSet { nextHourLabel.text = " " } }
+    @IBOutlet private weak var nextDayLabel: UILabel! { didSet { nextDayLabel.text = " " } }
     
-    @IBOutlet weak var n4DetailLabel: UILabel! { didSet { n4DetailLabel.text = " " } }
-    @IBOutlet weak var n4ProgressView: UIProgressView!
+    @IBOutlet private weak var n5DetailLabel: UILabel! { didSet { n5DetailLabel.text = " " } }
+    @IBOutlet private weak var n5ProgressView: UIProgressView!
     
-    @IBOutlet weak var n3DetailLabel: UILabel! { didSet { n3DetailLabel.text = " " } }
-    @IBOutlet weak var n3ProgressView: UIProgressView!
+    @IBOutlet private weak var n4DetailLabel: UILabel! { didSet { n4DetailLabel.text = " " } }
+    @IBOutlet private weak var n4ProgressView: UIProgressView!
+    
+    @IBOutlet private weak var n3DetailLabel: UILabel! { didSet { n3DetailLabel.text = " " } }
+    @IBOutlet private weak var n3ProgressView: UIProgressView!
     
     private let dateComponentsFormatter = DateComponentsFormatter()
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        formatter.doesRelativeDateFormatting = true
+        
+        return formatter
+    }()
     
     private var becomeInactiveObserver: NSObjectProtocol?
     private var becomeActiveObserver: NSObjectProtocol?
@@ -208,6 +218,7 @@ class StatusTableViewController: UITableViewController {
             nextReviewLabel?.text = nil
             nextHourLabel?.text = nil
             nextDayLabel?.text = nil
+            lastUpdateLabel.text = nil
             return
         }
         
@@ -215,6 +226,8 @@ class StatusTableViewController: UITableViewController {
             
             self.nextReviewDate = nextReviewDate
             nextReviewTitleLabel?.textColor = UIColor.black
+            
+            lastUpdateLabel.text = "Updated: " + dateFormatter.string(from: Date())
             
             if nextReviewDate > Date() {
                 

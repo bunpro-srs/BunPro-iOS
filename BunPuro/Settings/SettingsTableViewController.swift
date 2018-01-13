@@ -55,6 +55,8 @@ class SettingsTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let cell = tableView.cellForRow(at: indexPath)!
+        
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -85,6 +87,9 @@ class SettingsTableViewController: UITableViewController {
                 
                 controller.preferredAction = wanikaniAction
                 
+                controller.popoverPresentationController?.sourceView = cell
+                controller.popoverPresentationController?.sourceRect = cell.bounds
+                
                 present(controller, animated: true, completion: nil)
                 
             case 1:
@@ -106,6 +111,9 @@ class SettingsTableViewController: UITableViewController {
                 controller.addAction(noAction)
                 controller.addAction(cancelAction)
                 
+                controller.popoverPresentationController?.sourceView = cell
+                controller.popoverPresentationController?.sourceRect = cell.bounds
+                
                 present(controller, animated: true, completion: nil)
             case 2:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -126,6 +134,9 @@ class SettingsTableViewController: UITableViewController {
                 controller.addAction(offAction)
                 controller.addAction(cancelAction)
                 
+                controller.popoverPresentationController?.sourceView = cell
+                controller.popoverPresentationController?.sourceRect = cell.bounds
+                
                 present(controller, animated: true, completion: nil)
             default: break
             }
@@ -143,6 +154,9 @@ class SettingsTableViewController: UITableViewController {
                 
                 controller.addAction(logoutAction)
                 controller.addAction(cancelAction)
+                
+                controller.popoverPresentationController?.sourceView = cell
+                controller.popoverPresentationController?.sourceRect = cell.bounds
                 
                 present(controller, animated: true, completion: nil)
             default: break
