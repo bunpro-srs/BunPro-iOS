@@ -34,12 +34,12 @@ struct UserNotificationCenter {
         
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content, trigger: trigger)
-        center.add(request, withCompletionHandler: { (error) in
+        center.add(request) { (error) in
             if let error = error {
                 print(error)
             }
             
             print("Added notification for: \(date)")
-        })
+        }
     }
 }

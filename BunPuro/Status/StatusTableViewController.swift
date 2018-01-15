@@ -136,14 +136,19 @@ class StatusTableViewController: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: self)
-            
-            reviewProcedure.completionBlock = {
-                self.scheduleUpdateProcedure()
-            }
-            
-            Server.add(procedure: reviewProcedure)
+            presentReviewViewController()
         }
+    }
+    
+    func presentReviewViewController() {
+        
+        let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!)
+        
+        reviewProcedure.completionBlock = {
+            self.scheduleUpdateProcedure()
+        }
+        
+        Server.add(procedure: reviewProcedure)
     }
     
     private func refreshStatus() {
