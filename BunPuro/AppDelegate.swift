@@ -93,5 +93,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let statusViewController = (window?.rootViewController as? UITabBarController)?.viewControllers?.first(where: { $0 is StatusTableViewController }) as? StatusTableViewController
         
         statusViewController?.presentReviewViewController()
+        
+        completionHandler()
     }
 }
