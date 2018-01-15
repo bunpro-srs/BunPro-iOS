@@ -95,6 +95,8 @@ public enum BunPuroLoginError: Error {
 
 class LoggedInCondition: Condition, LoginViewControllerDelegate {
     
+    private lazy var queue = ProcedureQueue()
+    
     weak var presentingViewController: UIViewController?
     
     var completion: ((ConditionResult) -> Void)?
@@ -116,13 +118,32 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
                 return
             }
             
-            DispatchQueue.main.async {
-                let controller = LoginViewController(nibName: String(describing: LoginViewController.self), bundle: Bundle(for: LoginViewController.self))
-                controller.delegate = self
+            let keychain = Keychain()
+            
+            if let username = keychain[LoginViewController.CredentialsKey.email.rawValue],
+                let password = keychain[LoginViewController.CredentialsKey.password.rawValue] {
                 
-                controller.modalPresentationStyle = .formSheet
+                let loginProcedure = LoginProcedure(username: username, password: password) { (token, error) in
+                    
+                    if error == nil {
+                        completion(.success(true))
+                    } else {
+                        completion(.failure(error!))
+                    }
+                }
                 
-                presentingViewController.present(controller, animated: true, completion: nil)
+                queue.add(operation: loginProcedure)
+                
+            } else {
+                
+                DispatchQueue.main.async {
+                    let controller = LoginViewController(nibName: String(describing: LoginViewController.self), bundle: Bundle(for: LoginViewController.self))
+                    controller.delegate = self
+                    
+                    controller.modalPresentationStyle = .formSheet
+                    
+                    presentingViewController.present(controller, animated: true, completion: nil)
+                }
             }
         } else {
             completion(.success(true))
