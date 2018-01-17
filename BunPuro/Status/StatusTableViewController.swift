@@ -43,25 +43,13 @@ class StatusTableViewController: UITableViewController {
         return formatter
     }()
     
-    private var becomeInactiveObserver: NSObjectProtocol?
-    private var becomeActiveObserver: NSObjectProtocol?
     private var logoutObserver: NSObjectProtocol?
     
-    private var statusUpdateProcedure: StatusProcedure?
-    private weak var statusUpdateTimer: Timer?
-    
-    private var didReloadOnFirstAppearance: Bool = false
     private var nextReviewDate: Date?
     
+    private var userFetchedResultsController: NSFetchedResultsController<Account>?
+    
     deinit {
-        if becomeActiveObserver != nil {
-            NotificationCenter.default.removeObserver(becomeActiveObserver!)
-        }
-        
-        if becomeInactiveObserver != nil {
-            NotificationCenter.default.removeObserver(becomeInactiveObserver!)
-        }
-        
         if logoutObserver != nil {
             NotificationCenter.default.removeObserver(logoutObserver!)
         }
@@ -71,44 +59,31 @@ class StatusTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        becomeActiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) in
-            self?.scheduleUpdateProcedure()
-            self?.refreshStatus()
-        }
-        
-        becomeInactiveObserver = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (_) in
-            
-            self?.statusUpdateProcedure?.cancel()
-            self?.statusUpdateProcedure = nil
-            
-            self?.statusUpdateTimer?.invalidate()
-        }
-        
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             
-            self?.statusUpdateProcedure?.cancel()
-            self?.statusUpdateProcedure = nil
-            self?.statusUpdateTimer?.invalidate()
-            
-            self?.scheduleUpdateProcedure()
-            self?.refreshStatus()
-            
             DispatchQueue.main.async {
-                self?.setup(user: nil)
-                self?.setup(progress: nil)
+                self?.setup(account: nil)
                 self?.setup(reviews: nil)
             }
         }
+        
+        setupUserFetchedResultsController()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func setupUserFetchedResultsController() {
         
-        if !didReloadOnFirstAppearance {
-            scheduleUpdateProcedure()
-            refreshStatus()
-            
-            didReloadOnFirstAppearance = true
+        let request: NSFetchRequest<Account> = Account.fetchRequest()
+        
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
+        
+        userFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        userFetchedResultsController?.delegate = self
+        
+        do {
+            try userFetchedResultsController?.performFetch()
+        } catch {
+            print(error)
         }
     }
     
@@ -145,75 +120,24 @@ class StatusTableViewController: UITableViewController {
         let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!)
         
         reviewProcedure.completionBlock = {
-            self.scheduleUpdateProcedure()
+            // Throw Notification
         }
         
         Server.add(procedure: reviewProcedure)
     }
     
-    private func refreshStatus() {
+    private func setup(account: Account?) {
         
-        statusUpdateTimer?.invalidate()
+        self.navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
         
-        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { (_) in
-            self.scheduleUpdateProcedure()
-        }
-    }
-    
-    private func scheduleUpdateProcedure() {
+        n5DetailLabel.text = account?.n5?.localizedProgress
+        n5ProgressView.setProgress(account?.n5?.progress ?? 0, animated: true)
         
-        statusUpdateProcedure = StatusProcedure(presentingViewController: self) { (user, progress, reviews, error) in
-            
-            DispatchQueue.main.async {
-                self.setup(user: user)
-                self.setup(progress: progress)
-                self.setup(reviews: reviews)
-                
-                self.statusUpdateProcedure = nil
-            }
-            
-            if let error = error as? Swift.DecodingError {
-                switch error {
-                case .keyNotFound(_, _):
-                    self.scheduleUpdateProcedure()
-                default:
-                    print(error)
-                }
-            }
-        }
+        n4DetailLabel.text = account?.n4?.localizedProgress
+        n4ProgressView.setProgress(account?.n4?.progress ?? 0, animated: true)
         
-        if !didReloadOnFirstAppearance {
-            
-            let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
-            
-            let context = AppDelegate.coreDataStack.managedObjectContext
-            
-            do {
-                if try context.fetch(request).isEmpty {
-                    let updateGrammarProcedure = UpdateGrammarProcedure(presentingViewController: self, initialImport: true)
-                                        
-                    Server.add(procedure: updateGrammarProcedure)
-                }
-            } catch {
-                print("Could not load grammar points")
-            }
-        }
-        
-        Server.add(procedure: statusUpdateProcedure!)
-    }
-    
-    private func setup(user: User?) {
-        
-        guard let user = user else {
-            self.navigationItem.title = NSLocalizedString("Loading...", comment: "")
-            return
-        }
-        
-        self.navigationItem.title = user.name
-        
-        let importProcedure = ImportAccountIntoCoreDataProcedure(user: user)
-        
-        Server.add(procedure: importProcedure)
+        n3DetailLabel.text = account?.n3?.localizedProgress
+        n3ProgressView.setProgress(account?.n3?.progress ?? 0, animated: true)
     }
     
     private func setup(reviews response: ReviewResponse?) {
@@ -252,19 +176,6 @@ class StatusTableViewController: UITableViewController {
         nextHourLabel?.text = "\(response.reviewsWithinNextHour)"
         nextDayLabel?.text = "\(response.reviewsTomorrow)"
     }
-    
-    private func setup(progress response: UserProgress?) {
-        
-        n5DetailLabel.text = response?.n5.localizedProgress
-        n5ProgressView.setProgress(response?.n5.progress ?? 0, animated: true)
-        
-        n4DetailLabel.text = response?.n4.localizedProgress
-        n4ProgressView.setProgress(response?.n4.progress ?? 0, animated: true)
-        
-        n3DetailLabel.text = response?.n3.localizedProgress
-        n3ProgressView.setProgress(response?.n3.progress ?? 0, animated: true)
-    }
-    
 }
 
 extension StatusTableViewController: SegueHandler {
@@ -294,9 +205,49 @@ extension StatusTableViewController: SegueHandler {
     }
 }
 
+extension StatusTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        if controller == userFetchedResultsController, let account = userFetchedResultsController?.fetchedObjects?.first {
+            
+            setup(account: account)
+        }
+    }
+}
+
 extension StatusTableViewController: SFSafariViewControllerDelegate {
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+private extension Account {
+    
+    var n5: Level? {
+        return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N5" })
+    }
+    
+    var n4: Level? {
+        return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N4" })
+    }
+    
+    var n3: Level? {
+        return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N3" })
+    }
+}
+
+private extension Level {
+    
+    var progress: Float {
+        guard max > 0 else { return 0.0 }
+        
+        return Float(current) / Float(max)
+    }
+    
+    var localizedProgress: String? {
+        
+        return "\(current) / \(max)"
     }
 }

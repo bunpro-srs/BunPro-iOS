@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D34a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D39a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="bunnyMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -9,6 +9,7 @@
         <attribute name="lightMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="levels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Level" inverseName="account" inverseEntity="Level" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="createdDate"/>
@@ -51,6 +52,17 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Level" representedClassName="Level" syncable="YES" codeGenerationType="class">
+        <attribute name="current" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="max" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="levels" inverseEntity="Account" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="Link" representedClassName="Link" syncable="YES" codeGenerationType="class">
         <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -77,11 +89,12 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Account" positionX="-54" positionY="72" width="128" height="165"/>
+        <element name="Account" positionX="-54" positionY="72" width="128" height="180"/>
         <element name="Grammar" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
         <element name="Lesson" positionX="-54" positionY="27" width="128" height="105"/>
         <element name="Link" positionX="-54" positionY="45" width="128" height="135"/>
         <element name="Sentence" positionX="-54" positionY="63" width="128" height="120"/>
+        <element name="Level" positionX="-54" positionY="90" width="128" height="105"/>
     </elements>
 </model>

@@ -15,11 +15,13 @@ class ImportAccountIntoCoreDataProcedure: Procedure {
     
     let stack: CoreDataStack
     let user: User
+    let progress: UserProgress?
     
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, user: User) {
+    init(stack: CoreDataStack = AppDelegate.coreDataStack, user: User, progress: UserProgress? = nil) {
         
         self.stack = stack
         self.user = user
+        self.progress = progress
         
         super.init()
     }
@@ -41,15 +43,26 @@ class ImportAccountIntoCoreDataProcedure: Procedure {
             newAccount.englishMode = self.user.hideEnglish == Active.yes
             newAccount.lightMode = self.user.lightMode == State.on
             
+            if let progress = self.progress {
+                self.addLevel(progress.n5, to: newAccount, in: context)
+                self.addLevel(progress.n4, to: newAccount, in: context)
+                self.addLevel(progress.n3, to: newAccount, in: context)
+            }
             do {
                 try context.save()
-                DispatchQueue.main.async {
-                    self.stack.save()
-                    self.finish()
-                }
+                self.finish()
             } catch {
                 self.finish(withError: error)
             }
         }
+    }
+    
+    private func addLevel(_ level: UserProgress.JLPT, to account: Account, in managedObjectContext: NSManagedObjectContext) {
+        let newLevel = Level(context: managedObjectContext)
+        
+        newLevel.name = level.name
+        newLevel.current = Int16(level.current)
+        newLevel.max = Int16(level.max)
+        newLevel.account = account
     }
 }

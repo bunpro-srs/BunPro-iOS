@@ -15,7 +15,7 @@ public class CoreDataStack {
     
     public lazy var managedObjectContext: NSManagedObjectContext = {
         self.storeContainer.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        self.storeContainer.viewContext.stalenessInterval = 0
+        self.storeContainer.viewContext.automaticallyMergesChangesFromParent = true
         return self.storeContainer.viewContext
     }()
     

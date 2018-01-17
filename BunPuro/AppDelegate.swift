@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var modelName = "BunPro"
     lazy var coreDataStack = CoreDataStack(modelName: modelName)
     
+    private var dataManager: DataManager?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         copyPredefinedDatabase()
@@ -41,9 +43,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(granted)
         }
         
+        if let rootViewController = window?.rootViewController {
+            dataManager = DataManager(presentingViewController: rootViewController)
+        }
+        
         return true
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        dataManager?.startStatusUpdates()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        
+        dataManager?.startStatusUpdates()
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         
         coreDataStack.save()
