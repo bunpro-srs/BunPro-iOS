@@ -21,4 +21,16 @@ class DetailCell: UITableViewCell {
             descriptionLabel.numberOfLines = 0
         }
     }
+    
+    @IBOutlet private weak var progressView: UIProgressView! {
+        didSet {
+            progressView?.progress = 0.0
+        }
+    }
+    
+    func setProgress(_ progress: Float, animated: Bool) {
+        
+        progressView?.setProgress(progress, animated: animated)
+    }
+    
 }

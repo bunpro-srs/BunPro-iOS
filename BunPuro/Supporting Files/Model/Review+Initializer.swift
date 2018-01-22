@@ -34,3 +34,27 @@ extension Review {
         wasCorrect = review.wasCorrect
     }
 }
+
+extension Review {
+    
+    static func review(for grammar: Grammar) throws -> Review? {
+        
+        let request: NSFetchRequest<Review> = Review.fetchRequest()
+        request.fetchLimit = 1
+        request.fetchBatchSize = 1
+        
+        request.predicate = NSPredicate(format: "%K = %d", #keyPath(Review.grammarIdentifier), grammar.identifier)
+        
+        return try grammar.managedObjectContext?.fetch(request).first
+    }
+    
+    static func reviews(for grammar: [Grammar]) throws -> [Review]? {
+        
+        let request: NSFetchRequest<Review> = Review.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map { $0.identifier } )
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)]
+        
+        return try grammar.first?.managedObjectContext?.fetch(request)
+    }
+}

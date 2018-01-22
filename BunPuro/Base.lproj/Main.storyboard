@@ -956,31 +956,54 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="zwe-Gt-aJz" detailTextLabel="x8F-jn-zwk" style="IBUITableViewCellStyleValue1" id="ilc-v8-hUC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DetailCell" id="YYj-jy-owl" customClass="DetailCell" customModule="BunPuro" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ilc-v8-hUC" id="ySo-Sq-3Cq">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YYj-jy-owl" id="RI6-xI-OEC">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="zwe-Gt-aJz">
-                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="x8F-jn-zwk">
-                                            <rect key="frame" x="296" y="12" width="44" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" insetsLayoutMarginsFromSafeArea="NO" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-WW-gGR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                            <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </progressView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSr-rS-ZoB">
+                                            <rect key="frame" x="15" y="12" width="326" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwj-iL-bFu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="321.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nq2-hl-tqP">
+                                                    <rect key="frame" x="321.5" y="0.0" width="4.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="cDZ-WW-gGR" secondAttribute="trailing" constant="-34" id="0bM-v5-eYd"/>
+                                        <constraint firstItem="pSr-rS-ZoB" firstAttribute="top" secondItem="RI6-xI-OEC" secondAttribute="top" constant="12" id="JBm-5c-WgG"/>
+                                        <constraint firstItem="pSr-rS-ZoB" firstAttribute="leading" secondItem="RI6-xI-OEC" secondAttribute="leading" constant="15" id="U3f-tJ-Fo0"/>
+                                        <constraint firstAttribute="trailing" secondItem="pSr-rS-ZoB" secondAttribute="trailing" id="Wbq-Oi-oDH"/>
+                                        <constraint firstAttribute="bottom" secondItem="pSr-rS-ZoB" secondAttribute="bottom" constant="11" id="ddD-vC-Bd3"/>
+                                        <constraint firstItem="cDZ-WW-gGR" firstAttribute="top" secondItem="RI6-xI-OEC" secondAttribute="top" id="mU0-DT-6Rb"/>
+                                        <constraint firstItem="cDZ-WW-gGR" firstAttribute="leading" secondItem="RI6-xI-OEC" secondAttribute="leading" id="nrA-og-ZUQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="cDZ-WW-gGR" secondAttribute="bottom" id="sBf-tD-nMz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="It2-kV-ak6" kind="show" identifier="showGrammarLevel" id="e6L-fk-WFf"/>
+                                    <outlet property="descriptionLabel" destination="nq2-hl-tqP" id="E7l-G8-nnE"/>
+                                    <outlet property="nameLabel" destination="nwj-iL-bFu" id="L4V-6U-Szc"/>
+                                    <outlet property="progressView" destination="cDZ-WW-gGR" id="ZWz-QR-Hf2"/>
+                                    <segue destination="It2-kV-ak6" kind="show" identifier="showGrammarLevel" id="h1C-oh-f5i">
+                                        <segue key="commit" inheritsFrom="parent" id="Cs6-G6-zNk"/>
+                                        <segue key="preview" inheritsFrom="commit" id="1VI-5k-NnJ"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1136,6 +1159,7 @@
         <image name="tab_settings_inactive" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="h1C-oh-f5i"/>
         <segue reference="6sN-AD-eCk"/>
         <segue reference="JRI-lB-ITC"/>
     </inferredMetricsTieBreakers>
