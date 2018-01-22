@@ -18,6 +18,19 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
     
     var lesson: Lesson?
     
+    private lazy var reviews: [Review]? = {
+        
+        guard let grammar = lesson?.grammar?.allObjects as? [Grammar] else { return nil }
+        
+        do {
+            return try Review.reviews(for: grammar)
+        } catch {
+            
+            print(error)
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +48,14 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
         
         let point = fetchedResultsController.object(at: indexPath)
+        let hasReview = review(for: point) != nil
         
-        cell.textLabel?.text = point.title
-        cell.detailTextLabel?.text = point.meaning
+        cell.japaneseLabel?.text = point.title
+        cell.meaningLabel?.text = point.meaning
+        cell.isComplete = hasReview
 
         return cell
     }
@@ -50,10 +65,16 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammar:
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let controller = segue.destination.content as? GrammarViewController
-                controller?.grammar = fetchedResultsController.object(at: indexPath)
-            }
+            guard let cell = sender as? UITableViewCell else { fatalError() }
+            guard let indexPath = tableView.indexPath(for: cell) else { fatalError() }
+            
+            let controller = segue.destination.content as? GrammarViewController
+            controller?.grammar = fetchedResultsController.object(at: indexPath)
         }
+    }
+    
+    private func review(for grammar: Grammar) -> Review? {
+        
+        return reviews?.first(where: { $0.grammarIdentifier == grammar.identifier })
     }
 }

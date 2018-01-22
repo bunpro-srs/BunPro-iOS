@@ -72,6 +72,7 @@
 		2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C020165642001AE42E /* Lesson+Initializer.swift */; };
 		2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */; };
 		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
+		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78C1FA2835C0020E828 /* Review.swift */; };
 		2EE4E78F1FA283650020E828 /* AccountProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78E1FA283650020E828 /* AccountProgress.swift */; };
 		2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
@@ -212,6 +213,7 @@
 		2EBB70C020165642001AE42E /* Lesson+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLPT+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2EE4E78C1FA2835C0020E828 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		2EE4E78E1FA283650020E828 /* AccountProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountProgress.swift; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				2EB4564C1FE4710C003CDD65 /* DetailCell.swift */,
+				2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
 				2E1DCA2D1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift in Sources */,
+				2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */,
 				2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */,
 				2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */,
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,

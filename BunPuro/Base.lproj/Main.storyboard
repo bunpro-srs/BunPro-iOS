@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -1027,35 +1028,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="WMZ-ZF-bf4">
-                            <rect key="frame" x="0.0" y="72" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="127" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="jxx-P6-uwo" detailTextLabel="zxz-ET-Iom" style="IBUITableViewCellStyleValue1" id="Hzx-MN-EOW">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GrammarTeaserCell" rowHeight="99" id="Hzx-MN-EOW" customClass="GrammarTeaserCell" customModule="BunPuro" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hzx-MN-EOW" id="6NH-Tv-zcG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="98.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jxx-P6-uwo">
-                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zxz-ET-Iom">
-                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Of7-Yr-To5">
+                                            <rect key="frame" x="15" y="8" width="345" height="82.5"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko-review-complete" translatesAutoresizingMaskIntoConstraints="NO" id="sda-W2-jCl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="sda-W2-jCl" secondAttribute="height" multiplier="1:1" id="PhS-LQ-uuI"/>
+                                                        <constraint firstAttribute="width" constant="36" id="YoZ-Qf-yDW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nx8-D8-5c5">
+                                                    <rect key="frame" x="44" y="0.0" width="301" height="52.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axk-mW-jVv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="301" height="24"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-IP-dBN">
+                                                            <rect key="frame" x="0.0" y="32" width="301" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Of7-Yr-To5" firstAttribute="leading" secondItem="6NH-Tv-zcG" secondAttribute="leading" constant="15" id="CUT-Xf-I7S"/>
+                                        <constraint firstAttribute="trailing" secondItem="Of7-Yr-To5" secondAttribute="trailing" constant="15" id="MzK-Uj-ARD"/>
+                                        <constraint firstAttribute="bottom" secondItem="Of7-Yr-To5" secondAttribute="bottom" constant="8" id="WsG-bA-ePN"/>
+                                        <constraint firstItem="Of7-Yr-To5" firstAttribute="top" secondItem="6NH-Tv-zcG" secondAttribute="top" constant="8" id="gPD-NX-TvN"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="hankoImageView" destination="sda-W2-jCl" id="KE2-o0-8JM"/>
+                                    <outlet property="japaneseLabel" destination="axk-mW-jVv" id="HPl-E2-W2z"/>
+                                    <outlet property="meaningLabel" destination="rw2-IP-dBN" id="UwR-of-O4G"/>
                                     <segue destination="5Y1-lk-6aK" kind="show" identifier="showGrammar" id="ihl-cV-sJZ">
                                         <segue key="commit" inheritsFrom="parent" id="8uM-g9-7Lu"/>
                                         <segue key="preview" inheritsFrom="commit" id="PB6-Bq-Tdl"/>
@@ -1071,7 +1096,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppz-cR-awD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3372" y="-351"/>
+            <point key="canvasLocation" x="3372" y="-351.27436281859076"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1151,6 +1176,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bunpro-hanko-review-complete" width="36" height="36"/>
         <image name="tab_dashboard_active" width="25" height="25"/>
         <image name="tab_dashboard_inactive" width="25" height="25"/>
         <image name="tab_search_active" width="25" height="25"/>
@@ -1161,7 +1187,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="h1C-oh-f5i"/>
         <segue reference="6sN-AD-eCk"/>
-        <segue reference="JRI-lB-ITC"/>
+        <segue reference="ihl-cV-sJZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>
