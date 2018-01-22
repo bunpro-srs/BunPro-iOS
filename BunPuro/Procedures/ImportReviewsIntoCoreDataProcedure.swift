@@ -30,26 +30,7 @@ final class ImportReviewsIntoCoreDataProcedure: Procedure {
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             
-            self.reviews.forEach { (review) in
-                
-                let newReview = Review(context: context)
-                
-                newReview.identifier = review.identifier
-                newReview.complete = review.complete
-                newReview.createdDate = review.createdDate
-                newReview.grammarIdentifier = review.grammarIdentifier
-                newReview.lastStudiedDate = review.lastStudiedDate
-                newReview.nextReviewDate = review.nextReviewDate
-                newReview.readingIdentifiers = review.readingsIdentifiers as NSArray
-                newReview.selfStudy = review.selfStudy
-                newReview.streak = review.streak
-                newReview.studyQuestionIdentifier = review.studyQuenstionIdentifier
-                newReview.timesCorrect = review.timesCorrect
-                newReview.timesIncorrect = review.timesIncorrect
-                newReview.updatedDate = review.updatedDate
-                newReview.userIdentifier = review.userIdentifier
-                newReview.wasCorrect = review.wasCorrect
-            }
+            self.reviews.forEach { Review(review: $0, context: context) }
             
             do {
                 try context.save()
