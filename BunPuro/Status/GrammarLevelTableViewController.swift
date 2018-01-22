@@ -55,8 +55,8 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammarLevel:
-            guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("An index path is needed.") }
-            guard let cell = tableView.cellForRow(at: indexPath) as? DetailCell else { fatalError("A cell is needed.") }
+            guard let cell = sender as? DetailCell else { fatalError("A cell is needed.") }
+            guard let indexPath = tableView.indexPath(for: cell) else { fatalError("An index path is needed.") }
             
             let destination = segue.destination.content as? GrammarPointsTableViewController
             destination?.title = cell.nameLabel?.text

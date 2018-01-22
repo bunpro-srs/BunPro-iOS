@@ -37,6 +37,23 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         return controller
     }
     
+    private var reviewsFetchedResultsController: NSFetchedResultsController<Review> = {
+        
+        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(format: "%K = true", #keyPath(Review.complete))
+        
+        let sort = NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let controller = NSFetchedResultsController<Review>(fetchRequest: fetchRequest,
+                                                             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+                                                             sectionNameKeyPath: nil,
+                                                             cacheName: nil)
+        
+        return controller
+    }()
+    
     private func searchPredicate() -> NSPredicate? {
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return nil }
         
@@ -66,6 +83,12 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         fetchedResultsController = newFetchedResultsController()
         
+        do {
+            try reviewsFetchedResultsController.performFetch()
+        } catch {
+            print(error)
+        }
+        
         loadData()
     }
     
@@ -85,10 +108,15 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         Server.add(procedure: updateProcedure)
     }
     
+    private func review(for grammar: Grammar) -> Review? {
+        
+        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier && $0.complete })
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
         
         updateCell(cell, at: indexPath)
 
@@ -114,11 +142,12 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         tableView.reloadData()
     }
     
-    private func updateCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
+    private func updateCell(_ cell: GrammarTeaserCell, at indexPath: IndexPath) {
         let grammar = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = grammar.title
-        cell.detailTextLabel?.text = grammar.meaning
+        cell.japaneseLabel?.text = grammar.title
+        cell.meaningLabel?.text = grammar.meaning
+        cell.isComplete = review(for: grammar) != nil
     }
     
     // MARK: - Navigation
