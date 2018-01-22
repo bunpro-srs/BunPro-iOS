@@ -14,9 +14,9 @@ import CoreData
 final class ImportReviewsIntoCoreDataProcedure: Procedure {
     
     let stack: CoreDataStack
-    let reviews: [BunPuroKit.BPKReview]
+    let reviews: [BPKReview]
     
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, reviews: [BunPuroKit.BPKReview]) {
+    init(stack: CoreDataStack = AppDelegate.coreDataStack, reviews: [BPKReview]) {
         
         self.stack = stack
         self.reviews = reviews
