@@ -31,7 +31,7 @@ extension Review {
         timesIncorrect = review.timesIncorrect
         updatedDate = review.updatedDate
         userIdentifier = review.userIdentifier
-        wasCorrect = review.wasCorrect
+        wasCorrect = review.wasCorrect ?? false
     }
 }
 

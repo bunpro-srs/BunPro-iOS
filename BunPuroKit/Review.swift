@@ -28,11 +28,11 @@ public struct BPKReview: Codable {
     public let timesIncorrect: Int64
     public let streak: Int64
     public let nextReviewDate: Date
-    public let lastStudiedDate: Date
+    public let lastStudiedDate: Date?
     public let createdDate: Date
     public let updatedDate: Date
     public let readingsIdentifiers: [Int64]
     public let complete: Bool
-    public let wasCorrect: Bool
+    public let wasCorrect: Bool?
     public let selfStudy: Bool
 }

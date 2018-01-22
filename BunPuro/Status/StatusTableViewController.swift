@@ -313,7 +313,7 @@ extension Collection where Iterator.Element == Review {
     
     public var nextReviewDate: Date? {
         
-        let allDates = flatMap { $0.nextReviewDate }
+        let allDates = filter { $0.complete }.flatMap { $0.nextReviewDate }
         
         let tmp = allDates.reduce(Date.distantFuture, { $0 < $1 ? $0 : $1 })
         return tmp == Date.distantPast ? nil: tmp
