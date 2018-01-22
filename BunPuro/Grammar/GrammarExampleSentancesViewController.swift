@@ -23,7 +23,7 @@ class GrammarExampleSentancesViewController: CoreDataFetchedResultsTableViewCont
         let request: NSFetchRequest<Sentence> = Sentence.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@", #keyPath(Sentence.grammar), grammar)
         
-        let sort = NSSortDescriptor(key: #keyPath(Sentence.id), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Sentence.identifier), ascending: true)
         request.sortDescriptors = [sort]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)

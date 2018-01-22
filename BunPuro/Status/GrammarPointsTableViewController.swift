@@ -26,7 +26,7 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.lesson), lesson)
         
-        let sort = NSSortDescriptor(key: #keyPath(Grammar.id), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
         request.sortDescriptors = [sort]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)

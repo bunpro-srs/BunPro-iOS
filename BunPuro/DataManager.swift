@@ -19,9 +19,22 @@ final class DataManager {
     let presentingViewController: UIViewController
     private let persistentContainer: NSPersistentContainer
     
+    private var logoutObserver: NSObjectProtocol?
+    
+    deinit {
+        if logoutObserver != nil {
+            NotificationCenter.default.removeObserver(logoutObserver!)
+        }
+    }
+    
     init(presentingViewController: UIViewController, persistentContainer: NSPersistentContainer = AppDelegate.coreDataStack.storeContainer) {
         self.presentingViewController = presentingViewController
         self.persistentContainer = persistentContainer
+        
+        logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
+            
+            self?.scheduleUpdateProcedure()
+        }
     }
     
     // Status Updates
@@ -73,9 +86,19 @@ final class DataManager {
                     
                     print("Saving the user: \(user.name)")
                     
-                    let userProcedure = ImportAccountIntoCoreDataProcedure(user: user, progress: progress)
+                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: user, progress: progress)
                     
-                    self.procedureQueue.add(operation: userProcedure)
+                    self.procedureQueue.add(operation: importProcedure)
+                }
+                
+                if let reviews = reviews {
+                    
+                    print("Saving reviews")
+                    
+                    let importProcedure = ImportReviewsIntoCoreDataProcedure(reviews: reviews)
+                    
+                    self.procedureQueue.add(operation: importProcedure)
+                    
                 }
             }
         }

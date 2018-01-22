@@ -11,7 +11,7 @@ import ProcedureKit
 import ProcedureKitNetwork
 import KeychainAccess
 
-let baseUrlString = "https://bunpro.jp/api/v2/"
+let baseUrlString = "https://bunpro.jp/api/v3/"
 
 /*
  bunpro.jp/api/v1/users/[:key]                  <- Gets user info
@@ -28,11 +28,7 @@ enum ServerError: Error {
 }
 
 public struct Server {
-    
-    public static var user: User?
-    public static var userProgress: UserProgress?
-    public static var reviewResponse: ReviewResponse?
-    
+        
     static var token: Token? {
         get {
             return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token.rawValue]
@@ -70,9 +66,9 @@ class NetworkHandler {
 
 struct CustomDecoder {
     
-    static private let formatter = DateFormatter()
-    
     static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T : Decodable {
+        
+        let formatter = DateFormatter()
         
         formatter.locale = Locale(identifier: "en_US")
 

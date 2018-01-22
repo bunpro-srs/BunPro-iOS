@@ -30,7 +30,7 @@ class UpdateGrammarProcedure: GroupProcedure {
 
 fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure {
     
-    var input: Pending<[BunPuroKit.JLPT]> = .pending
+    var input: Pending<[BPKJlpt]> = .pending
     
     let stack: CoreDataStack
     
@@ -42,60 +42,14 @@ fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure 
     }
     
     override func execute() {
+        
         guard !isCancelled else { return }
         guard let jlpts = input.value else { return }
         
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
 
-            jlpts.forEach { (jlpt) in
-
-                let newJPLT = JLPT(context: context)
-
-                newJPLT.level = Int64(jlpt.level)
-                newJPLT.name = jlpt.name
-
-                jlpt.lessons.forEach { (lesson) in
-
-                    let newLesson = Lesson(context: context)
-
-                    newLesson.id = lesson.id
-                    newLesson.order = Int64(lesson.order)
-                    newLesson.jlpt = newJPLT
-
-                    lesson.grammar.forEach { (grammar) in
-
-                        let newGrammar = Grammar(context: context)
-
-                        newGrammar.id = grammar.id
-                        newGrammar.lesson = newLesson
-                        newGrammar.title = grammar.title.htmlAttributedString?.string
-                        newGrammar.meaning = grammar.meaning.htmlAttributedString?.string
-                        newGrammar.caution = grammar.caution.htmlAttributedString?.string
-                        newGrammar.structure = grammar.structure.htmlAttributedString?.string
-
-                        for link in grammar.supplementalLinks {
-
-                            let newLink = Link(context: context)
-                            newLink.id = link.id
-                            newLink.about = link.description
-                            newLink.site = link.site
-                            newLink.url = URL(string: link.link.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
-                            newLink.grammar = newGrammar
-                        }
-                        
-                        for sentence in grammar.exampleSentences {
-                            
-                            let newSentence = Sentence(context: context)
-                            newSentence.id = sentence.id
-                            newSentence.japanese = sentence.japanese
-                            newSentence.english = sentence.english
-                            newSentence.structure = sentence.structure
-                            newSentence.grammar = newGrammar
-                        }
-                    }
-                }
-            }
+            jlpts.forEach { JLPT(jlpt: $0, context: context) }
 
             do {
                 try context.save()

@@ -12,9 +12,9 @@ import ProcedureKitNetwork
 
 public class StatusProcedure: GroupProcedure, OutputProcedure {
         
-    public var output: Pending<ProcedureResult<(User?, UserProgress?, ReviewResponse?)>> = .pending
+    public var output: Pending<ProcedureResult<(BPKAccount?, BPKAccountProgress?, [BPKReview]?)>> = .pending
     
-    public let completion: ((User?, UserProgress?, ReviewResponse?, Error?) -> Void)?
+    public let completion: ((BPKAccount?, BPKAccountProgress?, [BPKReview]?, Error?) -> Void)?
     public var indicator: NetworkActivityIndicatorProtocol? {
         didSet {
             guard let indicator = indicator else { return }
@@ -26,7 +26,7 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
     private let _progressNetworkProcedure: ProgressProcedure
     private let _reviewsNetworkProcedure: ReviewsProcedure
     
-    public init(presentingViewController: UIViewController, completion: ((User?, UserProgress?, ReviewResponse?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, completion: ((BPKAccount?, BPKAccountProgress?, [BPKReview]?, Error?) -> Void)? = nil) {
         
         _userNetworkProcedure = UserProcedure(presentingViewController: presentingViewController)
         _progressNetworkProcedure = ProgressProcedure(presentingViewController: presentingViewController)

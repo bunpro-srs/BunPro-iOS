@@ -33,6 +33,12 @@ class StatusTableViewController: UITableViewController {
     @IBOutlet private weak var n3DetailLabel: UILabel! { didSet { n3DetailLabel.text = " " } }
     @IBOutlet private weak var n3ProgressView: UIProgressView!
     
+    @IBOutlet private weak var n2DetailLabel: UILabel! { didSet { n2DetailLabel.text = " " } }
+    @IBOutlet private weak var n2ProgressView: UIProgressView!
+    
+    @IBOutlet private weak var n1DetailLabel: UILabel! { didSet { n1DetailLabel.text = " " } }
+    @IBOutlet private weak var n1ProgressView: UIProgressView!
+    
     private let dateComponentsFormatter = DateComponentsFormatter()
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -48,6 +54,7 @@ class StatusTableViewController: UITableViewController {
     private var nextReviewDate: Date?
     
     private var userFetchedResultsController: NSFetchedResultsController<Account>?
+    private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
     
     deinit {
         if logoutObserver != nil {
@@ -68,6 +75,7 @@ class StatusTableViewController: UITableViewController {
         }
         
         setupUserFetchedResultsController()
+        setupReviewsFetchedResultsController()
     }
     
     private func setupUserFetchedResultsController() {
@@ -82,6 +90,25 @@ class StatusTableViewController: UITableViewController {
         
         do {
             try userFetchedResultsController?.performFetch()
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func setupReviewsFetchedResultsController() {
+        
+        let request: NSFetchRequest<Review> = Review.fetchRequest()
+        
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.updatedDate), ascending: true)]
+        
+        request.predicate = NSPredicate(format: "%K < %@", #keyPath(Review.nextReviewDate), Date().tomorrow.tomorrow.nextMidnight as NSDate)
+        
+        reviewsFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        reviewsFetchedResultsController?.delegate = self
+        
+        do {
+            try reviewsFetchedResultsController?.performFetch()
         } catch {
             print(error)
         }
@@ -130,19 +157,25 @@ class StatusTableViewController: UITableViewController {
         
         self.navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
         
-        n5DetailLabel.text = account?.n5?.localizedProgress
+        n5DetailLabel.text = account?.n5?.localizedProgress ?? " "
         n5ProgressView.setProgress(account?.n5?.progress ?? 0, animated: true)
         
-        n4DetailLabel.text = account?.n4?.localizedProgress
+        n4DetailLabel.text = account?.n4?.localizedProgress ?? " "
         n4ProgressView.setProgress(account?.n4?.progress ?? 0, animated: true)
         
-        n3DetailLabel.text = account?.n3?.localizedProgress
+        n3DetailLabel.text = account?.n3?.localizedProgress ?? " "
         n3ProgressView.setProgress(account?.n3?.progress ?? 0, animated: true)
+        
+        n2DetailLabel.text = account?.n2?.localizedProgress ?? " "
+        n2ProgressView.setProgress(account?.n2?.progress ?? 0, animated: true)
+        
+        n1DetailLabel.text = account?.n1?.localizedProgress ?? " "
+        n1ProgressView.setProgress(account?.n1?.progress ?? 0, animated: true)
     }
     
-    private func setup(reviews response: ReviewResponse?) {
+    private func setup(reviews: [Review]?) {
         
-        guard let response = response else {
+        guard let reviews = reviews else {
             nextReviewTitleLabel?.textColor = UIColor.black
             nextReviewLabel?.text = nil
             nextHourLabel?.text = nil
@@ -151,16 +184,19 @@ class StatusTableViewController: UITableViewController {
             return
         }
         
-        if let nextReviewDate = response.nextReviewDate {
+        if let nextReviewDate = reviews.nextReviewDate {
             
-            self.nextReviewDate = nextReviewDate
             nextReviewTitleLabel?.textColor = UIColor.black
             
             lastUpdateLabel.text = "Updated: " + dateFormatter.string(from: Date())
             
             if nextReviewDate > Date() {
                 
-                UserNotificationCenter.shared.scheduleNextReviewNotification(at: nextReviewDate)
+                if self.nextReviewDate != nextReviewDate {
+                    self.nextReviewDate = nextReviewDate
+                    
+                    UserNotificationCenter.shared.scheduleNextReviewNotification(at: nextReviewDate)
+                }
                 
                 dateComponentsFormatter.unitsStyle = .short
                 dateComponentsFormatter.includesTimeRemainingPhrase = true
@@ -173,8 +209,8 @@ class StatusTableViewController: UITableViewController {
             }
         }
         
-        nextHourLabel?.text = "\(response.reviewsWithinNextHour)"
-        nextDayLabel?.text = "\(response.reviewsTomorrow)"
+        nextHourLabel?.text = "\(reviews.reviewsWithinNextHour)"
+        nextDayLabel?.text = "\(reviews.reviewsTomorrow)"
     }
 }
 
@@ -184,6 +220,8 @@ extension StatusTableViewController: SegueHandler {
         case showN5Grammar
         case showN4Grammar
         case showN3Grammar
+        case showN2Grammar
+        case showN1Grammar
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -201,6 +239,14 @@ extension StatusTableViewController: SegueHandler {
             let destination = segue.destination.content as? GrammarLevelTableViewController
             destination?.level = 3
             destination?.title = "N3"
+        case .showN2Grammar:
+            let destination = segue.destination.content as? GrammarLevelTableViewController
+            destination?.level = 2
+            destination?.title = "N2"
+        case .showN1Grammar:
+            let destination = segue.destination.content as? GrammarLevelTableViewController
+            destination?.level = 1
+            destination?.title = "N1"
         }
     }
 }
@@ -212,6 +258,9 @@ extension StatusTableViewController: NSFetchedResultsControllerDelegate {
         if controller == userFetchedResultsController, let account = userFetchedResultsController?.fetchedObjects?.first {
             
             setup(account: account)
+        } else if controller == reviewsFetchedResultsController {
+            
+            setup(reviews: reviewsFetchedResultsController?.fetchedObjects)
         }
     }
 }
@@ -236,6 +285,14 @@ private extension Account {
     var n3: Level? {
         return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N3" })
     }
+    
+    var n2: Level? {
+        return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N2" })
+    }
+    
+    var n1: Level? {
+        return (levels?.allObjects as? [Level])?.first(where: { $0.name == "N1" })
+    }
 }
 
 private extension Level {
@@ -249,5 +306,71 @@ private extension Level {
     var localizedProgress: String? {
         
         return "\(current) / \(max)"
+    }
+}
+
+extension Collection where Iterator.Element == Review {
+    
+    public var nextReviewDate: Date? {
+        
+        let allDates = flatMap { $0.nextReviewDate }
+        
+        let tmp = allDates.reduce(Date.distantFuture, { $0 < $1 ? $0 : $1 })
+        return tmp == Date.distantPast ? nil: tmp
+    }
+    
+    public var reviewsWithinNextHour: Int {
+        
+        let date = Date()
+        let result = filter({ $0.complete && $0.nextReviewDate!.hours(from: date) <= 0 })
+        return result.count
+    }
+    
+    public var reviewsTomorrow: Int {
+        
+        return filter({ $0.complete && $0.nextReviewDate!.isTomorrow() }).count
+    }
+}
+
+extension Date {
+    
+    func hours(from date: Date) -> Int {
+        
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour!
+    }
+    
+    func isTomorrow() -> Bool {
+        
+        return Calendar.current.isDateInTomorrow(self)
+    }
+    
+    var yesterday: Date {
+        
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    
+    var tomorrow: Date {
+        
+        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+    }
+    
+    var noon: Date {
+        
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+    }
+    
+    var nextMidnight: Date {
+        
+        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+    
+    var month: Int {
+        
+        return Calendar.current.component(.month,  from: self)
+    }
+    
+    var isLastDayOfMonth: Bool {
+        
+        return tomorrow.month != month
     }
 }

@@ -11,16 +11,16 @@ import BunPuroKit
 import ProcedureKit
 import CoreData
 
-class ImportAccountIntoCoreDataProcedure: Procedure {
+final class ImportAccountIntoCoreDataProcedure: Procedure {
     
     let stack: CoreDataStack
-    let user: User
-    let progress: UserProgress?
+    let account: BPKAccount
+    let progress: BPKAccountProgress?
     
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, user: User, progress: UserProgress? = nil) {
+    init(stack: CoreDataStack = AppDelegate.coreDataStack, account: BPKAccount, progress: BPKAccountProgress? = nil) {
         
         self.stack = stack
-        self.user = user
+        self.account = account
         self.progress = progress
         
         super.init()
@@ -32,22 +32,8 @@ class ImportAccountIntoCoreDataProcedure: Procedure {
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             
-            let newAccount = Account(context: context)
-            
-            newAccount.name = self.user.name
-            newAccount.isActivated = self.user.isActivated
-            newAccount.createdDate = self.user.createdAt
-            newAccount.updatedDate = self.user.updatedAt
-            newAccount.bunnyMode = self.user.bunnyMode == State.on
-            newAccount.furiganaMode = self.user.furigana.rawValue
-            newAccount.englishMode = self.user.hideEnglish == Active.yes
-            newAccount.lightMode = self.user.lightMode == State.on
-            
-            if let progress = self.progress {
-                self.addLevel(progress.n5, to: newAccount, in: context)
-                self.addLevel(progress.n4, to: newAccount, in: context)
-                self.addLevel(progress.n3, to: newAccount, in: context)
-            }
+            let _ = Account(account: self.account, progress: self.progress, context: context)
+
             do {
                 try context.save()
                 self.finish()
@@ -57,12 +43,5 @@ class ImportAccountIntoCoreDataProcedure: Procedure {
         }
     }
     
-    private func addLevel(_ level: UserProgress.JLPT, to account: Account, in managedObjectContext: NSManagedObjectContext) {
-        let newLevel = Level(context: managedObjectContext)
-        
-        newLevel.name = level.name
-        newLevel.current = Int16(level.current)
-        newLevel.max = Int16(level.max)
-        newLevel.account = account
-    }
+    
 }

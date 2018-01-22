@@ -25,7 +25,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.jlpt.level), ascending: false)
         let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.order), ascending: true)
-        let idSort = NSSortDescriptor(key: #keyPath(Grammar.id), ascending: true)
+        let idSort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
         fetchRequest.sortDescriptors = [jlptSort, lessonSort, idSort]
         
         let controller = NSFetchedResultsController<Grammar>(fetchRequest: fetchRequest,
@@ -100,7 +100,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["5", "4", "3"]
+        return ["5", "4", "3", "2", "1"]
     }
     
     // MARK: - UISearchController
