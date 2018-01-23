@@ -39,6 +39,7 @@
 		2E3EE11D1FF4EF870027C924 /* String+FuriganaAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */; };
 		2E7737B920052754006B8FA7 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7737B720052754006B8FA7 /* ErrorViewController.swift */; };
 		2E7737BA20052754006B8FA7 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E7737B820052754006B8FA7 /* ErrorViewController.xib */; };
+		2E78A15D20179FBA0040D928 /* CreateReviewProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15C20179FBA0040D928 /* CreateReviewProcedure.swift */; };
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
@@ -175,6 +176,7 @@
 		2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FuriganaAttributedString.swift"; sourceTree = "<group>"; };
 		2E7737B720052754006B8FA7 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		2E7737B820052754006B8FA7 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
+		2E78A15C20179FBA0040D928 /* CreateReviewProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewProcedure.swift; sourceTree = "<group>"; };
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				2E01D2071FB2524500E8632D /* StatusProcedure.swift */,
 				2E0F9BB61FCC877600738129 /* BunProProcedure.swift */,
 				2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */,
+				2E78A15C20179FBA0040D928 /* CreateReviewProcedure.swift */,
 				2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */,
 			);
 			path = Procedures;
@@ -783,6 +786,7 @@
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
 				2E21B3161FD9D4E500FE8320 /* SettingsProcedure.swift in Sources */,
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
+				2E78A15D20179FBA0040D928 /* CreateReviewProcedure.swift in Sources */,
 				2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
 				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,

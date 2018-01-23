@@ -15,6 +15,18 @@ protocol GrammarPresenter {
 
 class GrammarViewController: UIViewController, GrammarPresenter {
 
+    // Test
+    
+    @IBAction func addToReviews(_ sender: UIBarButtonItem) {
+        
+        let addProcedure = CreateReviewProcedure(presentingViewController: self, grammarIdentifier: self.grammar!.identifier, complete: true) { (error) in
+            print(error ?? "No Error")
+        }
+        
+        Server.add(procedure: addProcedure)
+    }
+    
+    
     enum ViewMode: Int {
         case meaning
         case examples
