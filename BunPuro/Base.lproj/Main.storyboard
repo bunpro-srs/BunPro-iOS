@@ -50,21 +50,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0re-e3-Eg2">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0re-e3-Eg2">
                                                     <rect key="frame" x="15" y="12.000000000000002" width="345" height="20.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Next Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8W-DR-a0O">
-                                                            <rect key="frame" x="0.0" y="0.0" width="296.66666666666669" height="20.666666666666668"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="260.66666666666669" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text=" Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUQ-yY-qIY">
-                                                            <rect key="frame" x="296.66666666666669" y="0.0" width="48.333333333333314" height="20.666666666666668"/>
+                                                            <rect key="frame" x="268.66666666666669" y="0.0" width="48.333333333333314" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VZI-MH-vN8">
+                                                            <rect key="frame" x="325" y="0.0" width="20" height="20.666666666666668"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -428,6 +431,7 @@
                         <outlet property="nextHourLabel" destination="2hI-WD-RH1" id="7hd-E0-6i3"/>
                         <outlet property="nextReviewLabel" destination="MUQ-yY-qIY" id="CpG-Kc-pRq"/>
                         <outlet property="nextReviewTitleLabel" destination="f8W-DR-a0O" id="t6R-1E-ego"/>
+                        <outlet property="statusUpdateActivityIndicator" destination="VZI-MH-vN8" id="Dn5-4a-dP1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90t-Ga-spj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -722,6 +726,11 @@
                                 <action selector="viewModeChanged:" destination="5Y1-lk-6aK" eventType="valueChanged" id="y6U-g5-Cnd"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="umM-yR-yvR">
+                            <connections>
+                                <action selector="addToReviews:" destination="5Y1-lk-6aK" id="nj0-xa-4It"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="viewModeSegmentedControl" destination="Oqy-UC-t2a" id="Qu4-Oe-83S"/>

@@ -40,7 +40,15 @@ final class DataManager {
     // Status Updates
     private let updateTimeInterval: TimeInterval = TimeInterval(60)
     private var startImmediately: Bool = true
-    private var isUpdating: Bool = false
+    private var isUpdating: Bool = false {
+        
+        didSet {
+            DispatchQueue.main.async {
+                
+                NotificationCenter.default.post(name: self.isUpdating ? .BunProWillBeginUpdating : .BunProDidEndUpdating, object: self)
+            }
+        }
+    }
     private weak var statusUpdateTimer: Timer? { didSet { statusUpdateTimer?.tolerance = 10.0 } }
     
     func startStatusUpdates() {
@@ -76,11 +84,11 @@ final class DataManager {
         
         let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { (user, progress, reviews, error) in
             
-            defer {
-                self.isUpdating = false
-            }
-            
             DispatchQueue.main.async {
+                
+                defer {
+                    self.isUpdating = false
+                }
                 
                 if let user = user, let progress = progress {
                     
@@ -105,4 +113,10 @@ final class DataManager {
         
         Server.add(procedure: statusProcedure)
     }
+}
+
+extension Notification.Name {
+    
+    static let BunProWillBeginUpdating = Notification.Name(rawValue: "BunProWillBeginUpdating")
+    static let BunProDidEndUpdating = Notification.Name(rawValue: "BunProDidEndUpdating")
 }

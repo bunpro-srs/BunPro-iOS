@@ -21,6 +21,9 @@ class StatusTableViewController: UITableViewController {
     @IBOutlet private weak var nextReviewTitleLabel: UILabel!
     
     @IBOutlet private weak var nextReviewLabel: UILabel! { didSet { nextReviewLabel.text = " " } }
+    
+    @IBOutlet private weak var statusUpdateActivityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet private weak var nextHourLabel: UILabel! { didSet { nextHourLabel.text = " " } }
     @IBOutlet private weak var nextDayLabel: UILabel! { didSet { nextDayLabel.text = " " } }
     
@@ -50,6 +53,8 @@ class StatusTableViewController: UITableViewController {
     }()
     
     private var logoutObserver: NSObjectProtocol?
+    private var beginUpdateObserver: NSObjectProtocol?
+    private var endUpdateObserver: NSObjectProtocol?
     
     private var nextReviewDate: Date?
     
@@ -57,8 +62,11 @@ class StatusTableViewController: UITableViewController {
     private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
     
     deinit {
-        if logoutObserver != nil {
-            NotificationCenter.default.removeObserver(logoutObserver!)
+        
+        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver] {
+            if observer != nil {
+                NotificationCenter.default.removeObserver(observer!)
+            }
         }
     }
     
@@ -71,6 +79,20 @@ class StatusTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self?.setup(account: nil)
                 self?.setup(reviews: nil)
+            }
+        }
+        
+        beginUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProWillBeginUpdating, object: nil, queue: nil) { (_) in
+            
+            DispatchQueue.main.async {
+                self.statusUpdateActivityIndicator.startAnimating()
+            }
+        }
+        
+        endUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProDidEndUpdating, object: nil, queue: nil) { (_) in
+            
+            DispatchQueue.main.async {
+                self.statusUpdateActivityIndicator.stopAnimating()
             }
         }
         
@@ -193,7 +215,6 @@ class StatusTableViewController: UITableViewController {
             if nextReviewDate > Date() {
                 
                 if self.nextReviewDate != nextReviewDate {
-                    self.nextReviewDate = nextReviewDate
                     
                     UserNotificationCenter.shared.scheduleNextReviewNotification(at: nextReviewDate)
                 }
@@ -207,6 +228,8 @@ class StatusTableViewController: UITableViewController {
                 nextReviewTitleLabel?.textColor = UIColor(named: "Main Tint")
                 nextReviewLabel?.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
+            
+            self.nextReviewDate = nextReviewDate
         }
         
         nextHourLabel?.text = "\(reviews.reviewsWithinNextHour)"
