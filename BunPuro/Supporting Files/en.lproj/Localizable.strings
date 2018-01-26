@@ -30,3 +30,8 @@
 "state.on" = "On";
 "state.off" = "Off";
 "settings.logout.action" = "Logout";
+
+// Reviews
+"review.edit.remove" = "Remove from Reviews";
+"review.edit.reset" = "Reset Review Progress";
+"review.edit.add" = "Add to Reviews";

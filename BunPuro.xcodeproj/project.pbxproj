@@ -16,11 +16,10 @@
 		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
 		2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02BF2006A95C005D33FD /* InitialDatabase.json */; };
-		2E02F8AD2007D2580068D8BF /* BunPro.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */; };
-		2E02F8AE2007D2580068D8BF /* BunPro.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */; };
-		2E02F8AF2007D2580068D8BF /* BunPro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2E02F8AC2007D2580068D8BF /* BunPro.sqlite */; };
 		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
 		2E0F9BB71FCC877600738129 /* BunProProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F9BB61FCC877600738129 /* BunProProcedure.swift */; };
+		2E14485B201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */; };
+		2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BFFA2200FBC8C00985446 /* DataManager.swift */; };
 		2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */; };
 		2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */; };
 		2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
@@ -40,6 +39,10 @@
 		2E3EE11D1FF4EF870027C924 /* String+FuriganaAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */; };
 		2E7737B920052754006B8FA7 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7737B720052754006B8FA7 /* ErrorViewController.swift */; };
 		2E7737BA20052754006B8FA7 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E7737B820052754006B8FA7 /* ErrorViewController.xib */; };
+		2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */; };
+		2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */; };
+		2E78A1612017AF100040D928 /* StructureInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A1602017AF100040D928 /* StructureInfoCell.swift */; };
+		2E78A1642017AF2B0040D928 /* StreakInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A1632017AF2B0040D928 /* StreakInfoCell.swift */; };
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
@@ -53,7 +56,7 @@
 		2EAD9E1A1FA26EB400CE52CF /* BunPuroKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EAD9E0A1FA26EB400CE52CF /* BunPuroKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; };
 		2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2EAD9E2B1FA26F1100CE52CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* User.swift */; };
+		2EAD9E2B1FA26F1100CE52CF /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* Account.swift */; };
 		2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2C1FA26F6C00CE52CF /* Server.swift */; };
 		2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
 		2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
@@ -66,9 +69,16 @@
 		2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74071FAA7A3000DE2A08 /* StoryboardIdentifiable.swift */; };
 		2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74081FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift */; };
 		2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74091FAA7A3100DE2A08 /* SegueHandlerType.swift */; };
-		2EBDC0951FA877DF00CC643D /* ReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */; };
+		2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70B820164EBA001AE42E /* Account+Initializer.swift */; };
+		2EBB70BB20165021001AE42E /* Sentence+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */; };
+		2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BC201654F9001AE42E /* Link+Initializer.swift */; };
+		2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */; };
+		2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C020165642001AE42E /* Lesson+Initializer.swift */; };
+		2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */; };
+		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
+		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78C1FA2835C0020E828 /* Review.swift */; };
-		2EE4E78F1FA283650020E828 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78E1FA283650020E828 /* UserProgress.swift */; };
+		2EE4E78F1FA283650020E828 /* AccountProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78E1FA283650020E828 /* AccountProgress.swift */; };
 		2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
 		2EE4E7931FA28F350020E828 /* ProcedureKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
@@ -144,11 +154,10 @@
 		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
 		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-shm"; sourceTree = "<group>"; };
-		2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-wal"; sourceTree = "<group>"; };
-		2E02F8AC2007D2580068D8BF /* BunPro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BunPro.sqlite; sourceTree = "<group>"; };
 		2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGrammarProcedure.swift; sourceTree = "<group>"; };
 		2E0F9BB61FCC877600738129 /* BunProProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunProProcedure.swift; sourceTree = "<group>"; };
+		2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportReviewsIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
+		2E1BFFA2200FBC8C00985446 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2E1DCA241FC49A72002E67D6 /* GrammarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarViewController.swift; sourceTree = "<group>"; };
 		2E1DCA261FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarMeaningTableViewController.swift; sourceTree = "<group>"; };
 		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
@@ -170,6 +179,10 @@
 		2E3EE11C1FF4EF870027C924 /* String+FuriganaAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FuriganaAttributedString.swift"; sourceTree = "<group>"; };
 		2E7737B720052754006B8FA7 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		2E7737B820052754006B8FA7 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
+		2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyReviewProcedure.swift; sourceTree = "<group>"; };
+		2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
+		2E78A1602017AF100040D928 /* StructureInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructureInfoCell.swift; sourceTree = "<group>"; };
+		2E78A1632017AF2B0040D928 /* StreakInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakInfoCell.swift; sourceTree = "<group>"; };
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,7 +203,7 @@
 		2EAD9E101FA26EB400CE52CF /* BunPuroKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunPuroKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E171FA26EB400CE52CF /* BunPuroKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroKitTests.swift; sourceTree = "<group>"; };
 		2EAD9E191FA26EB400CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAD9E2A1FA26F1100CE52CF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2EAD9E2A1FA26F1100CE52CF /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKitNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,9 +214,16 @@
 		2EBA74071FAA7A3000DE2A08 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		2EBA74081FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReusableView+NibLoadableView.swift"; sourceTree = "<group>"; };
 		2EBA74091FAA7A3100DE2A08 /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
-		2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
+		2EBB70B820164EBA001AE42E /* Account+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sentence+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70BC201654F9001AE42E /* Link+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Link+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grammar+initializer.swift"; sourceTree = "<group>"; };
+		2EBB70C020165642001AE42E /* Lesson+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLPT+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
+		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2EE4E78C1FA2835C0020E828 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
-		2EE4E78E1FA283650020E828 /* UserProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
+		2EE4E78E1FA283650020E828 /* AccountProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountProgress.swift; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
@@ -271,6 +291,7 @@
 				2E01D2071FB2524500E8632D /* StatusProcedure.swift */,
 				2E0F9BB61FCC877600738129 /* BunProProcedure.swift */,
 				2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */,
+				2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */,
 				2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */,
 			);
 			path = Procedures;
@@ -293,10 +314,7 @@
 				2EAD9DDE1FA25DF100CE52CF /* LaunchScreen.storyboard */,
 				2EAD9DE11FA25DF100CE52CF /* Info.plist */,
 				2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */,
-				2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */,
-				2E02F8AC2007D2580068D8BF /* BunPro.sqlite */,
-				2E02F8AA2007D2580068D8BF /* BunPro.sqlite-shm */,
-				2E02F8AB2007D2580068D8BF /* BunPro.sqlite-wal */,
+				2EBB70B720164E9F001AE42E /* Model */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -317,6 +335,7 @@
 			children = (
 				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
+				2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */,
 			);
 			path = Procedures;
 			sourceTree = "<group>";
@@ -325,6 +344,10 @@
 			isa = PBXGroup;
 			children = (
 				2EB4564C1FE4710C003CDD65 /* DetailCell.swift */,
+				2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */,
+				2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */,
+				2E78A1602017AF100040D928 /* StructureInfoCell.swift */,
+				2E78A1632017AF2B0040D928 /* StreakInfoCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -396,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
+				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
 				2E67558A1FFFEA2900BD10EB /* Status */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
@@ -438,9 +462,8 @@
 				2EAD9E2C1FA26F6C00CE52CF /* Server.swift */,
 				2E01D1FE1FB24FAC00E8632D /* Procedures */,
 				2EE4E78C1FA2835C0020E828 /* Review.swift */,
-				2EAD9E2A1FA26F1100CE52CF /* User.swift */,
-				2EE4E78E1FA283650020E828 /* UserProgress.swift */,
-				2EBDC0941FA877DF00CC643D /* ReviewResponse.swift */,
+				2EAD9E2A1FA26F1100CE52CF /* Account.swift */,
+				2EE4E78E1FA283650020E828 /* AccountProgress.swift */,
 				2EB4DB561FBCE27B00833897 /* Grammar.swift */,
 				2E1DCA301FC76AC6002E67D6 /* LoginViewController.swift */,
 				2E1DCA311FC76AC6002E67D6 /* LoginViewController.xib */,
@@ -471,6 +494,21 @@
 				2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EBB70B720164E9F001AE42E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */,
+				2EBB70B820164EBA001AE42E /* Account+Initializer.swift */,
+				2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */,
+				2EBB70BC201654F9001AE42E /* Link+Initializer.swift */,
+				2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */,
+				2EBB70C020165642001AE42E /* Lesson+Initializer.swift */,
+				2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */,
+				2EBB70C420165DF6001AE42E /* Review+Initializer.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -644,9 +682,6 @@
 			files = (
 				2E30749C1FACF9660078725B /* Localizable.strings in Resources */,
 				2EAD9DE01FA25DF100CE52CF /* LaunchScreen.storyboard in Resources */,
-				2E02F8AD2007D2580068D8BF /* BunPro.sqlite-shm in Resources */,
-				2E02F8AF2007D2580068D8BF /* BunPro.sqlite in Resources */,
-				2E02F8AE2007D2580068D8BF /* BunPro.sqlite-wal in Resources */,
 				2E3074901FACF9640078725B /* InfoPlist.strings in Resources */,
 				2EAD9DDD1FA25DF100CE52CF /* Assets.xcassets in Resources */,
 				2EAD9DDB1FA25DF100CE52CF /* Main.storyboard in Resources */,
@@ -694,27 +729,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */,
+				2EBB70BB20165021001AE42E /* Sentence+Initializer.swift in Sources */,
+				2E14485B201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift in Sources */,
+				2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
 				2E1DCA2D1FC6016B002E67D6 /* GrammarReadingsViewControllerTableViewController.swift in Sources */,
+				2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */,
+				2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */,
 				2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */,
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
+				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
+				2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */,
 				2EB4564D1FE4710C003CDD65 /* DetailCell.swift in Sources */,
 				2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */,
 				2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */,
 				2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */,
 				2E3EE11D1FF4EF870027C924 /* String+FuriganaAttributedString.swift in Sources */,
+				2E78A1642017AF2B0040D928 /* StreakInfoCell.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
+				2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */,
 				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E1DCA2F1FC766B4002E67D6 /* GrammarExampleSentancesViewController.swift in Sources */,
+				2E78A1612017AF100040D928 /* StructureInfoCell.swift in Sources */,
+				2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */,
 				2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */,
 				2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */,
 				2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */,
 				2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */,
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
+				2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */,
 				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
+				2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */,
 				2E1DCA271FC4BB5A002E67D6 /* GrammarMeaningTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,14 +798,14 @@
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
 				2E21B3161FD9D4E500FE8320 /* SettingsProcedure.swift in Sources */,
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
+				2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */,
 				2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */,
-				2EBDC0951FA877DF00CC643D /* ReviewResponse.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
 				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,
 				2E0F9BB71FCC877600738129 /* BunProProcedure.swift in Sources */,
 				2E3EE1161FE91EFD0027C924 /* ReviewViewController.swift in Sources */,
-				2EAD9E2B1FA26F1100CE52CF /* User.swift in Sources */,
-				2EE4E78F1FA283650020E828 /* UserProgress.swift in Sources */,
+				2EAD9E2B1FA26F1100CE52CF /* Account.swift in Sources */,
+				2EE4E78F1FA283650020E828 /* AccountProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

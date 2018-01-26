@@ -187,7 +187,7 @@ class SettingsTableViewController: UITableViewController {
             }
             
             DispatchQueue.main.async {
-                let importProcedure = ImportAccountIntoCoreDataProcedure(user: user)
+                let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
                 
                 Server.add(procedure: importProcedure)
             }

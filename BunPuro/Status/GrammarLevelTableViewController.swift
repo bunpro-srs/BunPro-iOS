@@ -18,8 +18,31 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     
     var level: Int = 5
     
+    private var didUpdateObserver: NSObjectProtocol?
+    
+    deinit {
+        
+        print("deinit \(String(describing: self))")
+        
+        for observer in [didUpdateObserver] {
+            
+            if let observer = observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        didUpdateObserver = NotificationCenter.default.addObserver(
+        forName: .BunProDidEndUpdating,
+        object: nil,
+        queue: OperationQueue.main) { [weak self] (_) in
+            
+            self?.tableView.reloadData()
+        }
         
         let request: NSFetchRequest<Lesson> = Lesson.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %d", #keyPath(Lesson.jlpt.level), level)
@@ -33,13 +56,20 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
 
         let lesson = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), indexPath.row + 1)
-        cell.detailTextLabel?.text = "\(lesson.grammar?.count ?? 0)"
-
+        let progress = lesson.progress
+        let completed = Int(Float(lesson.grammar?.count ?? 0) * progress)
+        
+        cell.nameLabel?.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), indexPath.row + 1)
+        cell.descriptionLabel?.text = "\(completed) / \(lesson.grammar?.count ?? 0)"
+        
+        
+        
+        cell.setProgress(progress, animated: false)
+        
         return cell
     }
     
@@ -48,11 +78,11 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammarLevel:
-            guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("An index path is needed.") }
-            guard let cell = tableView.cellForRow(at: indexPath) else { fatalError("A cell is needed.") }
+            guard let cell = sender as? DetailCell else { fatalError("A cell is needed.") }
+            guard let indexPath = tableView.indexPath(for: cell) else { fatalError("An index path is needed.") }
             
             let destination = segue.destination.content as? GrammarPointsTableViewController
-            destination?.title = cell.textLabel?.text
+            destination?.title = cell.nameLabel?.text
             destination?.lesson = fetchedResultsController.object(at: indexPath)
         }
     }

@@ -1,9 +1,9 @@
 //
-//  ImportAccountIntoCoreDataProcedure.swift
+//  ImportReviewsIntoCoreDataProcedure.swift
 //  BunPuro
 //
-//  Created by Andreas Braun on 06.12.17.
-//  Copyright © 2017 Andreas Braun. All rights reserved.
+//  Created by Andreas Braun on 19.01.18.
+//  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
 import Foundation
@@ -11,17 +11,15 @@ import BunPuroKit
 import ProcedureKit
 import CoreData
 
-final class ImportAccountIntoCoreDataProcedure: Procedure {
+final class ImportReviewsIntoCoreDataProcedure: Procedure {
     
     let stack: CoreDataStack
-    let account: BPKAccount
-    let progress: BPKAccountProgress?
+    let reviews: [BPKReview]
     
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, account: BPKAccount, progress: BPKAccountProgress? = nil) {
+    init(stack: CoreDataStack = AppDelegate.coreDataStack, reviews: [BPKReview]) {
         
         self.stack = stack
-        self.account = account
-        self.progress = progress
+        self.reviews = reviews
         
         super.init()
     }
@@ -32,8 +30,8 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             
-            let _ = Account(account: self.account, progress: self.progress, context: context)
-
+            self.reviews.forEach { Review(review: $0, context: context) }
+            
             do {
                 try context.save()
                 self.finish()
@@ -42,6 +40,4 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
             }
         }
     }
-    
-    
 }

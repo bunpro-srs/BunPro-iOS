@@ -15,7 +15,7 @@ public class CoreDataStack {
     
     public lazy var managedObjectContext: NSManagedObjectContext = {
         self.storeContainer.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        self.storeContainer.viewContext.stalenessInterval = 0
+        self.storeContainer.viewContext.automaticallyMergesChangesFromParent = true
         return self.storeContainer.viewContext
     }()
     
@@ -28,7 +28,25 @@ public class CoreDataStack {
         
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
-                print("Unresolved error: \(error.userInfo)")
+                
+                do {
+                    let contents = try FileManager.default.contentsOfDirectory(atPath: NSPersistentContainer.defaultDirectoryURL().path)
+                    
+                    for name in contents {
+                        
+                        if let url = URL(string: NSPersistentContainer.defaultDirectoryURL().absoluteString + name) {
+                            try FileManager.default.removeItem(at: url)
+                        }
+                    }
+                    
+                    container.loadPersistentStores { (desc, error) in
+                        if let error = error as NSError? {
+                            print("Unresolved error: \(error.userInfo)")
+                        }
+                    }
+                } catch let fileError {
+                    print("Unresolved error: \(error.userInfo)\n\(fileError)")
+                }
             }
         }
         
@@ -44,5 +62,4 @@ public class CoreDataStack {
             print("Unresolved error: \(error.userInfo)")
         }
     }
-    
 }

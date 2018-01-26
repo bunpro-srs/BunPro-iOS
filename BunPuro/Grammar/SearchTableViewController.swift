@@ -25,7 +25,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.jlpt.level), ascending: false)
         let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.order), ascending: true)
-        let idSort = NSSortDescriptor(key: #keyPath(Grammar.id), ascending: true)
+        let idSort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
         fetchRequest.sortDescriptors = [jlptSort, lessonSort, idSort]
         
         let controller = NSFetchedResultsController<Grammar>(fetchRequest: fetchRequest,
@@ -37,6 +37,23 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         return controller
     }
     
+    private var reviewsFetchedResultsController: NSFetchedResultsController<Review> = {
+        
+        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(format: "%K = true", #keyPath(Review.complete))
+        
+        let sort = NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let controller = NSFetchedResultsController<Review>(fetchRequest: fetchRequest,
+                                                             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+                                                             sectionNameKeyPath: nil,
+                                                             cacheName: nil)
+        
+        return controller
+    }()
+    
     private func searchPredicate() -> NSPredicate? {
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return nil }
         
@@ -44,6 +61,11 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
         
         return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+    }
+    
+    deinit {
+        
+        print("deinit \(String(describing: self))")
     }
     
     override func viewDidLoad() {
@@ -66,6 +88,12 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         fetchedResultsController = newFetchedResultsController()
         
+        do {
+            try reviewsFetchedResultsController.performFetch()
+        } catch {
+            print(error)
+        }
+        
         loadData()
     }
     
@@ -85,10 +113,15 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         Server.add(procedure: updateProcedure)
     }
     
+    private func review(for grammar: Grammar) -> Review? {
+        
+        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier && $0.complete })
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
         
         updateCell(cell, at: indexPath)
 
@@ -100,7 +133,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["5", "4", "3"]
+        return ["5", "4", "3", "2", "1"]
     }
     
     // MARK: - UISearchController
@@ -114,29 +147,23 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         tableView.reloadData()
     }
     
-    private func updateCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
+    private func updateCell(_ cell: GrammarTeaserCell, at indexPath: IndexPath) {
         let grammar = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = grammar.title
-        cell.detailTextLabel?.text = grammar.meaning
+        cell.japaneseLabel?.text = grammar.title
+        cell.meaningLabel?.text = grammar.meaning
+        cell.isComplete = review(for: grammar) != nil
     }
     
     // MARK: - Navigation
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        switch segueIdentifier(for: identifier) {
-        case .showGrammar:
-            return tableView.indexPathForSelectedRow != nil
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segueIdentifier(for: segue) {
         case .showGrammar:
             
-            guard let indexPath = tableView.indexPathForSelectedRow else {
+            guard let cell = sender as? UITableViewCell else { fatalError() }
+            guard let indexPath = tableView.indexPath(for: cell) else {
                 fatalError("IndexPath must be provided")
             }
             
