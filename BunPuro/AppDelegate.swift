@@ -69,6 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         coreDataStack.save()
     }
+    
+    static func setNeedsStatusUpdate() {
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
+    }
 
     // Copy prepopulated database if needed
     private func copyPredefinedDatabase() {

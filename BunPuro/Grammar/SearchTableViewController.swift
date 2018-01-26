@@ -63,6 +63,11 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
     }
     
+    deinit {
+        
+        print("deinit \(String(describing: self))")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -152,20 +157,13 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     
     // MARK: - Navigation
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        switch segueIdentifier(for: identifier) {
-        case .showGrammar:
-            return tableView.indexPathForSelectedRow != nil
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segueIdentifier(for: segue) {
         case .showGrammar:
             
-            guard let indexPath = tableView.indexPathForSelectedRow else {
+            guard let cell = sender as? UITableViewCell else { fatalError() }
+            guard let indexPath = tableView.indexPath(for: cell) else {
                 fatalError("IndexPath must be provided")
             }
             

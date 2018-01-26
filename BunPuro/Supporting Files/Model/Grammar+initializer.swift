@@ -33,3 +33,16 @@ extension Grammar {
         grammar.exampleSentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
     }
 }
+
+extension Grammar {
+    
+    var review: Review? {
+        
+        do {
+            return try Review.review(for: self)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+}

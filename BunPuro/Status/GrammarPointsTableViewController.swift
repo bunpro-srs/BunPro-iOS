@@ -18,23 +18,38 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
     
     var lesson: Lesson?
     
-    private lazy var reviews: [Review]? = {
+    private var reviews: [Review]?
+    
+    private var didUpdateObserver: NSObjectProtocol?
+    
+    deinit {
         
-        guard let grammar = lesson?.grammar?.allObjects as? [Grammar] else { return nil }
+        print("deinit \(String(describing: self))")
         
-        do {
-            return try Review.reviews(for: grammar)
-        } catch {
+        for observer in [didUpdateObserver] {
             
-            print(error)
-            return nil
+            if let observer = observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
         }
-    }()
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         guard let lesson = self.lesson else { fatalError("Lesson needs to be provided.") }
+        
+        didUpdateObserver = NotificationCenter.default.addObserver(
+            forName: .BunProDidEndUpdating,
+            object: nil,
+            queue: OperationQueue.main) { [weak self] (_) in
+                
+                self?.updateReviews()
+                self?.tableView.reloadData()
+        }
+        
+        updateReviews()
         
         let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.lesson), lesson)
@@ -51,7 +66,7 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
         
         let point = fetchedResultsController.object(at: indexPath)
-        let hasReview = review(for: point) != nil
+        let hasReview = review(for: point)?.complete ?? false
         
         cell.japaneseLabel?.text = point.title
         cell.meaningLabel?.text = point.meaning
@@ -70,6 +85,19 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
             
             let controller = segue.destination.content as? GrammarViewController
             controller?.grammar = fetchedResultsController.object(at: indexPath)
+        }
+    }
+    
+    private func updateReviews() {
+        
+        guard let grammar = lesson?.grammar?.allObjects as? [Grammar] else { reviews = nil; return }
+        
+        do {
+            reviews = try Review.reviews(for: grammar)
+        } catch {
+            
+            print(error)
+            reviews = nil
         }
     }
     

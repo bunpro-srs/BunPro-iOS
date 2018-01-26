@@ -18,8 +18,31 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     
     var level: Int = 5
     
+    private var didUpdateObserver: NSObjectProtocol?
+    
+    deinit {
+        
+        print("deinit \(String(describing: self))")
+        
+        for observer in [didUpdateObserver] {
+            
+            if let observer = observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        didUpdateObserver = NotificationCenter.default.addObserver(
+        forName: .BunProDidEndUpdating,
+        object: nil,
+        queue: OperationQueue.main) { [weak self] (_) in
+            
+            self?.tableView.reloadData()
+        }
         
         let request: NSFetchRequest<Lesson> = Lesson.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %d", #keyPath(Lesson.jlpt.level), level)

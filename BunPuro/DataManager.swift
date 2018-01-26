@@ -75,6 +75,11 @@ final class DataManager {
         statusUpdateTimer?.invalidate()
     }
     
+    func immidiateStatusUpdate() {
+        
+        self.scheduleUpdateProcedure()
+    }
+    
     func updateGrammarDatabase() {
         
         // updates the grammar database

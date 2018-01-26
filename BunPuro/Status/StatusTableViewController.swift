@@ -63,6 +63,8 @@ class StatusTableViewController: UITableViewController {
     
     deinit {
         
+        print("deinit \(String(describing: self))")
+        
         for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver] {
             if observer != nil {
                 NotificationCenter.default.removeObserver(observer!)
