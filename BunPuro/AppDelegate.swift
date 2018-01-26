@@ -23,10 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var coreDataStack = CoreDataStack(modelName: modelName)
     
     private var dataManager: DataManager?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        copyPredefinedDatabase()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         Server.reset()
         
@@ -75,31 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
 
-    // Copy prepopulated database if needed
-    private func copyPredefinedDatabase() {
-        
-        if let applicationSupportUrl = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first, !FileManager.default.fileExists(atPath: applicationSupportUrl.path) {
-            
-            if
-                let sqliteDestinationUrl = URL(string: applicationSupportUrl.absoluteString + modelName + ".sqlite"),
-                let shmDestinationUrl = URL(string: applicationSupportUrl.absoluteString + modelName + ".sqlite-shm"),
-                let walDestinationUrl = URL(string: applicationSupportUrl.absoluteString + modelName + ".sqlite-wal"),
-                
-                let sqliteSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite"),
-                let shmSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-shm"),
-                let walSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-wal") {
-                
-                do {
-                    try FileManager.default.createDirectory(at: applicationSupportUrl, withIntermediateDirectories: true, attributes: nil)
-                    try FileManager.default.copyItem(at: sqliteSourceUrl, to: sqliteDestinationUrl)
-                    try FileManager.default.copyItem(at: shmSourceUrl, to: shmDestinationUrl)
-                    try FileManager.default.copyItem(at: walSourceUrl, to: walDestinationUrl)
-                } catch {
-                    print(error)
-                }
-            }
-        }
-    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {

@@ -24,6 +24,9 @@ public class CoreDataStack {
     }
     
     public lazy var storeContainer: NSPersistentContainer = {
+        
+        copyPredefinedDatabase()
+        
         let container = NSPersistentContainer(name: self.modelName)
         
         container.loadPersistentStores { (storeDescription, error) in
@@ -38,6 +41,8 @@ public class CoreDataStack {
                             try FileManager.default.removeItem(at: url)
                         }
                     }
+                    
+                    self.copyPredefinedDatabase()
                     
                     container.loadPersistentStores { (desc, error) in
                         if let error = error as NSError? {
@@ -60,6 +65,34 @@ public class CoreDataStack {
             try managedObjectContext.save()
         } catch let error as NSError {
             print("Unresolved error: \(error.userInfo)")
+        }
+    }
+    
+    func copyPredefinedDatabase() {
+        
+        guard
+            let sqliteDestinationUrl = URL(string: NSPersistentContainer.defaultDirectoryURL().absoluteString + modelName + ".sqlite"),
+            let shmDestinationUrl = URL(string: NSPersistentContainer.defaultDirectoryURL().absoluteString + modelName + ".sqlite-shm"),
+            let walDestinationUrl = URL(string: NSPersistentContainer.defaultDirectoryURL().absoluteString + modelName + ".sqlite-wal"),
+            
+            let sqliteSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite"),
+            let shmSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-shm"),
+            let walSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-wal") else {
+                print("Could not create urls for database.")
+                return
+        }
+        
+        if !FileManager.default.fileExists(atPath: sqliteDestinationUrl.path) {
+            
+            do {
+                try FileManager.default.createDirectory(at: NSPersistentContainer.defaultDirectoryURL(), withIntermediateDirectories: true, attributes: nil)
+                
+                try FileManager.default.copyItem(at: sqliteSourceUrl, to: sqliteDestinationUrl)
+                try FileManager.default.copyItem(at: shmSourceUrl, to: shmDestinationUrl)
+                try FileManager.default.copyItem(at: walSourceUrl, to: walDestinationUrl)
+            } catch {
+                print(error)
+            }
         }
     }
 }
