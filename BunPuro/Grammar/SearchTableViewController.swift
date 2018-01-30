@@ -41,8 +41,6 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
         
-        fetchRequest.predicate = NSPredicate(format: "%K = true", #keyPath(Review.complete))
-        
         let sort = NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
         fetchRequest.sortDescriptors = [sort]
         
@@ -88,6 +86,8 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         fetchedResultsController = newFetchedResultsController()
         
+        reviewsFetchedResultsController.delegate = self
+        
         do {
             try reviewsFetchedResultsController.performFetch()
         } catch {
@@ -114,8 +114,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     }
     
     private func review(for grammar: Grammar) -> Review? {
-        
-        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier && $0.complete })
+        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier })
     }
     
     // MARK: - Table view data source
@@ -152,7 +151,9 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         cell.japaneseLabel?.text = grammar.title
         cell.meaningLabel?.text = grammar.meaning
-        cell.isComplete = review(for: grammar) != nil
+        
+        let hasReview = review(for: grammar)?.complete ?? false
+        cell.isComplete = hasReview
     }
     
     // MARK: - Navigation
@@ -169,6 +170,15 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
             
             let destination = segue.destination.content as? GrammarViewController
             destination?.grammar = fetchedResultsController.object(at: indexPath)
+        }
+    }
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        if controller == fetchedResultsController {
+            super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
+        } else if controller == reviewsFetchedResultsController, let visibleRowIndexpaths = tableView.indexPathsForVisibleRows {
+            tableView.reloadRows(at: visibleRowIndexpaths, with: .automatic)
         }
     }
 }
