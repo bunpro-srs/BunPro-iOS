@@ -171,7 +171,11 @@ class StatusTableViewController: UITableViewController {
         let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!)
         
         reviewProcedure.completionBlock = {
-            // Throw Notification
+            
+            DispatchQueue.main.async {
+                
+                AppDelegate.setNeedsStatusUpdate()
+            }
         }
         
         Server.add(procedure: reviewProcedure)
