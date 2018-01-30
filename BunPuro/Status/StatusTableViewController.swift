@@ -42,6 +42,8 @@ class StatusTableViewController: UITableViewController {
     @IBOutlet private weak var n1DetailLabel: UILabel! { didSet { n1DetailLabel.text = " " } }
     @IBOutlet private weak var n1ProgressView: UIProgressView!
     
+    var showReviewsOnViewDidAppear: Bool = false
+    
     private let dateComponentsFormatter = DateComponentsFormatter()
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -100,6 +102,18 @@ class StatusTableViewController: UITableViewController {
         
         setupUserFetchedResultsController()
         setupReviewsFetchedResultsController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        if showReviewsOnViewDidAppear {
+            
+            showReviewsOnViewDidAppear = false
+            
+            presentReviewViewController()
+        }
     }
     
     private func setupUserFetchedResultsController() {

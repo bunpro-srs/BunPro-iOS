@@ -84,9 +84,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        let statusViewController = (window?.rootViewController as? UITabBarController)?.viewControllers?.first(where: { $0 is StatusTableViewController }) as? StatusTableViewController
-        
-        statusViewController?.presentReviewViewController()
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            
+            let statusViewController = (window?.rootViewController as? UITabBarController)?.viewControllers?.first(where: { $0 is StatusTableViewController }) as? StatusTableViewController
+            
+            statusViewController?.showReviewsOnViewDidAppear = true
+            
+        }
         
         completionHandler()
     }
