@@ -20,7 +20,19 @@ extension Link {
         id = link.identifier
         about = link.description
         site = link.site
-        url = URL(string: link.link.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+        
+        let linksString = link.link.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if let newUrl = URL(string: linksString) {
+            url = newUrl
+        } else {
+            print("Url seems to be funny: \(linksString)")
+            
+            url = URL(string: linksString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+            
+            print(url ?? "Could not create URL!")
+        }
+        
         createdDate = link.createdDate
         updatedDate = link.updatedDate
         self.grammar = grammar
