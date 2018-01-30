@@ -10,9 +10,6 @@
 /* The last time an update was made. */
 "status.lastupdate" = "Last update: %@";
 
-/* Updating prompt */
-"status.updating" = "Updating...";
-
 /* Level in a JLPT */
 "level.number" = "Level %d";
 

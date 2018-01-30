@@ -99,16 +99,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     
     private func loadData() {
         
-        self.navigationItem.prompt = "Updating..."
-        
         let updateProcedure = UpdateGrammarProcedure(presentingViewController: self)
-        
-        updateProcedure.completionBlock = {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.navigationItem.prompt = nil
-            }
-        }
         
         Server.add(procedure: updateProcedure)
     }
