@@ -10,7 +10,11 @@ import UIKit
 
 class StructureInfoCell: UITableViewCell {
 
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel! {
+        didSet {
+            descriptionLabel.numberOfLines = 0
+        }
+    }
     
     @IBOutlet private weak var structureContentView: UIView! {
         didSet {

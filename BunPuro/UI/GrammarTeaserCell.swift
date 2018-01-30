@@ -10,8 +10,16 @@ import UIKit
 
 class GrammarTeaserCell: UITableViewCell {
 
-    @IBOutlet weak var japaneseLabel: UILabel!
-    @IBOutlet weak var meaningLabel: UILabel!
+    @IBOutlet weak var japaneseLabel: UILabel! {
+        didSet {
+            japaneseLabel.numberOfLines = 0
+        }
+    }
+    @IBOutlet weak var meaningLabel: UILabel! {
+        didSet {
+            meaningLabel.numberOfLines = 0
+        }
+    }
     
     @IBOutlet private weak var hankoImageView: UIImageView!
     

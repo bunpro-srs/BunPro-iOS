@@ -10,8 +10,20 @@ import UIKit
 
 class BasicInfoCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var cautionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.numberOfLines = 0
+        }
+    }
+    @IBOutlet weak var meaningLabel: UILabel! {
+        didSet {
+            meaningLabel.numberOfLines = 0
+        }
+    }
+    @IBOutlet weak var cautionLabel: UILabel! {
+        didSet {
+            cautionLabel.numberOfLines = 0
+        }
+    }
 
 }
