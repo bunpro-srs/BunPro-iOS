@@ -31,14 +31,9 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         self.email = username
         self.password = password
         
-        var components = URLComponents(string: loginUrlString)!
+        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)")!
         
-        components.queryItems = [
-            URLQueryItem(name: "user_login[email]", value: username),
-            URLQueryItem(name: "user_login[password]", value: password)
-        ]
-        
-        var request = URLRequest(url: components.url!)
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
