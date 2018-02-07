@@ -27,15 +27,17 @@ public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDeleg
         
         guard !isCancelled else { return }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ReviewViewControllerProcedure.self))
-
-        let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
-        (controller.visibleViewController as? ReviewViewController)?.delegate = self
-        
-        presentingViewController.present(controller, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ReviewViewControllerProcedure.self))
+            
+            let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
+            (controller.visibleViewController as? ReviewViewController)?.delegate = self
+            
+            self.presentingViewController.present(controller, animated: true, completion: nil)
+        }
     }
     
-    func revieViewControllerDidFinish(_ controller: ReviewViewController) {
+    func reviewViewControllerDidFinish(_ controller: ReviewViewController) {
         
         presentingViewController.dismiss(animated: true) {
             self.finish()

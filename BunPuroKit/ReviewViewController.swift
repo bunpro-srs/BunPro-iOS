@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 protocol ReviewViewControllerDelegate: class {
-    func revieViewControllerDidFinish(_ controller: ReviewViewController)
+    func reviewViewControllerDidFinish(_ controller: ReviewViewController)
 }
 
 class ReviewViewController: UIViewController {
@@ -31,6 +31,6 @@ class ReviewViewController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        delegate?.revieViewControllerDidFinish(self)
+        delegate?.reviewViewControllerDidFinish(self)
     }
 }
