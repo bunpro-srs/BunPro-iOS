@@ -66,9 +66,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
                     
                     print("Reload because reviews did change")
-                    self?.tableView.beginUpdates()
-                    self?.tableView.reloadSections(IndexSet([0]), with: .none)
-                    self?.tableView.endUpdates()
+                    self?.tableView.reloadData()
                 }
         }
         
@@ -226,8 +224,12 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
                 
-                cell.titleLabel.text = grammar?.title
-                cell.meaningLabel.text = grammar?.meaning
+//                let title1Font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont.systemFont(ofSize: 19))
+//                let bodyFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
+//                let calloutFont = UIFontMetrics(forTextStyle: .callout).scaledFont(for: UIFont.systemFont(ofSize: 15))
+
+                cell.titleLabel.text = grammar?.title//?.htmlAttributedString(font: title1Font)
+                cell.meaningLabel.text = grammar?.meaning//?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: bodyFont)
                 
                 if let caution = grammar?.caution, !caution.isEmpty {
                     cell.cautionLabel.text = "⚠️ \(caution)"
@@ -244,7 +246,9 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let cell = tableView.dequeueReusableCell(for: indexPath) as StructureInfoCell
                 
-                cell.descriptionLabel.text = grammar?.structure?.replacingOccurrences(of: ", ", with: "\n")
+                let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+                
+                cell.descriptionLabel.attributedText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont)
                 
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
                 
@@ -325,36 +329,38 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
 
 extension GrammarViewController: NSFetchedResultsControllerDelegate {
     
-    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert: tableView.insertSections([sectionIndex], with: .fade)
-        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
-        default: break
-        }
-    }
-    
+//    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.beginUpdates()
+//    }
+//
+//    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert: tableView.insertSections([sectionIndex], with: .fade)
+//        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
+//        default: break
+//        }
+//    }
+//
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        let currentPresentingController: NSFetchedResultsController<NSFetchRequestResult>?
+        tableView.reloadData()
         
-        switch viewMode {
-        case .examples:
-            currentPresentingController = exampleSentencesFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
-        case .reading:
-            currentPresentingController = readingsFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
-        }
-        
-        guard controller == currentPresentingController else { return }
-        
-        tableView.reloadSections(IndexSet([0]), with: .none)
+//        let currentPresentingController: NSFetchedResultsController<NSFetchRequestResult>?
+//
+//        switch viewMode {
+//        case .examples:
+//            currentPresentingController = exampleSentencesFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
+//        case .reading:
+//            currentPresentingController = readingsFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
+//        }
+//
+//        guard controller == currentPresentingController else { return }
+//
+//        tableView.reloadSections(IndexSet([0]), with: .none)
     }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.endUpdates()
+//    }
 }

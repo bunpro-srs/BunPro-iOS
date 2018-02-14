@@ -9,6 +9,7 @@
 import UIKit
 import BunPuroKit
 import UserNotifications
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         
-        center.requestAuthorization(options: [.sound, .alert]) { (granted, error) in
+        center.requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
             guard error == nil else {
                 
                 print(error!)
@@ -44,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let rootViewController = window?.rootViewController {
             dataManager = DataManager(presentingViewController: rootViewController)
         }
+        
+        //UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(10))
         
         return true
     }
@@ -72,13 +75,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
-
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
      
+        UserNotificationCenter.shared.updateNotifications(basedOnReceived: notification)
+        
         completionHandler([.sound, .badge, .alert])
     }
     
@@ -93,5 +97,32 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         completionHandler()
+    }
+    
+    static func resetAppBadgeIcon() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    static func badgeNumber(date: Date = Date()) -> NSNumber? {
+        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%K <= %@ && complete = true", #keyPath(Review.nextReviewDate), date as NSDate)
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
+        ]
+        
+        do {
+            let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
+            
+            return NSNumber(value: reviews.count)
+        } catch {
+            print(error)
+            
+            return nil
+        }
+    }
+    
+    static func updateAppBadgeIcon() {
+        
+        UIApplication.shared.applicationIconBadgeNumber = AppDelegate.badgeNumber()?.intValue ?? 0
     }
 }

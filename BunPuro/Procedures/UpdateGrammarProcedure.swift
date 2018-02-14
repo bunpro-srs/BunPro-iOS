@@ -16,9 +16,9 @@ class UpdateGrammarProcedure: GroupProcedure {
     private let lessonProcedure: LessonsProcedure
     private let importProcedure: ImportLessonsIntoCoreDataProcedure
     
-    init(presentingViewController: UIViewController, initialImport: Bool = false) {
+    init(presentingViewController: UIViewController) {
         
-        lessonProcedure = LessonsProcedure(presentingViewController: presentingViewController, initialImport: initialImport)
+        lessonProcedure = LessonsProcedure(presentingViewController: presentingViewController)
         importProcedure = ImportLessonsIntoCoreDataProcedure()
         importProcedure.injectResult(from: lessonProcedure)
         

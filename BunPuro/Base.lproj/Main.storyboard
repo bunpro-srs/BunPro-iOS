@@ -218,7 +218,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="O0x-Fp-Jk4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t25-sq-JeB">
@@ -244,7 +244,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="t25-sq-JeB" secondAttribute="trailing" id="4iS-Zb-XE6"/>
                                                 <constraint firstItem="O0x-Fp-Jk4" firstAttribute="leading" secondItem="ALL-7a-j8W" secondAttribute="leading" id="VN2-Q5-FCj"/>
                                                 <constraint firstAttribute="bottom" secondItem="t25-sq-JeB" secondAttribute="bottom" constant="11" id="VY2-0b-6MQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="O0x-Fp-Jk4" secondAttribute="trailing" id="bLb-EU-jGH"/>
+                                                <constraint firstAttribute="trailing" secondItem="O0x-Fp-Jk4" secondAttribute="trailing" constant="-34" id="bLb-EU-jGH"/>
                                                 <constraint firstItem="t25-sq-JeB" firstAttribute="top" secondItem="ALL-7a-j8W" secondAttribute="top" constant="12" id="ep7-mx-R4d"/>
                                                 <constraint firstItem="t25-sq-JeB" firstAttribute="leading" secondItem="ALL-7a-j8W" secondAttribute="leading" constant="15" id="iOy-ah-VeL"/>
                                                 <constraint firstItem="O0x-Fp-Jk4" firstAttribute="top" secondItem="ALL-7a-j8W" secondAttribute="top" id="tbV-If-KDi"/>
@@ -267,7 +267,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Vra-P4-KwT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aH-cC-TKs">
@@ -294,7 +294,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="8aH-cC-TKs" secondAttribute="bottom" constant="11" id="I3k-Uw-wYh"/>
                                                 <constraint firstItem="8aH-cC-TKs" firstAttribute="top" secondItem="PHY-bn-8EW" secondAttribute="top" constant="12" id="TzT-D7-17R"/>
                                                 <constraint firstItem="Vra-P4-KwT" firstAttribute="leading" secondItem="PHY-bn-8EW" secondAttribute="leading" id="VPh-cg-Wzi"/>
-                                                <constraint firstAttribute="trailing" secondItem="Vra-P4-KwT" secondAttribute="trailing" id="cRn-nu-sEc"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vra-P4-KwT" secondAttribute="trailing" constant="-34" id="cRn-nu-sEc"/>
                                                 <constraint firstAttribute="bottom" secondItem="Vra-P4-KwT" secondAttribute="bottom" id="dwa-zO-4HJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="8aH-cC-TKs" secondAttribute="trailing" id="dxt-ip-TEe"/>
                                             </constraints>
@@ -316,7 +316,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="en1-iJ-2Z8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a31-w2-Q7k">
@@ -338,7 +338,7 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="en1-iJ-2Z8" secondAttribute="trailing" id="02D-SV-lqF"/>
+                                                <constraint firstAttribute="trailing" secondItem="en1-iJ-2Z8" secondAttribute="trailing" constant="-34" id="02D-SV-lqF"/>
                                                 <constraint firstItem="a31-w2-Q7k" firstAttribute="top" secondItem="0PM-fa-WWR" secondAttribute="top" constant="12" id="Hif-Sn-gte"/>
                                                 <constraint firstAttribute="bottom" secondItem="en1-iJ-2Z8" secondAttribute="bottom" id="XMf-VN-9u5"/>
                                                 <constraint firstItem="en1-iJ-2Z8" firstAttribute="leading" secondItem="0PM-fa-WWR" secondAttribute="leading" id="YLj-ow-dLL"/>
@@ -365,7 +365,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Hq9-TH-UGb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="44.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                                                     <color key="progressTintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-eE-5fM">
@@ -394,7 +394,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="fuN-eE-5fM" secondAttribute="bottom" constant="11" id="DnD-gQ-Jbz"/>
                                                 <constraint firstAttribute="bottom" secondItem="Hq9-TH-UGb" secondAttribute="bottom" id="Es4-z5-oUm"/>
                                                 <constraint firstItem="Hq9-TH-UGb" firstAttribute="leading" secondItem="Nwc-Qs-ytw" secondAttribute="leading" id="Thc-gm-vbZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="Hq9-TH-UGb" secondAttribute="trailing" id="kpm-zH-hxT"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hq9-TH-UGb" secondAttribute="trailing" constant="-34" id="kpm-zH-hxT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -709,25 +709,37 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="161.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lho-Q0-vNl">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lho-Q0-vNl">
                                             <rect key="frame" x="16" y="11" width="343" height="140"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="ないほうがいい" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-Xh-odS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="84.333333333333329"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="ないほうがいい" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-Xh-odS">
+                                                    <rect key="frame" x="79.333333333333329" y="0.0" width="184.66666666666669" height="83.333333333333329"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to be/is, (casual non-past tense)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVI-fC-5ib">
-                                                    <rect key="frame" x="0.0" y="92.333333333333329" width="343" height="20.333333333333329"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVI-fC-5ib">
+                                                    <rect key="frame" x="47.666666666666671" y="91.333333333333329" width="247.66666666666663" height="20.333333333333329"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="to be/is, (casual non-past tense)">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="17"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No \U3060 with \U3044Adjectives" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oi9-KZ-MZn">
-                                                    <rect key="frame" x="0.0" y="120.66666666666664" width="343" height="19.333333333333329"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oi9-KZ-MZn">
+                                                    <rect key="frame" x="39.666666666666657" y="119.66666666666664" width="263.66666666666674" height="20.333333333333329"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="No \U3060 with \U3044Adjectives">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="17"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -756,11 +768,11 @@
                                         <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="RjZ-9A-mqI">
                                             <rect key="frame" x="16" y="11" width="343" height="100"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Khc-ze-lEl">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Khc-ze-lEl">
                                                     <rect key="frame" x="8" y="16" width="327" height="68"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Structure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7e-rE-rKz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="20.333333333333332"/>
+                                                            <rect key="frame" x="125.66666666666666" y="0.0" width="76" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>

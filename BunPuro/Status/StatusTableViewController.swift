@@ -254,6 +254,8 @@ class StatusTableViewController: UITableViewController {
         
         nextHourLabel?.text = "\(reviews.reviewsWithinNextHour)"
         nextDayLabel?.text = "\(reviews.reviewsTomorrow)"
+        
+        AppDelegate.updateAppBadgeIcon()
     }
 }
 

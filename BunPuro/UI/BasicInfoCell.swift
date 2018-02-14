@@ -25,5 +25,5 @@ class BasicInfoCell: UITableViewCell {
             cautionLabel.numberOfLines = 0
         }
     }
-
+    
 }

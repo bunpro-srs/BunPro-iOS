@@ -18,13 +18,13 @@ extension Grammar {
         self.init(context: context)
         
         alternate = grammar.alternate
-        caution = grammar.caution.htmlAttributedString?.string
+        caution = grammar.caution
         formal = grammar.formal
         identifier = grammar.identifier
         isNew = grammar.isNew
-        meaning = grammar.meaning.htmlAttributedString?.string
-        structure = grammar.structure.htmlAttributedString?.string
-        title = grammar.title.htmlAttributedString?.string
+        meaning = grammar.meaning
+        structure = grammar.structure
+        title = grammar.title
         yomikata = grammar.yomikata
         
         self.lesson = lesson
