@@ -60,7 +60,7 @@ struct UserNotificationCenter {
     private func scheduleReminderNotification(from date: Date) {
         guard date > Date() else { return }
         
-        let reminderDate = date.addingTimeInterval(10)
+        let reminderDate = date.addingTimeInterval(5 * 60)
         
         let center = UNUserNotificationCenter.current()
         
