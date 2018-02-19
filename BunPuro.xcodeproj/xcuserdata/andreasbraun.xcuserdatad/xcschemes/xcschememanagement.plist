@@ -11,17 +11,26 @@
 		</dict>
 		<key>BunPuroKit.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
 		<key>CreateDatabase.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2E3D43A2201B50E400B4D5EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2EAD9DCF1FA25DF100CE52CF</key>
 		<dict>
 			<key>primary</key>
@@ -33,6 +42,11 @@
 			<true/>
 		</dict>
 		<key>2EAD9DF01FA25DF100CE52CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EAD9E071FA26EB400CE52CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
