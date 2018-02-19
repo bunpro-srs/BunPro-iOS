@@ -275,7 +275,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 
-                cell.nameLabel?.attributedText = sentence.japanese?.htmlAttributedString(font: japaneseFont)
+                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont)
                 cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
                 
                 cell.selectionStyle = .none
@@ -301,18 +301,44 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1, viewMode == .reading {
+        switch indexPath.section {
+        case 0: break
+        case 1:
             
             defer {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
             
-            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-            guard let url = readingsFetchedResultsController.object(at: correctIndexPath).url else { return }
-            
-            let safariViewController = SFSafariViewController(url: url)
-            
-            present(safariViewController, animated: true, completion: nil)
+            switch viewMode {
+            case .reading:
+                
+                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+                guard let url = readingsFetchedResultsController.object(at: correctIndexPath).url else { return }
+                
+                let safariViewController = SFSafariViewController(url: url)
+                
+                present(safariViewController, animated: true, completion: nil)
+            case .examples:
+                
+                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+                
+                if let furigana = exampleSentencesFetchedResultsController.object(at: correctIndexPath).japanese?.cleanStringAndFurigana.furigana,
+                    let cell = tableView.cellForRow(at: indexPath) {
+                    
+                    let infoViewController = storyboard!.instantiateViewController() as KanjiTableViewController
+                    
+                    infoViewController.furigana = furigana
+                    
+                    infoViewController.modalPresentationStyle = .popover
+                    
+                    infoViewController.popoverPresentationController?.sourceRect = cell.bounds
+                    infoViewController.popoverPresentationController?.sourceView = cell
+                    infoViewController.popoverPresentationController?.delegate = self
+                    
+                    present(infoViewController, animated: true)
+                }
+            }
+        default: break
         }
     }
 
@@ -327,40 +353,17 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     }
 }
 
-extension GrammarViewController: NSFetchedResultsControllerDelegate {
+extension GrammarViewController: UIPopoverPresentationControllerDelegate {
     
-//    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.beginUpdates()
-//    }
-//
-//    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-//        switch type {
-//        case .insert: tableView.insertSections([sectionIndex], with: .fade)
-//        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
-//        default: break
-//        }
-//    }
-//
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension GrammarViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         tableView.reloadData()
-        
-//        let currentPresentingController: NSFetchedResultsController<NSFetchRequestResult>?
-//
-//        switch viewMode {
-//        case .examples:
-//            currentPresentingController = exampleSentencesFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
-//        case .reading:
-//            currentPresentingController = readingsFetchedResultsController as? NSFetchedResultsController<NSFetchRequestResult>
-//        }
-//
-//        guard controller == currentPresentingController else { return }
-//
-//        tableView.reloadSections(IndexSet([0]), with: .none)
     }
-//
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.endUpdates()
-//    }
 }
