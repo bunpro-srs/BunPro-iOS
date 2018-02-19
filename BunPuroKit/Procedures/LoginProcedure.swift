@@ -20,7 +20,7 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     
     let completion: (Token?, Error?) -> Void
     
-    private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
+    private let _networkProcedure: NetworkProcedure<NetworkDataProcedure>
     private let _transformProcedure: TransformProcedure<Data, TokenResponse>
     
     private let email: String

@@ -26,7 +26,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
     
     private let modificationType: ModificationType
     
-    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>!
+    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     
     public init(presentingViewController: UIViewController, modificationType: ModificationType, completion: @escaping ((Error?) -> Void)) {
         

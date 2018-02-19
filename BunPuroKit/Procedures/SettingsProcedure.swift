@@ -32,7 +32,7 @@ public class SetSettingsProcedure: GroupProcedure {
         }
     }
     
-    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>!
+    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     private var _userProcedure: UserProcedure!
     
     public let completion: ((BPKAccount?, Error?) -> Void)

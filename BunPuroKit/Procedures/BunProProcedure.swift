@@ -17,7 +17,7 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         set { assertionFailure("\(#function) should not be called") }
     }
     
-    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>!
+    private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     private var _transformProcedure: TransformProcedure<Data, T>!
     
     public let completion: ((T?, Error?) -> Void)?
