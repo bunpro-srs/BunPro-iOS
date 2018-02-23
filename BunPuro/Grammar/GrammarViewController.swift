@@ -231,7 +231,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 cell.titleLabel.text = grammar?.title//?.htmlAttributedString(font: title1Font)
                 cell.meaningLabel.text = grammar?.meaning//?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: bodyFont)
                 
-                if let caution = grammar?.caution, !caution.isEmpty {
+                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>X</span> ", with: ""), !caution.isEmpty {
                     cell.cautionLabel.text = "⚠️ \(caution)"
                 } else {
                     cell.cautionLabel.text = nil
