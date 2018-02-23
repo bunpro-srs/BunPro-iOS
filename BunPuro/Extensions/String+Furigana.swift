@@ -67,11 +67,10 @@ extension String {
         
         for character in self {
             
-            foundKanji = String(character).isKanji
-            
             switch character {
             case "（":
                 foundFurigana = true
+                foundKanji = false
             case "）":
                 foundFurigana = false
                 foundKanji = false
@@ -83,6 +82,19 @@ extension String {
                 currentFuriganaWord = ""
                 currentKanjiWord = ""
             default:
+                
+                let characterString = String(character)
+                
+                guard characterString.isKanji || characterString.isHiragana || characterString.isKatakana else {
+                    
+                    currentKanjiWord = ""
+                    continue
+                }
+                
+                if !foundKanji {
+                    foundKanji = characterString.isKanji
+                }
+                
                 if foundKanji {
                     currentKanjiWord += String(character)
                 }
