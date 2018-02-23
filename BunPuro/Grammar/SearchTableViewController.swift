@@ -126,6 +126,51 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         return ["5", "4", "3", "2", "1"]
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let point = fetchedResultsController.object(at: indexPath)
+        let review = self.review(for: point)
+        let hasReview = review?.complete ?? false
+        
+        var actions = [UIContextualAction]()
+        
+        if hasReview {
+            let removeReviewAction = UIContextualAction(style: .normal,
+                                                        title: NSLocalizedString("review.edit.remove.short", comment: "")) { (action, view, completion) in
+                                                            AppDelegate.modifyReview(.remove(review!.identifier))
+                                                            
+                                                            completion(true)
+            }
+            
+            removeReviewAction.backgroundColor = .red
+            
+            let resetReviewAction = UIContextualAction(style: .normal,
+                                                       title: NSLocalizedString("review.edit.reset.short", comment: "")) { (action, view, completion) in
+                                                        AppDelegate.modifyReview(.reset(review!.identifier))
+                                                        
+                                                        completion(true)
+            }
+            
+            resetReviewAction.backgroundColor = .purple
+            
+            actions.append(removeReviewAction)
+            actions.append(resetReviewAction)
+        } else {
+            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal,
+                                                       title: NSLocalizedString("review.edit.add.short", comment: "")) { (action, view, completion) in
+                                                        AppDelegate.modifyReview(.add(point.identifier))
+                                                        
+                                                        completion(true)
+            }
+            
+            actions.append(addToReviewAction)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        
+        return configuration
+    }
+    
     // MARK: - UISearchController
 
     func updateSearchResults(for searchController: UISearchController) {
