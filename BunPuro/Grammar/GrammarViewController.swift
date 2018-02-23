@@ -126,19 +126,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     private func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         
-        let addProcedure = ModifyReviewProcedure(presentingViewController: self, modificationType: modificationType) { (error) in
-            print(error ?? "No Error")
-            
-            if error == nil {
-                
-                DispatchQueue.main.async {
-                    
-                    AppDelegate.setNeedsStatusUpdate()
-                }
-            }
-        }
-        
-        Server.add(procedure: addProcedure)
+        AppDelegate.modifyReview(modificationType)
     }
     
     private func setupSentencesFetchedResultsController() {
@@ -357,6 +345,38 @@ extension GrammarViewController: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        
+        if let review = review, review.complete {
+            let removeAction = UIPreviewAction(
+                title: NSLocalizedString("review.edit.remove", comment: ""),
+                style: .destructive,
+                handler: { (action, viewController) in
+                    self.modifyReview(.remove(self.review!.identifier))
+            })
+            
+            let resetAction = UIPreviewAction(
+                title: NSLocalizedString("review.edit.reset", comment: ""),
+                style: .destructive,
+                handler: { (action, viewController) in
+                    self.modifyReview(.reset(self.review!.identifier))
+            })
+            
+            return [removeAction, resetAction]
+            
+        } else {
+            
+            let addAction = UIPreviewAction(
+                title: NSLocalizedString("review.edit.add", comment: ""),
+                style: .default,
+                handler: { (action, viewController) in
+                    self.modifyReview(.add(self.grammar!.identifier))
+            })
+            
+            return [addAction]
+        }
     }
 }
 

@@ -65,7 +65,6 @@ final class DataManager {
         statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { (_) in
             
             guard !self.isUpdating else { return }
-            self.isUpdating = true
             self.scheduleUpdateProcedure()
         }
     }
@@ -85,21 +84,40 @@ final class DataManager {
         // updates the grammar database
     }
     
+    func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
+        
+        let addProcedure = ModifyReviewProcedure(presentingViewController: presentingViewController, modificationType: modificationType) { (error) in
+            print(error ?? "No Error")
+            
+            if error == nil {
+                
+                DispatchQueue.main.async {
+                    
+                    AppDelegate.setNeedsStatusUpdate()
+                }
+            }
+        }
+        
+        Server.add(procedure: addProcedure)
+    }
+    
     private func scheduleUpdateProcedure() {
+        
+        self.isUpdating = true
         
         let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { (user, progress, reviews, error) in
             
             DispatchQueue.main.async {
-                
-                defer {
-                    self.isUpdating = false
-                }
                 
                 if let user = user, let progress = progress {
                     
                     print("Saving the user: \(user.name)")
                     
                     let importProcedure = ImportAccountIntoCoreDataProcedure(account: user, progress: progress)
+                    
+                    importProcedure.addDidFinishBlockObserver { (_, _) in
+                        self.isUpdating = false
+                    }
                     
                     self.procedureQueue.add(operation: importProcedure)
                 }
@@ -110,8 +128,11 @@ final class DataManager {
                     
                     let importProcedure = ImportReviewsIntoCoreDataProcedure(reviews: reviews)
                     
-                    self.procedureQueue.add(operation: importProcedure)
+                    importProcedure.addDidFinishBlockObserver { (_, _) in
+                        self.isUpdating = false
+                    }
                     
+                    self.procedureQueue.add(operation: importProcedure)
                 }
             }
         }

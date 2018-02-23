@@ -1093,7 +1093,7 @@
             </objects>
             <point key="canvasLocation" x="2460" y="-351"/>
         </scene>
-        <!--Grammar Points Table View Controller-->
+        <!--Title-->
         <scene sceneID="UiV-Fr-dO7">
             <objects>
                 <tableViewController id="It2-kV-ak6" customClass="GrammarPointsTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
@@ -1167,6 +1167,7 @@
                             <outlet property="delegate" destination="It2-kV-ak6" id="52d-xY-gqz"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="l1H-vX-DE4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppz-cR-awD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1262,7 +1263,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="h1C-oh-f5i"/>
         <segue reference="6sN-AD-eCk"/>
-        <segue reference="AhY-hH-Pxl"/>
+        <segue reference="tSE-gJ-zq6"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

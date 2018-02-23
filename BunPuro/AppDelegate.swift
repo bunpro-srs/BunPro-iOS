@@ -72,8 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     static func setNeedsStatusUpdate() {
-        
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
+    }
+    
+    static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
     }
 }
 

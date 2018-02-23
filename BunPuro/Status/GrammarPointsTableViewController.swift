@@ -20,13 +20,16 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
     
     private var reviews: [Review]?
     
+    private var activityIndicatorView: UIActivityIndicatorView?
+    
+    private var willUpdateObserver: NSObjectProtocol?
     private var didUpdateObserver: NSObjectProtocol?
     
     deinit {
         
         print("deinit \(String(describing: self))")
         
-        for observer in [didUpdateObserver] {
+        for observer in [didUpdateObserver, willUpdateObserver] {
             
             if let observer = observer {
                 NotificationCenter.default.removeObserver(observer)
@@ -40,13 +43,26 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         
         guard let lesson = self.lesson else { fatalError("Lesson needs to be provided.") }
         
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicatorView?.hidesWhenStopped = true
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView!)
+        
+        willUpdateObserver = NotificationCenter.default.addObserver(
+            forName: .BunProWillBeginUpdating,
+            object: nil,
+            queue: OperationQueue.main) { [weak self] (_) in
+                self?.activityIndicatorView?.startAnimating()
+        }
+        
         didUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
             object: nil,
             queue: OperationQueue.main) { [weak self] (_) in
-                
                 self?.updateReviews()
                 self?.tableView.reloadData()
+                
+                self?.activityIndicatorView?.stopAnimating()
         }
         
         updateReviews()
@@ -71,8 +87,53 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         cell.japaneseLabel?.text = point.title
         cell.meaningLabel?.text = point.meaning
         cell.isComplete = hasReview
-
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let point = fetchedResultsController.object(at: indexPath)
+        let review = self.review(for: point)
+        let hasReview = review?.complete ?? false
+        
+        var actions = [UIContextualAction]()
+        
+        if hasReview {
+            let removeReviewAction = UIContextualAction(style: .normal,
+                                                        title: NSLocalizedString("review.edit.remove.short", comment: "")) { (action, view, completion) in
+                                                            AppDelegate.modifyReview(.remove(review!.identifier))
+                                                            
+                                                            completion(true)
+            }
+            
+            removeReviewAction.backgroundColor = .red
+            
+            let resetReviewAction = UIContextualAction(style: .normal,
+                                                       title: NSLocalizedString("review.edit.reset.short", comment: "")) { (action, view, completion) in
+                                                        AppDelegate.modifyReview(.reset(review!.identifier))
+                                                        
+                                                        completion(true)
+            }
+            
+            resetReviewAction.backgroundColor = .purple
+            
+            actions.append(removeReviewAction)
+            actions.append(resetReviewAction)
+        } else {
+            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal,
+                                                       title: NSLocalizedString("review.edit.add.short", comment: "")) { (action, view, completion) in
+                                                        AppDelegate.modifyReview(.add(point.identifier))
+                                                        
+                                                        completion(true)
+            }
+            
+            actions.append(addToReviewAction)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        
+        return configuration
     }
     
     // MARK: - Navigation
