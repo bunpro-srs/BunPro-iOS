@@ -68,7 +68,7 @@ class KanjiTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 
-                showCopyJapaneseOrEnglish()
+                showCopyJapaneseOrEnglish(at: indexPath)
             case 1:
                 showEnglish = !showEnglish
                 
@@ -80,7 +80,9 @@ class KanjiTableViewController: UITableViewController {
         }
     }
     
-    private func showCopyJapaneseOrEnglish() {
+    private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -99,10 +101,15 @@ class KanjiTableViewController: UITableViewController {
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
         
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
+        
         present(alertController, animated: true)
     }
     
     private func showCopyKanjiOrKana(at indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -120,6 +127,9 @@ class KanjiTableViewController: UITableViewController {
         alertController.addAction(copyKana)
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
         
         present(alertController, animated: true)
     }

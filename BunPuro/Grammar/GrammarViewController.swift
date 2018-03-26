@@ -359,7 +359,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
             switch Info(rawValue: indexPath.row)! {
             case .basic:
                 
-                showCopyJapaneseOrMeaning()
+                showCopyJapaneseOrMeaning(at: indexPath)
                 
             case .structure:
                 break
@@ -432,7 +432,9 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         }
     }
     
-    private func showCopyJapaneseOrMeaning() {
+    private func showCopyJapaneseOrMeaning(at indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -451,10 +453,15 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
         
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
+        
         present(alertController, animated: true)
     }
     
     private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
         
@@ -476,6 +483,9 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         alertController.addAction(copyMeaning)
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
         
         present(alertController, animated: true)
     }
