@@ -13,11 +13,15 @@ protocol ReviewViewControllerDelegate: class {
     func reviewViewControllerDidFinish(_ controller: ReviewViewController)
 }
 
-class ReviewViewController: UIViewController {
+class ReviewViewController: UIViewController, WKNavigationDelegate {
 
     weak var delegate: ReviewViewControllerDelegate?
     
-    @IBOutlet private weak var webView: WKWebView!
+    @IBOutlet private weak var webView: WKWebView! {
+        didSet {
+//            webView.navigationDelegate = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,4 +37,9 @@ class ReviewViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         delegate?.reviewViewControllerDidFinish(self)
     }
+    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//
+//        print(navigationAction.request.url)
+//    }
 }

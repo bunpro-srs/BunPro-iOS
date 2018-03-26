@@ -11,6 +11,7 @@ public struct BPKSentence: Codable {
         case alternativeJapanese = "alternate_japanese"
         case createdDate = "created_at"
         case updatedDate = "updated_at"
+        case audio = "audio_link"
     }
     
     public let identifier: Int64
@@ -21,6 +22,7 @@ public struct BPKSentence: Codable {
     public let alternativeJapanese: String?
     public let createdDate: Date
     public let updatedDate: Date
+    public let audio: String?
 }
 
 public struct BPKLink: Codable {

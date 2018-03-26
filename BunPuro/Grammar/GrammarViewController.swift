@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import SafariServices
 import BunPuroKit
+import AVFoundation
 
 protocol GrammarPresenter {
     var grammar: Grammar? { get set }
@@ -24,13 +25,31 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     @IBOutlet private var selectionSectionHeaderView: UIView!
     @IBOutlet private weak var viewModeSegmentedControl: UISegmentedControl!
+    
     private var exampleSentencesFetchedResultsController: NSFetchedResultsController<Sentence>!
     private var readingsFetchedResultsController: NSFetchedResultsController<Link>!
+    private var player: AVPlayer?
     
     var grammar: Grammar?
+    
     private var review: Review? {
         return grammar?.review
     }
+    
+    private lazy var account: Account? = {
+        
+        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        fetchRequest.fetchBatchSize = 1
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
+        
+        do {
+            return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print(error)
+            return nil
+        }
+    }()
     
     private var viewMode: ViewMode = .examples {
         didSet {
@@ -65,8 +84,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
                     
-                    print("Reload because reviews did change")
-                    self?.tableView.reloadData()
+//                    print("Reload because reviews did change")
+                    self?.tableView.reloadSections(IndexSet([1]), with: .none)
                 }
         }
         
@@ -175,6 +194,37 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         }
     }
     
+//    private var playbackObserver: NSObjectProtocol?
+    
+    private func playSound(forSentenceAt indexPath: IndexPath) {
+    
+        guard let url = exampleSentencesFetchedResultsController.object(at: indexPath).audioURL else { return }
+        
+        print("play url: \(url)")
+        
+        if player == nil {
+            player = AVPlayer(url: url)
+            player?.volume = 1.0
+        } else {
+            
+            player?.pause()
+            
+            let item = AVPlayerItem(url: url)
+            player?.replaceCurrentItem(with: item)
+        }
+        
+//        if playbackObserver != nil {
+//            NotificationCenter.default.removeObserver(playbackObserver!)
+//        }
+//
+//        playbackObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: OperationQueue.main) { [weak self] (_) in
+//
+//            print("finished playing")
+//        }
+        
+        player?.play()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 2
@@ -212,17 +262,15 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
                 
-//                let title1Font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont.systemFont(ofSize: 19))
-//                let bodyFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
-//                let calloutFont = UIFontMetrics(forTextStyle: .callout).scaledFont(for: UIFont.systemFont(ofSize: 15))
-
-                cell.titleLabel.text = grammar?.title//?.htmlAttributedString(font: title1Font)
-                cell.meaningLabel.text = grammar?.meaning//?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: bodyFont)
+                cell.titleLabel.text = grammar?.title
+                cell.meaningLabel.text = grammar?.meaning
                 
-                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>X</span> ", with: ""), !caution.isEmpty {
-                    cell.cautionLabel.text = "⚠️ \(caution)"
+                let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+                
+                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""), let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont), !caution.isEmpty {
+                    cell.cautionLabel.attributedText = attributed
                 } else {
-                    cell.cautionLabel.text = nil
+                    cell.cautionLabel.attributedText = nil
                     cell.cautionLabel.isHidden = true
                 }
                 
@@ -265,6 +313,14 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont)
                 cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
+                cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
+                
+                cell.customAction = { [weak self] (_) in
+                    
+                    self?.playSound(forSentenceAt: correctIndexPath)
+                }
+                
+                cell.descriptionLabel?.isHidden = account?.englishMode ?? false
                 
                 cell.selectionStyle = .none
 
@@ -279,6 +335,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1)
                 cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2)
+                cell.customAction = nil
+                cell.actionImage = nil
                 
                 cell.selectionStyle = .default
             }
@@ -310,20 +368,18 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
                 
-                if let furigana = exampleSentencesFetchedResultsController.object(at: correctIndexPath).japanese?.cleanStringAndFurigana.furigana,
-                    let cell = tableView.cellForRow(at: indexPath) {
+                let sentence = exampleSentencesFetchedResultsController.object(at: correctIndexPath)
+                
+                if let japanese = sentence.japanese?.cleanStringAndFurigana {
                     
                     let infoViewController = storyboard!.instantiateViewController() as KanjiTableViewController
                     
-                    infoViewController.furigana = furigana
+                    infoViewController.japanese = japanese.string
+                    infoViewController.english = sentence.english?.htmlAttributedString?.string
+                    infoViewController.furigana = japanese.furigana ?? [Furigana]()
+                    infoViewController.showEnglish = !(account?.englishMode ?? false)
                     
-                    infoViewController.modalPresentationStyle = .popover
-                    
-                    infoViewController.popoverPresentationController?.sourceRect = cell.bounds
-                    infoViewController.popoverPresentationController?.sourceView = cell
-                    infoViewController.popoverPresentationController?.delegate = self
-                    
-                    present(infoViewController, animated: true)
+                    show(infoViewController, sender: self)
                 }
             }
         default: break

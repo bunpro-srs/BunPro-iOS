@@ -28,9 +28,23 @@ class DetailCell: UITableViewCell {
         }
     }
     
+    var actionImage: UIImage? {
+        didSet {
+            actionButton?.setImage(actionImage, for: .normal)
+            actionButton?.isHidden = actionImage == nil
+        }
+    }
+    
+    @IBOutlet private weak var actionButton: UIButton!
+    
+    var customAction: ((DetailCell) -> Void)?
+    
     func setProgress(_ progress: Float, animated: Bool) {
         
         progressView?.setProgress(progress, animated: animated)
     }
     
+    @IBAction func didPressCustomAction(_ sender: UIButton) {
+        customAction?(self)
+    }
 }

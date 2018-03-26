@@ -37,3 +37,6 @@
 "review.edit.reset.short" = "Reset";
 "review.edit.add.short" = "Add";
 
+// Kanji
+"kanji.english.show" = "Show English";
+"kanji.header.readings" = "Kanji Readings";

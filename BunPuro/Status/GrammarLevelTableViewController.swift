@@ -37,11 +37,11 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
         super.viewDidLoad()
         
         didUpdateObserver = NotificationCenter.default.addObserver(
-        forName: .BunProDidEndUpdating,
-        object: nil,
-        queue: OperationQueue.main) { [weak self] (_) in
-            
-            self?.tableView.reloadData()
+            forName: .BunProDidEndUpdating,
+            object: nil,
+            queue: OperationQueue.main) { [weak self] (_) in
+                
+                self?.tableView.reloadData()
         }
         
         let request: NSFetchRequest<Lesson> = Lesson.fetchRequest()
@@ -49,10 +49,10 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
         
         let sort = NSSortDescriptor(key: #keyPath(Lesson.order), ascending: true)
         request.sortDescriptors = [sort]
-                
+        
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
     }
-
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

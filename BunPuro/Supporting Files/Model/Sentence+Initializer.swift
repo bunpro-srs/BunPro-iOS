@@ -24,6 +24,12 @@ extension Sentence {
         createdDate = sentence.createdDate
         updatedDate = sentence.updatedDate
         alternativeJapanese = sentence.alternativeJapanese
+        audio = sentence.audio
         self.grammar = grammar
+    }
+    
+    var audioURL: URL? {
+        guard let fileName = audio?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
+        return URL(string: "https://bunpro.jp/assets/\(fileName)")
     }
 }

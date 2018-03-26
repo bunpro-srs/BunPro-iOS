@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D39a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E182a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="bunnyMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="englishMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -106,6 +106,7 @@
     </entity>
     <entity name="Sentence" representedClassName="Sentence" syncable="YES" codeGenerationType="class">
         <attribute name="alternativeJapanese" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="english" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -127,6 +128,6 @@
         <element name="Level" positionX="-54" positionY="90" width="128" height="105"/>
         <element name="Link" positionX="-54" positionY="45" width="128" height="165"/>
         <element name="Review" positionX="-54" positionY="90" width="128" height="270"/>
-        <element name="Sentence" positionX="-54" positionY="63" width="128" height="165"/>
+        <element name="Sentence" positionX="-54" positionY="63" width="128" height="180"/>
     </elements>
 </model>
