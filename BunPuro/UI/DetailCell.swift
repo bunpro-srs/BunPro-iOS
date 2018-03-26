@@ -10,6 +10,8 @@ import UIKit
 
 class DetailCell: UITableViewCell {
     
+    var longPressGestureRecognizer: UILongPressGestureRecognizer?
+    
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
             nameLabel.numberOfLines = 0

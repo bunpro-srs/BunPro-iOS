@@ -16,10 +16,6 @@ class KanjiTableViewController: UITableViewController {
     
     var showEnglish: Bool = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,11 +63,65 @@ class KanjiTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0, indexPath.row > 0 {
-            
-            showEnglish = !showEnglish
-            
-            tableView.reloadRows(at: [indexPath], with: .none)
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                
+                showCopyJapaneseOrEnglish()
+            case 1:
+                showEnglish = !showEnglish
+                
+                tableView.reloadRows(at: [indexPath], with: .none)
+            default: break
+            }
+        default:
+            showCopyKanjiOrKana(at: indexPath)
         }
     }
+    
+    private func showCopyJapaneseOrEnglish() {
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let copyKanjiOnly = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.japanese?.htmlAttributedString?.string
+        }
+        
+        let copyKana = UIAlertAction(title: NSLocalizedString("copy.english", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.english?.htmlAttributedString?.string
+        }
+        
+        alertController.addAction(copyKanjiOnly)
+        alertController.addAction(copyKana)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        present(alertController, animated: true)
+    }
+    
+    private func showCopyKanjiOrKana(at indexPath: IndexPath) {
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let copyKanjiOnly = UIAlertAction(title: NSLocalizedString("copy.kanji", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.furigana[indexPath.row].original
+        }
+        
+        let copyKana = UIAlertAction(title: NSLocalizedString("copy.kana", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.furigana[indexPath.row].text
+        }
+        
+        alertController.addAction(copyKanjiOnly)
+        alertController.addAction(copyKana)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        present(alertController, animated: true)
+    }
+    
 }

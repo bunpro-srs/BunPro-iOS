@@ -275,7 +275,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 }
                 
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
-                
+                                
                 return cell
             
             case .structure:
@@ -301,6 +301,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         default:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
             
+            cell.longPressGestureRecognizer = nil
+            
             switch viewMode {
             case .examples:
                 
@@ -323,7 +325,12 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 cell.descriptionLabel?.isHidden = account?.englishMode ?? false
                 
                 cell.selectionStyle = .none
-
+                
+                if cell.longPressGestureRecognizer == nil {
+                    cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+                    cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
+                }
+                
             case .reading:
                 
                 let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
@@ -348,7 +355,17 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.section {
-        case 0: break
+        case 0:
+            switch Info(rawValue: indexPath.row)! {
+            case .basic:
+                
+                showCopyJapaneseOrMeaning()
+                
+            case .structure:
+                break
+            case .streak:
+                break
+            }
         case 1:
             
             defer {
@@ -394,6 +411,73 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return section == 1 ? 29 + 16 + 16 : 0
+    }
+    
+    @IBAction private func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
+        
+        guard recognizer.state == .began else { return }
+        guard let cell = (recognizer.view as? UITableViewCell), let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        switch indexPath.section {
+        case 0: break
+        default:
+            switch viewMode {
+            case .examples:
+                
+                showCopyJapaneseOrEnglish(at: indexPath)
+                
+            case .reading:
+                break
+            }
+        }
+    }
+    
+    private func showCopyJapaneseOrMeaning() {
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let copyJapanese = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.grammar?.title
+        }
+        
+        let copyMeaning = UIAlertAction(title: NSLocalizedString("copy.meaning", comment: ""), style: .default) { [weak self] (_) in
+            
+            UIPasteboard.general.string = self?.grammar?.meaning
+        }
+        
+        alertController.addAction(copyJapanese)
+        alertController.addAction(copyMeaning)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        present(alertController, animated: true)
+    }
+    
+    private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
+        
+        let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+        
+        let sentence = exampleSentencesFetchedResultsController.object(at: correctIndexPath)
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let copyJapanese = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { (_) in
+            
+            UIPasteboard.general.string = sentence.japanese?.htmlAttributedString?.string.cleanStringAndFurigana.string
+        }
+        
+        let copyMeaning = UIAlertAction(title: NSLocalizedString("copy.english", comment: ""), style: .default) { (_) in
+            
+            UIPasteboard.general.string = sentence.english?.htmlAttributedString?.string
+        }
+        
+        alertController.addAction(copyJapanese)
+        alertController.addAction(copyMeaning)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        
+        present(alertController, animated: true)
     }
 }
 

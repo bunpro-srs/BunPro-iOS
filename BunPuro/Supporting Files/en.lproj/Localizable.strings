@@ -40,3 +40,10 @@
 // Kanji
 "kanji.english.show" = "Show English";
 "kanji.header.readings" = "Kanji Readings";
+
+// Copying
+"copy.japanese" = "Copy Japanese";
+"copy.meaning" = "Copy Meaning";
+"copy.english" = "Copy English";
+"copy.kanji" = "Copy Kanji";
+"copy.kana" = "Copy Kana";
