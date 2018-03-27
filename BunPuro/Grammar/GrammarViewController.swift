@@ -84,8 +84,31 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
                     
-//                    print("Reload because reviews did change")
-                    self?.tableView.reloadSections(IndexSet([1]), with: .none)
+                    if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
+                        
+                        let complete = self?.review?.complete ?? false
+                        
+                        switch (numberOfRows, complete) {
+                        case (2, true):
+                            
+                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                            
+                            self?.tableView.beginUpdates()
+                            self?.tableView.insertRows(at: [indexPath], with: .fade)
+                            self?.tableView.endUpdates()
+                            
+                        case (3, false):
+                            
+                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                            
+                            self?.tableView.beginUpdates()
+                            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+                            self?.tableView.endUpdates()
+                
+                        default: break
+                        }
+                        
+                    }
                 }
         }
         
