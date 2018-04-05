@@ -104,7 +104,15 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                             self?.tableView.beginUpdates()
                             self?.tableView.deleteRows(at: [indexPath], with: .fade)
                             self?.tableView.endUpdates()
-                
+                            
+                        case (3, true):
+                            
+                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                            
+                            self?.tableView.beginUpdates()
+                            self?.tableView.reloadRows(at: [indexPath], with: .none)
+                            self?.tableView.endUpdates()
+                            
                         default: break
                         }
                         
