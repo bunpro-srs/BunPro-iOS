@@ -36,6 +36,11 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
         
         super.viewDidLoad()
         
+        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        
+        tableView.backgroundView = backgroundImageView
+        
         didUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
             object: nil,
@@ -56,17 +61,15 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
+        let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
 
         let lesson = fetchedResultsController.object(at: indexPath)
         
         let progress = lesson.progress
         let completed = Int(Float(lesson.grammar?.count ?? 0) * progress)
         
-        cell.nameLabel?.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), indexPath.row + 1)
-        cell.descriptionLabel?.text = "\(completed) / \(lesson.grammar?.count ?? 0)"
-        
-        
+        cell.titleLabel?.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), indexPath.row + 1)
+        cell.subtitleLabel?.text = "\(completed) / \(lesson.grammar?.count ?? 0)"
         
         cell.setProgress(progress, animated: false)
         
@@ -78,11 +81,11 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammarLevel:
-            guard let cell = sender as? DetailCell else { fatalError("A cell is needed.") }
+            guard let cell = sender as? JLPTProgressTableViewCell else { fatalError("A cell is needed.") }
             guard let indexPath = tableView.indexPath(for: cell) else { fatalError("An index path is needed.") }
             
             let destination = segue.destination.content as? GrammarPointsTableViewController
-            destination?.title = cell.nameLabel?.text
+            destination?.title = cell.titleLabel?.text
             destination?.lesson = fetchedResultsController.object(at: indexPath)
         }
     }

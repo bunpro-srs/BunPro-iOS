@@ -32,6 +32,8 @@
 "review.edit.remove" = "Remove from Reviews";
 "review.edit.reset" = "Reset Review Progress";
 "review.edit.add" = "Add to Reviews";
+"review.edit.button.remove_reset" = "Reset/Remove";
+"review.edit.button.add" = "Add";
 
 "review.edit.remove.short" = "Remove";
 "review.edit.reset.short" = "Reset";

@@ -19,7 +19,8 @@ class StreakInfoCell: UITableViewCell {
         
         for (index, hanko) in hankoCollection.enumerated() {
             
-            hanko.tintColor = (index + 1) < streak ? .red : #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+            hanko.tintColor = .lightGray
+            hanko.alpha = (index + 1) <= streak ? 1.0 : 0.1
         }
         
         super.layoutSubviews()

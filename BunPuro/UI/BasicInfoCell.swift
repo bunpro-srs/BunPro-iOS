@@ -25,7 +25,7 @@ class BasicInfoCell: UITableViewCell {
             cautionLabel.numberOfLines = 0
         }
     }
-    
+        
     override var canBecomeFirstResponder: Bool {
         return true
     }

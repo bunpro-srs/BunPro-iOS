@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9He-GF-8iv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9He-GF-8iv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,10 +26,16 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xF2-Yu-dnD">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" name="Main Tint"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.27450980392156865" green="0.45882352941176469" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="xF2-Yu-dnD" firstAttribute="centerY" secondItem="ucm-jv-dPY" secondAttribute="centerY" id="09x-0h-uzh"/>
                             <constraint firstItem="As7-pP-OdT" firstAttribute="bottom" secondItem="ucm-jv-dPY" secondAttribute="bottom" id="ORM-g4-Em8"/>
+                            <constraint firstItem="xF2-Yu-dnD" firstAttribute="centerX" secondItem="ucm-jv-dPY" secondAttribute="centerX" id="OqJ-GV-7bl"/>
                             <constraint firstItem="As7-pP-OdT" firstAttribute="top" secondItem="ogS-9p-3nJ" secondAttribute="top" id="WSu-cl-wFS"/>
                             <constraint firstItem="ogS-9p-3nJ" firstAttribute="trailing" secondItem="As7-pP-OdT" secondAttribute="trailing" id="qiR-0Y-FCi"/>
                             <constraint firstItem="As7-pP-OdT" firstAttribute="leading" secondItem="ogS-9p-3nJ" secondAttribute="leading" id="rWZ-ZZ-uOr"/>
@@ -43,6 +50,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="xF2-Yu-dnD" id="pUA-An-DUB"/>
                         <outlet property="webView" destination="As7-pP-OdT" id="Ndg-9o-J3F"/>
                     </connections>
                 </viewController>
@@ -55,7 +63,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavigationReviewViewControllerProcedure" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9He-GF-8iv" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XFw-qW-HVC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="XFw-qW-HVC">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -69,4 +77,10 @@
             <point key="canvasLocation" x="-631" y="176"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Main Tint">
+            <color red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+    <color key="tintColor" name="Main Tint"/>
 </document>
