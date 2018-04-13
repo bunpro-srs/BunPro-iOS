@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file source-language="en" datatype="plaintext" original="BunPuro/Base.lproj/LaunchScreen.storyboard" target-language="en">
+        <header>
+      <tool tool-version="9.1" build-num="9B55" tool-name="Xcode" tool-id="com.apple.dt.xcode"/>
+    </header>
+    <body/>
+  </file>
+  <file source-language="en" original="BunPuro/Base.lproj/Main.storyboard" datatype="plaintext" target-language="en">
+        <header>
+      <tool tool-version="9.1" build-num="9B55" tool-name="Xcode" tool-id="com.apple.dt.xcode"/>
+    </header>
+    <body>
+      <trans-unit id="6Vc-Lo-xIJ.text">
+        <source>N2 and N1 comming soon.</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;N2 and N1 comming soon.&quot;; ObjectID = &quot;6Vc-Lo-xIJ&quot;;</note>
+      </trans-unit>
+      <trans-unit id="7zn-LV-HCd.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;7zn-LV-HCd&quot;;</note>
+      </trans-unit>
+      <trans-unit id="9iS-9p-zzX.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;9iS-9p-zzX&quot;;</note>
+      </trans-unit>
+      <trans-unit id="BF1-YK-x1d.text">
+        <source>N4</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;N4&quot;; ObjectID = &quot;BF1-YK-x1d&quot;;</note>
+      </trans-unit>
+      <trans-unit id="Dr3-cV-SGp.text">
+        <source>N3</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;N3&quot;; ObjectID = &quot;Dr3-cV-SGp&quot;;</note>
+      </trans-unit>
+      <trans-unit id="G7M-ZD-5rX.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;G7M-ZD-5rX&quot;;</note>
+      </trans-unit>
+      <trans-unit id="IzM-nP-Glc.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;IzM-nP-Glc&quot;;</note>
+      </trans-unit>
+      <trans-unit id="J16-bo-Kj0.title">
+        <source>Loading...</source>
+        <note>Class = &quot;UINavigationItem&quot;; title = &quot;Loading...&quot;; ObjectID = &quot;J16-bo-Kj0&quot;;</note>
+      </trans-unit>
+      <trans-unit id="N0O-ez-tJ9.text">
+        <source>Next Day</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Next Day&quot;; ObjectID = &quot;N0O-ez-tJ9&quot;;</note>
+      </trans-unit>
+      <trans-unit id="QlM-tg-lb6.normalTitle">
+        <source>Login</source>
+        <note>Class = &quot;UIButton&quot;; normalTitle = &quot;Login&quot;; ObjectID = &quot;QlM-tg-lb6&quot;;</note>
+      </trans-unit>
+      <trans-unit id="aX1-aW-D3c.text">
+        <source>N5</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;N5&quot;; ObjectID = &quot;aX1-aW-D3c&quot;;</note>
+      </trans-unit>
+      <trans-unit id="frx-CG-Qat.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;frx-CG-Qat&quot;;</note>
+      </trans-unit>
+      <trans-unit id="hQw-yU-T0H.text">
+        <source>Next Review</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Next Review&quot;; ObjectID = &quot;hQw-yU-T0H&quot;;</note>
+      </trans-unit>
+      <trans-unit id="l8k-ny-fjF.headerTitle">
+        <source>Progress</source>
+        <note>Class = &quot;UITableViewSection&quot;; headerTitle = &quot;Progress&quot;; ObjectID = &quot;l8k-ny-fjF&quot;;</note>
+      </trans-unit>
+      <trans-unit id="lSF-ga-drx.placeholder">
+        <source>API Key</source>
+        <note>Class = &quot;UITextField&quot;; placeholder = &quot;API Key&quot;; ObjectID = &quot;lSF-ga-drx&quot;;</note>
+      </trans-unit>
+      <trans-unit id="mDD-up-LSi.headerTitle">
+        <source>Reviews</source>
+        <note>Class = &quot;UITableViewSection&quot;; headerTitle = &quot;Reviews&quot;; ObjectID = &quot;mDD-up-LSi&quot;;</note>
+      </trans-unit>
+      <trans-unit id="s4X-iH-s5S.text">
+        <source>Next Hour</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Next Hour&quot;; ObjectID = &quot;s4X-iH-s5S&quot;;</note>
+      </trans-unit>
+      <trans-unit id="v4v-7c-p8j.title">
+        <source>Status</source>
+        <note>Class = &quot;UITabBarItem&quot;; title = &quot;Status&quot;; ObjectID = &quot;v4v-7c-p8j&quot;;</note>
+      </trans-unit>
+      <trans-unit id="wT0-cB-9X3.text">
+        <source>Detail</source>
+        <note>Class = &quot;UILabel&quot;; text = &quot;Detail&quot;; ObjectID = &quot;wT0-cB-9X3&quot;;</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file source-language="en" original="BunPuro/Info.plist" datatype="plaintext" target-language="en">
+        <header>
+      <tool tool-version="9.1" build-num="9B55" tool-name="Xcode" tool-id="com.apple.dt.xcode"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file source-language="en" original="BunPuro/Localizable.strings" datatype="plaintext" target-language="en">
+        <header>
+      <tool tool-version="9.1" build-num="9B55" tool-name="Xcode" tool-id="com.apple.dt.xcode"/>
+    </header>
+    <body>
+      <trans-unit id="notification.review.message">
+        <source>notification.review.message</source>
+        <target>New Reviews are available.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="notification.review.title">
+        <source>notification.review.title</source>
+        <target>Reviews</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="reviewtime.now">
+        <source>reviewtime.now</source>
+        <target>Now</target>
+        <note>The string that indicates that a review is available</note>
+      </trans-unit>
+      <trans-unit id="status.lastupdate">
+        <source>status.lastupdate</source>
+        <target>Last update: %@</target>
+        <note>The last time an update was made.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file source-language="en" original="BunPuroKit/Info.plist" datatype="plaintext" target-language="en">
+        <header>
+      <tool tool-version="9.1" build-num="9B55" tool-name="Xcode" tool-id="com.apple.dt.xcode"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <target>文プロ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

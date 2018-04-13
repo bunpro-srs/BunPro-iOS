@@ -33,6 +33,8 @@ public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDeleg
             let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
             (controller.visibleViewController as? ReviewViewController)?.delegate = self
             
+            controller.modalPresentationStyle = .pageSheet
+            
             self.presentingViewController.present(controller, animated: true, completion: nil)
         }
     }

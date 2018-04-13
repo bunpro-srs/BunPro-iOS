@@ -69,6 +69,11 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        
+        tableView.backgroundView = backgroundImageView
+        
         definesPresentationContext = true
         
         searchController = UISearchController(searchResultsController: nil)
@@ -83,7 +88,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         navigationItem.hidesSearchBarWhenScrolling = false
         
         searchController.searchBar.placeholder = NSLocalizedString("search.grammar.placeholder", comment: "Search grammar placeholder")
-        
+        searchController.searchBar.barStyle = .black
         fetchedResultsController = newFetchedResultsController()
         
         reviewsFetchedResultsController.delegate = self
@@ -118,8 +123,12 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return fetchedResultsController.sections?[section].name ?? "Unknown"
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
+        
+        view?.titleLabel.text = fetchedResultsController.sections?[section].name ?? "Unknown"
+        return view
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {

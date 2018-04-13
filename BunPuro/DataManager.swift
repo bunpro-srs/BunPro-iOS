@@ -38,9 +38,9 @@ final class DataManager {
     }
     
     // Status Updates
-    private let updateTimeInterval: TimeInterval = TimeInterval(60)
+    private let updateTimeInterval: TimeInterval = TimeInterval(60 * 5)
     private var startImmediately: Bool = true
-    private var isUpdating: Bool = false {
+    var isUpdating: Bool = false {
         
         didSet {
             DispatchQueue.main.async {
@@ -49,7 +49,7 @@ final class DataManager {
             }
         }
     }
-    private weak var statusUpdateTimer: Timer? { didSet { statusUpdateTimer?.tolerance = 10.0 } }
+    private var statusUpdateTimer: Timer? { didSet { statusUpdateTimer?.tolerance = 10.0 } }
     
     func startStatusUpdates() {
         
@@ -62,16 +62,19 @@ final class DataManager {
         
         stopStatusUpdates()
         
-        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { (_) in
+        statusUpdateTimer = Timer(timeInterval: updateTimeInterval, repeats: true) { (_) in
             
             guard !self.isUpdating else { return }
             self.scheduleUpdateProcedure()
         }
+        
+        RunLoop.main.add(statusUpdateTimer!, forMode: .defaultRunLoopMode)
     }
     
     func stopStatusUpdates() {
         
         statusUpdateTimer?.invalidate()
+        statusUpdateTimer = nil
     }
     
     func immidiateStatusUpdate() {
@@ -130,6 +133,8 @@ final class DataManager {
                     
                     importProcedure.addDidFinishBlockObserver { (_, _) in
                         self.isUpdating = false
+                        
+                        self.startStatusUpdates()
                     }
                     
                     self.procedureQueue.add(operation: importProcedure)

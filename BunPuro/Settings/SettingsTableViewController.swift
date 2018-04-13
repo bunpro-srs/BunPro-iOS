@@ -29,6 +29,11 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        
+        tableView.backgroundView = backgroundImageView
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: nil, queue: OperationQueue.main) { (_) in
             self.updateUI()
         }
@@ -162,6 +167,13 @@ class SettingsTableViewController: UITableViewController {
             default: break
             }
         default: break
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        
+        if let view = view as? UITableViewHeaderFooterView {
+            view.textLabel?.textColor = .white
         }
     }
         

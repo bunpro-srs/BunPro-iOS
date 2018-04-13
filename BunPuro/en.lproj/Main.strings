@@ -23,7 +23,7 @@
 "J16-bo-Kj0.title" = "Loading...";
 
 /* Class = "UILabel"; text = "Next Day"; ObjectID = "N0O-ez-tJ9"; */
-"N0O-ez-tJ9.text" = "Next Day";
+"N0O-ez-tJ9.text" = "Tomorrow";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "QlM-tg-lb6"; */
 "QlM-tg-lb6.normalTitle" = "Login";

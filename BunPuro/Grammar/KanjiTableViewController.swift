@@ -16,6 +16,15 @@ class KanjiTableViewController: UITableViewController {
     
     var showEnglish: Bool = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        
+        tableView.backgroundView = backgroundImageView
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -33,34 +42,36 @@ class KanjiTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(for: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
         
         if indexPath.section == 0 {
             
             if indexPath.row == 0 {
                 
-                cell.textLabel?.attributedText = japanese?.htmlAttributedString(font: cell.textLabel?.font)
+                cell.nameLabel?.attributedText = japanese?.htmlAttributedString(font: cell.textLabel?.font, color: .white)
             } else {
-                cell.textLabel?.text = showEnglish ? english : NSLocalizedString("kanji.english.show", comment: "")
-                cell.textLabel?.textColor = showEnglish ? UIColor.black : view.tintColor
+                cell.nameLabel?.text = showEnglish ? english : NSLocalizedString("kanji.english.show", comment: "")
+                cell.nameLabel?.textColor = showEnglish ? UIColor.white : view.tintColor
             }
         } else {
             let info = furigana[indexPath.row]
             
-            cell.textLabel?.text = "\(info.original)（\(info.text)）"
+            cell.nameLabel?.text = "\(info.original)（\(info.text)）"
         }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return NSLocalizedString("kanji.header.readings", comment: "")
-        }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        return nil
+        guard section == 1 else { return nil }
+        
+        let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
+        
+        view?.titleLabel.text = NSLocalizedString("kanji.header.readings", comment: "")
+        return view
     }
-    
+        
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.section {
@@ -72,7 +83,8 @@ class KanjiTableViewController: UITableViewController {
             case 1:
                 showEnglish = !showEnglish
                 
-                tableView.reloadRows(at: [indexPath], with: .none)
+                tableView.reloadData()
+                
             default: break
             }
         default:

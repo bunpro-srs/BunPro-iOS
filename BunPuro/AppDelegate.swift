@@ -75,6 +75,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
     
+    static var isUpdating: Bool {
+        return (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.isUpdating ?? false
+    }
+    
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)

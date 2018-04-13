@@ -25,6 +25,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     @IBOutlet private var selectionSectionHeaderView: UIView!
     @IBOutlet private weak var viewModeSegmentedControl: UISegmentedControl!
+    @IBOutlet private weak var reviewEditBarButtonItem: UIBarButtonItem!
     
     private var exampleSentencesFetchedResultsController: NSFetchedResultsController<Sentence>!
     private var readingsFetchedResultsController: NSFetchedResultsController<Link>!
@@ -55,7 +56,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         didSet {
             viewModeSegmentedControl?.selectedSegmentIndex = viewMode.rawValue
             
-            tableView.reloadSections(IndexSet([1]), with: .none)
+            tableView.reloadData()
+            //tableView.reloadSections(IndexSet([1]), with: .none)
         }
     }
     
@@ -75,7 +77,14 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        
+        tableView.backgroundView = backgroundImageView
+        
         assert(grammar != nil)
+        
+        updateEditBarButtonState()
         
         endUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
@@ -116,6 +125,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                         default: break
                         }
                         
+                        self?.updateEditBarButtonState()
                     }
                 }
         }
@@ -123,7 +133,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         setupSentencesFetchedResultsController()
         setupReadingsFetchedResultsController()
     }
-
+    
     @IBAction private func viewModeChanged(_ sender: UISegmentedControl) {
         guard let newViewMode = ViewMode(rawValue: sender.selectedSegmentIndex) else {
             fatalError("ViewMode (\(sender.selectedSegmentIndex)) not supported.")
@@ -134,9 +144,9 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     @IBAction private func edidReviewButtonPressed(_ sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
         if review?.complete == true {
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             let removeAction = UIAlertAction(
                 title: NSLocalizedString("review.edit.remove", comment: ""),
@@ -153,25 +163,23 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
             }
             
             alertController.addAction(resetAction)
+            
+            alertController.addAction(
+                UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+            )
+            
+            alertController.popoverPresentationController?.barButtonItem = sender
+            
+            present(alertController, animated: true)
+            
         } else {
-            
-            let addAction = UIAlertAction(
-                title: NSLocalizedString("review.edit.add", comment: ""),
-                style: .default) { (_) in
-                    
-                    self.modifyReview(.add(self.grammar!.identifier))
-            }
-            
-            alertController.addAction(addAction)
+            modifyReview(.add(grammar!.identifier))
         }
+    }
+    
+    private func updateEditBarButtonState() {
         
-        alertController.addAction(
-            UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
-        )
-        
-        alertController.popoverPresentationController?.barButtonItem = sender
-        
-        present(alertController, animated: true)
+        reviewEditBarButtonItem.title = review?.complete == true ? NSLocalizedString("review.edit.button.remove_reset", comment: "") : NSLocalizedString("review.edit.button.add", comment: "")
     }
     
     private func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
@@ -225,8 +233,6 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         }
     }
     
-//    private var playbackObserver: NSObjectProtocol?
-    
     private func playSound(forSentenceAt indexPath: IndexPath) {
     
         guard let url = exampleSentencesFetchedResultsController.object(at: indexPath).audioURL else { return }
@@ -243,15 +249,6 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
             let item = AVPlayerItem(url: url)
             player?.replaceCurrentItem(with: item)
         }
-        
-//        if playbackObserver != nil {
-//            NotificationCenter.default.removeObserver(playbackObserver!)
-//        }
-//
-//        playbackObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: OperationQueue.main) { [weak self] (_) in
-//
-//            print("finished playing")
-//        }
         
         player?.play()
     }
@@ -298,7 +295,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 
-                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""), let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont), !caution.isEmpty {
+                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""), let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white), !caution.isEmpty {
                     cell.cautionLabel.attributedText = attributed
                 } else {
                     cell.cautionLabel.attributedText = nil
@@ -315,7 +312,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 
-                cell.descriptionLabel.attributedText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont)
+                cell.descriptionLabel.attributedText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont, color: .white)
                 
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 100000, bottom: 0, right: 0)
                 
@@ -344,8 +341,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 
-                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont)
-                cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont)
+                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: UIColor(named: "Main Tint")!)
+                cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
                 cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
                 
                 cell.customAction = { [weak self] (_) in
@@ -371,8 +368,8 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
                 
-                cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1)
-                cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2)
+                cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1, color: UIColor(named: "Main Tint")!)
+                cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2, color: .white)
                 cell.customAction = nil
                 cell.actionImage = nil
                 

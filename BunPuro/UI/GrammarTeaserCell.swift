@@ -26,7 +26,8 @@ class GrammarTeaserCell: UITableViewCell {
     var isComplete: Bool = false {
         didSet {
             
-            hankoImageView?.tintColor = isComplete ? .red : #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+            hankoImageView?.tintColor = .lightGray
+            hankoImageView.isHidden = !isComplete
         }
     }
 }
