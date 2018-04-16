@@ -65,7 +65,7 @@ class KanjiTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard section == 1 else { return nil }
+        guard section == 1, tableView.numberOfRows(inSection: section) > 0 else { return nil }
         
         let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
         

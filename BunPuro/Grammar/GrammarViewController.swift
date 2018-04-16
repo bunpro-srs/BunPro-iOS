@@ -371,10 +371,11 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
                 
                 cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1, color: UIColor(named: "Main Tint")!)
                 cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2, color: .white)
+                cell.descriptionLabel.isHidden = false
                 cell.customAction = nil
                 cell.actionImage = nil
                 
-                cell.selectionStyle = .default
+                cell.selectionStyle = .none
             }
             
             return cell
@@ -386,12 +387,10 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         switch indexPath.section {
         case 0:
             switch Info(rawValue: indexPath.row)! {
-            case .basic:
+            case .basic, .structure:
                 
                 showCopyJapaneseOrMeaning(at: indexPath)
                 
-            case .structure:
-                break
             case .streak:
                 break
             }
