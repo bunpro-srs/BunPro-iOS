@@ -23,6 +23,7 @@ class KanjiTableViewController: UITableViewController {
         backgroundImageView.contentMode = .scaleAspectFill
         
         tableView.backgroundView = backgroundImageView
+        tableView.backgroundView?.addMotion()
     }
     
     // MARK: - Table view data source

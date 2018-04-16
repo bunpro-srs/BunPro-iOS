@@ -73,6 +73,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         backgroundImageView.contentMode = .scaleAspectFill
         
         tableView.backgroundView = backgroundImageView
+        tableView.backgroundView?.addMotion()
         
         definesPresentationContext = true
         

@@ -81,6 +81,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         backgroundImageView.contentMode = .scaleAspectFill
         
         tableView.backgroundView = backgroundImageView
+        tableView.backgroundView?.addMotion()
         
         assert(grammar != nil)
         

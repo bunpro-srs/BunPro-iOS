@@ -48,6 +48,7 @@ class StatusTableViewController: UITableViewController {
         backgroundImageView.contentMode = .scaleAspectFill
         
         tableView.backgroundView = backgroundImageView
+        tableView.backgroundView?.addMotion()
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             
@@ -170,10 +171,7 @@ class StatusTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
             
-            cell.nextReviewDate = nextReviewDate
-            cell.nextHourReviewCount = reviews?.reviewsWithinNextHour
-            cell.nextDayReviewCount = reviews?.reviewsTomorrow
-            cell.lastUpdateDate = lastUpdateDate
+            updateStatusCell(cell)
             
             return cell
         } else {
@@ -238,6 +236,8 @@ class StatusTableViewController: UITableViewController {
     
     private var lastUpdateDate: Date?
     
+    private var nextReviewsCount: Int = 0
+    
     private func setup(reviews: [Review]?) {
         
         if let reviewDate = reviews?.nextReviewDate, self.nextReviewDate != reviewDate {
@@ -246,16 +246,35 @@ class StatusTableViewController: UITableViewController {
         
         nextReviewDate = reviews?.nextReviewDate
         self.reviews = reviews
+        if let nextReviewDate = nextReviewDate {
+            nextReviewsCount = reviews?.reviews(at: nextReviewDate).count ?? 0
+        }
         lastUpdateDate = Date()
         
-        let cell = statusCell()
-        
-        cell?.nextReviewDate = nextReviewDate
-        cell?.nextHourReviewCount = reviews?.reviewsWithinNextHour
-        cell?.nextDayReviewCount = reviews?.reviewsTomorrow
-        cell?.lastUpdateDate = lastUpdateDate
+        if let cell = statusCell() {
+            updateStatusCell(cell)
+        }
 
         AppDelegate.updateAppBadgeIcon()
+    }
+    
+    private func updateStatusCell(_ cell: StatusTableViewCell) {
+        cell.nextReviewDate = nextReviewDate
+        
+        if let date = nextReviewDate {
+            
+            if date < Date() {
+                cell.nextReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
+            } else {
+                cell.nextReviewsCount = AppDelegate.badgeNumber(date: date)?.intValue ?? 0
+            }
+        } else {
+            cell.nextReviewsCount = 0
+        }
+        
+        cell.nextHourReviewCount = reviews?.reviewsWithinNextHour
+        cell.nextDayReviewCount = reviews?.reviewsWithNext24Hours
+        cell.lastUpdateDate = lastUpdateDate
     }
     
     private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, jlpt: JLPT) {
@@ -356,10 +375,23 @@ extension Collection where Iterator.Element == Review {
         return tmp == Date.distantPast ? nil: tmp
     }
     
+    public func reviews(at date: Date) -> [Review] {
+        
+        let result = filter({ $0.complete && $0.nextReviewDate!.minutes(from: date) <= 0 })
+        return result
+    }
+    
     public var reviewsWithinNextHour: Int {
         
         let date = Date()
         let result = filter({ $0.complete && $0.nextReviewDate!.hours(from: date) <= 0 })
+        return result.count
+    }
+    
+    public var reviewsWithNext24Hours: Int {
+        
+        let date = Date()
+        let result = filter({ $0.complete && $0.nextReviewDate!.hours(from: date) <= 23 })
         return result.count
     }
     
@@ -370,6 +402,11 @@ extension Collection where Iterator.Element == Review {
 }
 
 extension Date {
+    
+    func minutes(from date: Date) -> Int {
+        
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute!
+    }
     
     func hours(from date: Date) -> Int {
         

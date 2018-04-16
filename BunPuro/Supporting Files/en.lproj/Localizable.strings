@@ -49,3 +49,8 @@
 "copy.english" = "Copy English";
 "copy.kanji" = "Copy Kanji";
 "copy.kana" = "Copy Kana";
+
+// Subscription
+"subscription.unknown" = "Unknown";
+"subscription.subscribed" = "Yes";
+"subscription.unsubscribed" = "No";

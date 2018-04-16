@@ -40,6 +40,7 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
         backgroundImageView.contentMode = .scaleAspectFill
         
         tableView.backgroundView = backgroundImageView
+        tableView.backgroundView?.addMotion()
         
         didUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,

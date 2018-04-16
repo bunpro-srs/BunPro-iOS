@@ -67,6 +67,8 @@
 		2E7B36922078144B00542BB8 /* GrammarHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B36912078144B00542BB8 /* GrammarHeaderTableViewCell.swift */; };
 		2E7B3694207D301A00542BB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E7B3693207D301A00542BB8 /* Assets.xcassets */; };
 		2E7B36962081061800542BB8 /* CorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B36952081061800542BB8 /* CorneredView.swift */; };
+		2E7B3698208516B200542BB8 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2E7B3697208516B200542BB8 /* Localizable.stringsdict */; };
+		2E7B369A208532BC00542BB8 /* UIView+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B3699208532BC00542BB8 /* UIView+Motion.swift */; };
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
@@ -243,6 +245,8 @@
 		2E7B36912078144B00542BB8 /* GrammarHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		2E7B3693207D301A00542BB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E7B36952081061800542BB8 /* CorneredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorneredView.swift; sourceTree = "<group>"; };
+		2E7B3697208516B200542BB8 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		2E7B3699208532BC00542BB8 /* UIView+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Motion.swift"; sourceTree = "<group>"; };
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 			children = (
 				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
 				2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */,
+				2E7B3699208532BC00542BB8 /* UIView+Motion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 		2E30749F1FACF96E0078725B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E7B3697208516B200542BB8 /* Localizable.stringsdict */,
 				2E30749E1FACF9660078725B /* Localizable.strings */,
 				2E3074921FACF9640078725B /* InfoPlist.strings */,
 				2EAD9DDE1FA25DF100CE52CF /* LaunchScreen.storyboard */,
@@ -823,6 +829,7 @@
 			files = (
 				2E30749C1FACF9660078725B /* Localizable.strings in Resources */,
 				2EAD9DE01FA25DF100CE52CF /* LaunchScreen.storyboard in Resources */,
+				2E7B3698208516B200542BB8 /* Localizable.stringsdict in Resources */,
 				2E3D43C8201B559A00B4D5EF /* BunPro.sqlite-shm in Resources */,
 				2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */,
 				2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */,
@@ -921,6 +928,7 @@
 				2ECBE3E6203B588200F20EE3 /* StringFuriganaExt.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */,
+				2E7B369A208532BC00542BB8 /* UIView+Motion.swift in Sources */,
 				2E78A1612017AF100040D928 /* StructureInfoCell.swift in Sources */,
 				2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */,
 				2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */,
