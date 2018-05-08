@@ -168,13 +168,29 @@ class StatusTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
+        switch indexPath.section {
+        case 0:
             
-            updateStatusCell(cell)
-            
-            return cell
-        } else {
+            if AppDelegate.isContentAccessable {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
+                
+                updateStatusCell(cell)
+                
+                return cell
+            } else if AppDelegate.isTrialPeriodAvailable {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                
+                cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                
+                cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
+                
+                return cell
+            }
+        default:
             let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
             
             let correctedIndexPath = IndexPath(row: indexPath.row, section: 0)
@@ -192,7 +208,10 @@ class StatusTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                if let nextReviewDate = nextReviewDate {
+                
+                if !AppDelegate.isContentAccessable {
+                    return indexPath
+                } else if let nextReviewDate = nextReviewDate {
                     return nextReviewDate < Date() ? indexPath : nil
                 }
                 return nil
@@ -210,7 +229,13 @@ class StatusTableViewController: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            presentReviewViewController()
+            if AppDelegate.isContentAccessable {
+                presentReviewViewController()
+            } else if AppDelegate.isTrialPeriodAvailable {
+                signupForTrial()
+            } else {
+                signup()
+            }
         }
     }
     
@@ -229,9 +254,21 @@ class StatusTableViewController: UITableViewController {
         Server.add(procedure: reviewProcedure)
     }
     
+    private func signupForTrial() {
+        
+        AppDelegate.signupForTrial()
+    }
+    
+    private func signup() {
+        
+        AppDelegate.signup()
+    }
+    
     private func setup(account: Account?) {
         
-        self.navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
+        navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
+        
+        tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
     
     private var lastUpdateDate: Date?

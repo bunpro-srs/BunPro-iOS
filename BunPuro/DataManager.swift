@@ -11,6 +11,7 @@ import Foundation
 import CoreData
 import BunPuroKit
 import ProcedureKit
+import SafariServices
 
 final class DataManager {
     
@@ -85,6 +86,45 @@ final class DataManager {
     func updateGrammarDatabase() {
         
         // updates the grammar database
+    }
+    
+    func signupForTrial() {
+        
+        self.isUpdating = true
+        
+        let signupForTrialProcedure = ActivateTrialPeriodProcedure(presentingViewController: presentingViewController) { (user, error) in
+            
+            guard let user = user else {
+                
+                DispatchQueue.main.async {
+                    self.isUpdating = false
+                }
+                
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let importProcedure = ImportAccountIntoCoreDataProcedure(account: user, progress: nil)
+                
+                importProcedure.addDidFinishBlockObserver { (_, _) in
+                    self.isUpdating = false
+                }
+                
+                self.procedureQueue.add(operation: importProcedure)
+            }
+        }
+        
+        Server.add(procedure: signupForTrialProcedure)
+    }
+    
+    func signup() {
+        let url = URL(string: "https://bunpro.jp")!
+        let safariViewController = SFSafariViewController(url: url)
+        
+        safariViewController.preferredBarTintColor = .black
+        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        
+        presentingViewController.present(safariViewController, animated: true, completion: nil)
     }
     
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {

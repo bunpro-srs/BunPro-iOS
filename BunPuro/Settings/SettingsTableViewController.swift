@@ -10,13 +10,36 @@ import UIKit
 import CoreData
 import ProcedureKit
 import BunPuroKit
+import SafariServices
 
 class SettingsTableViewController: UITableViewController {
+    
+    private enum Section: Int {
+        case settings
+        case subscription
+        case logout
+    }
+    
+    private enum Setting: Int {
+        case furigana
+        case english
+        case bunny
+    }
+    
+    private enum Info: Int {
+        case subscription
+        case empty
+        case about
+        case contact
+        case privacy
+        case terms
+    }
     
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
     @IBOutlet private weak var hideEnglishDetailLabel: UILabel!
     @IBOutlet private weak var bunnyModeDetailLabel: UILabel!
-
+    @IBOutlet private weak var subscriptionDetailLabel: UILabel!
+    
     private let queue = ProcedureQueue()
     private var settings: SetSettingsProcedure.Settings? {
         didSet {
@@ -63,10 +86,10 @@ class SettingsTableViewController: UITableViewController {
         
         let cell = tableView.cellForRow(at: indexPath)!
         
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
+        switch Section(rawValue: indexPath.section)! {
+        case .settings:
+            switch Setting(rawValue: indexPath.row)! {
+            case .furigana:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
                 let yesAction = UIAlertAction(title: FuriganaMode.on.localizedString, style: .default) { (_) in
@@ -98,7 +121,7 @@ class SettingsTableViewController: UITableViewController {
                 
                 present(controller, animated: true, completion: nil)
                 
-            case 1:
+            case .english:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
                 let yesAction = UIAlertAction(title: Active.yes.localizedString, style: .default) { (_) in
@@ -121,7 +144,7 @@ class SettingsTableViewController: UITableViewController {
                 controller.popoverPresentationController?.sourceRect = cell.bounds
                 
                 present(controller, animated: true, completion: nil)
-            case 2:
+            case .bunny:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
                 let onAction = UIAlertAction(title: State.on.localizedString, style: .default) { (_) in
@@ -144,9 +167,37 @@ class SettingsTableViewController: UITableViewController {
                 controller.popoverPresentationController?.sourceRect = cell.bounds
                 
                 present(controller, animated: true, completion: nil)
-            default: break
             }
-        case 1:
+        case .subscription:
+            
+            switch Info(rawValue: indexPath.row)! {
+            case .subscription:
+                break
+            case .about:
+                guard let url = URL(string: "https://bunpro.jp/about") else { return }
+                let safariViewController = SFSafariViewController(url: url)
+                
+                present(safariViewController, animated: true)
+            case .contact:
+                guard let url = URL(string: "https://bunpro.jp/contact") else { return }
+                let safariViewController = SFSafariViewController(url: url)
+                
+                present(safariViewController, animated: true)
+            case .privacy:
+                guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
+                let safariViewController = SFSafariViewController(url: url)
+                
+                present(safariViewController, animated: true)
+            case .terms:
+                guard let url = URL(string: "https://bunpro.jp/terms") else { return }
+                let safariViewController = SFSafariViewController(url: url)
+                
+                present(safariViewController, animated: true)
+                
+            case .empty: break
+            }
+            
+        case .logout:
             switch indexPath.row {
             case 0:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -167,7 +218,6 @@ class SettingsTableViewController: UITableViewController {
                 present(controller, animated: true, completion: nil)
             default: break
             }
-        default: break
         }
     }
     
@@ -181,8 +231,13 @@ class SettingsTableViewController: UITableViewController {
     private func updateUI() {
         guard let account = self.account else {
             
+            subscriptionDetailLabel.text = NSLocalizedString("subscription.unknown", comment: "The string that is displayed if the subscription state is not known, such as the user information is not yet updated.")
             return
         }
+        
+        subscriptionDetailLabel.text = account.subscriber ?
+            NSLocalizedString("subscription.subscribed", comment: "the string that is displayed if the user is subscribed") :
+        NSLocalizedString("subscription.unsubscribed", comment: "The string that is displayed if the user is not subscribed")
         
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no

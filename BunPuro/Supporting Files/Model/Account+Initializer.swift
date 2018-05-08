@@ -22,6 +22,7 @@ extension Account {
         furiganaMode = account.furigana.rawValue
         englishMode = account.hideEnglish == Active.yes
         lightMode = account.lightMode == State.on
+        subscriber = account.subscriber
         
         if let progress = progress {
             self.addLevel(progress.n5, to: self, in: context)
@@ -38,5 +39,22 @@ extension Account {
         newLevel.current = Int16(level.current)
         newLevel.max = Int16(level.max)
         newLevel.account = account
+    }
+}
+
+extension Account {
+    
+    static var currentAccount: Account? {
+        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        fetchRequest.fetchBatchSize = 1
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
+        
+        do {
+            return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }

@@ -34,15 +34,19 @@ class StatusTableViewCell: UITableViewCell {
         didSet { isUpdating ? activityIndicatorView.startAnimating() : activityIndicatorView.stopAnimating() }
     }
     
+    var nextReviewsCount: Int = 0
+    
     var nextReviewDate: Date? {
         didSet {
             guard let date = nextReviewDate else { reviewStatusNextDateLabel.text = " "; return }
             
             if date > Date() {
                 reviewStatusLabel.textColor = .white
+                reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {
                 reviewStatusLabel.textColor = UIColor(named: "Main Tint")
+                reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
                 reviewStatusNextDateLabel.text = NSLocalizedString("reviewtime.now", comment: "The string that indicates that a review is available")
             }
         }
@@ -55,14 +59,22 @@ class StatusTableViewCell: UITableViewCell {
     }
     var nextHourReviewCount: Int? {
         didSet {
-            guard let count = nextHourReviewCount else { reviewNextHourCountLabel.text = " "; return }
-            reviewNextHourCountLabel.text = "\(count)"
+            guard let nextHourReviewCount = nextHourReviewCount else { reviewNextHourCountLabel.text = " "; return }
+            
+            let difference = nextHourReviewCount - nextReviewsCount
+            
+            let count = difference > 0 ? difference : 0
+            reviewNextHourCountLabel.text = "+\(count)"
         }
     }
     var nextDayReviewCount: Int? {
         didSet {
-            guard let count = nextDayReviewCount else { reviewTomorrowCountLabel.text = " "; return }
-            reviewTomorrowCountLabel.text = "\(count)"
+            guard let nextDayReviewCount = nextDayReviewCount else { reviewTomorrowCountLabel.text = " "; return }
+            
+            let difference = nextDayReviewCount - nextReviewsCount
+            
+            let count = difference > 0 ? difference : 0
+            reviewTomorrowCountLabel.text = "+\(count)"
         }
     }
 

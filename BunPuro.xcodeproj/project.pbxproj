@@ -30,6 +30,8 @@
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E3074951FACF9650078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074971FACF9650078725B /* InfoPlist.strings */; };
 		2E30749C1FACF9660078725B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E30749E1FACF9660078725B /* Localizable.strings */; };
+		2E32A9A9209EEC5A003406CA /* ActivateTrialPeriodProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E32A9A8209EEC5A003406CA /* ActivateTrialPeriodProcedure.swift */; };
+		2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */; };
 		2E3D43A6201B50E400B4D5EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D43A5201B50E400B4D5EF /* AppDelegate.swift */; };
 		2E3D43A8201B50E400B4D5EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D43A7201B50E400B4D5EF /* ViewController.swift */; };
 		2E3D43AB201B50E500B4D5EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43A9201B50E500B4D5EF /* Main.storyboard */; };
@@ -56,6 +58,7 @@
 		2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EE11A1FE925C30027C924 /* Main.storyboard */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
+		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
 		2E7737B920052754006B8FA7 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7737B720052754006B8FA7 /* ErrorViewController.swift */; };
 		2E7737BA20052754006B8FA7 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E7737B820052754006B8FA7 /* ErrorViewController.xib */; };
 		2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */; };
@@ -219,6 +222,8 @@
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2E3074991FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2E30749D1FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2E32A9A8209EEC5A003406CA /* ActivateTrialPeriodProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateTrialPeriodProcedure.swift; sourceTree = "<group>"; };
+		2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
 		2E3D43A3201B50E400B4D5EF /* CreateDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CreateDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E3D43A5201B50E400B4D5EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E3D43A7201B50E400B4D5EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +239,7 @@
 		2E3EE11A1FE925C30027C924 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
+		2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Initializer.swift"; sourceTree = "<group>"; };
 		2E7737B720052754006B8FA7 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		2E7737B820052754006B8FA7 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyReviewProcedure.swift; sourceTree = "<group>"; };
@@ -361,6 +367,7 @@
 			children = (
 				2E2FE52C1FC349AC00DCC894 /* LoginProcedure.swift */,
 				2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */,
+				2E32A9A8209EEC5A003406CA /* ActivateTrialPeriodProcedure.swift */,
 				2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */,
 				2E01D2011FB2503000E8632D /* ProgressProcedure.swift */,
 				2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */,
@@ -380,6 +387,7 @@
 				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
 				2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */,
 				2E7B3699208532BC00542BB8 /* UIView+Motion.swift */,
+				2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 				2E78A1602017AF100040D928 /* StructureInfoCell.swift */,
 				2E78A1632017AF2B0040D928 /* StreakInfoCell.swift */,
 				2E7B36952081061800542BB8 /* CorneredView.swift */,
+				2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -906,6 +915,7 @@
 				2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */,
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */,
 				2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */,
+				2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */,
 				2ECBE3E5203B588200F20EE3 /* FuriganaLayoutManager.swift in Sources */,
 				2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */,
 				2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */,
@@ -914,6 +924,7 @@
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
 				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
+				2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */,
 				2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */,
 				2EB4564D1FE4710C003CDD65 /* DetailCell.swift in Sources */,
 				2E7B36962081061800542BB8 /* CorneredView.swift in Sources */,
@@ -977,6 +988,7 @@
 				2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */,
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,
 				2E21B3161FD9D4E500FE8320 /* SettingsProcedure.swift in Sources */,
+				2E32A9A9209EEC5A003406CA /* ActivateTrialPeriodProcedure.swift in Sources */,
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
 				2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */,
 				2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */,

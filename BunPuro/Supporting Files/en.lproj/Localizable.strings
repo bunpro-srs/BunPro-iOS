@@ -10,6 +10,12 @@
 /* The last time an update was made. */
 "status.lastupdate" = "Last update: %@";
 
+/* The title of the signup for trial button */
+"status.signuptrail" = "Signup for Trial";
+
+/* The title of the signup button */
+"status.signup" = "Subscribe";
+
 /* Level in a JLPT */
 "level.number" = "Level %d";
 

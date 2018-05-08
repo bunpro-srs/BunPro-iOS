@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E182a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F35e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="bunnyMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="englishMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -7,6 +7,7 @@
         <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lightMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscriber" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="levels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Level" inverseName="account" inverseEntity="Level" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -121,7 +122,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Account" positionX="-54" positionY="72" width="128" height="150"/>
+        <element name="Account" positionX="-54" positionY="72" width="128" height="165"/>
         <element name="Grammar" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
         <element name="Lesson" positionX="-54" positionY="27" width="128" height="135"/>

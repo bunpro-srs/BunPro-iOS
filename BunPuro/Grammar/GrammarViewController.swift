@@ -39,17 +39,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     private lazy var account: Account? = {
         
-        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        fetchRequest.fetchLimit = 1
-        fetchRequest.fetchBatchSize = 1
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
-        
-        do {
-            return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
-        } catch {
-            print(error)
-            return nil
-        }
+        return Account.currentAccount
     }()
     
     private var viewMode: ViewMode = .examples {
@@ -267,7 +257,9 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         default:
             switch viewMode {
             case .examples:
-                return exampleSentencesFetchedResultsController?.fetchedObjects?.count ?? 0
+                let subscribed = AppDelegate.isContentAccessable
+                let actualNumberOfObjects = (exampleSentencesFetchedResultsController?.fetchedObjects?.count ?? 0)
+                return subscribed ? actualNumberOfObjects : actualNumberOfObjects > 0 ? 1 : 0
             case .reading:
                 return readingsFetchedResultsController?.fetchedObjects?.count ?? 0
             }

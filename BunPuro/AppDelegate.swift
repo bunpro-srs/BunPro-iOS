@@ -75,8 +75,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
     
+    static func signupForTrial() {
+        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signupForTrial()
+    }
+    
+    static func signup() {
+        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signup()
+    }
+    
     static var isUpdating: Bool {
         return (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.isUpdating ?? false
+    }
+    
+    static var isTrialPeriodAvailable: Bool {
+        let hasBegun = Date() > Date(day: 10, month: 5, year: 2018)
+        let hasEnded = Date() > Date(day: 11, month: 6, year: 2018)
+        return hasBegun && !hasEnded
+    }
+    
+    static var isContentAccessable: Bool {
+        guard Date() > Date(day: 10, month: 5, year: 2018) else { return true }
+        return Account.currentAccount?.subscriber ?? false
     }
     
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {

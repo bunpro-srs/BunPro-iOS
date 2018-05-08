@@ -25,6 +25,7 @@ public struct BPKAccount: Codable {
         case bunnyMode = "bunny_mode"
         case furigana
         case lightMode = "light_mode"
+        case subscriber
     }
     
     public let identifier: Int64
@@ -33,4 +34,5 @@ public struct BPKAccount: Codable {
     public let name: String
     public let lightMode: State
     public let bunnyMode: State
+    public let subscriber: Bool
 }

@@ -36,9 +36,16 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
         self.completion = completion
         
         super.init(operations: [_userNetworkProcedure, _progressNetworkProcedure, _reviewsNetworkProcedure])
+        
+        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
     }
     
     override public func procedureDidFinish(withErrors: [Error]) {
+        
+        guard withErrors.isEmpty else {
+            output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
+            return
+        }
         
         let user = _userNetworkProcedure.output.value?.value
         let progress = _progressNetworkProcedure.output.value?.value
@@ -64,11 +71,6 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
             }
             
             completion?(user, progress, reviews, withErrors.first)
-        }
-        
-        guard withErrors.isEmpty else {
-                output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
-                return
         }
         
         output = Pending.ready(ProcedureResult.success((user,
