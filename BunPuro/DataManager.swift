@@ -52,6 +52,8 @@ final class DataManager {
     }
     private var statusUpdateTimer: Timer? { didSet { statusUpdateTimer?.tolerance = 10.0 } }
     
+    private var hasPendingReviewModification: Bool = false
+    
     func startStatusUpdates() {
         
         if startImmediately {
@@ -136,6 +138,7 @@ final class DataManager {
                 
                 DispatchQueue.main.async {
                     
+                    self.hasPendingReviewModification = true
                     AppDelegate.setNeedsStatusUpdate()
                 }
             }
@@ -175,6 +178,11 @@ final class DataManager {
                         self.isUpdating = false
                         
                         self.startStatusUpdates()
+                        
+                        if self.hasPendingReviewModification {
+                            self.hasPendingReviewModification = false
+                            NotificationCenter.default.post(name: .BunProDidModifyReview, object: nil)
+                        }
                     }
                     
                     self.procedureQueue.add(operation: importProcedure)
@@ -190,4 +198,9 @@ extension Notification.Name {
     
     static let BunProWillBeginUpdating = Notification.Name(rawValue: "BunProWillBeginUpdating")
     static let BunProDidEndUpdating = Notification.Name(rawValue: "BunProDidEndUpdating")
+}
+
+extension Notification.Name {
+    
+    static let BunProDidModifyReview = Notification.Name(rawValue: "BunProDidModifyReview")
 }

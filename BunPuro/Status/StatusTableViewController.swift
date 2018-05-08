@@ -21,6 +21,7 @@ class StatusTableViewController: UITableViewController {
     private var logoutObserver: NSObjectProtocol?
     private var beginUpdateObserver: NSObjectProtocol?
     private var endUpdateObserver: NSObjectProtocol?
+    private var pendingModificationObserver: NSObjectProtocol?
     
     private var nextReviewDate: Date?
     private var reviews: [Review]?
@@ -33,7 +34,7 @@ class StatusTableViewController: UITableViewController {
         
         print("deinit \(String(describing: self))")
         
-        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver] {
+        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver, pendingModificationObserver] {
             if observer != nil {
                 NotificationCenter.default.removeObserver(observer!)
             }
@@ -73,6 +74,12 @@ class StatusTableViewController: UITableViewController {
             }
         }
         
+        pendingModificationObserver = NotificationCenter.default.addObserver(forName: .BunProDidModifyReview, object: nil, queue: nil) { (_) in
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
+        }
         
         setupUserFetchedResultsController()
         setupReviewsFetchedResultsController()
