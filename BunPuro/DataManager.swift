@@ -151,15 +151,15 @@ final class DataManager {
         
         self.isUpdating = true
         
-        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { (user, progress, reviews, error) in
+        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { (user, reviews, error) in
             
             DispatchQueue.main.async {
                 
-                if let user = user, let progress = progress {
+                if let user = user {
                     
                     print("Saving the user: \(user.name)")
                     
-                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: user, progress: progress)
+                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
                     
                     importProcedure.addDidFinishBlockObserver { (_, _) in
                         self.isUpdating = false

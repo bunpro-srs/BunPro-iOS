@@ -5,6 +5,12 @@ public enum Active: String, Codable {
     case no = "No"
 }
 
+public enum Visible: String, Codable {
+    case show = "Show"
+    case hide = "Hide"
+    case minimal = "Minimal"
+}
+
 public enum State: String, Codable {
     case on = "On"
     case off = "Off"
@@ -22,6 +28,7 @@ public struct BPKAccount: Codable {
         case identifier = "id"
         case name = "username"
         case hideEnglish = "hide_english"
+        case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
         case lightMode = "light_mode"
@@ -30,6 +37,7 @@ public struct BPKAccount: Codable {
     
     public let identifier: Int64
     public let hideEnglish: Active
+    public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
     public let lightMode: State

@@ -23,6 +23,7 @@ class SettingsTableViewController: UITableViewController {
     private enum Setting: Int {
         case furigana
         case english
+//        case reviewEnglish
         case bunny
     }
     
@@ -144,6 +145,8 @@ class SettingsTableViewController: UITableViewController {
                 controller.popoverPresentationController?.sourceRect = cell.bounds
                 
                 present(controller, animated: true, completion: nil)
+//            case .reviewEnglish:
+                
             case .bunny:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 

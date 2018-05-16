@@ -12,7 +12,7 @@ import BunPuroKit
 
 extension Account {
     
-    convenience init(account: BPKAccount, progress: BPKAccountProgress?, context: NSManagedObjectContext) {
+    convenience init(account: BPKAccount, context: NSManagedObjectContext) {
         
         self.init(context: context)
         
@@ -21,24 +21,9 @@ extension Account {
         bunnyMode = account.bunnyMode == State.on
         furiganaMode = account.furigana.rawValue
         englishMode = account.hideEnglish == Active.yes
+        reviewEnglishMode = account.reviewEnglish.rawValue
         lightMode = account.lightMode == State.on
         subscriber = account.subscriber
-        
-        if let progress = progress {
-            self.addLevel(progress.n5, to: self, in: context)
-            self.addLevel(progress.n4, to: self, in: context)
-            self.addLevel(progress.n3, to: self, in: context)
-            self.addLevel(progress.n2, to: self, in: context)
-        }
-    }
-    
-    private func addLevel(_ level: BPKAccountProgress.JLPT, to account: Account, in managedObjectContext: NSManagedObjectContext) {
-        let newLevel = Level(context: managedObjectContext)
-        
-        newLevel.name = level.name
-        newLevel.current = Int16(level.current)
-        newLevel.max = Int16(level.max)
-        newLevel.account = account
     }
 }
 

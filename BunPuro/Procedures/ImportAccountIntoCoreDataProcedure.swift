@@ -32,7 +32,7 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             
-            let _ = Account(account: self.account, progress: self.progress, context: context)
+            let _ = Account(account: self.account, context: context)
 
             do {
                 try context.save()

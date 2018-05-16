@@ -12,9 +12,9 @@ import ProcedureKitNetwork
 
 public class StatusProcedure: GroupProcedure, OutputProcedure {
         
-    public var output: Pending<ProcedureResult<(BPKAccount?, BPKAccountProgress?, [BPKReview]?)>> = .pending
+    public var output: Pending<ProcedureResult<(BPKAccount?, [BPKReview]?)>> = .pending
     
-    public let completion: ((BPKAccount?, BPKAccountProgress?, [BPKReview]?, Error?) -> Void)?
+    public let completion: ((BPKAccount?, [BPKReview]?, Error?) -> Void)?
     public var indicator: NetworkActivityIndicatorProtocol? {
         didSet {
             guard let indicator = indicator else { return }
@@ -23,19 +23,16 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
     }
     
     private let _userNetworkProcedure: UserProcedure
-    private let _progressNetworkProcedure: ProgressProcedure
     private let _reviewsNetworkProcedure: ReviewsProcedure
     
-    public init(presentingViewController: UIViewController, completion: ((BPKAccount?, BPKAccountProgress?, [BPKReview]?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, completion: ((BPKAccount?, [BPKReview]?, Error?) -> Void)? = nil) {
         
         _userNetworkProcedure = UserProcedure(presentingViewController: presentingViewController)
-        _progressNetworkProcedure = ProgressProcedure(presentingViewController: presentingViewController)
-        _progressNetworkProcedure.add(dependency: _userNetworkProcedure)
         _reviewsNetworkProcedure = ReviewsProcedure(presentingViewController: presentingViewController)
         _reviewsNetworkProcedure.add(dependency: _userNetworkProcedure)
         self.completion = completion
         
-        super.init(operations: [_userNetworkProcedure, _progressNetworkProcedure, _reviewsNetworkProcedure])
+        super.init(operations: [_userNetworkProcedure, _reviewsNetworkProcedure])
         
         add(condition: LoggedInCondition(presentingViewController: presentingViewController))
     }
@@ -48,7 +45,6 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
         }
         
         let user = _userNetworkProcedure.output.value?.value
-        let progress = _progressNetworkProcedure.output.value?.value
         let reviews = _reviewsNetworkProcedure.output.value?.value
         
         defer {
@@ -70,11 +66,9 @@ public class StatusProcedure: GroupProcedure, OutputProcedure {
                 }
             }
             
-            completion?(user, progress, reviews, withErrors.first)
+            completion?(user, reviews, withErrors.first)
         }
         
-        output = Pending.ready(ProcedureResult.success((user,
-                                                        progress,
-                                                        reviews)))
+        output = Pending.ready(ProcedureResult.success((user, reviews)))
     }
 }
