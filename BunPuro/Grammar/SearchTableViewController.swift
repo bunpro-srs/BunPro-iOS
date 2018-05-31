@@ -10,7 +10,7 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating {
+class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating, UISearchBarDelegate {
     
     enum SegueIdentifier: String {
         case showGrammar
@@ -53,12 +53,41 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     }()
     
     private func searchPredicate() -> NSPredicate? {
-        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { return nil }
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            
+            switch searchController.searchBar.selectedScopeButtonIndex {
+            case 1:
+                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+                let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
+                return identifierPredicate
+            case 2:
+                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+                let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
+                return identifierPredicate
+            default:
+                return nil
+            }
+        }
         
         let titlePredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.title), searchText)
         let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
         
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+        switch searchController.searchBar.selectedScopeButtonIndex {
+        case 1:
+            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+            
+            let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
+            
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [identifierPredicate, NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])])
+        case 2:
+            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+            
+            let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
+            
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [identifierPredicate, NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])])
+        default:
+            return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+        }
     }
     
     deinit {
@@ -86,10 +115,19 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         
         navigationItem.titleView = searchController.searchBar
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
         
         searchController.searchBar.placeholder = NSLocalizedString("search.grammar.placeholder", comment: "Search grammar placeholder")
         searchController.searchBar.barStyle = .black
+        
+        searchController.searchBar.scopeButtonTitles = [
+            NSLocalizedString("search.grammar.scope.all", comment: ""),
+            NSLocalizedString("search.grammar.scope.unlearned", comment: ""),
+            NSLocalizedString("search.grammar.scope.learned", comment: "")
+        ]
+        searchController.searchBar.showsScopeBar = true
+        
         fetchedResultsController = newFetchedResultsController()
         
         reviewsFetchedResultsController.delegate = self
@@ -226,5 +264,10 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         } else if controller == reviewsFetchedResultsController, let visibleRowIndexpaths = tableView.indexPathsForVisibleRows {
             tableView.reloadRows(at: visibleRowIndexpaths, with: .automatic)
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        updateSearchResults(for: searchController)
     }
 }

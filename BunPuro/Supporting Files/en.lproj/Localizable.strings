@@ -22,6 +22,10 @@
 /* Search grammar placeholder */
 "search.grammar.placeholder" = "Search Grammar";
 
+"search.grammar.scope.all" = "All";
+"search.grammar.scope.unlearned" = "Unlearned";
+"search.grammar.scope.learned" = "Learned";
+
 /* Common cancel action */
 "general.cancel" = "Cancel";
 

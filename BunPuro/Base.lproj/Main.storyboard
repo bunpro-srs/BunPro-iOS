@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1647,8 +1647,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jMr-YW-mZt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="tab_search_inactive" selectedImage="tab_search_active" id="IZ3-Kc-eQR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="XDB-i9-ubt">
-                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="XDB-i9-ubt">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1702,7 +1702,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="hLX-iS-Gz3"/>
         <segue reference="YWX-Ln-WH0"/>
-        <segue reference="ZfT-32-FUG"/>
+        <segue reference="qPI-zK-KpJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>
