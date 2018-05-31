@@ -111,6 +111,7 @@
 		2ECBE3E7203B588200F20EE3 /* FuriganaWordKerner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E3203B588100F20EE3 /* FuriganaWordKerner.swift */; };
 		2ECBE3E8203B588200F20EE3 /* FuriganaTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E4203B588200F20EE3 /* FuriganaTextView.swift */; };
 		2ECBE3EA203B5B8B00F20EE3 /* KanjiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */; };
+		2EDF8C5320AC9EAB0024263F /* CorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B36952081061800542BB8 /* CorneredView.swift */; };
 		2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78C1FA2835C0020E828 /* Review.swift */; };
 		2EE4E78F1FA283650020E828 /* AccountProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78E1FA283650020E828 /* AccountProgress.swift */; };
 		2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
@@ -994,6 +995,7 @@
 				2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
 				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,
+				2EDF8C5320AC9EAB0024263F /* CorneredView.swift in Sources */,
 				2E0F9BB71FCC877600738129 /* BunProProcedure.swift in Sources */,
 				2E3EE1161FE91EFD0027C924 /* ReviewViewController.swift in Sources */,
 				2EAD9E2B1FA26F1100CE52CF /* Account.swift in Sources */,

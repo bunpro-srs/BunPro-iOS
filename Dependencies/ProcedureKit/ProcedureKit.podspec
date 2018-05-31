@@ -21,10 +21,10 @@ session Advanced NSOperations: https://developer.apple.com/videos/wwdc/2015/?id=
   s.osx.deployment_target = '10.10'
   
   # Ensure the correct version of Swift is used
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  s.swift_version = '4.1'
 
-  # Defaul spec is 'Standard'
-  s.default_subspec   = 'Standard'
+  # Default spec is 'Standard'
+  s.default_subspec = 'Standard'
 
   # Default core framework suitable for an iOS, watchOS, tvOS or macOS application
   s.subspec 'Standard' do |ss|
@@ -46,13 +46,6 @@ session Advanced NSOperations: https://developer.apple.com/videos/wwdc/2015/?id=
   	ss.source_files = ['Sources/ProcedureKitNetwork']
   end
 
-  # ProcedureKitLocation
-  s.subspec 'Location' do |ss|
-  	ss.dependency 'ProcedureKit/Standard'
-  	ss.frameworks = 'CoreLocation', 'MapKit'
-  	ss.source_files = ['Sources/ProcedureKitLocation']
-  end
-
   # ProcedureKitCloud
   s.subspec 'Cloud' do |ss|
   	ss.dependency 'ProcedureKit/Standard'
@@ -60,11 +53,26 @@ session Advanced NSOperations: https://developer.apple.com/videos/wwdc/2015/?id=
   	ss.source_files = ['Sources/ProcedureKitCloud']
   end
 
+  # ProcedureKitCoreData
+  s.subspec 'CoreData' do |ss|
+  	ss.dependency 'ProcedureKit/Standard'
+  	ss.frameworks = 'CoreData'
+  	ss.source_files = ['Sources/ProcedureKitCoreData']
+  end
+
+  # ProcedureKitLocation
+  s.subspec 'Location' do |ss|
+  	ss.dependency 'ProcedureKit/Standard'
+  	ss.frameworks = 'CoreLocation', 'MapKit'
+  	ss.source_files = ['Sources/ProcedureKitLocation']
+  end
+
   # All cross-platform ProcedureKit
   s.subspec 'All' do |ss|
   	ss.dependency 'ProcedureKit/Network'
   	ss.dependency 'ProcedureKit/Location'
-  	ss.dependency 'ProcedureKit/Cloud'  	  
+  	ss.dependency 'ProcedureKit/CoreData'  	
+  	ss.dependency 'ProcedureKit/Cloud'
   end
 
   # ProcedureKitMobile

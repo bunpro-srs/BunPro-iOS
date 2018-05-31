@@ -157,8 +157,6 @@ final class DataManager {
                 
                 if let user = user {
                     
-                    print("Saving the user: \(user.name)")
-                    
                     let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
                     
                     importProcedure.addDidFinishBlockObserver { (_, _) in
@@ -169,8 +167,6 @@ final class DataManager {
                 }
                 
                 if let reviews = reviews {
-                    
-                    print("Saving reviews")
                     
                     let importProcedure = ImportReviewsIntoCoreDataProcedure(reviews: reviews)
                     

@@ -39,7 +39,7 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, TokenResponse> {
             
-            print(try JSONSerialization.jsonObject(with: $0, options: []))
+//            print(try JSONSerialization.jsonObject(with: $0, options: []))
             return try JSONDecoder().decode(TokenResponse.self, from: $0)
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
@@ -118,7 +118,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
             }
             
             let keychain = Keychain()
-            
+                        
             if let username = keychain[LoginViewController.CredentialsKey.email.rawValue],
                 let password = keychain[LoginViewController.CredentialsKey.password.rawValue] {
                 

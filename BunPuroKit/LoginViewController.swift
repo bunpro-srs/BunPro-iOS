@@ -9,6 +9,7 @@
 import UIKit
 import KeychainAccess
 import ProcedureKit
+import SafariServices
 
 protocol LoginViewControllerDelegate: class {
     func loginViewControllerDidLogin(_ controller: LoginViewController)
@@ -28,8 +29,6 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet private weak var errorLogButton: UIButton!
-    
     private var failedAttempts: Int = 0
     private var failedAttemptErrors: [Error] = []
     
@@ -39,8 +38,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        errorLogButton.isHidden = true
         
         emailTextField.text = keychain[string: CredentialsKey.email.rawValue]
         passwordTextField.text = keychain[string: CredentialsKey.password.rawValue]
@@ -78,7 +75,6 @@ class LoginViewController: UIViewController {
         
         if let error = error, failedAttempts == 3 {
             failedAttemptErrors.append(error)
-            errorLogButton.isHidden = false
         }
         
         activateUI()
@@ -100,14 +96,19 @@ class LoginViewController: UIViewController {
         validateCredentials()
     }
     
-    @IBAction func errorLogButtonPressed(_ sender: UIButton) {
+    @IBAction func showPrivacy() {
         
-        let controller = ErrorViewController(nibName: String(describing: ErrorViewController.self), bundle: Bundle(for: ErrorViewController.self))
-        controller.errors = failedAttemptErrors
+        guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
         
-        let navigationController = UINavigationController(rootViewController: controller)
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
         
-        present(navigationController, animated: true)
+        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        
+        safariViewController.preferredBarTintColor = .black
+        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        
+        present(safariViewController, animated: true)
+        
     }
-
 }

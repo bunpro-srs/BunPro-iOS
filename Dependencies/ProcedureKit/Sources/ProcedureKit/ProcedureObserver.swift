@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 import Foundation
@@ -20,6 +20,14 @@ public protocol ProcedureObserver {
      - parameter procedure: the observed procedure, P.
      */
     func didAttach(to procedure: Procedure)
+
+    /**
+     Observer gets notified when the attached InputProcedure has
+     it's input value set ready.
+
+     - parameter procedure: the observed procedure, P
+     */
+    func didSetInputReady(on procedure: Procedure)
 
     /**
      The procedure will execute.
@@ -107,6 +115,9 @@ public extension ProcedureObserver {
 
     /// Do nothing.
     func didAttach(to procedure: Procedure) { }
+
+    /// Do nothing
+    func didSetInputReady(on procedure: Procedure) { }
 
     /// Do nothing.
     func will(execute procedure: Procedure, pendingExecute: PendingExecuteEvent) { }

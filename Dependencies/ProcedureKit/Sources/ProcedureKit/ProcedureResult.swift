@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 public enum Pending<T> {
@@ -24,9 +24,9 @@ public enum Pending<T> {
     }
 }
 
-extension Pending where T: Equatable {
+extension Pending: Equatable where T: Equatable {
 
-    static func == (lhs: Pending<T>, rhs: Pending<T>) -> Bool {
+    public static func == (lhs: Pending<T>, rhs: Pending<T>) -> Bool {
         switch (lhs, rhs) {
         case (.pending, .pending):
             return true
@@ -58,7 +58,7 @@ public protocol ProcedureResultProtocol {
     var error: Error? { get }
 }
 
-extension Pending where T: ProcedureResultProtocol {
+extension Pending: ProcedureResultProtocol where T: ProcedureResultProtocol {
 
     public var success: T.Value? {
         return value?.value
@@ -85,9 +85,9 @@ public enum ProcedureResult<T>: ProcedureResultProtocol {
     }
 }
 
-extension ProcedureResult where T: Equatable {
+extension ProcedureResult: Equatable where T: Equatable {
 
-    static func == (lhs: ProcedureResult<T>, rhs: ProcedureResult<T>) -> Bool {
+    public static func == (lhs: ProcedureResult<T>, rhs: ProcedureResult<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.success(lhsValue), .success(rhsValue)):
             return lhsValue == rhsValue
@@ -159,20 +159,21 @@ public extension ProcedureProtocol {
 
         return self
     }
-}
 
-public extension InputProcedure {
+    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency, block: @escaping (Self, Dependency.Output) -> Void) -> Self {
 
-    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency, via block: @escaping (Dependency.Output) throws -> Input) -> Self {
         return inject(dependency: dependency) { procedure, dependency, errors in
+
             // Check if there are any errors first
             guard errors.isEmpty else {
                 procedure.cancel(withError: ProcedureKitError.dependency(finishedWithErrors: errors)); return
             }
+
             // Check that we have a result ready
             guard let result = dependency.output.value else {
                 procedure.cancel(withError: ProcedureKitError.requirementNotSatisfied()); return
             }
+
             // Check that the result was successful
             guard let output = result.value else {
                 // If not, check for an error
@@ -186,8 +187,30 @@ public extension InputProcedure {
             }
 
             // Given successfull output
+            block(self, output)
+        }
+    }
+}
+
+public extension InputProcedure {
+
+    /// Notifies observers that the input was set .ready
+    func didSetInputReady() {
+        guard !input.isPending, let procedure = self as? Procedure else { return }
+        procedure.eventQueue.dispatch {
+            procedure.dispatchObservers(pendingEvent: PendingEvent.execute) { (observer, event) in
+                observer.didSetInputReady(on: procedure)
+            }
+        }
+    }
+
+    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency, via block: @escaping (Dependency.Output) throws -> Input) -> Self {
+
+        return injectResult(from: dependency) { (procedure, output) in
             do {
                 procedure.input = .ready(try block(output))
+
+                procedure.didSetInputReady()
             }
             catch {
                 procedure.cancel(withError: ProcedureKitError.dependency(finishedWithErrors: [error]))
@@ -208,3 +231,27 @@ public extension InputProcedure {
         }
     }
 }
+
+// MARK: - Bindings
+
+public extension InputProcedure {
+
+    func bind<T: InputProcedure>(to target: T) where T.Input == Self.Input {
+        addDidSetInputReadyBlockObserver { (procedure) in
+            target.input = procedure.input
+        }
+    }
+}
+
+public extension OutputProcedure {
+
+    func bind<T: OutputProcedure>(from source: T) where T.Output == Self.Output {
+        source.addWillFinishBlockObserver { [weak self] (source, _, _) in
+            guard let strongSelf = self else { return }
+            strongSelf.output = source.output
+        }
+    }
+}
+
+
+

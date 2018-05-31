@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 import Foundation
@@ -360,7 +360,9 @@ extension RepeatProcedure where T: Repeatable {
 
 // MARK: - Extensions
 
-extension RepeatProcedure where T: InputProcedure {
+extension RepeatProcedure: InputProcedure where T: InputProcedure {
+
+    public typealias Input = T.Input
 
     /// - returns: the pending input value where T conforms to InputProcedure
     public var input: Pending<T.Input> {
@@ -370,9 +372,38 @@ extension RepeatProcedure where T: InputProcedure {
             appendConfigureBlock { $0.input = newValue }
         }
     }
+
+    /// MARK: Result Injection APIs
+
+    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency, via block: @escaping (Dependency.Output) throws -> T.Input) -> Self {
+
+        return injectResult(from: dependency) { (procedure, output) in
+            do {
+                procedure.input = .ready(try block(output))
+            }
+            catch {
+                procedure.cancel(withError: ProcedureKitError.dependency(finishedWithErrors: [error]))
+            }
+        }
+    }
+
+    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency) -> Self where Dependency.Output == T.Input {
+        return injectResult(from: dependency, via: { $0 })
+    }
+
+    @discardableResult func injectResult<Dependency: OutputProcedure>(from dependency: Dependency) -> Self where Dependency.Output == Optional<T.Input> {
+        return injectResult(from: dependency) { output in
+            guard let output = output else {
+                throw ProcedureKitError.requirementNotSatisfied()
+            }
+            return output
+        }
+    }
 }
 
-extension RepeatProcedure where T: OutputProcedure {
+extension RepeatProcedure: OutputProcedure where T: OutputProcedure {
+
+    public typealias Output = T.Output
 
     /// - returns: the pending output result value where T conforms to OutputProcedure
     public var output: Pending<ProcedureResult<T.Output>> {

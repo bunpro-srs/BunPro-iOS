@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 import Foundation
@@ -98,7 +98,7 @@ struct PendingProfileResult {
 // MARK: ProcedureProfiler
 public final class ProcedureProfiler: Identifiable, Equatable {
 
-    public let identifier = UUID()
+    public let identity = UUID()
 
     enum Reporter {
         case parent(ProcedureProfiler)

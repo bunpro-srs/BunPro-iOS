@@ -25,7 +25,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     @IBOutlet private var selectionSectionHeaderView: UIView!
     @IBOutlet private weak var viewModeSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var reviewEditBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var reviewEditBarButtonItem: UIBarButtonItem!
     
     private var exampleSentencesFetchedResultsController: NSFetchedResultsController<Sentence>!
     private var readingsFetchedResultsController: NSFetchedResultsController<Link>!
@@ -47,17 +47,17 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
             viewModeSegmentedControl?.selectedSegmentIndex = viewMode.rawValue
             
             tableView.reloadData()
-            //tableView.reloadSections(IndexSet([1]), with: .none)
         }
     }
     
+    private var beginUpdateObserver: NSObjectProtocol?
     private var endUpdateObserver: NSObjectProtocol?
     
     deinit {
         
         print("deinit \(String(describing: self))")
         
-        for observer in [endUpdateObserver] {
+        for observer in [beginUpdateObserver, endUpdateObserver] {
             if observer != nil {
                 NotificationCenter.default.removeObserver(observer!)
             }
@@ -77,12 +77,25 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
         
         updateEditBarButtonState()
         
+        beginUpdateObserver = NotificationCenter.default.addObserver(
+            forName: .BunProWillBeginUpdating,
+            object: nil,
+            queue: OperationQueue.main,
+            using: { (_) in
+                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+                activityIndicator.startAnimating()
+                
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        })
+        
         endUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
             object: nil,
             queue: nil) { [weak self] (_) in
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
+                    
+                    self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
                     
                     if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
                         
@@ -170,7 +183,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     private func updateEditBarButtonState() {
         
-        reviewEditBarButtonItem.title = review?.complete == true ? NSLocalizedString("review.edit.button.remove_reset", comment: "") : NSLocalizedString("review.edit.button.add", comment: "")
+        reviewEditBarButtonItem?.title = review?.complete == true ? NSLocalizedString("review.edit.button.remove_reset", comment: "") : NSLocalizedString("review.edit.button.add", comment: "")
     }
     
     private func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {

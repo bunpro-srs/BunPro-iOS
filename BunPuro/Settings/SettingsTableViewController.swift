@@ -178,25 +178,21 @@ class SettingsTableViewController: UITableViewController {
                 break
             case .about:
                 guard let url = URL(string: "https://bunpro.jp/about") else { return }
-                let safariViewController = SFSafariViewController(url: url)
                 
-                present(safariViewController, animated: true)
+                present(customSafariViewController(url: url), animated: true)
             case .contact:
                 guard let url = URL(string: "https://bunpro.jp/contact") else { return }
-                let safariViewController = SFSafariViewController(url: url)
                 
-                present(safariViewController, animated: true)
+                present(customSafariViewController(url: url), animated: true)
             case .privacy:
                 guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
-                let safariViewController = SFSafariViewController(url: url)
                 
-                present(safariViewController, animated: true)
+                present(customSafariViewController(url: url), animated: true)
             case .terms:
                 guard let url = URL(string: "https://bunpro.jp/terms") else { return }
-                let safariViewController = SFSafariViewController(url: url)
                 
-                present(safariViewController, animated: true)
-                
+                present(customSafariViewController(url: url), animated: true)
+
             case .empty: break
             }
             
@@ -270,6 +266,19 @@ class SettingsTableViewController: UITableViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         tableView.beginUpdates()
         tableView.endUpdates()
+    }
+    
+    private func customSafariViewController(url: URL) -> SFSafariViewController {
+        
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        
+        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        
+        safariViewController.preferredBarTintColor = .black
+        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        
+        return safariViewController
     }
 }
 

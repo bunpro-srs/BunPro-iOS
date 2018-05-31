@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 import Foundation
@@ -229,7 +229,7 @@ internal class BackgroundManager {
                 _backgroundEventHandlersPerProcedure.removeValue(forKey: procedure)
                 return backgroundTasks
             }
-            let backgroundTaskIdentifiers: [UIBackgroundTaskIdentifier]? = backgroundTasks?.flatMap {
+            let backgroundTaskIdentifiers: [UIBackgroundTaskIdentifier]? = backgroundTasks?.compactMap {
                 let identifier = $0.returnCurrentAndOverwrite(with: UIBackgroundTaskInvalid)
                 guard identifier != UIBackgroundTaskInvalid else { return nil }
                 return identifier

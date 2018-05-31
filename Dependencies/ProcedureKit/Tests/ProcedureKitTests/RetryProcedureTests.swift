@@ -1,7 +1,7 @@
 //
 //  ProcedureKit
 //
-//  Copyright © 2016 ProcedureKit. All rights reserved.
+//  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
 import XCTest
@@ -36,6 +36,32 @@ class RetryProcedureTests: RetryTestCase {
         wait(for: retry)
         XCTAssertProcedureFinishedWithoutErrors(retry)
         XCTAssertEqual(retry.count, 3)
+    }
+
+    func test__with_input_procedure_payload() {
+
+        let outputProcedure = TestProcedure()
+        outputProcedure.output = .ready(.success("ProcedureKit"))
+        retry = Retry(iterator: createPayloadIterator(succeedsAfterFailureCount: 2), retry: { $1 })
+
+        var textOutput: [String] = []
+        retry.addWillAddOperationBlockObserver { (_, operation) in
+            if let procedure = operation as? TestProcedure {
+                procedure.addDidFinishBlockObserver { (testProcedure, errors) in
+                    guard errors.count == 0 else { return }
+                    if let output = testProcedure.output.value?.value {
+                        textOutput.append(output)
+                    }
+                }
+            }
+        }
+
+        retry.injectResult(from: outputProcedure)
+
+        wait(for: retry, outputProcedure)
+        XCTAssertProcedureFinishedWithoutErrors(retry)
+
+        XCTAssertEqual(textOutput, ["Hello ProcedureKit"])
     }
 
     func test__retry_deinits_after_finished() {
