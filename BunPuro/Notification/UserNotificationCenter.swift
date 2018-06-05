@@ -54,7 +54,7 @@ struct UserNotificationCenter {
             print("Added notification for: \(date)")
         }
         
-        scheduleReminderNotification(from: date)
+//        scheduleReminderNotification(from: date)
     }
     
     private func scheduleReminderNotification(from date: Date) {

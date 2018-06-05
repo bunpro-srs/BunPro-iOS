@@ -240,6 +240,8 @@
 		2E3EE11A1FE925C30027C924 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
+		2E48ABB420C1A19400BA660B /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
+		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
 		2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Initializer.swift"; sourceTree = "<group>"; };
 		2E7737B720052754006B8FA7 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		2E7737B820052754006B8FA7 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 		2E30749F1FACF96E0078725B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E48ABB420C1A19400BA660B /* apple-app-site-association */,
 				2E7B3697208516B200542BB8 /* Localizable.stringsdict */,
 				2E30749E1FACF9660078725B /* Localizable.strings */,
 				2E3074921FACF9640078725B /* InfoPlist.strings */,
@@ -525,6 +528,7 @@
 		2EAD9DD21FA25DF100CE52CF /* BunPuro */ = {
 			isa = PBXGroup;
 			children = (
+				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
@@ -776,6 +780,11 @@
 					2EAD9DCF1FA25DF100CE52CF = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					2EAD9DE51FA25DF100CE52CF = {
 						CreatedOnToolsVersion = 9.0.1;
@@ -1258,11 +1267,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25D37P63S9;
+				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuro;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1274,11 +1284,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25D37P63S9;
+				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuro;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
