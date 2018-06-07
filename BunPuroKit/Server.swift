@@ -11,6 +11,7 @@ import ProcedureKit
 import ProcedureKitNetwork
 import KeychainAccess
 
+let websiteUrlString = "https://bunpro.jp"
 let baseUrlString = "https://bunpro.jp/api/v3/"
 
 /*

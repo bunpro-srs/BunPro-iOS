@@ -42,7 +42,7 @@ class StatusTableViewCell: UITableViewCell {
             
             if date > Date() {
                 reviewStatusLabel.textColor = .white
-                reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
+                reviewStatusLabel.text = NSLocalizedString("reviewtime.none", comment: "The string that indicates that no review are available")
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {
                 reviewStatusLabel.textColor = UIColor(named: "Main Tint")

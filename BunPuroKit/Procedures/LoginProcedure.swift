@@ -136,7 +136,8 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
             } else {
                 
                 DispatchQueue.main.async {
-                    let controller = LoginViewController(nibName: String(describing: LoginViewController.self), bundle: Bundle(for: LoginViewController.self))
+                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: LoginViewController.self))
+                    let controller = storyboard.instantiateViewController() as LoginViewController
                     controller.delegate = self
                     
                     controller.modalPresentationStyle = .formSheet

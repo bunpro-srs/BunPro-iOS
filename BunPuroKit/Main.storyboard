@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9He-GF-8iv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9He-GF-8iv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,7 +30,7 @@
                             </wkWebView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xF2-Yu-dnD">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" name="Main Tint"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.27450980392156865" green="0.45882352941176469" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -58,6 +60,114 @@
             </objects>
             <point key="canvasLocation" x="164" y="175.86206896551727"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="mUQ-8c-Jbh">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KW3-Jd-vvi" customClass="LoginViewController" customModule="BunPuroKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wh7-ew-X3x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-yT-Luq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPa-cv-H65" customClass="CorneredView" customModule="BunPuroKit" customModuleProvider="target">
+                                <rect key="frame" x="4" y="60" width="367" height="179"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tyJ-nV-C8C">
+                                        <rect key="frame" x="11" y="16" width="345" height="151"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="D7l-xQ-4EG">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="37"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </activityIndicatorView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QNg-Sh-AXp">
+                                                <rect key="frame" x="0.0" y="45" width="345" height="68"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QEP-MS-KjN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="68"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UPq-Zp-KwK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
+                                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bfv-O6-7PL">
+                                                                <rect key="frame" x="0.0" y="38" width="310" height="30"/>
+                                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKz-nW-HrB">
+                                                        <rect key="frame" x="318" y="0.0" width="27" height="68"/>
+                                                        <state key="normal" image="onepassword-toolbar-light"/>
+                                                        <connections>
+                                                            <action selector="showOnePasswordExtension:" destination="KW3-Jd-vvi" eventType="touchUpInside" id="nj5-D8-PMl"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U42-iM-83P">
+                                                <rect key="frame" x="0.0" y="121" width="345" height="30"/>
+                                                <color key="tintColor" name="Main Tint"/>
+                                                <state key="normal" title="Login"/>
+                                                <connections>
+                                                    <action selector="loginButtonPressed:" destination="KW3-Jd-vvi" eventType="touchUpInside" id="PX4-2A-HOd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.20784313730000001" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tyJ-nV-C8C" secondAttribute="trailing" constant="11" id="BlG-8P-uty"/>
+                                    <constraint firstItem="tyJ-nV-C8C" firstAttribute="leading" secondItem="TPa-cv-H65" secondAttribute="leading" constant="11" id="Nz6-7A-iD8"/>
+                                    <constraint firstAttribute="bottom" secondItem="tyJ-nV-C8C" secondAttribute="bottom" constant="12" id="hUb-BC-l5F"/>
+                                    <constraint firstItem="tyJ-nV-C8C" firstAttribute="top" secondItem="TPa-cv-H65" secondAttribute="top" constant="16" id="r5l-zG-MkT"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3F-mT-rta">
+                                <rect key="frame" x="0.0" y="247" width="375" height="30"/>
+                                <color key="tintColor" name="Main Tint"/>
+                                <state key="normal" title="Privacy"/>
+                                <connections>
+                                    <action selector="showPrivacy" destination="KW3-Jd-vvi" eventType="touchUpInside" id="RmD-vK-IMD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NqF-yT-Luq" firstAttribute="top" secondItem="Wh7-ew-X3x" secondAttribute="top" id="K5u-4s-Qec"/>
+                            <constraint firstItem="NqF-yT-Luq" firstAttribute="bottom" secondItem="Wh7-ew-X3x" secondAttribute="bottom" id="KWy-Mi-C9L"/>
+                            <constraint firstAttribute="trailing" secondItem="TPa-cv-H65" secondAttribute="trailing" constant="4" id="LeX-z7-14s"/>
+                            <constraint firstItem="TPa-cv-H65" firstAttribute="top" secondItem="Wh7-ew-X3x" secondAttribute="top" constant="60" id="Lq8-lf-WSm"/>
+                            <constraint firstItem="R3F-mT-rta" firstAttribute="leading" secondItem="y8W-Dx-Gof" secondAttribute="leading" id="MVn-wg-jXW"/>
+                            <constraint firstItem="TPa-cv-H65" firstAttribute="leading" secondItem="y8W-Dx-Gof" secondAttribute="leading" constant="4" id="SdQ-rl-h4K"/>
+                            <constraint firstItem="R3F-mT-rta" firstAttribute="top" secondItem="TPa-cv-H65" secondAttribute="bottom" constant="8" symbolic="YES" id="ijF-7U-yjE"/>
+                            <constraint firstItem="NqF-yT-Luq" firstAttribute="leading" secondItem="Wh7-ew-X3x" secondAttribute="leading" id="j9p-rB-uyu"/>
+                            <constraint firstItem="NqF-yT-Luq" firstAttribute="trailing" secondItem="Wh7-ew-X3x" secondAttribute="trailing" id="n2q-Jq-TvT"/>
+                            <constraint firstItem="R3F-mT-rta" firstAttribute="trailing" secondItem="y8W-Dx-Gof" secondAttribute="trailing" id="tFk-o1-oq0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y8W-Dx-Gof"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="D7l-xQ-4EG" id="Tno-en-OqW"/>
+                        <outlet property="emailTextField" destination="UPq-Zp-KwK" id="mTL-K3-OBA"/>
+                        <outlet property="loginButton" destination="U42-iM-83P" id="WW6-Bx-q5Y"/>
+                        <outlet property="onePasswordButton" destination="EKz-nW-HrB" id="eu2-xR-jRM"/>
+                        <outlet property="passwordTextField" destination="bfv-O6-7PL" id="4ZW-hW-RuP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H4X-FR-hhz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-631" y="861"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="gDz-Fr-pG5">
             <objects>
@@ -78,6 +188,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background" width="637" height="450"/>
+        <image name="onepassword-toolbar-light" width="27" height="27"/>
         <namedColor name="Main Tint">
             <color red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

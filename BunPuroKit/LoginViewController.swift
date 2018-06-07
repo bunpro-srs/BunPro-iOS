@@ -9,6 +9,7 @@
 import UIKit
 import KeychainAccess
 import ProcedureKit
+import PasswordManager
 import SafariServices
 
 protocol LoginViewControllerDelegate: class {
@@ -29,6 +30,8 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var onePasswordButton: UIButton!
+    
     private var failedAttempts: Int = 0
     private var failedAttemptErrors: [Error] = []
     
@@ -38,6 +41,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        onePasswordButton.isHidden = !PasswordExtension.shared.isAvailable()
         
         emailTextField.text = keychain[string: CredentialsKey.email.rawValue]
         passwordTextField.text = keychain[string: CredentialsKey.password.rawValue]
@@ -96,6 +102,23 @@ class LoginViewController: UIViewController {
         validateCredentials()
     }
     
+    @IBAction func showOnePasswordExtension(_ sender: UIButton) {
+        
+        PasswordExtension.shared.findLoginDict(for: websiteUrlString, viewController: self, sender: sender) { (loginDictionary, error) in
+            
+            guard let loginDictionary = loginDictionary else {
+                return
+            }
+            
+            if loginDictionary.isEmpty {
+                print(error ?? "")
+            }
+            
+            self.emailTextField.text = loginDictionary[PELogin.username.key()] as? String
+            self.passwordTextField.text = loginDictionary[PELogin.password.key()] as? String
+        }
+    }
+    
     @IBAction func showPrivacy() {
         
         guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
@@ -109,6 +132,5 @@ class LoginViewController: UIViewController {
         safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
         
         present(safariViewController, animated: true)
-        
     }
 }

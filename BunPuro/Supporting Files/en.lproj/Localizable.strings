@@ -7,6 +7,9 @@
 /* The string that indicates that a review is available */
 "reviewtime.now" = "Now";
 
+/* The string that indicates that no review are available */
+"reviewtime.none" = "No Reviews";
+
 /* The last time an update was made. */
 "status.lastupdate" = "Last update: %@";
 
