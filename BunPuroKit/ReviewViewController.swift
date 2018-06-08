@@ -51,8 +51,10 @@ class ReviewViewController: UIViewController, WKNavigationDelegate {
         activityIndicatorView.stopAnimating()
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//
-//        print(navigationAction.request.url)
-//    }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+
+        print(navigationAction.request.url)
+        
+        decisionHandler(.allow)
+    }
 }

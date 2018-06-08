@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "65CFC5EF1D608A5500CAD875"
+               BuildableName = "ProcedureKit.framework"
+               BlueprintName = "ProcedureKit"
+               ReferencedContainer = "container:Dependencies/ProcedureKit/ProcedureKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "65ECB2CC1DB4F0C000F96F46"
                BuildableName = "ProcedureKitNetwork.framework"
                BlueprintName = "ProcedureKitNetwork"
