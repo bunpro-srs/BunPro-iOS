@@ -53,7 +53,13 @@ class ReviewViewController: UIViewController, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
-        print(navigationAction.request.url)
+        if let url = navigationAction.request.url, url.path == "/summary" {
+            decisionHandler(.cancel)
+            
+            delegate?.reviewViewControllerDidFinish(self)
+            
+            return
+        }
         
         decisionHandler(.allow)
     }
