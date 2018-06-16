@@ -71,6 +71,7 @@ class StatusTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
                 self.refreshControl?.endRefreshing()
+                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
         }
         
