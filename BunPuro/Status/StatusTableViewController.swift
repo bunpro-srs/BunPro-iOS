@@ -190,10 +190,17 @@ class StatusTableViewController: UITableViewController {
                 cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
                 
                 return cell
-            } else {
+            } else if Account.currentAccount != nil {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
                 
                 cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                
+                cell.titleLabel.text = NSLocalizedString("status.loading", comment: "The title of the loading indicator")
+                cell.titleLabel.textColor = .white
                 
                 return cell
             }
@@ -240,7 +247,7 @@ class StatusTableViewController: UITableViewController {
                 presentReviewViewController()
             } else if AppDelegate.isTrialPeriodAvailable {
                 signupForTrial()
-            } else {
+            } else if Account.currentAccount != nil {
                 signup()
             }
         }

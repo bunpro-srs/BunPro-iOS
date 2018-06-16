@@ -19,6 +19,9 @@
 /* The title of the signup button */
 "status.signup" = "Subscribe";
 
+/* The title of the loading indicator */
+"status.loading" = "Loading";
+
 /* Level in a JLPT */
 "level.number" = "Level %d";
 
