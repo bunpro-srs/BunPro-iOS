@@ -46,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dataManager = DataManager(presentingViewController: rootViewController)
         }
         
-        //UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(10))
+//        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(20))
+//        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(25))
         
         return true
     }
