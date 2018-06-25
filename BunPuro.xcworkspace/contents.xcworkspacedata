@@ -4,4 +4,10 @@
    <FileRef
       location = "group:BunPuro.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Dependencies/KeychainAccess/Lib/KeychainAccess.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Dependencies/ProcedureKit/ProcedureKit.xcodeproj">
+   </FileRef>
 </Workspace>
