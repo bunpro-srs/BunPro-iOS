@@ -27,7 +27,7 @@ public class ReviewsProcedure: BunPuroProcedure<[BPKReview]> {
     let collection: ReviewCollection
     
     override var hasMilliseconds: Bool { return true }
-    override var url: URL { return URL(string: "\(baseUrlString)/reviews/\(collection.rawValue)")! }
+    override var url: URL { return URL(string: "\(baseUrlString)reviews/\(collection.rawValue)")! }
     
     init(presentingViewController: UIViewController, collection: ReviewCollection = .all, completion: (([BPKReview]?, Error?) -> Void)? = nil) {
         
