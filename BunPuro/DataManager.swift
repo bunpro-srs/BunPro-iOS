@@ -20,9 +20,15 @@ final class DataManager {
     let presentingViewController: UIViewController
     private let persistentContainer: NSPersistentContainer
     
+    private var loginObserver: NSObjectProtocol?
     private var logoutObserver: NSObjectProtocol?
     
     deinit {
+        
+        if loginObserver != nil {
+            NotificationCenter.default.removeObserver(loginObserver!)
+        }
+        
         if logoutObserver != nil {
             NotificationCenter.default.removeObserver(logoutObserver!)
         }
@@ -31,6 +37,11 @@ final class DataManager {
     init(presentingViewController: UIViewController, persistentContainer: NSPersistentContainer = AppDelegate.coreDataStack.storeContainer) {
         self.presentingViewController = presentingViewController
         self.persistentContainer = persistentContainer
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: .ServerDidLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] (_) in
+            
+            self?.updateGrammarDatabase()
+        }
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             
@@ -85,9 +96,11 @@ final class DataManager {
         self.scheduleUpdateProcedure()
     }
     
-    func updateGrammarDatabase() {
+    private func updateGrammarDatabase() {
         
-        // updates the grammar database
+        let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
+        
+        Server.add(procedure: updateProcedure)
     }
     
     func signupForTrial() {

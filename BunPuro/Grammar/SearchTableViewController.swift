@@ -137,15 +137,6 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         } catch {
             print(error)
         }
-        
-        loadData()
-    }
-    
-    private func loadData() {
-        
-        let updateProcedure = UpdateGrammarProcedure(presentingViewController: self)
-        
-        Server.add(procedure: updateProcedure)
     }
     
     private func review(for grammar: Grammar) -> Review? {
