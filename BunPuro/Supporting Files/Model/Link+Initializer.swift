@@ -26,11 +26,11 @@ extension Link {
         if let newUrl = URL(string: linksString) {
             url = newUrl
         } else {
-            print("Url seems to be funny: \(linksString)")
+//            print("Url seems to be funny: \(linksString)")
             
             url = URL(string: linksString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
             
-            print(url ?? "Could not create URL!")
+//            print(url ?? "Could not create URL!")
         }
         
         createdDate = link.createdDate

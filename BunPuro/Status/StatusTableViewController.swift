@@ -71,7 +71,19 @@ class StatusTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
                 self.refreshControl?.endRefreshing()
-                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+                
+                guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
+                
+                visibleIndexPaths.forEach {
+                    guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
+                    
+                    let correctedIndexPath = IndexPath(row: $0.row, section: 0)
+                    
+                    let jlpt = self.jlptFetchedResultsController!.object(at: correctedIndexPath)
+                    self.updateJLPTCell(cell, jlpt: jlpt)
+                }
+                
+//                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
         }
         
@@ -223,13 +235,7 @@ class StatusTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                
-//                if !AppDelegate.isContentAccessable {
-                    return indexPath
-//                } else if let nextReviewDate = nextReviewDate {
-//                    return indexPath//nextReviewDate < Date() ? indexPath : nil
-//                }
-//                return nil
+                return indexPath
             default: return nil
             }
             

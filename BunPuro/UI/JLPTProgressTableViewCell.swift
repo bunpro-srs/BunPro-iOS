@@ -15,6 +15,9 @@ class JLPTProgressTableViewCell: UITableViewCell {
     @IBOutlet private var progressView: UIProgressView! { didSet { progressView.subviews.forEach { $0.layer.cornerRadius = 4; $0.clipsToBounds = true }} }
         
     func setProgress(_ progress: Float, animated: Bool) {
+        
+        guard progressView.progress != progress else { return }
+        
         progressView.setProgress(progress, animated: animated)
     }
 }
