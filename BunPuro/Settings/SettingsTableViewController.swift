@@ -30,6 +30,7 @@ class SettingsTableViewController: UITableViewController {
     private enum Info: Int {
         case subscription
         case empty
+        case community
         case about
         case contact
         case privacy
@@ -174,8 +175,10 @@ class SettingsTableViewController: UITableViewController {
         case .subscription:
             
             switch Info(rawValue: indexPath.row)! {
-            case .subscription:
-                break
+            case .community:
+                guard let url = URL(string: "https://community.bunpro.jp/") else { return }
+                
+                present(customSafariViewController(url: url), animated: true)
             case .about:
                 guard let url = URL(string: "https://bunpro.jp/about") else { return }
                 
@@ -193,7 +196,7 @@ class SettingsTableViewController: UITableViewController {
                 
                 present(customSafariViewController(url: url), animated: true)
 
-            case .empty: break
+            case .subscription, .empty: break
             }
             
         case .logout:
