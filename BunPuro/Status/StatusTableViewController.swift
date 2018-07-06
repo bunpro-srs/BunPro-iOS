@@ -224,12 +224,12 @@ class StatusTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 
-                if !AppDelegate.isContentAccessable {
+//                if !AppDelegate.isContentAccessable {
                     return indexPath
-                } else if let nextReviewDate = nextReviewDate {
-                    return nextReviewDate < Date() ? indexPath : nil
-                }
-                return nil
+//                } else if let nextReviewDate = nextReviewDate {
+//                    return indexPath//nextReviewDate < Date() ? indexPath : nil
+//                }
+//                return nil
             default: return nil
             }
             
@@ -245,7 +245,11 @@ class StatusTableViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
             
             if AppDelegate.isContentAccessable {
-                presentReviewViewController()
+                if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
+                    presentReviewViewController()
+                } else {
+                    presentReviewViewController(reviewMode: false)
+                }
             } else if AppDelegate.isTrialPeriodAvailable {
                 signupForTrial()
             } else if Account.currentAccount != nil {
@@ -254,9 +258,9 @@ class StatusTableViewController: UITableViewController {
         }
     }
     
-    func presentReviewViewController() {
+    func presentReviewViewController(reviewMode: Bool = true) {
         
-        let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!)
+        let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!, reviewMode: reviewMode)
         
         reviewProcedure.completionBlock = {
             
@@ -436,7 +440,7 @@ extension Collection where Iterator.Element == Review {
     public var reviewsWithinNextHour: Int {
         
         let date = Date()
-        let result = filter({ $0.complete && $0.nextReviewDate!.hours(from: date) <= 0 })
+        let result = filter({ $0.complete && $0.nextReviewDate!.minutes(from: date) < 60 })
         return result.count
     }
     
@@ -457,42 +461,42 @@ extension Date {
     
     func minutes(from date: Date) -> Int {
         
-        return Calendar.current.dateComponents([.minute], from: date, to: self).minute!
+        return Calendar.autoupdatingCurrent.dateComponents([.minute], from: date, to: self).minute!
     }
     
     func hours(from date: Date) -> Int {
         
-        return Calendar.current.dateComponents([.hour], from: date, to: self).hour!
+        return Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
     }
     
     func isTomorrow() -> Bool {
         
-        return Calendar.current.isDateInTomorrow(self)
+        return Calendar.autoupdatingCurrent.isDateInTomorrow(self)
     }
     
     var yesterday: Date {
         
-        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: noon)!
     }
     
     var tomorrow: Date {
         
-        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
     }
     
     var noon: Date {
         
-        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+        return Calendar.autoupdatingCurrent.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
     
     var nextMidnight: Date {
         
-        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+        return Calendar.autoupdatingCurrent.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
     }
     
     var month: Int {
         
-        return Calendar.current.component(.month,  from: self)
+        return Calendar.autoupdatingCurrent.component(.month,  from: self)
     }
     
     var isLastDayOfMonth: Bool {

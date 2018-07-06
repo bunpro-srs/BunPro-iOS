@@ -13,10 +13,12 @@ import ProcedureKitNetwork
 public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
     
     public let presentingViewController: UIViewController
+    public let reviewMode: Bool
     
-    public init(presentingViewController: UIViewController) {
+    public init(presentingViewController: UIViewController, reviewMode: Bool = true) {
         
         self.presentingViewController = presentingViewController
+        self.reviewMode = reviewMode
         
         super.init()
         
@@ -32,6 +34,7 @@ public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDeleg
             
             let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
             (controller.visibleViewController as? ReviewViewController)?.delegate = self
+            (controller.visibleViewController as? ReviewViewController)?.reviewMode = self.reviewMode
             
             controller.modalPresentationStyle = .pageSheet
             
