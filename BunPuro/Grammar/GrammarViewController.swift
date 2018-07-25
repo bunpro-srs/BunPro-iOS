@@ -443,7 +443,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return section == 1 ? 29 + 16 + 16 : 0
+        return section == 1 ? 29 + 8 + 8 : 0
     }
     
     @IBAction private func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {

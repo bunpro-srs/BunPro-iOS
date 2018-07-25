@@ -347,9 +347,9 @@
                                             <rect key="frame" x="4" y="4" width="367" height="84"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXh-3w-EUQ">
-                                                    <rect key="frame" x="0.0" y="47.333333333333343" width="63.333333333333336" height="36.666666666666657"/>
+                                                    <rect key="frame" x="0.0" y="47.666666666666657" width="63.666666666666664" height="36.333333333333343"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="K4g-aj-32h">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="36.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="36.333333333333343"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htg-yJ-4mt">
@@ -1159,10 +1159,10 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-ml-olh">
                                                             <rect key="frame" x="196" y="1" width="24" height="24"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="0Np-nn-iSz">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="baV-YM-4TV">
                                                             <rect key="frame" x="224" y="1" width="24" height="24"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="baV-YM-4TV">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="0Np-nn-iSz">
                                                             <rect key="frame" x="252" y="1" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="UIO-Wt-xJg">
@@ -1406,9 +1406,9 @@
                                             <rect key="frame" x="4" y="4" width="367" height="84"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW8-8x-13z">
-                                                    <rect key="frame" x="0.0" y="47.333333333333343" width="63.333333333333336" height="36.666666666666657"/>
+                                                    <rect key="frame" x="0.0" y="47.666666666666657" width="63.666666666666664" height="36.333333333333343"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xY2-8M-bJ3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="36.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="36.333333333333343"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvl-0b-ytV">
@@ -1734,10 +1734,10 @@
     <resources>
         <image name="bunpro-hanko-review-complete_small" width="24" height="24"/>
         <image name="play" width="33" height="33"/>
-        <image name="tab_dashboard_active" width="25" height="25"/>
-        <image name="tab_dashboard_inactive" width="25" height="25"/>
-        <image name="tab_search_active" width="25" height="25"/>
-        <image name="tab_search_inactive" width="25" height="25"/>
+        <image name="tab_dashboard_active" width="25" height="20"/>
+        <image name="tab_dashboard_inactive" width="25" height="20"/>
+        <image name="tab_search_active" width="21" height="25"/>
+        <image name="tab_search_inactive" width="21" height="25"/>
         <image name="tab_settings_active" width="25" height="25"/>
         <image name="tab_settings_inactive" width="25" height="25"/>
         <namedColor name="Main Tint">
@@ -1753,7 +1753,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="hLX-iS-Gz3"/>
         <segue reference="YWX-Ln-WH0"/>
-        <segue reference="tSE-gJ-zq6"/>
+        <segue reference="8Tl-dW-Q4E"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

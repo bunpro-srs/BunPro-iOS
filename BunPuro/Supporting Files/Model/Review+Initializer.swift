@@ -18,15 +18,15 @@ extension Review {
         self.init(context: context)
         
         identifier = review.identifier
-        complete = review.complete
+        complete = review.complete ?? true
         createdDate = review.createdDate
         grammarIdentifier = review.grammarIdentifier
         lastStudiedDate = review.lastStudiedDate
         nextReviewDate = review.nextReviewDate
-        readingIdentifiers = review.readingsIdentifiers as NSArray
+        readingIdentifiers = review.readingsIdentifiers as NSArray?
         selfStudy = review.selfStudy
         streak = review.streak
-        studyQuestionIdentifier = review.studyQuenstionIdentifier
+        studyQuestionIdentifier = review.studyQuenstionIdentifier ?? 0
         timesCorrect = review.timesCorrect
         timesIncorrect = review.timesIncorrect
         updatedDate = review.updatedDate

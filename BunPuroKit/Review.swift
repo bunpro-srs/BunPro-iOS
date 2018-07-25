@@ -18,12 +18,19 @@ public struct BPKReview: Codable {
         case complete
         case wasCorrect = "was_correct"
         case selfStudy = "self_study"
+        case reviewType = "review_type"
+    }
+    
+    public enum ReviewType: String, Codable {
+        case standard
+        case ghost
     }
     
     public let identifier: Int64
     public let userIdentifier: Int64
-    public let studyQuenstionIdentifier: Int64
+    public let studyQuenstionIdentifier: Int64?
     public let grammarIdentifier: Int64
+    public let reviewType: ReviewType? // Self study does not have a type
     public let timesCorrect: Int64
     public let timesIncorrect: Int64
     public let streak: Int64
@@ -31,8 +38,41 @@ public struct BPKReview: Codable {
     public let lastStudiedDate: Date?
     public let createdDate: Date
     public let updatedDate: Date
-    public let readingsIdentifiers: [Int64]
-    public let complete: Bool
+    public let readingsIdentifiers: [Int64]?
+    public let complete: Bool?
     public let wasCorrect: Bool?
     public let selfStudy: Bool
 }
+
+/*
+ {
+ history =             (
+ {
+ attempts = 1;
+ id = 1060;
+ status = 1;
+ streak = 1;
+ time = "2018-07-05 06:00:00 +0000";
+ }, ...
+ );
+ "missed_question_ids" =             (
+ );
+ "review_misses" = 0;
+ "review_type" = standard;
+ "studied_question_ids" =             (
+ 1060, ...
+ );
+ }
+ */
+
+/*
+{
+    history =             (
+    );
+    "review_misses" = 0;
+    "review_type" = ghost;
+    "self_study" = 0;
+},
+ 
+ 
+*/
