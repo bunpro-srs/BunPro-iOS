@@ -45,7 +45,11 @@ final class DataManager {
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             
-            self?.scheduleUpdateProcedure()
+            DispatchQueue.main.async {
+                self?.procedureQueue.add(operation: ResetReviewsProcedure())
+                
+                self?.scheduleUpdateProcedure()
+            }
         }
     }
     

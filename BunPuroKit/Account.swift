@@ -1,25 +1,42 @@
 import Foundation
 
 public enum Active: String, Codable {
-    case yes = "Yes"
-    case no = "No"
+    case yes = "\"Yes\""
+    case no = "\"No\""
 }
 
 public enum Visible: String, Codable {
     case show = "Show"
-    case hide = "Hide"
-    case minimal = "Minimal"
+    case hide = "\"Hide\""
+    case minimal = "\"Minimal\""
 }
 
 public enum State: String, Codable {
-    case on = "On"
-    case off = "Off"
+    case on = "\"On\""
+    case off = "\"Off\""
 }
 
 public enum FuriganaMode: String, Codable {
-    case on = "On"
-    case off = "Off"
-    case wanikani = "Wanikani"
+    case on = "\"On\""
+    case off = "\"Hide\""
+    case wanikani = "\"Wanikani\""
+    
+    public init?(string: String) {
+        guard let mode = FuriganaMode(rawValue: string) else {
+            
+            switch string {
+            case "Wanikani":
+                self = FuriganaMode.wanikani
+            case "Hide", "Off":
+                self = FuriganaMode.off
+            default:
+                self = .on
+            }
+            return
+        }
+        
+        self = mode
+    }
 }
 
 public struct BPKAccount: Codable {

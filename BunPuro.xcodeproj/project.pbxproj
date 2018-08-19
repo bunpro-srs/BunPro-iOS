@@ -85,6 +85,7 @@
 		2E7B36962081061800542BB8 /* CorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B36952081061800542BB8 /* CorneredView.swift */; };
 		2E7B3698208516B200542BB8 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2E7B3697208516B200542BB8 /* Localizable.stringsdict */; };
 		2E7B369A208532BC00542BB8 /* UIView+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B3699208532BC00542BB8 /* UIView+Motion.swift */; };
+		2E994AD021294A9D007C4DDB /* ResetReviewsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */; };
 		2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */; };
 		2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */; };
 		2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */; };
@@ -286,6 +287,7 @@
 		2E7B36952081061800542BB8 /* CorneredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorneredView.swift; sourceTree = "<group>"; };
 		2E7B3697208516B200542BB8 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		2E7B3699208532BC00542BB8 /* UIView+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Motion.swift"; sourceTree = "<group>"; };
+		2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetReviewsProcedure.swift; sourceTree = "<group>"; };
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
 				2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */,
+				2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */,
 			);
 			path = Procedures;
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				2ECBE3EA203B5B8B00F20EE3 /* KanjiTableViewController.swift in Sources */,
 				2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */,
 				2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */,
+				2E994AD021294A9D007C4DDB /* ResetReviewsProcedure.swift in Sources */,
 				2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */,
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
 				2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */,

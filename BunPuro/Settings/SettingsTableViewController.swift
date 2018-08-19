@@ -241,7 +241,7 @@ class SettingsTableViewController: UITableViewController {
             NSLocalizedString("subscription.subscribed", comment: "the string that is displayed if the user is subscribed") :
         NSLocalizedString("subscription.unsubscribed", comment: "The string that is displayed if the user is not subscribed")
         
-        guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
+        guard let furigana = FuriganaMode(string: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
         let bunnyMode = account.bunnyMode ? State.on : State.off
         
