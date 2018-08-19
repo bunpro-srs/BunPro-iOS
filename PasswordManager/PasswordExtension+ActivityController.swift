@@ -23,7 +23,7 @@ extension PasswordExtension {
         viewController.present(activityVC, animated: true, completion: nil)
     }
     
-    func activityViewController(for item: [String: Any], sender: Any?, typeIdentifier: String, completion: @escaping (UIActivity.ActivityType?, Bool, [Any]?, Error?) -> Void) -> UIActivityViewController? {
+    func activityViewController(for item: [String: Any], sender: Any?, typeIdentifier: String, completion: @escaping (UIActivityType?, Bool, [Any]?, Error?) -> Void) -> UIActivityViewController? {
         let itemProvider = NSItemProvider(item: item as NSSecureCoding, typeIdentifier: typeIdentifier)
         
         let extensionItem = NSExtensionItem()
@@ -43,7 +43,7 @@ extension PasswordExtension {
         return activityViewController
     }
     
-    func handleActivityViewControllerCompletion(activityType: UIActivity.ActivityType?, completed: Bool, items: [Any]?, error: Error?, completion: @escaping ((loginDetails: PELoginDetails, loginDict: [String: Any])?, _ error: PEError?) -> Void) {
+    func handleActivityViewControllerCompletion(activityType: UIActivityType?, completed: Bool, items: [Any]?, error: Error?, completion: @escaping ((loginDetails: PELoginDetails, loginDict: [String: Any])?, _ error: PEError?) -> Void) {
         if let error = error {
             print("Failed to contact extension: \(error)")
             self.callOnMainThread { [unowned self] () in

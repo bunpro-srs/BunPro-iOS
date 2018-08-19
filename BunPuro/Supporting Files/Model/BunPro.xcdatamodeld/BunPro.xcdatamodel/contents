@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F59b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="18A365a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="bunnyMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="englishMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -80,6 +80,7 @@
         <attribute name="lastStudiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nextReviewDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="readingIdentifiers" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
+        <attribute name="reviewType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selfStudy" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="streak" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="studyQuestionIdentifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -116,7 +117,7 @@
         <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
         <element name="Lesson" positionX="-54" positionY="27" width="128" height="135"/>
         <element name="Link" positionX="-54" positionY="45" width="128" height="165"/>
-        <element name="Review" positionX="-54" positionY="90" width="128" height="270"/>
+        <element name="Review" positionX="-54" positionY="90" width="128" height="285"/>
         <element name="Sentence" positionX="-54" positionY="63" width="128" height="180"/>
     </elements>
 </model>

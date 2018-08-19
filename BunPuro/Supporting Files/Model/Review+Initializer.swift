@@ -32,6 +32,7 @@ extension Review {
         updatedDate = review.updatedDate
         userIdentifier = review.userIdentifier
         wasCorrect = review.wasCorrect ?? false
+        reviewType = review.reviewType?.rawValue
     }
 }
 
@@ -52,7 +53,12 @@ extension Review {
         
         let request: NSFetchRequest<Review> = Review.fetchRequest()
         
-        request.predicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map { $0.identifier } )
+        let grammarIdentifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map { $0.identifier } )
+        let reviewTypePredicate = NSPredicate(format: "%K == %@", #keyPath(Review.reviewType), BPKReview.ReviewType.standard.rawValue)
+        
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [grammarIdentifierPredicate, reviewTypePredicate])
+        
+        request.predicate = compoundPredicate
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)]
         
         return try grammar.first?.managedObjectContext?.fetch(request)
