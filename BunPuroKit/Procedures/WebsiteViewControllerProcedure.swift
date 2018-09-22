@@ -10,15 +10,15 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
+public class WebsiteViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
     
     public let presentingViewController: UIViewController
-    public let reviewMode: Bool
+    public let website: Website
     
-    public init(presentingViewController: UIViewController, reviewMode: Bool = true) {
+    public init(presentingViewController: UIViewController, website: Website = .review) {
         
         self.presentingViewController = presentingViewController
-        self.reviewMode = reviewMode
+        self.website = website
         
         super.init()
         
@@ -30,13 +30,13 @@ public class ReviewViewControllerProcedure: Procedure, ReviewViewControllerDeleg
         guard !isCancelled else { return }
         
         DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ReviewViewControllerProcedure.self))
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: WebsiteViewControllerProcedure.self))
             
             let controller = storyboard.instantiateViewController(withIdentifier: "NavigationReviewViewControllerProcedure") as! UINavigationController
             (controller.visibleViewController as? ReviewViewController)?.delegate = self
-            (controller.visibleViewController as? ReviewViewController)?.reviewMode = self.reviewMode
+            (controller.visibleViewController as? ReviewViewController)?.website = self.website
             
-            controller.modalPresentationStyle = .pageSheet
+            controller.modalPresentationStyle = .fullScreen
             
             self.presentingViewController.present(controller, animated: true, completion: nil)
         }

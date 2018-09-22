@@ -31,7 +31,7 @@ struct UserNotificationCenter {
         content.threadIdentifier = threadIdentifier
         content.title = NSLocalizedString("notification.review.title", comment: "")
         content.body = NSLocalizedString("notification.review.message", comment: "")
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         content.badge = AppDelegate.badgeNumber(date: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date), repeats: false)

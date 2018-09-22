@@ -86,7 +86,7 @@ final class DataManager {
             self.scheduleUpdateProcedure()
         }
         
-        RunLoop.main.add(statusUpdateTimer!, forMode: .defaultRunLoopMode)
+        RunLoop.main.add(statusUpdateTimer!, forMode: RunLoop.Mode.default)
     }
     
     func stopStatusUpdates() {

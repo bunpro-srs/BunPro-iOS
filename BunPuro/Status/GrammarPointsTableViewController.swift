@@ -49,7 +49,7 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         
         guard let lesson = self.lesson else { fatalError("Lesson needs to be provided.") }
         
-        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicatorView = UIActivityIndicatorView(style: .white)
         activityIndicatorView?.hidesWhenStopped = true
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView!)

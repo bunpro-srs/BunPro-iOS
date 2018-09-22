@@ -26,7 +26,7 @@ extension PasswordExtension {
             return
         }
         
-        guard let itemProvider = attachements[0] as? NSItemProvider else {
+        guard let itemProvider = attachements.first else {
             self.callOnMainThread { [unowned self] () in
                 let error = self.unexpectedDataError(with: "Unexpected data returned by App Extension: extension item had no attachments.")
                 completion(nil, error)

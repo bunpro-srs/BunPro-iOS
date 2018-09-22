@@ -183,7 +183,7 @@ class StatusTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return section == 0 ? 1 : jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+        return section == 0 ? AppDelegate.isContentAccessable ? 3 : 1 : jlptFetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,32 +191,52 @@ class StatusTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             
-            if AppDelegate.isContentAccessable {
-                let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
+            switch indexPath.row {
+            case 0:
                 
-                updateStatusCell(cell)
+                if AppDelegate.isContentAccessable {
+                    let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
+                    
+                    updateStatusCell(cell)
+                    
+                    return cell
+                } else if AppDelegate.isTrialPeriodAvailable {
+                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                    
+                    cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
+                    
+                    return cell
+                } else if Account.currentAccount != nil {
+                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                    
+                    cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
+                    
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+                    
+                    cell.titleLabel.text = NSLocalizedString("status.loading", comment: "The title of the loading indicator")
+                    cell.titleLabel.textColor = .white
+                    
+                    return cell
+                }
                 
-                return cell
-            } else if AppDelegate.isTrialPeriodAvailable {
+            case 1:
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
                 
-                cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
+                cell.titleLabel.text = NSLocalizedString("status.cram", comment: "The title of the cram button")
                 
                 return cell
-            } else if Account.currentAccount != nil {
+                
+            default:
+                
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
                 
-                cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
-                
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-                
-                cell.titleLabel.text = NSLocalizedString("status.loading", comment: "The title of the loading indicator")
-                cell.titleLabel.textColor = .white
+                cell.titleLabel.text = NSLocalizedString("status.study", comment: "The title of the study button")
                 
                 return cell
             }
+            
         default:
             let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
             
@@ -234,7 +254,7 @@ class StatusTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0:
+            case 0, 1, 2:
                 return indexPath
             default: return nil
             }
@@ -246,27 +266,42 @@ class StatusTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 && indexPath.row == 0 {
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            if AppDelegate.isContentAccessable {
-                if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
-                    presentReviewViewController()
-                } else {
-                    presentReviewViewController(reviewMode: false)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                
+                if AppDelegate.isContentAccessable {
+                    if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
+                        presentReviewViewController()
+                    } else {
+                        presentReviewViewController(website: .main)
+                    }
+                } else if AppDelegate.isTrialPeriodAvailable {
+                    signupForTrial()
+                } else if Account.currentAccount != nil {
+                    signup()
                 }
-            } else if AppDelegate.isTrialPeriodAvailable {
-                signupForTrial()
-            } else if Account.currentAccount != nil {
-                signup()
+                
+            case 1:
+                
+                presentReviewViewController(website: .cram)
+                
+            case 2:
+                
+                presentReviewViewController(website: .study)
+                
+            default: break
             }
+        default: break
         }
     }
     
-    func presentReviewViewController(reviewMode: Bool = true) {
+    func presentReviewViewController(website: Website = .review) {
         
-        let reviewProcedure = ReviewViewControllerProcedure(presentingViewController: tabBarController!, reviewMode: reviewMode)
+        let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: tabBarController!, website: website)
         
         reviewProcedure.completionBlock = {
             

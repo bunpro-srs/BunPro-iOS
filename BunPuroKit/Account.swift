@@ -18,7 +18,7 @@ public enum State: String, Codable {
 
 public enum FuriganaMode: String, Codable {
     case on = "On"
-    case off = "Hide"
+    case off = "Off"
     case wanikani = "Wanikani"
     
     public init?(string: String) {
@@ -39,6 +39,12 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
+public enum LightMode: String, Codable {
+    case on = "On"
+    case off = "Off"
+    case modern = "Modern"
+}
+
 public struct BPKAccount: Codable {
     
     private enum CodingKeys: String, CodingKey {
@@ -57,7 +63,7 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
-    public let lightMode: State
+    public let lightMode: LightMode
     public let bunnyMode: State
     public let subscriber: Bool
 }

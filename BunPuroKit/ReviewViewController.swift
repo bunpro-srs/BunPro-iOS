@@ -13,10 +13,30 @@ protocol ReviewViewControllerDelegate: class {
     func reviewViewControllerDidFinish(_ controller: ReviewViewController)
 }
 
+public enum Website {
+    case main
+    case review
+    case study
+    case cram
+    
+    var url: URL {
+        switch self {
+        case .main:
+            return URL(string: "https://www.bunpro.jp")!
+        case .review:
+            return URL(string: "https://www.bunpro.jp/app_study")!
+        case .study:
+            return URL(string: "https://www.bunpro.jp/app_learn")!
+        case .cram:
+            return URL(string: "https://www.bunpro.jp/app_cram")!
+        }
+    }
+}
+
 class ReviewViewController: UIViewController, WKNavigationDelegate {
 
     weak var delegate: ReviewViewControllerDelegate?
-    var reviewMode: Bool = true
+    var website: Website = .main
     
     @IBOutlet private weak var webView: WKWebView! {
         didSet {
@@ -29,8 +49,7 @@ class ReviewViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: reviewMode ? "https://www.bunpro.jp/app_study" : "https://www.bunpro.jp")!
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: website.url)
         
         request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
         webView.alpha = 0.0
@@ -51,17 +70,4 @@ class ReviewViewController: UIViewController, WKNavigationDelegate {
         
         activityIndicatorView.stopAnimating()
     }
-    
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//
-//        if let url = navigationAction.request.url, url.path == "/summary" {
-//            decisionHandler(.cancel)
-//
-//            delegate?.reviewViewControllerDidFinish(self)
-//
-//            return
-//        }
-//
-//        decisionHandler(.allow)
-//    }
 }

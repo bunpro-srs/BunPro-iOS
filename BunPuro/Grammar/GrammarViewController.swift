@@ -82,7 +82,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
             object: nil,
             queue: OperationQueue.main,
             using: { (_) in
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+                let activityIndicator = UIActivityIndicatorView(style: .white)
                 activityIndicator.startAnimating()
                 
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)

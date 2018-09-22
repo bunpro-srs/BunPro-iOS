@@ -35,13 +35,13 @@ class FuriganaLayoutManager: NSLayoutManager
         
         let attributesToEnumerate = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
         
-        textStorage?.enumerateAttribute(NSAttributedStringKey(rawValue: kFuriganaAttributeName), in: attributesToEnumerate, options: []) { (attributeValue, range, _) in
+        textStorage?.enumerateAttribute(NSAttributedString.Key(rawValue: kFuriganaAttributeName), in: attributesToEnumerate, options: []) { (attributeValue, range, _) in
             if let furiganaStringRepresentation = attributeValue as? String
             {
                 if let furiganaText = FuriganaTextFromStringRepresentation(furiganaStringRepresentation as NSString)
                 {
-                    let font = self.textStorage!.attribute(NSAttributedStringKey.font, at: range.location, effectiveRange: nil) as! UIFont
-                    let color = self.textStorage!.attribute(NSAttributedStringKey.foregroundColor, at: range.location, effectiveRange: nil) as? UIColor
+                    let font = self.textStorage!.attribute(NSAttributedString.Key.font, at: range.location, effectiveRange: nil) as! UIFont
+                    let color = self.textStorage!.attribute(NSAttributedString.Key.foregroundColor, at: range.location, effectiveRange: nil) as? UIColor
                     self.drawFurigana(furiganaText, characterRange: range, characterFont: font, textColor: color)
                 }
             }
@@ -65,13 +65,13 @@ class FuriganaLayoutManager: NSLayoutManager
         paragrapStyle.lineBreakMode = .byClipping
         
         var furiganaAttributes = [
-            NSAttributedStringKey.font : furiganaFont,
-            NSAttributedStringKey.paragraphStyle : paragrapStyle,
+            NSAttributedString.Key.font : furiganaFont,
+            NSAttributedString.Key.paragraphStyle : paragrapStyle,
             ]
         
         if let color = textColor
         {
-            furiganaAttributes[NSAttributedStringKey.foregroundColor] = color
+            furiganaAttributes[NSAttributedString.Key.foregroundColor] = color
         }
         
         text.draw(in: glyphBounds, withAttributes: furiganaAttributes)

@@ -53,7 +53,7 @@
 		2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */; };
 		2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */; };
 		2E3EE1161FE91EFD0027C924 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1141FE91EFD0027C924 /* ReviewViewController.swift */; };
-		2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */; };
+		2E3EE1191FE91FA40027C924 /* WebsiteViewControllerProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */; };
 		2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EE11A1FE925C30027C924 /* Main.storyboard */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
@@ -257,7 +257,7 @@
 		2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-wal"; sourceTree = "<group>"; };
 		2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BunPro.sqlite; sourceTree = "<group>"; };
 		2E3EE1141FE91EFD0027C924 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
-		2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewControllerProcedure.swift; sourceTree = "<group>"; };
+		2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewControllerProcedure.swift; sourceTree = "<group>"; };
 		2E3EE11A1FE925C30027C924 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 				2E0F9BB61FCC877600738129 /* BunProProcedure.swift */,
 				2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */,
 				2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */,
-				2E3EE1181FE91FA40027C924 /* ReviewViewControllerProcedure.swift */,
+				2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */,
 			);
 			path = Procedures;
 			sourceTree = "<group>";
@@ -890,7 +890,7 @@
 					};
 					2EAD9E071FA26EB400CE52CF = {
 						CreatedOnToolsVersion = 9.0.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					2EAD9E0F1FA26EB400CE52CF = {
@@ -1118,7 +1118,7 @@
 				2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */,
 				2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */,
 				2E59791820C6EAAD0007E9BE /* StoryboardIdentifiable.swift in Sources */,
-				2E3EE1191FE91FA40027C924 /* ReviewViewControllerProcedure.swift in Sources */,
+				2E3EE1191FE91FA40027C924 /* WebsiteViewControllerProcedure.swift in Sources */,
 				2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */,
 				2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */,
 				2EDF8C5320AC9EAB0024263F /* CorneredView.swift in Sources */,
@@ -1454,7 +1454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1472,7 +1472,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1562,7 +1562,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1587,7 +1587,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

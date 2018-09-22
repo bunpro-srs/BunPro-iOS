@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -29,22 +29,22 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28C-jF-bmw" customClass="CorneredView" customModule="BunPuro" customModuleProvider="target">
-                                            <rect key="frame" x="4" y="0.0" width="367" height="130"/>
+                                            <rect key="frame" x="4" y="4" width="367" height="122"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-gh-vjI">
-                                                    <rect key="frame" x="11" y="12" width="345" height="106"/>
+                                                    <rect key="frame" x="11" y="12" width="345" height="98"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0re-e3-Eg2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="33.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="25.333333333333332"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" text="Next Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8W-DR-a0O">
-                                                                    <rect key="frame" x="0.0" y="4.6666666666666679" width="108.33333333333333" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.66666666666666785" width="108.33333333333333" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-9Y-rEM">
-                                                                    <rect key="frame" x="116.33333333333336" y="0.0" width="200.66666666666663" height="33.333333333333336"/>
+                                                                    <rect key="frame" x="116.33333333333336" y="0.0" width="200.66666666666663" height="25.333333333333332"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text=" Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MUQ-yY-qIY">
                                                                             <rect key="frame" x="152.33333333333334" y="0.0" width="48.333333333333343" height="20.333333333333332"/>
@@ -53,7 +53,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4U-Zd-pNG">
-                                                                            <rect key="frame" x="167.66666666666666" y="20.333333333333336" width="33" height="13"/>
+                                                                            <rect key="frame" x="167.66666666666666" y="20.333333333333336" width="33" height="5"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -61,12 +61,12 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="VZI-MH-vN8">
-                                                                    <rect key="frame" x="325" y="6.6666666666666679" width="20" height="20"/>
+                                                                    <rect key="frame" x="325" y="2.6666666666666679" width="20" height="20"/>
                                                                 </activityIndicatorView>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBg-UU-Pl3">
-                                                            <rect key="frame" x="0.0" y="49.333333333333336" width="345" height="20.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="41.333333333333336" width="345" height="20.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Within 1 Hour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fe-Qh-MP6">
                                                                     <rect key="frame" x="0.0" y="0.0" width="296.66666666666669" height="20.333333333333332"/>
@@ -83,7 +83,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBw-Ln-mXG">
-                                                            <rect key="frame" x="0.0" y="85.666666666666671" width="345" height="20.333333333333329"/>
+                                                            <rect key="frame" x="0.0" y="77.666666666666671" width="345" height="20.333333333333329"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Within 24 Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-68-2Hr">
                                                                     <rect key="frame" x="0.0" y="0.0" width="296.66666666666669" height="20.333333333333332"/>
@@ -113,10 +113,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="28C-jF-bmw" secondAttribute="bottom" id="4vB-xM-MY3"/>
+                                        <constraint firstAttribute="bottom" secondItem="28C-jF-bmw" secondAttribute="bottom" constant="4" id="4vB-xM-MY3"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="28C-jF-bmw" secondAttribute="trailing" constant="-12" id="BKc-fW-CIv"/>
                                         <constraint firstItem="28C-jF-bmw" firstAttribute="leading" secondItem="rpV-fk-xbg" secondAttribute="leadingMargin" constant="-12" id="qnf-5o-aPM"/>
-                                        <constraint firstItem="28C-jF-bmw" firstAttribute="top" secondItem="rpV-fk-xbg" secondAttribute="top" id="sHn-PC-dQ8"/>
+                                        <constraint firstItem="28C-jF-bmw" firstAttribute="top" secondItem="rpV-fk-xbg" secondAttribute="top" constant="4" id="sHn-PC-dQ8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -283,16 +283,16 @@
                                                     <rect key="frame" x="11" y="12" width="345" height="60"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ouV-DG-3f6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="52.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="301" height="52.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgB-cu-9Xo">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="301" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwI-7D-wMw">
-                                                                    <rect key="frame" x="0.0" y="32" width="313" height="20.333333333333329"/>
+                                                                    <rect key="frame" x="0.0" y="32" width="301" height="20.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -300,7 +300,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-Yv-V00">
-                                                            <rect key="frame" x="321" y="0.0" width="24" height="24"/>
+                                                            <rect key="frame" x="309" y="0.0" width="36" height="36"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="cSf-Yv-V00" secondAttribute="height" multiplier="1:1" id="LPV-7n-De2"/>
                                                             </constraints>
@@ -1133,43 +1133,43 @@
                                             <rect key="frame" x="4" y="4" width="367" height="50"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jaO-jk-auu">
-                                                    <rect key="frame" x="17.666666666666657" y="12" width="332" height="26"/>
+                                                    <rect key="frame" x="-54.666666666666657" y="12" width="476.33333333333326" height="26"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="6QN-Hn-xUQ">
-                                                            <rect key="frame" x="0.0" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-BV-M09">
-                                                            <rect key="frame" x="28" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="40" y="0.0" width="36.333333333333343" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="cAR-3i-kBA">
-                                                            <rect key="frame" x="56" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="80.333333333333329" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="6CE-dp-XPV">
-                                                            <rect key="frame" x="84" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="120.33333333333334" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="KZn-sp-QOL">
-                                                            <rect key="frame" x="111.99999999999999" y="1" width="24.000000000000014" height="24"/>
+                                                            <rect key="frame" x="160.33333333333334" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="Vbn-cp-bvc">
-                                                            <rect key="frame" x="140" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="200.33333333333331" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="wks-pP-cgY">
-                                                            <rect key="frame" x="168" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="240.33333333333331" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-ml-olh">
-                                                            <rect key="frame" x="196" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="280.33333333333331" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="baV-YM-4TV">
-                                                            <rect key="frame" x="224" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="320.33333333333337" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="0Np-nn-iSz">
-                                                            <rect key="frame" x="252" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="360.33333333333337" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="UIO-Wt-xJg">
-                                                            <rect key="frame" x="280" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="400.33333333333337" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="nXA-vj-fRw">
-                                                            <rect key="frame" x="308" y="1" width="24" height="24"/>
+                                                            <rect key="frame" x="440.33333333333337" y="0.0" width="36" height="26"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -1226,16 +1226,16 @@
                                                     <rect key="frame" x="11" y="12" width="345" height="150"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MpD-9b-8y5">
-                                                            <rect key="frame" x="0.0" y="54" width="312" height="42"/>
+                                                            <rect key="frame" x="0.0" y="54" width="305" height="42"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-mN-ikT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfV-eP-md1">
-                                                                    <rect key="frame" x="0.0" y="24" width="312" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="305" height="18"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1243,7 +1243,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBI-Mf-UdG">
-                                                            <rect key="frame" x="312" y="58.666666666666671" width="33" height="33"/>
+                                                            <rect key="frame" x="305" y="55" width="40" height="40"/>
                                                             <state key="normal" image="play"/>
                                                             <connections>
                                                                 <action selector="didPressCustomAction:" destination="FpW-5l-ag1" eventType="touchUpInside" id="amg-Q7-4VP"/>
@@ -1589,16 +1589,16 @@
                                                     <rect key="frame" x="11" y="12" width="345" height="60"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nx8-D8-5c5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="52.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="301" height="52.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axk-mW-jVv">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="301" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-IP-dBN">
-                                                                    <rect key="frame" x="0.0" y="32" width="313" height="20.333333333333329"/>
+                                                                    <rect key="frame" x="0.0" y="32" width="301" height="20.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1606,7 +1606,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="sda-W2-jCl">
-                                                            <rect key="frame" x="321" y="0.0" width="24" height="24"/>
+                                                            <rect key="frame" x="309" y="0.0" width="36" height="36"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="sda-W2-jCl" secondAttribute="height" multiplier="1:1" id="PhS-LQ-uuI"/>
                                                             </constraints>
@@ -1732,13 +1732,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bunpro-hanko-review-complete_small" width="24" height="24"/>
-        <image name="play" width="33" height="33"/>
-        <image name="tab_dashboard_active" width="25" height="20"/>
-        <image name="tab_dashboard_inactive" width="25" height="20"/>
-        <image name="tab_search_active" width="21" height="25"/>
-        <image name="tab_search_inactive" width="21" height="25"/>
-        <image name="tab_settings_active" width="25" height="25"/>
+        <image name="bunpro-hanko-review-complete_small" width="36" height="36"/>
+        <image name="play" width="40" height="40"/>
+        <image name="tab_dashboard_active" width="25" height="20.333333969116211"/>
+        <image name="tab_dashboard_inactive" width="25" height="20.333333969116211"/>
+        <image name="tab_search_active" width="21.333333969116211" height="25"/>
+        <image name="tab_search_inactive" width="21.333333969116211" height="25"/>
+        <image name="tab_settings_active" width="37.5" height="37.5"/>
         <image name="tab_settings_inactive" width="25" height="25"/>
         <namedColor name="Main Tint">
             <color red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1753,7 +1753,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="hLX-iS-Gz3"/>
         <segue reference="YWX-Ln-WH0"/>
-        <segue reference="8Tl-dW-Q4E"/>
+        <segue reference="tSE-gJ-zq6"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

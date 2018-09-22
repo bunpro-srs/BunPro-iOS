@@ -22,6 +22,12 @@
 /* The title of the loading indicator */
 "status.loading" = "Loading";
 
+/* The title of the cram button */
+"status.cram" = "Cram";
+
+/* The title of the study button */
+"status.study" = "Study";
+
 /* Level in a JLPT */
 "level.number" = "Level %d";
 

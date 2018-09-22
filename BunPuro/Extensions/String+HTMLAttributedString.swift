@@ -29,7 +29,7 @@ extension String {
         guard let html = try? NSMutableAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
             else { return nil }
         
-        html.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSRange(location: 0, length: html.length))
+        html.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: 0, length: html.length))
         return html
     }
 }
