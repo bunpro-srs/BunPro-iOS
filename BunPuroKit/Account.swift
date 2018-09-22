@@ -39,11 +39,13 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
-public enum LightMode: String, Codable {
-    case on = "On"
-    case off = "Off"
-    case modern = "Modern"
-}
+//public enum LightMode: String, Codable {
+//    case on = "On"
+//    case off = "Off"
+//    case modern = "Modern"
+//    case classic = "Classic"
+//    case classicLight = "Classic Light"
+//}
 
 public struct BPKAccount: Codable {
     
@@ -54,7 +56,7 @@ public struct BPKAccount: Codable {
         case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
-        case lightMode = "light_mode"
+//        case lightMode = "light_mode"
         case subscriber
     }
     
@@ -63,7 +65,7 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
-    public let lightMode: LightMode
+//    public let lightMode: LightMode
     public let bunnyMode: State
     public let subscriber: Bool
 }

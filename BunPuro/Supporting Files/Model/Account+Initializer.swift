@@ -22,7 +22,7 @@ extension Account {
         furiganaMode = account.furigana.rawValue
         englishMode = account.hideEnglish == Active.yes
         reviewEnglishMode = account.reviewEnglish.rawValue
-        lightMode = (account.lightMode == LightMode.on) || (account.lightMode == LightMode.modern)
+//        lightMode = (account.lightMode == LightMode.on) || (account.lightMode == LightMode.modern)
         subscriber = account.subscriber
     }
 }

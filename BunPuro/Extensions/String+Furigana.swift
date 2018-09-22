@@ -112,7 +112,9 @@ extension String {
         
         for pair in pairs {
             
-            let range = NSRange(correctedText.range(of: pair.kanji)!, in: correctedText)
+            guard let r = correctedText.range(of: pair.kanji) else { continue }
+            
+            let range = NSRange(r, in: correctedText)
             let furigana = Furigana(text: pair.furigana, original: pair.kanji, range: range)
             
             if furiganas == nil {
