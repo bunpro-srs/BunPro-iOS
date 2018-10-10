@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+        
         Server.reset()
         
         let center = UNUserNotificationCenter.current()
@@ -79,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillResignActive(_ application: UIApplication) {
         
-        dataManager?.startStatusUpdates()
+//        dataManager?.startStatusUpdates()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -90,6 +92,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         
         coreDataStack.save()
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        if let dataManager = dataManager {
+            dataManager.scheduleUpdateProcedure(completion: completionHandler)
+        } else {
+            completionHandler(.failed)
+        }
     }
     
     static func setNeedsStatusUpdate() {

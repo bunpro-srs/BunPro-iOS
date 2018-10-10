@@ -164,7 +164,7 @@ final class DataManager {
         Server.add(procedure: addProcedure)
     }
     
-    private func scheduleUpdateProcedure() {
+    func scheduleUpdateProcedure(completion: ((UIBackgroundFetchResult) -> Void)? = nil) {
         
         self.isUpdating = true
         
@@ -196,6 +196,8 @@ final class DataManager {
                             self.hasPendingReviewModification = false
                             NotificationCenter.default.post(name: .BunProDidModifyReview, object: nil)
                         }
+                        
+                        completion?(.newData)
                     }
                     
                     self.procedureQueue.add(operation: importProcedure)
