@@ -98,24 +98,22 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
-        backgroundImageView.contentMode = .scaleAspectFill
-        
-        tableView.backgroundView = backgroundImageView
-        tableView.backgroundView?.addMotion()
+        tableView.backgroundColor = UIColor(named: "ModernDark")
         
         definesPresentationContext = true
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         
-        searchController.searchBar.showsCancelButton = false
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         
-        navigationItem.titleView = searchController.searchBar
-        searchController.searchBar.sizeToFit()
+        navigationItem.searchController = searchController
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.setShowsCancelButton(false, animated: false)
         searchController.searchBar.delegate = self
+        searchController.searchBar.keyboardAppearance = .dark
+        searchController.searchBar.sizeToFit()
         navigationItem.hidesSearchBarWhenScrolling = false
         
         searchController.searchBar.placeholder = NSLocalizedString("search.grammar.placeholder", comment: "Search grammar placeholder")
@@ -126,7 +124,6 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
             NSLocalizedString("search.grammar.scope.unlearned", comment: ""),
             NSLocalizedString("search.grammar.scope.learned", comment: "")
         ]
-        searchController.searchBar.showsScopeBar = true
         
         fetchedResultsController = newFetchedResultsController()
         
@@ -137,6 +134,12 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
         } catch {
             print(error)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        searchController.searchBar.setShowsCancelButton(false, animated: false)
     }
     
     private func review(for grammar: Grammar) -> Review? {
@@ -213,6 +216,7 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     // MARK: - UISearchController
 
     func updateSearchResults(for searchController: UISearchController) {
+        
         NSFetchedResultsController<Grammar>.deleteCache(withName: nil)
         fetchedResultsController.fetchRequest.predicate = searchPredicate()
         
@@ -260,5 +264,13 @@ class SearchTableViewController: CoreDataFetchedResultsTableViewController<Gramm
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
         updateSearchResults(for: searchController)
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        searchController.searchBar.setShowsCancelButton(false, animated: false)
+        searchController.searchBar.sizeToFit()
+
+        return true
     }
 }

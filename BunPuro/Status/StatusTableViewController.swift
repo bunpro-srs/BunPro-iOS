@@ -45,11 +45,7 @@ class StatusTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
-        backgroundImageView.contentMode = .scaleAspectFill
-        
-        tableView.backgroundView = backgroundImageView
-        tableView.backgroundView?.addMotion()
+        tableView.backgroundColor = UIColor(named: "ModernDark")
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             

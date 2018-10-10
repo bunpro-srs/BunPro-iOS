@@ -41,11 +41,7 @@ class GrammarPointsTableViewController: CoreDataFetchedResultsTableViewControlle
         
         super.viewDidLoad()
         
-        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
-        backgroundImageView.contentMode = .scaleAspectFill
-        
-        tableView.backgroundView = backgroundImageView
-        tableView.backgroundView?.addMotion()
+        tableView.backgroundColor = UIColor(named: "ModernDark")
         
         guard let lesson = self.lesson else { fatalError("Lesson needs to be provided.") }
         

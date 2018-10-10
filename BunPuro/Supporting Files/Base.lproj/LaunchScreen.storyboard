@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,9 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="KJ8-e8-VAI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko" translatesAutoresizingMaskIntoConstraints="NO" id="bbc-mQ-RxE">
                                 <rect key="frame" x="60" y="206" width="255" height="255"/>
                                 <constraints>
@@ -29,14 +27,10 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="bbc-mQ-RxE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3yC-AQ-gMB"/>
-                            <constraint firstAttribute="bottom" secondItem="KJ8-e8-VAI" secondAttribute="bottom" id="6HL-DS-5hc"/>
-                            <constraint firstAttribute="trailing" secondItem="KJ8-e8-VAI" secondAttribute="trailing" id="AoG-72-Fv2"/>
-                            <constraint firstItem="KJ8-e8-VAI" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Ja5-If-NeF"/>
                             <constraint firstItem="bbc-mQ-RxE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="QHE-dE-s0g"/>
-                            <constraint firstItem="KJ8-e8-VAI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="sPg-FE-uSo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -47,7 +41,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="637" height="450"/>
-        <image name="bunpro-hanko" width="1348" height="1348"/>
+        <image name="bunpro-hanko" width="871" height="700"/>
+        <namedColor name="Background">
+            <color red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

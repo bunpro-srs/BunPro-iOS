@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class CorneredView: UIView {
 
-    @IBInspectable var cornerRadius: CGFloat = 9.0 {
+    @IBInspectable var cornerRadius: CGFloat = 4.0 {
         didSet { setNeedsDisplay() }
     }
 
@@ -30,7 +30,12 @@ class CorneredView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        clipsToBounds = true
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.6
+        layer.shadowOffset = CGSize(width: 1, height: 1)
+        layer.masksToBounds = false
+        clipsToBounds = false
     }
     
     override func layoutSubviews() {

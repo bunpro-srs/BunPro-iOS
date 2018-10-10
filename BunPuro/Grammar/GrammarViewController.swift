@@ -67,11 +67,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
-        backgroundImageView.contentMode = .scaleAspectFill
-        
-        tableView.backgroundView = backgroundImageView
-        tableView.backgroundView?.addMotion()
+        tableView.backgroundColor = UIColor(named: "ModernDark")
         
         assert(grammar != nil)
         
@@ -443,7 +439,7 @@ class GrammarViewController: UITableViewController, GrammarPresenter {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return section == 1 ? 29 + 8 + 8 : 0
+        return section == 1 ? 46 : 0
     }
     
     @IBAction private func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {

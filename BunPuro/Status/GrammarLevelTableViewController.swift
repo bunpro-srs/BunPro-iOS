@@ -36,11 +36,7 @@ class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController
         
         super.viewDidLoad()
         
-        let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
-        backgroundImageView.contentMode = .scaleAspectFill
-        
-        tableView.backgroundView = backgroundImageView
-        tableView.backgroundView?.addMotion()
+        tableView.backgroundColor = UIColor(named: "ModernDark")
         
         didUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,

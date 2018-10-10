@@ -24,7 +24,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var coreDataStack = CoreDataStack(modelName: modelName)
     
     private var dataManager: DataManager?
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(named: "NavigationBarHeader")
+        
+        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor(named: "NavigationBarHeader")
+        
+        CorneredView.appearance().backgroundColor = UIColor(named: "Tiles")
+        UITableViewCell.appearance().clipsToBounds = true
+        UITableViewCell.appearance().contentView.clipsToBounds = true
+        
+        UIProgressView.appearance().trackTintColor = UIColor(named: "Background")
+        UIProgressView.appearance().progressTintColor = UIColor(named: "TilesSymbol")
+        
+        window?.tintColor = UIColor(named: "Main Tint")
+        
+        return true
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         Server.reset()

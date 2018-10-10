@@ -16,7 +16,7 @@ protocol LoginViewControllerDelegate: class {
     func loginViewControllerDidLogin(_ controller: LoginViewController)
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     enum CredentialsKey: String {
         case email
@@ -42,11 +42,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         onePasswordButton.isHidden = !PasswordExtension.shared.isAvailable()
         
         emailTextField.text = keychain[string: CredentialsKey.email.rawValue]
         passwordTextField.text = keychain[string: CredentialsKey.password.rawValue]
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         validateCredentials()
     }
@@ -132,5 +134,22 @@ class LoginViewController: UIViewController {
         safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
         
         present(safariViewController, animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            loginButtonPressed(loginButton)
+        default: break
+        }
+        
+        return true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
