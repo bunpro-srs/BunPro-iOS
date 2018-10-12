@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             
-            print(granted)
+//            print(granted)
         }
         
         if let rootViewController = window?.rootViewController {

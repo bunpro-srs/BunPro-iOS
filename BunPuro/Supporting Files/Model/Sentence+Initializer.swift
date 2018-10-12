@@ -30,6 +30,6 @@ extension Sentence {
     
     var audioURL: URL? {
         guard let fileName = audio?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
-        return URL(string: "https://bunpro.jp/assets/\(fileName)")
+        return URL(string: "https://bunpro.jp/audio/\(fileName)")
     }
 }
