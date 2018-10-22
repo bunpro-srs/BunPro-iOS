@@ -10,6 +10,6 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class ProgressProcedure: BunPuroProcedure<BPKAccountProgress> {
+public final class ProgressProcedure: BunPuroProcedure<BPKAccountProgress> {
     override var url: URL { return URL(string: "\(baseUrlString)/user/progress")! }
 }

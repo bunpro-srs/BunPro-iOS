@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailCell: UITableViewCell {
+final class DetailCell: UITableViewCell {
     
     var longPressGestureRecognizer: UILongPressGestureRecognizer?
     

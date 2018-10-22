@@ -11,7 +11,7 @@ import BunPuroKit
 import ProcedureKit
 import CoreData
 
-class UpdateGrammarProcedure: GroupProcedure {
+final class UpdateGrammarProcedure: GroupProcedure {
     
     private let lessonProcedure: LessonsProcedure
     private let importProcedure: ImportLessonsIntoCoreDataProcedure
@@ -28,7 +28,7 @@ class UpdateGrammarProcedure: GroupProcedure {
     }
 }
 
-fileprivate class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure {
+fileprivate final class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure {
     
     var input: Pending<[BPKJlpt]> = .pending
     

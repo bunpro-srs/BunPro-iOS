@@ -13,7 +13,7 @@ import KeychainAccess
 
 private let logoutUrlString = "\(baseUrlString)logout"
 
-class LogoutProcedure: Procedure {
+final class LogoutProcedure: Procedure {
     
     //private let _networkProcedure: NetworkProcedure<NetworkDataProcedure<URLSession>>
     

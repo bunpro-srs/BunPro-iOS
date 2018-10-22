@@ -16,7 +16,7 @@ protocol GrammarPresenter {
     var grammar: Grammar? { get set }
 }
 
-class GrammarViewController: UITableViewController, GrammarPresenter {
+final class GrammarViewController: UITableViewController, GrammarPresenter {
 
     enum ViewMode: Int {
         case examples

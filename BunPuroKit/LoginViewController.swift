@@ -16,7 +16,7 @@ protocol LoginViewControllerDelegate: class {
     func loginViewControllerDidLogin(_ controller: LoginViewController)
 }
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+final class LoginViewController: UIViewController, UITextFieldDelegate {
     
     enum CredentialsKey: String {
         case email

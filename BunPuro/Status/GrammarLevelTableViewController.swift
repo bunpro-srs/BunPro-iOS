@@ -10,7 +10,7 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController<Lesson>, SegueHandler {
+final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController<Lesson>, SegueHandler {
 
     enum SegueIdentifier: String {
         case showGrammarLevel

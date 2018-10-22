@@ -10,6 +10,6 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class UserProcedure: BunPuroProcedure<BPKAccount> {
+public final class UserProcedure: BunPuroProcedure<BPKAccount> {
     override var url: URL  { return URL(string: "\(baseUrlString)user/")! }
 }

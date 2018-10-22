@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class CorneredView: UIView {
+final class CorneredView: UIView {
 
     @IBInspectable var cornerRadius: CGFloat = 4.0 {
         didSet { setNeedsDisplay() }

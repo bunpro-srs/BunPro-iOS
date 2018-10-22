@@ -28,7 +28,7 @@ private struct _ReviewContainer: Codable {
     let self_study_reviews: [BPKReview]
 }
 
-private class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
+private final class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
     
     let collection: ReviewCollection
     
@@ -43,7 +43,7 @@ private class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
     }
 }
 
-public class ReviewsProcedure: GroupProcedure, OutputProcedure {
+public final class ReviewsProcedure: GroupProcedure, OutputProcedure {
     
     public var output: Pending<ProcedureResult<[BPKReview]>> {
         get { return transformProcedure.output }

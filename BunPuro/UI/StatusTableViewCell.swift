@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatusTableViewCell: UITableViewCell {
+final class StatusTableViewCell: UITableViewCell {
 
     @IBOutlet private var reviewStatusLabel: UILabel!
     @IBOutlet private var reviewStatusNextDateLabel: UILabel!

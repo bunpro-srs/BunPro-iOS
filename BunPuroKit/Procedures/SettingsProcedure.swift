@@ -10,7 +10,7 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class SetSettingsProcedure: GroupProcedure {
+public final class SetSettingsProcedure: GroupProcedure {
     
     public struct Settings {
         public var furigana: FuriganaMode

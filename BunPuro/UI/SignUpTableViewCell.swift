@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpTableViewCell: UITableViewCell {
+final class SignUpTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     

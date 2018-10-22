@@ -33,7 +33,7 @@ public enum Website {
     }
 }
 
-class ReviewViewController: UIViewController, WKNavigationDelegate {
+final class ReviewViewController: UIViewController, WKNavigationDelegate {
 
     weak var delegate: ReviewViewControllerDelegate?
     var website: Website = .main

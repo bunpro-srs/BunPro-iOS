@@ -10,7 +10,7 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class LessonsProcedure: GroupProcedure, OutputProcedure {
+public final class LessonsProcedure: GroupProcedure, OutputProcedure {
     
     public var output: Pending<ProcedureResult<[BPKJlpt]>> {
         get { return transformProcedure.output }
@@ -39,7 +39,7 @@ public class LessonsProcedure: GroupProcedure, OutputProcedure {
     }
 }
 
-fileprivate class _LessonsProcedure: BunPuroProcedure<[BPKLesson]> {
+fileprivate final class _LessonsProcedure: BunPuroProcedure<[BPKLesson]> {
     
     override var hasMilliseconds: Bool { return true }
     override var url: URL { return URL(string: "\(baseUrlString)lessons")! }

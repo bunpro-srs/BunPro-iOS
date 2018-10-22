@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KanjiTableViewController: UITableViewController {
+final class KanjiTableViewController: UITableViewController {
 
     var japanese: String?
     var english: String?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GrammarTeaserCell: UITableViewCell {
+final class GrammarTeaserCell: UITableViewCell {
 
     @IBOutlet weak var japaneseLabel: UILabel! {
         didSet {

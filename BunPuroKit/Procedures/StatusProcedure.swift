@@ -10,7 +10,7 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class StatusProcedure: GroupProcedure, OutputProcedure {
+public final class StatusProcedure: GroupProcedure, OutputProcedure {
         
     public var output: Pending<ProcedureResult<(BPKAccount?, [BPKReview]?)>> = .pending
     

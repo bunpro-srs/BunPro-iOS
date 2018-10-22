@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StructureInfoCell: UITableViewCell {
+final class StructureInfoCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel! {
         didSet {

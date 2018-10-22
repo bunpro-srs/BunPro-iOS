@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasicInfoCell: UITableViewCell {
+final class BasicInfoCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {

@@ -10,7 +10,7 @@ import UIKit
 import BunPuroKit
 import CoreData
 
-class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating, UISearchBarDelegate {
+final class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating, UISearchBarDelegate {
     
     enum SegueIdentifier: String {
         case showGrammar

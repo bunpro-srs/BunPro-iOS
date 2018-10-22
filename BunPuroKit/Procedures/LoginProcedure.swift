@@ -14,7 +14,7 @@ import KeychainAccess
 public typealias Token = String
 private let loginUrlString = "\(baseUrlString)login/"
 
-class LoginProcedure: GroupProcedure, OutputProcedure {
+final class LoginProcedure: GroupProcedure, OutputProcedure {
     
     var output: Pending<ProcedureResult<TokenResponse>> = .pending
     
@@ -90,11 +90,11 @@ struct TokenResponse: Codable {
     let errors: [TokenError]?
 }
 
-public enum BunPuroLoginError: Error {
-    case noPresentingViewControllerProvided
-}
-
 class LoggedInCondition: Condition, LoginViewControllerDelegate {
+    
+    enum Error: Swift.Error {
+        case noPresentingViewControllerProvided
+    }
     
     private lazy var queue = ProcedureQueue()
     
@@ -115,7 +115,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
         if Server.token == nil {
             
             guard let presentingViewController = presentingViewController else {
-                completion(ConditionResult.failure(BunPuroLoginError.noPresentingViewControllerProvided))
+                completion(ConditionResult.failure(Error.noPresentingViewControllerProvided))
                 return
             }
             

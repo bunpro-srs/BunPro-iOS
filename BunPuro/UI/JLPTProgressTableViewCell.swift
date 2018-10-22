@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JLPTProgressTableViewCell: UITableViewCell {
+final class JLPTProgressTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!

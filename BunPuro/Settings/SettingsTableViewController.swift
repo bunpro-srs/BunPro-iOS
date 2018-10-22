@@ -12,7 +12,7 @@ import ProcedureKit
 import BunPuroKit
 import SafariServices
 
-class SettingsTableViewController: UITableViewController {
+final class SettingsTableViewController: UITableViewController {
     
     private enum Section: Int {
         case settings

@@ -14,7 +14,7 @@ import CoreData
 
 private let updateInterval = TimeInterval(60)
 
-class StatusTableViewController: UITableViewController {
+final class StatusTableViewController: UITableViewController {
     
     var showReviewsOnViewDidAppear: Bool = false
     

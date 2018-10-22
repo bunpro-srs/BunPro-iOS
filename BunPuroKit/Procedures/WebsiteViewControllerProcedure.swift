@@ -10,7 +10,7 @@ import Foundation
 import ProcedureKit
 import ProcedureKitNetwork
 
-public class WebsiteViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
+public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControllerDelegate {
     
     public let presentingViewController: UIViewController
     public let website: Website

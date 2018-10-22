@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StreakInfoCell: UITableViewCell {
+final class StreakInfoCell: UITableViewCell {
     
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private var hankoCollection: [UIImageView]!

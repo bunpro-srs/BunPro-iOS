@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GrammarHeaderTableViewCell: UITableViewCell {
+final class GrammarHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
 
