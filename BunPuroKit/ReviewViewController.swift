@@ -33,10 +33,18 @@ public enum Website {
     }
 }
 
-final class ReviewViewController: UIViewController, WKNavigationDelegate {
+final public class ReviewViewController: UIViewController, WKNavigationDelegate {
 
     weak var delegate: ReviewViewControllerDelegate?
-    var website: Website = .main
+    public var website: Website = .main {
+        didSet {
+            guard oldValue != website else {
+                return
+            }
+            
+            loadWebsite()
+        }
+    }
     
     @IBOutlet private weak var webView: WKWebView! {
         didSet {
@@ -46,21 +54,27 @@ final class ReviewViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadWebsite()
+    }
+    
+    private func loadWebsite() {
+        activityIndicatorView?.startAnimating()
         
         var request = URLRequest(url: website.url)
         
         request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
-        webView.alpha = 0.0
-        webView.load(request)
+        webView?.alpha = 0.0
+        webView?.load(request)
     }
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         delegate?.reviewViewControllerDidFinish(self)
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         print("didFinish")
         

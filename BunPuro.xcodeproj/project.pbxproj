@@ -17,6 +17,7 @@
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
 		2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02BF2006A95C005D33FD /* InitialDatabase.json */; };
 		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
+		2E0EB074217E5300005E8B78 /* NSUserActivity+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */; };
 		2E0F9BB71FCC877600738129 /* BunProProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F9BB61FCC877600738129 /* BunProProcedure.swift */; };
 		2E14485B201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */; };
 		2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BFFA2200FBC8C00985446 /* DataManager.swift */; };
@@ -230,6 +231,7 @@
 		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGrammarProcedure.swift; sourceTree = "<group>"; };
+		2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Shortcuts.swift"; sourceTree = "<group>"; };
 		2E0F9BB61FCC877600738129 /* BunProProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunProProcedure.swift; sourceTree = "<group>"; };
 		2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportReviewsIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2E1BFFA2200FBC8C00985446 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
+				2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
 				2E67558A1FFFEA2900BD10EB /* Status */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
@@ -1035,6 +1038,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E0EB074217E5300005E8B78 /* NSUserActivity+Shortcuts.swift in Sources */,
 				2EA4612B1FABAA4500B4F3BD /* UserNotificationCenter.swift in Sources */,
 				2EBB70BB20165021001AE42E /* Sentence+Initializer.swift in Sources */,
 				2E14485B201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift in Sources */,

@@ -12,6 +12,7 @@ import ProcedureKit
 import SafariServices
 import CoreData
 
+
 private let updateInterval = TimeInterval(60)
 
 final class StatusTableViewController: UITableViewController {
@@ -304,6 +305,17 @@ final class StatusTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 
                 AppDelegate.setNeedsStatusUpdate()
+            }
+        }
+        
+        if #available(iOS 12.0, *) {
+            switch website {
+            case .study:
+                reviewProcedure.userActivity = NSUserActivity.studyActivity
+            case .cram:
+                reviewProcedure.userActivity = NSUserActivity.cramActivity
+            default:
+                break
             }
         }
         

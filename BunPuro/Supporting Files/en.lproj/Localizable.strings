@@ -76,3 +76,11 @@
 "subscription.unknown" = "Unknown";
 "subscription.subscribed" = "Yes";
 "subscription.unsubscribed" = "No";
+
+// Shortcuts
+
+"shortcut.study.title" = "Start studying";
+"shortcut.study.suggetedphrase" = "Study time";
+
+"shortcut.cram.title" = "Start cramming";
+"shortcut.cram.suggetedphrase" = "Cram time";

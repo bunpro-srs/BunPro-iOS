@@ -14,6 +14,7 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
     
     public let presentingViewController: UIViewController
     public let website: Website
+    public var userActivity: NSUserActivity?
     
     public init(presentingViewController: UIViewController, website: Website = .review) {
         
@@ -38,7 +39,9 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
             
             controller.modalPresentationStyle = .fullScreen
             
-            self.presentingViewController.present(controller, animated: true, completion: nil)
+            self.presentingViewController.present(controller, animated: true) {
+                controller.userActivity = self.userActivity
+            }
         }
     }
     

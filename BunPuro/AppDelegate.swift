@@ -103,6 +103,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        
+        if let type = NSUserActivity.ActivityType(rawValue: userActivityType) {
+            guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }
+                tabbarController.selectedIndex = 0
+            
+            guard let viewController = tabbarController.viewControllers?.first?.content else { return false }
+            
+            switch viewController {
+            case is StatusTableViewController:
+                
+                let statusViewController = viewController as? StatusTableViewController
+                
+                switch type {
+                case .study:
+                    statusViewController?.presentReviewViewController(website: .study)
+                case .cram:
+                    statusViewController?.presentReviewViewController(website: .cram)
+                }
+            case is ReviewViewController:
+                let reviewViewController = viewController as? ReviewViewController
+                
+                switch type {
+                case .study:
+                    reviewViewController?.website = .study
+                case .cram:
+                    reviewViewController?.website = .cram
+                }
+            default: return false
+            }
+        }
+        
+        return false
+    }
+    
     static func setNeedsStatusUpdate() {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
