@@ -346,7 +346,7 @@ final class StatusTableViewController: UITableViewController {
     private func setup(reviews: [Review]?) {
         
         if let reviewDate = reviews?.nextReviewDate, self.nextReviewDate != reviewDate {
-            UserNotificationCenter.shared.scheduleNextReviewNotification(at: reviewDate)
+            UserNotificationCenter.shared.scheduleNextReviewNotification(at: reviewDate, reviewCount: reviews?.count ?? 0)
         }
         
         nextReviewDate = reviews?.nextReviewDate

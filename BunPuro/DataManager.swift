@@ -185,6 +185,8 @@ final class DataManager {
                 
                 if let reviews = reviews {
                     
+                    let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
+                    
                     let importProcedure = ImportReviewsIntoCoreDataProcedure(reviews: reviews)
                     
                     importProcedure.addDidFinishBlockObserver { (_, _) in
@@ -197,7 +199,15 @@ final class DataManager {
                             NotificationCenter.default.post(name: .BunProDidModifyReview, object: nil)
                         }
                         
-                        completion?(.newData)
+                        DispatchQueue.main.async {
+                            let newReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
+                            let hasNewReviews = newReviewsCount > oldReviewsCount
+                            if hasNewReviews {
+                                UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(1.0), reviewCount: newReviewsCount)
+                            }
+                            
+                            completion?(hasNewReviews ? .newData : .noData)
+                        }
                     }
                     
                     self.procedureQueue.add(operation: importProcedure)

@@ -2,7 +2,7 @@
 "notification.review.message" = "New Reviews are available.";
 
 /* No comment provided by engineer. */
-"notification.review.title" = "Reviews";
+"notification.review.title" = "You have %d reviews";
 
 /* The string that indicates that a review is available */
 "reviewtime.now" = "Now";
