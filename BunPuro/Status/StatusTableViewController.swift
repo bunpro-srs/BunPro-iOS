@@ -29,7 +29,6 @@ final class StatusTableViewController: UITableViewController {
     
     private var userFetchedResultsController: NSFetchedResultsController<Account>?
     private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
-    private var jlptFetchedResultsController: NSFetchedResultsController<JLPT>?
     
     deinit {
         
@@ -43,13 +42,11 @@ final class StatusTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor(named: "ModernDark")
         
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
-            
             DispatchQueue.main.async {
                 self?.setup(account: nil)
                 self?.setup(reviews: nil)
@@ -57,14 +54,12 @@ final class StatusTableViewController: UITableViewController {
         }
         
         beginUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProWillBeginUpdating, object: nil, queue: nil) { (_) in
-            
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
             }
         }
         
         endUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProDidEndUpdating, object: nil, queue: nil) { (_) in
-            
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
                 self.refreshControl?.endRefreshing()
@@ -74,18 +69,15 @@ final class StatusTableViewController: UITableViewController {
                 visibleIndexPaths.forEach {
                     guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
                     
-                    let correctedIndexPath = IndexPath(row: $0.row, section: 0)
-                    
-                    let jlpt = self.jlptFetchedResultsController!.object(at: correctedIndexPath)
-                    self.updateJLPTCell(cell, jlpt: jlpt)
+                    let level = 5 - $0.row
+                    let metric = self.metricForLevel(level)
+
+                    self.updateJLPTCell(cell, level: level, metric: metric)
                 }
-                
-//                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
         }
         
         pendingModificationObserver = NotificationCenter.default.addObserver(forName: .BunProDidModifyReview, object: nil, queue: nil) { (_) in
-            
             DispatchQueue.main.async {
                 self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
@@ -93,15 +85,12 @@ final class StatusTableViewController: UITableViewController {
         
         setupUserFetchedResultsController()
         setupReviewsFetchedResultsController()
-        setupJLPTFetchedResultsController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(animated)
         
         if showReviewsOnViewDidAppear {
-            
             showReviewsOnViewDidAppear = false
             
             presentReviewViewController()
@@ -109,19 +98,16 @@ final class StatusTableViewController: UITableViewController {
     }
     
     private func statusCell() -> StatusTableViewCell? {
-        
         let indexPath = IndexPath(row: 0, section: 0)
         
         return tableView.cellForRow(at: indexPath) as? StatusTableViewCell
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        
         AppDelegate.setNeedsStatusUpdate()
     }
     
     private func setupUserFetchedResultsController() {
-        
         let request: NSFetchRequest<Account> = Account.fetchRequest()
         
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
@@ -138,12 +124,11 @@ final class StatusTableViewController: UITableViewController {
     }
     
     private func setupReviewsFetchedResultsController() {
-        
         let request: NSFetchRequest<Review> = Review.fetchRequest()
         
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.updatedDate), ascending: true)]
         
-        request.predicate = NSPredicate(format: "%K < %@", #keyPath(Review.nextReviewDate), Date().tomorrow.tomorrow.nextMidnight as NSDate)
+        request.predicate = NSPredicate(format: "%K < %@ AND %K == true", #keyPath(Review.nextReviewDate), Date().tomorrow.tomorrow.nextMidnight as NSDate, #keyPath(Review.complete))
         
         reviewsFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -156,41 +141,19 @@ final class StatusTableViewController: UITableViewController {
         }
     }
     
-    private func setupJLPTFetchedResultsController() {
-        
-        let request: NSFetchRequest<JLPT> = JLPT.fetchRequest()
-        
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(JLPT.name), ascending: false)]
-        
-        jlptFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        jlptFetchedResultsController?.delegate = self
-        
-        do {
-            try jlptFetchedResultsController?.performFetch()
-        } catch {
-            print(error)
-        }
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return section == 0 ? AppDelegate.isContentAccessable ? 3 : 1 : jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+        return section == 0 ? AppDelegate.isContentAccessable ? 3 : 1 : 4//jlptFetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.section {
         case 0:
-            
             switch indexPath.row {
             case 0:
-                
                 if AppDelegate.isContentAccessable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
                     
@@ -226,7 +189,6 @@ final class StatusTableViewController: UITableViewController {
                 return cell
                 
             default:
-                
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
                 
                 cell.titleLabel.text = NSLocalizedString("status.study", comment: "The title of the study button")
@@ -237,17 +199,16 @@ final class StatusTableViewController: UITableViewController {
         default:
             let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
             
-            let correctedIndexPath = IndexPath(row: indexPath.row, section: 0)
+            let level = 5 - indexPath.row
+            let metric = metricForLevel(5 - indexPath.row)
             
-            let jlpt = jlptFetchedResultsController!.object(at: correctedIndexPath)
-            updateJLPTCell(cell, jlpt: jlpt)
+            updateJLPTCell(cell, level: level, metric: metric)
             
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -262,14 +223,12 @@ final class StatusTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                
                 if AppDelegate.isContentAccessable {
                     if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
                         presentReviewViewController()
@@ -283,11 +242,9 @@ final class StatusTableViewController: UITableViewController {
                 }
                 
             case 1:
-                
                 presentReviewViewController(website: .cram)
                 
             case 2:
-                
                 presentReviewViewController(website: .study)
                 
             default: break
@@ -297,13 +254,10 @@ final class StatusTableViewController: UITableViewController {
     }
     
     func presentReviewViewController(website: Website = .review) {
-        
         let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: tabBarController!, website: website)
         
         reviewProcedure.completionBlock = {
-            
             DispatchQueue.main.async {
-                
                 AppDelegate.setNeedsStatusUpdate()
             }
         }
@@ -322,18 +276,37 @@ final class StatusTableViewController: UITableViewController {
         Server.add(procedure: reviewProcedure)
     }
     
-    private func signupForTrial() {
+    private func metricForLevel(_ level: Int) -> (complete: Int, max: Int, progress: Float) {
+        let completeFetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
+        completeFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.level), "JLPT\(level)")
         
+        do {
+            let grammarPoints = try AppDelegate.coreDataStack.managedObjectContext.fetch(completeFetchRequest)
+            
+            let complete = grammarPoints.filter({ $0.review?.complete == true }).count
+            let max = grammarPoints.count
+            
+            var progress: Float = 0.0
+            
+            if max > 0, max >= complete {
+                progress = Float(complete) / Float(max)
+            }
+            
+            return (complete, max, progress)
+        } catch {
+            return (0, 0, 0.0)
+        }
+    }
+    
+    private func signupForTrial() {
         AppDelegate.signupForTrial()
     }
     
     private func signup() {
-        
         AppDelegate.signup()
     }
     
     private func setup(account: Account?) {
-        
         navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
         
         tableView.reloadSections(IndexSet(integer: 0), with: .none)
@@ -341,31 +314,28 @@ final class StatusTableViewController: UITableViewController {
     
     private var lastUpdateDate: Date?
     
-    private var nextReviewsCount: Int = 0
-    
     private func setup(reviews: [Review]?) {
-        
         if let reviewDate = reviews?.nextReviewDate, self.nextReviewDate != reviewDate {
             UserNotificationCenter.shared.scheduleNextReviewNotification(at: reviewDate, reviewCount: reviews?.count ?? 0)
         }
         
-        nextReviewDate = reviews?.nextReviewDate
-        self.reviews = reviews
-        if let nextReviewDate = nextReviewDate {
-            nextReviewsCount = reviews?.reviews(at: nextReviewDate).count ?? 0
+        DispatchQueue.default.async {
+            self.nextReviewDate = reviews?.nextReviewDate
+            
+            self.reviews = reviews
+            self.lastUpdateDate = Date()
+            
+            DispatchQueue.main.async {
+                if let cell = self.statusCell() {
+                    self.updateStatusCell(cell)
+                }
+                
+                AppDelegate.updateAppBadgeIcon()
+            }
         }
-        lastUpdateDate = Date()
-        
-        if let cell = statusCell() {
-            updateStatusCell(cell)
-        }
-
-        AppDelegate.updateAppBadgeIcon()
     }
     
     private func updateStatusCell(_ cell: StatusTableViewCell) {
-        cell.nextReviewDate = nextReviewDate
-        
         if let date = nextReviewDate {
             
             if date < Date() {
@@ -377,16 +347,17 @@ final class StatusTableViewController: UITableViewController {
             cell.nextReviewsCount = 0
         }
         
+        cell.nextReviewDate = nextReviewDate
+        
         cell.nextHourReviewCount = reviews?.reviewsWithinNextHour
         cell.nextDayReviewCount = reviews?.reviewsWithNext24Hours
         cell.lastUpdateDate = lastUpdateDate
     }
     
-    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, jlpt: JLPT) {
-        
-        cell.titleLabel.text = jlpt.name
-        cell.subtitleLabel.text = jlpt.localizedProgressString
-        cell.setProgress(jlpt.progress, animated: true)
+    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int, metric: (complete: Int, max: Int, progress: Float)) {
+        cell.titleLabel.text = "N\(level)"
+        cell.subtitleLabel.text = "\(metric.complete) / \(metric.max)"
+        cell.setProgress(metric.progress, animated: false)
     }
 }
 
@@ -397,40 +368,27 @@ extension StatusTableViewController: SegueHandler {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else { return }
         
         switch segueIdentifier(for: segue) {
         case .showJLPT:
             
-            let correctedIndexPath = IndexPath(row: indexPath.row, section: 0)
-            let jlpt = jlptFetchedResultsController?.object(at: correctedIndexPath)
+            let level = 5 - indexPath.row
             
             let destination = segue.destination.content as? GrammarLevelTableViewController
-            destination?.level = Int(jlpt?.level ?? 0)
-            destination?.title = jlpt?.name
+            destination?.level = level
+            destination?.title = "N\(level)"
         }
     }
 }
 
 extension StatusTableViewController: NSFetchedResultsControllerDelegate {
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if controller == userFetchedResultsController, let account = userFetchedResultsController?.fetchedObjects?.first {
-            
             setup(account: account)
         } else if controller == reviewsFetchedResultsController {
-            
             setup(reviews: reviewsFetchedResultsController?.fetchedObjects)
-        } else if controller == jlptFetchedResultsController {
-            
-            let updatedIndexPath = IndexPath(row: indexPath!.row, section: 1)
-            
-            if let cell = tableView.cellForRow(at: updatedIndexPath) as? JLPTProgressTableViewCell, let jlpt = anObject as? JLPT {
-            
-                updateJLPTCell(cell, jlpt: jlpt)
-            }
         }
     }
 }
@@ -442,38 +400,9 @@ extension StatusTableViewController: SFSafariViewControllerDelegate {
     }
 }
 
-private extension Lesson {
-    
-    var finishedGrammarCount: Int {
-        return Int(Float(grammar?.count ?? 0) * progress)
-    }
-}
-
-private extension JLPT {
-    
-    var finishedLessonsCount: Int {
-        return (lessons?.allObjects as? [Lesson])?.reduce(0, { $0 + $1.finishedGrammarCount }) ?? 0
-    }
-    
-    var lessonCount: Int {
-        return (lessons?.allObjects as? [Lesson])?.reduce(0, { $0 + ($1.grammar?.count ?? 0) }) ?? 0
-    }
-    
-    var progress: Float {
-        guard lessonCount > 0 else { return 0.0 }
-        
-        return Float(finishedLessonsCount) / Float(lessonCount)
-    }
-    
-    var localizedProgressString: String {
-        return "\(finishedLessonsCount) / \(lessonCount)"
-    }
-}
-
 extension Collection where Iterator.Element == Review {
     
     public var nextReviewDate: Date? {
-        
         let allDates = filter { $0.complete }.compactMap { $0.nextReviewDate }
         
         let tmp = allDates.reduce(Date.distantFuture, { $0 < $1 ? $0 : $1 })
@@ -481,75 +410,46 @@ extension Collection where Iterator.Element == Review {
     }
     
     public func reviews(at date: Date) -> [Review] {
-        
-        let result = filter({ $0.complete && $0.nextReviewDate!.minutes(from: date) <= 0 })
+        let result = filter { $0.complete && $0.nextReviewDate!.minutes(from: date) <= 0 }
         return result
     }
     
     public var reviewsWithinNextHour: Int {
-        
         let date = Date()
-        let result = filter({ $0.complete && $0.nextReviewDate!.minutes(from: date) < 60 })
+        let result = filter { $0.complete && $0.nextReviewDate!.minutes(from: date) < 60 }
         return result.count
     }
     
     public var reviewsWithNext24Hours: Int {
-        
         let date = Date()
-        let result = filter({ $0.complete && $0.nextReviewDate!.hours(from: date) <= 23 })
+        let result = filter { $0.complete && $0.nextReviewDate!.hours(from: date) <= 23 }
         return result.count
-    }
-    
-    public var reviewsTomorrow: Int {
-        
-        return filter({ $0.complete && $0.nextReviewDate!.isTomorrow() }).count
     }
 }
 
 extension Date {
     
     func minutes(from date: Date) -> Int {
-        
         return Calendar.autoupdatingCurrent.dateComponents([.minute], from: date, to: self).minute!
     }
     
     func hours(from date: Date) -> Int {
-        
         return Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
     }
     
     func isTomorrow() -> Bool {
-        
         return Calendar.autoupdatingCurrent.isDateInTomorrow(self)
     }
     
-    var yesterday: Date {
-        
-        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: noon)!
-    }
-    
     var tomorrow: Date {
-        
         return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
     }
     
     var noon: Date {
-        
         return Calendar.autoupdatingCurrent.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
     
     var nextMidnight: Date {
-        
         return Calendar.autoupdatingCurrent.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
-    }
-    
-    var month: Int {
-        
-        return Calendar.autoupdatingCurrent.component(.month,  from: self)
-    }
-    
-    var isLastDayOfMonth: Bool {
-        
-        return tomorrow.month != month
     }
 }

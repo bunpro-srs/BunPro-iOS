@@ -13,13 +13,13 @@ import CoreData
 
 final class UpdateGrammarProcedure: GroupProcedure {
     
-    private let lessonProcedure: LessonsProcedure
-    private let importProcedure: ImportLessonsIntoCoreDataProcedure
+    private let lessonProcedure: GrammarPointsProcedure
+    private let importProcedure: ImportGrammarPointsIntoCoreDataProcedure
     
     init(presentingViewController: UIViewController) {
         
-        lessonProcedure = LessonsProcedure(presentingViewController: presentingViewController)
-        importProcedure = ImportLessonsIntoCoreDataProcedure()
+        lessonProcedure = GrammarPointsProcedure(presentingViewController: presentingViewController)
+        importProcedure = ImportGrammarPointsIntoCoreDataProcedure()
         importProcedure.injectResult(from: lessonProcedure)
         
         super.init(operations: [lessonProcedure, importProcedure])
@@ -28,9 +28,9 @@ final class UpdateGrammarProcedure: GroupProcedure {
     }
 }
 
-fileprivate final class ImportLessonsIntoCoreDataProcedure: Procedure, InputProcedure {
+fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure, InputProcedure {
     
-    var input: Pending<[BPKJlpt]> = .pending
+    var input: Pending<[BPKGrammar]> = .pending
     
     let stack: CoreDataStack
     
@@ -44,12 +44,12 @@ fileprivate final class ImportLessonsIntoCoreDataProcedure: Procedure, InputProc
     override func execute() {
         
         guard !isCancelled else { return }
-        guard let jlpts = input.value else { return }
+        guard let grammarPoints = input.value else { return }
         
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
 
-            jlpts.forEach { JLPT(jlpt: $0, context: context) }
+            grammarPoints.forEach { Grammar(grammar: $0, context: context) }
 
             do {
                 try context.save()

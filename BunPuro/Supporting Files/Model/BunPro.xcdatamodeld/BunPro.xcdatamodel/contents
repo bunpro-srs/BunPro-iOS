@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="18A365a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="bunnyMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="englishMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -21,36 +21,14 @@
         <attribute name="formal" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isNew" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lessonIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="structure" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="yomikata" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="lesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="grammar" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Link" inverseName="grammar" inverseEntity="Link" syncable="YES"/>
         <relationship name="sentences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sentence" inverseName="grammar" inverseEntity="Sentence" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="identifier"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
-    <entity name="JLPT" representedClassName="JLPT" syncable="YES" codeGenerationType="class">
-        <attribute name="level" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="jlpt" inverseEntity="Lesson" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="level"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
-    <entity name="Lesson" representedClassName="Lesson" syncable="YES" codeGenerationType="class">
-        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="updatedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="grammar" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Grammar" inverseName="lesson" inverseEntity="Grammar" syncable="YES"/>
-        <relationship name="jlpt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JLPT" inverseName="lessons" inverseEntity="JLPT" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
@@ -113,9 +91,7 @@
     </entity>
     <elements>
         <element name="Account" positionX="-54" positionY="72" width="128" height="165"/>
-        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="225"/>
-        <element name="JLPT" positionX="-63" positionY="18" width="128" height="90"/>
-        <element name="Lesson" positionX="-54" positionY="27" width="128" height="135"/>
+        <element name="Grammar" positionX="-63" positionY="-18" width="128" height="240"/>
         <element name="Link" positionX="-54" positionY="45" width="128" height="165"/>
         <element name="Review" positionX="-54" positionY="90" width="128" height="285"/>
         <element name="Sentence" positionX="-54" positionY="63" width="128" height="180"/>

@@ -40,6 +40,7 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         guard let token = Server.token else { cancel(withError: ServerError.noAPIToken); super.execute(); return }
         
         var request = URLRequest(url: url)
+//        print(request)
         
         request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
         

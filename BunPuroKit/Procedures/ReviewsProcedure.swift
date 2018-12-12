@@ -45,10 +45,7 @@ private final class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
 
 public final class ReviewsProcedure: GroupProcedure, OutputProcedure {
     
-    public var output: Pending<ProcedureResult<[BPKReview]>> {
-        get { return transformProcedure.output }
-        set { assertionFailure("\(#function) should never be called.") }
-    }
+    public var output: Pending<ProcedureResult<[BPKReview]>> = .pending
     
     public let completion: (([BPKReview]?, Error?) -> Void)?
     
@@ -64,5 +61,7 @@ public final class ReviewsProcedure: GroupProcedure, OutputProcedure {
         transformProcedure.injectResult(from: downloadProcedure!)
         
         super.init(operations: [downloadProcedure!, transformProcedure])
+        
+        bind(from: transformProcedure)
     }
 }

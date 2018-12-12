@@ -46,6 +46,14 @@ extension UITableView {
         return cell
     }
     
+    func dequeueReusableCell<T: UITableViewCell>() -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier) as? T else {
+            fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
+        }
+        return cell
+    }
+    
+    
     func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T {
         guard let view = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T else {
             fatalError("Could not dequeue header or footer view with identifier: \(T.reuseIdentifier)")

@@ -23,14 +23,14 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         
         fetchRequest.predicate = searchPredicate()
         
-        let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.jlpt.level), ascending: false)
-        let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lesson.order), ascending: true)
+        let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.level), ascending: false)
+        let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lessonIdentifier), ascending: true)
         let idSort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
         fetchRequest.sortDescriptors = [jlptSort, lessonSort, idSort]
         
         let controller = NSFetchedResultsController<Grammar>(fetchRequest: fetchRequest,
                                                              managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-                                                             sectionNameKeyPath: #keyPath(Grammar.lesson.jlpt.name),
+                                                             sectionNameKeyPath: #keyPath(Grammar.level),
                                                              cacheName: nil)
         controller.delegate = self
         
@@ -156,16 +156,41 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         return cell
     }
     
+    private func progress(count: Int, max: Int) -> Float {
+        guard max > 0 else { return 0 }
+        return Float(count) / Float(max)
+    }
+    
+    private func correctLevel(_ level: Int) -> Int {
+        let mod = level % 10
+        return mod == 0 ? 10 : mod
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let name = fetchedResultsController?.sections?[section].name else { return nil }
         
-        let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
+        let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
         
-        view?.titleLabel.text = fetchedResultsController.sections?[section].name ?? "Unknown"
-        return view
+        let grammarPoints = fetchedResultsController.fetchedObjects?.filter({ $0.level == name }) ?? []
+        let grammarCount = grammarPoints.count
+        let finishedGrammarCount = grammarPoints.filter({ $0.review?.complete == true }).count
+        
+        cell.titleLabel.text = name.replacingOccurrences(of: "JLPT", with: "N")
+        cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
+        cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
+        
+        return cell.contentView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 66
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["5", "4", "3", "2", "1"]
+        return fetchedResultsController?.sections?.compactMap { section in
+            let name = section.name.replacingOccurrences(of: "JLPT", with: "")
+            return name
+        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

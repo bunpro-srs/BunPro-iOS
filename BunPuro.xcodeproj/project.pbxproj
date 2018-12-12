@@ -11,9 +11,8 @@
 		2E01D2001FB24FD300E8632D /* UserProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */; };
 		2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2011FB2503000E8632D /* ProgressProcedure.swift */; };
 		2E01D2041FB2507F00E8632D /* ReviewsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */; };
-		2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */; };
+		2E01D2061FB251ED00E8632D /* GrammarPointsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2051FB251ED00E8632D /* GrammarPointsProcedure.swift */; };
 		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
-		2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
 		2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02BF2006A95C005D33FD /* InitialDatabase.json */; };
 		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
@@ -46,8 +45,6 @@
 		2E3D43BE201B53EB00B4D5EF /* Sentence+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */; };
 		2E3D43BF201B53EB00B4D5EF /* Link+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BC201654F9001AE42E /* Link+Initializer.swift */; };
 		2E3D43C0201B53EB00B4D5EF /* Grammar+initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */; };
-		2E3D43C1201B53EB00B4D5EF /* Lesson+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C020165642001AE42E /* Lesson+Initializer.swift */; };
-		2E3D43C2201B53EB00B4D5EF /* JLPT+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */; };
 		2E3D43C3201B53EB00B4D5EF /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
 		2E3D43C4201B53FE00B4D5EF /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
 		2E3D43C8201B559A00B4D5EF /* BunPro.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C5201B559A00B4D5EF /* BunPro.sqlite-shm */; };
@@ -117,8 +114,6 @@
 		2EBB70BB20165021001AE42E /* Sentence+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */; };
 		2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BC201654F9001AE42E /* Link+Initializer.swift */; };
 		2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */; };
-		2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C020165642001AE42E /* Lesson+Initializer.swift */; };
-		2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */; };
 		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
 		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2ECBE3E5203B588200F20EE3 /* FuriganaLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E1203B588100F20EE3 /* FuriganaLayoutManager.swift */; };
@@ -226,9 +221,8 @@
 		2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProcedure.swift; sourceTree = "<group>"; };
 		2E01D2011FB2503000E8632D /* ProgressProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressProcedure.swift; sourceTree = "<group>"; };
 		2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsProcedure.swift; sourceTree = "<group>"; };
-		2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsProcedure.swift; sourceTree = "<group>"; };
+		2E01D2051FB251ED00E8632D /* GrammarPointsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsProcedure.swift; sourceTree = "<group>"; };
 		2E01D2071FB2524500E8632D /* StatusProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProcedure.swift; sourceTree = "<group>"; };
-		2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPointsTableViewController.swift; sourceTree = "<group>"; };
 		2E01D2111FB2686600E8632D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGrammarProcedure.swift; sourceTree = "<group>"; };
 		2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Shortcuts.swift"; sourceTree = "<group>"; };
@@ -325,8 +319,6 @@
 		2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sentence+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70BC201654F9001AE42E /* Link+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Link+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grammar+initializer.swift"; sourceTree = "<group>"; };
-		2EBB70C020165642001AE42E /* Lesson+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+Initializer.swift"; sourceTree = "<group>"; };
-		2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLPT+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2ECBE3E1203B588100F20EE3 /* FuriganaLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuriganaLayoutManager.swift; sourceTree = "<group>"; };
@@ -417,7 +409,7 @@
 				2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */,
 				2E01D2011FB2503000E8632D /* ProgressProcedure.swift */,
 				2E01D2031FB2507F00E8632D /* ReviewsProcedure.swift */,
-				2E01D2051FB251ED00E8632D /* LessonsProcedure.swift */,
+				2E01D2051FB251ED00E8632D /* GrammarPointsProcedure.swift */,
 				2E01D2071FB2524500E8632D /* StatusProcedure.swift */,
 				2E0F9BB61FCC877600738129 /* BunProProcedure.swift */,
 				2E21B3151FD9D4E500FE8320 /* SettingsProcedure.swift */,
@@ -537,7 +529,6 @@
 			children = (
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
 				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
-				2E01D20F1FB25D6F00E8632D /* GrammarPointsTableViewController.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -679,8 +670,6 @@
 				2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */,
 				2EBB70BC201654F9001AE42E /* Link+Initializer.swift */,
 				2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */,
-				2EBB70C020165642001AE42E /* Lesson+Initializer.swift */,
-				2EBB70C2201656F2001AE42E /* JLPT+Initializer.swift */,
 				2EBB70C420165DF6001AE42E /* Review+Initializer.swift */,
 				2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */,
 				2E3D43C5201B559A00B4D5EF /* BunPro.sqlite-shm */,
@@ -1008,14 +997,12 @@
 				2E3D43BC201B538C00B4D5EF /* UpdateGrammarProcedure.swift in Sources */,
 				2E3D43C0201B53EB00B4D5EF /* Grammar+initializer.swift in Sources */,
 				2E3D43C3201B53EB00B4D5EF /* Review+Initializer.swift in Sources */,
-				2E3D43C1201B53EB00B4D5EF /* Lesson+Initializer.swift in Sources */,
 				2E3D43A8201B50E400B4D5EF /* ViewController.swift in Sources */,
 				2E3D43BD201B53EB00B4D5EF /* Account+Initializer.swift in Sources */,
 				2E3D43A6201B50E400B4D5EF /* AppDelegate.swift in Sources */,
 				2E3D43BF201B53EB00B4D5EF /* Link+Initializer.swift in Sources */,
 				2E3D43C4201B53FE00B4D5EF /* String+HTMLAttributedString.swift in Sources */,
 				2E3D43BE201B53EB00B4D5EF /* Sentence+Initializer.swift in Sources */,
-				2E3D43C2201B53EB00B4D5EF /* JLPT+Initializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,7 +1035,6 @@
 				2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */,
 				2ECBE3E5203B588200F20EE3 /* FuriganaLayoutManager.swift in Sources */,
 				2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */,
-				2EBB70C3201656F2001AE42E /* JLPT+Initializer.swift in Sources */,
 				2ECBE3E8203B588200F20EE3 /* FuriganaTextView.swift in Sources */,
 				2E1DCA251FC49A72002E67D6 /* GrammarViewController.swift in Sources */,
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
@@ -1065,7 +1051,6 @@
 				2E78A1642017AF2B0040D928 /* StreakInfoCell.swift in Sources */,
 				2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */,
 				2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */,
-				2E01D2101FB25D6F00E8632D /* GrammarPointsTableViewController.swift in Sources */,
 				2ECBE3E6203B588200F20EE3 /* StringFuriganaExt.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */,
@@ -1079,7 +1064,6 @@
 				2E994AD021294A9D007C4DDB /* ResetReviewsProcedure.swift in Sources */,
 				2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */,
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
-				2EBB70C120165642001AE42E /* Lesson+Initializer.swift in Sources */,
 				2E7B36922078144B00542BB8 /* GrammarHeaderTableViewCell.swift in Sources */,
 				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
@@ -1116,7 +1100,7 @@
 				2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */,
 				2EB4564B1FE4559B003CDD65 /* LogoutProcedure.swift in Sources */,
 				2E59791620C6EAAD0007E9BE /* ReusableView+NibLoadableView.swift in Sources */,
-				2E01D2061FB251ED00E8632D /* LessonsProcedure.swift in Sources */,
+				2E01D2061FB251ED00E8632D /* GrammarPointsProcedure.swift in Sources */,
 				2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */,
 				2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */,
 				2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */,

@@ -70,7 +70,7 @@ public struct BPKGrammar: Codable {
     public let title: String
     public let createdDate: Date
     public let updatedDate: Date
-    public let alternate: String
+    public let alternate: String?
     public let meaning: String
     public let caution: String
     public let structure: String
