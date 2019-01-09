@@ -22,7 +22,7 @@ extension Grammar {
         formal = grammar.formal
         identifier = grammar.identifier
         level = grammar.level
-        lessonIdentifier = grammar.lessonIdentifier
+        lessonIdentifier = String(grammar.lessonIdentifier)
         isNew = grammar.isNew
         meaning = grammar.meaning
         structure = grammar.structure

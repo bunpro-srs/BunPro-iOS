@@ -63,9 +63,14 @@ final public class ReviewViewController: UIViewController, WKNavigationDelegate 
     private func loadWebsite() {
         activityIndicatorView?.startAnimating()
         
+        guard let token = Server.token else {
+            activityIndicatorView.stopAnimating()
+            return
+        }
+        
         var request = URLRequest(url: website.url)
         
-        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
         webView?.alpha = 0.0
         webView?.load(request)
     }

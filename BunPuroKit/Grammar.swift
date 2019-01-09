@@ -76,7 +76,7 @@ public struct BPKGrammar: Codable {
     public let structure: String
     public let formal: Bool
     public let level: String
-    public let lessonIdentifier: String
+    public let lessonIdentifier: Int
     public let isNew: Bool
     public let yomikata: String
     public let exampleSentences: [BPKSentence]

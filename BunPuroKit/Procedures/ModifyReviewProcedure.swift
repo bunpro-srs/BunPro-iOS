@@ -12,6 +12,10 @@ import ProcedureKitNetwork
 
 public final class ModifyReviewProcedure: GroupProcedure {
     
+    enum ModificationError: Error {
+        case noToken
+    }
+    
     public enum ModificationType {
         /// Provide the Grammar identifier
         case add(Int64)
@@ -43,6 +47,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
     override public func execute() {
         
         guard !isCancelled else { return }
+        guard let token = Server.token else { finish(withError: ModificationError.noToken); return }
         
         let urlString: String
         var components: URLComponents
@@ -76,7 +81,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "POST"
         
-        request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
+        request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
         
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         
