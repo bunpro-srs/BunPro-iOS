@@ -62,6 +62,8 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
                         Server.reset()
                     case .dataCorrupted(_):
                         break // Seems to be a bug in swift...
+                    @unknown default:
+                        break
                     }
                 }
             }

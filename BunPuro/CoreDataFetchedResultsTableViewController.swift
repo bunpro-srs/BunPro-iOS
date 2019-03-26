@@ -56,6 +56,8 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+        @unknown default:
+            break
         }
     }
     

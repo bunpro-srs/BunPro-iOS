@@ -47,7 +47,12 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, T> {
             
-//            print(try JSONSerialization.jsonObject(with: $0, options: [.allowFragments]))
+            do {
+                _ = try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
+            } catch {
+                print(try JSONSerialization.jsonObject(with: $0, options: [.allowFragments]))
+            }
+//
             return try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)

@@ -81,6 +81,25 @@ public struct BPKGrammar: Codable {
     public let yomikata: String
     public let exampleSentences: [BPKSentence]
     public let supplementalLinks: [BPKLink]
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        identifier = try values.decode(Int64.self, forKey: .identifier)
+        title = (try? values.decode(String.self, forKey: .title)) ?? "This is a faulty grammar point, sorry for that... ._."
+        createdDate = try values.decode(Date.self, forKey: .createdDate)
+        updatedDate = try values.decode(Date.self, forKey: .updatedDate)
+        alternate = try? values.decode(String.self, forKey: .alternate)
+        meaning = (try? values.decode(String.self, forKey: .meaning)) ?? ""
+        caution = (try? values.decode(String.self, forKey: .caution)) ?? ""
+        structure = (try? values.decode(String.self, forKey: .structure)) ?? ""
+        formal = try values.decode(Bool.self, forKey: .formal)
+        level = (try? values.decode(String.self, forKey: .level)) ?? "0"
+        lessonIdentifier = (try? values.decode(Int.self, forKey: .lessonIdentifier)) ?? 0
+        isNew = try values.decode(Bool.self, forKey: .isNew)
+        yomikata = (try? values.decode(String.self, forKey: .yomikata)) ?? ""
+        exampleSentences = try values.decode([BPKSentence].self, forKey: .exampleSentences)
+        supplementalLinks = try values.decode([BPKLink].self, forKey: .supplementalLinks)
+    }
 }
 
 public struct BPKLesson: Codable {

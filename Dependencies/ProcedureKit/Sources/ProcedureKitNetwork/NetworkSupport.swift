@@ -283,7 +283,7 @@ public enum HTTPStatusCode: Int, CustomStringConvertible {
 
 public extension HTTPURLResponse {
 
-    public var code: HTTPStatusCode? {
+    var code: HTTPStatusCode? {
         return HTTPStatusCode(rawValue: statusCode)
     }
 }

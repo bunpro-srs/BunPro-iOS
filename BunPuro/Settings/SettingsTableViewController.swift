@@ -11,6 +11,7 @@ import CoreData
 import ProcedureKit
 import BunPuroKit
 import SafariServices
+import MessageUI
 
 final class SettingsTableViewController: UITableViewController {
     
@@ -35,6 +36,7 @@ final class SettingsTableViewController: UITableViewController {
         case contact
         case privacy
         case terms
+        case debug
     }
     
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
@@ -193,6 +195,33 @@ final class SettingsTableViewController: UITableViewController {
                 present(customSafariViewController(url: url), animated: true)
 
             case .subscription, .empty: break
+            case .debug:
+                let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "%K <= %@ && complete = true", #keyPath(Review.nextReviewDate), NSDate())
+                fetchRequest.sortDescriptors = [
+                    NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
+                ]
+                
+                var string = ""
+                
+                do {
+                    let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
+                    
+                    string = reviews.description
+                } catch {
+                    print(error)
+                    
+                    string = String(describing: error)
+                }
+                
+                let emailViewController = MFMailComposeViewController()
+                emailViewController.setSubject("BunPro bad reviews")
+                emailViewController.setMessageBody(string, isHTML: true)
+                emailViewController.setToRecipients(["rion-kaneshiro@gmx.net"])
+                
+                emailViewController.mailComposeDelegate = self
+                
+                present(emailViewController, animated: true, completion: nil)
             }
             
         case .logout:
@@ -216,6 +245,20 @@ final class SettingsTableViewController: UITableViewController {
                 present(controller, animated: true, completion: nil)
             default: break
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch Section(rawValue: indexPath.section)! {
+        case .subscription:
+            switch Info(rawValue: indexPath.row)! {
+            case .debug:
+                return 0
+            default:
+                return super.tableView(tableView, heightForRowAt: indexPath)
+            }
+        default:
+            return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
@@ -278,6 +321,13 @@ final class SettingsTableViewController: UITableViewController {
         safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
         
         return safariViewController
+    }
+}
+
+extension SettingsTableViewController: UINavigationControllerDelegate { }
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

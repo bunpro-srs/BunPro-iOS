@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -278,16 +278,16 @@
                                                     <rect key="frame" x="11" y="12" width="341" height="60"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ouV-DG-3f6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="297" height="52.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="309" height="52.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgB-cu-9Xo">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="297" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwI-7D-wMw">
-                                                                    <rect key="frame" x="0.0" y="32" width="297" height="20.333333333333329"/>
+                                                                    <rect key="frame" x="0.0" y="32" width="309" height="20.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -295,7 +295,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-Yv-V00">
-                                                            <rect key="frame" x="305" y="0.0" width="36" height="36"/>
+                                                            <rect key="frame" x="317" y="0.0" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="cSf-Yv-V00" secondAttribute="height" multiplier="1:1" id="LPV-7n-De2"/>
                                                             </constraints>
@@ -415,7 +415,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="Background"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="qn0-jz-P9c">
-                            <rect key="frame" x="0.0" y="685" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="729" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -897,12 +897,55 @@
                                             <outlet property="nameLabel" destination="sUx-Ui-3nP" id="NRI-Zd-Gp3"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="OuZ-Kb-RNU" customClass="DetailCell" customModule="BunPuro" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="547" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OuZ-Kb-RNU" id="gAt-Q1-GXS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMo-p4-PAh" customClass="CorneredView" customModule="BunPuro" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="1" width="367" height="43"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOx-Wv-PeQ">
+                                                            <rect key="frame" x="11" y="12" width="345" height="19"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Log current reviews (Debug)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqb-p6-CBx">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="19"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                    <color key="textColor" name="Main Tint"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="gOx-Wv-PeQ" firstAttribute="top" secondItem="ZMo-p4-PAh" secondAttribute="top" constant="12" id="7cW-Ym-QG7"/>
+                                                        <constraint firstItem="gOx-Wv-PeQ" firstAttribute="leading" secondItem="ZMo-p4-PAh" secondAttribute="leading" constant="11" id="iWA-Th-2GC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gOx-Wv-PeQ" secondAttribute="trailing" constant="11" id="pFL-Kx-lWn"/>
+                                                        <constraint firstAttribute="bottom" secondItem="gOx-Wv-PeQ" secondAttribute="bottom" constant="12" id="sWx-1f-sdf"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZMo-p4-PAh" secondAttribute="trailing" constant="-12" id="6Op-NW-bGx"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZMo-p4-PAh" secondAttribute="bottom" id="W6d-Sh-cXH"/>
+                                                <constraint firstItem="ZMo-p4-PAh" firstAttribute="leading" secondItem="gAt-Q1-GXS" secondAttribute="leadingMargin" constant="-12" id="cj3-Ky-d1X"/>
+                                                <constraint firstItem="ZMo-p4-PAh" firstAttribute="top" secondItem="gAt-Q1-GXS" secondAttribute="top" constant="1" id="k07-Sx-Lib"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="sUx-Ui-3nP" id="bzI-E2-dhV"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="kYw-Pb-uem">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="SSO-Uh-ZhS" customClass="DetailCell" customModule="BunPuro" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="647" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SSO-Uh-ZhS" id="kcT-WU-hBg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1122,43 +1165,43 @@
                                             <rect key="frame" x="4" y="0.0" width="367" height="54"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jaO-jk-auu">
-                                                    <rect key="frame" x="-54.666666666666657" y="12" width="476.33333333333326" height="30"/>
+                                                    <rect key="frame" x="17.666666666666657" y="12" width="332" height="30"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="6QN-Hn-xUQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="0.0" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="HK8-BV-M09">
-                                                            <rect key="frame" x="40" y="0.0" width="36.333333333333343" height="30"/>
+                                                            <rect key="frame" x="28" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="cAR-3i-kBA">
-                                                            <rect key="frame" x="80.333333333333329" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="56" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="6CE-dp-XPV">
-                                                            <rect key="frame" x="120.33333333333334" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="84" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="KZn-sp-QOL">
-                                                            <rect key="frame" x="160.33333333333334" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="111.99999999999999" y="3" width="24.000000000000014" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="Vbn-cp-bvc">
-                                                            <rect key="frame" x="200.33333333333331" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="140" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="wks-pP-cgY">
-                                                            <rect key="frame" x="240.33333333333331" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="168" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-ml-olh">
-                                                            <rect key="frame" x="280.33333333333331" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="196" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="baV-YM-4TV">
-                                                            <rect key="frame" x="320.33333333333337" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="224" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="0Np-nn-iSz">
-                                                            <rect key="frame" x="360.33333333333337" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="252" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="UIO-Wt-xJg">
-                                                            <rect key="frame" x="400.33333333333337" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="280" y="3" width="24" height="24"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="nXA-vj-fRw">
-                                                            <rect key="frame" x="440.33333333333337" y="0.0" width="36" height="30"/>
+                                                            <rect key="frame" x="308" y="3" width="24" height="24"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -1213,16 +1256,16 @@
                                                     <rect key="frame" x="11" y="12" width="345" height="150"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MpD-9b-8y5">
-                                                            <rect key="frame" x="0.0" y="54" width="305" height="42"/>
+                                                            <rect key="frame" x="0.0" y="54" width="312" height="42"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWH-mN-ikT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfV-eP-md1">
-                                                                    <rect key="frame" x="0.0" y="24" width="305" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="312" height="18"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1230,7 +1273,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBI-Mf-UdG">
-                                                            <rect key="frame" x="305" y="55" width="40" height="40"/>
+                                                            <rect key="frame" x="312" y="58.666666666666671" width="33" height="33"/>
                                                             <state key="normal" image="play"/>
                                                             <connections>
                                                                 <action selector="didPressCustomAction:" destination="FpW-5l-ag1" eventType="touchUpInside" id="amg-Q7-4VP"/>
@@ -1372,9 +1415,9 @@
                                             <rect key="frame" x="4" y="4" width="367" height="84"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW8-8x-13z">
-                                                    <rect key="frame" x="0.0" y="47.666666666666657" width="63.666666666666664" height="36.333333333333343"/>
+                                                    <rect key="frame" x="0.0" y="47.333333333333343" width="63.333333333333336" height="36.666666666666657"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xY2-8M-bJ3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="36.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="36.666666666666657"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvl-0b-ytV">
@@ -1525,16 +1568,16 @@
                                                     <rect key="frame" x="11" y="12" width="341" height="60"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sXn-MS-9hq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="297" height="52.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="309" height="52.333333333333336"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoh-zG-3Nh">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="297" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <color key="textColor" name="Main Tint"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmv-DL-ZEx">
-                                                                    <rect key="frame" x="0.0" y="32" width="297" height="20.333333333333329"/>
+                                                                    <rect key="frame" x="0.0" y="32" width="309" height="20.333333333333329"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1542,7 +1585,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bunpro-hanko-review-complete_small" translatesAutoresizingMaskIntoConstraints="NO" id="pC7-Uo-I3q">
-                                                            <rect key="frame" x="305" y="0.0" width="36" height="36"/>
+                                                            <rect key="frame" x="317" y="0.0" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="pC7-Uo-I3q" secondAttribute="height" multiplier="1:1" id="Ib1-rn-RCo"/>
                                                             </constraints>
@@ -1666,13 +1709,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bunpro-hanko-review-complete_small" width="36" height="36"/>
-        <image name="play" width="40" height="40"/>
+        <image name="bunpro-hanko-review-complete_small" width="24" height="24"/>
+        <image name="play" width="33" height="33"/>
         <image name="tab_dashboard_active" width="25" height="20.333333969116211"/>
         <image name="tab_dashboard_inactive" width="25" height="20.333333969116211"/>
         <image name="tab_search_active" width="21.333333969116211" height="25"/>
         <image name="tab_search_inactive" width="21.333333969116211" height="25"/>
-        <image name="tab_settings_active" width="37.5" height="37.5"/>
+        <image name="tab_settings_active" width="25" height="25"/>
         <image name="tab_settings_inactive" width="25" height="25"/>
         <namedColor name="Background">
             <color red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

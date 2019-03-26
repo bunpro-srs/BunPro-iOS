@@ -270,7 +270,7 @@ public extension LoggerProtocol {
      - parameter line: a `Int`, containing the line number (make it default to #line)
      */
     func verbose(message: @autoclosure () -> String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(message: message, severity: .verbose, file: file, function: function, line: line)
+        log(message: message(), severity: .verbose, file: file, function: function, line: line)
     }
 
     /**
@@ -282,7 +282,7 @@ public extension LoggerProtocol {
      - parameter line: a `Int`, containing the line number (make it default to #line)
      */
     func notice(message: @autoclosure () -> String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(message: message, severity: .notice, file: file, function: function, line: line)
+        log(message: message(), severity: .notice, file: file, function: function, line: line)
     }
 
     /**
@@ -294,7 +294,7 @@ public extension LoggerProtocol {
      - parameter line: a `Int`, containing the line number (make it default to #line)
      */
     func info(message: @autoclosure () -> String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(message: message, severity: .info, file: file, function: function, line: line)
+        log(message: message(), severity: .info, file: file, function: function, line: line)
     }
 
     /**
@@ -306,7 +306,7 @@ public extension LoggerProtocol {
      - parameter line: a `Int`, containing the line number (make it default to #line)
      */
     func warning(message: @autoclosure () -> String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(message: message, severity: .warning, file: file, function: function, line: line)
+        log(message: message(), severity: .warning, file: file, function: function, line: line)
     }
 
     /**
@@ -318,7 +318,7 @@ public extension LoggerProtocol {
      - parameter line: a `Int`, containing the line number (make it default to #line)
      */
     func fatal(message: @autoclosure () -> String, file: String = #file, function: String = #function, line: Int = #line) {
-        log(message: message, severity: .fatal, file: file, function: function, line: line)
+        log(message: message(), severity: .fatal, file: file, function: function, line: line)
     }
 }
 

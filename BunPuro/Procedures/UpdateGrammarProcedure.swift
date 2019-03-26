@@ -49,7 +49,7 @@ fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure, Inp
         stack.storeContainer.performBackgroundTask { (context) in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
 
-            grammarPoints.forEach { Grammar(grammar: $0, context: context) }
+            grammarPoints.filter({ $0.level != "0" }).forEach { Grammar(grammar: $0, context: context) }
 
             do {
                 try context.save()
