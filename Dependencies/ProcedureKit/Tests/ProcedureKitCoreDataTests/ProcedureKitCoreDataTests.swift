@@ -21,7 +21,6 @@ open class ProcedureKitCoreDataTestCase: ProcedureKitTestCase {
 
         let shouldSave: Bool
         let download: ResultProcedure<[Item]>
-        var managedObjectContext: NSManagedObjectContext!
 
         init(items: [Item], andSave shouldSave: Bool = true) {
             self.shouldSave = shouldSave
@@ -32,7 +31,7 @@ open class ProcedureKitCoreDataTestCase: ProcedureKitTestCase {
         override func execute() {
 
             guard let container = input.value else {
-                finish(withError: ProcedureKitError.requirementNotSatisfied())
+                finish(with: ProcedureKitError.requirementNotSatisfied())
                 return
             }
 
@@ -43,10 +42,10 @@ open class ProcedureKitCoreDataTestCase: ProcedureKitTestCase {
 
             insert.injectResult(from: download)
 
-            insert.addWillFinishBlockObserver { [unowned self] (procedure, errors, _) in
+            insert.addWillFinishBlockObserver { [unowned self] (procedure, error, _) in
 
                 guard let managedObjectIDs = procedure.output.success else {
-                    self.output = .ready(.failure(procedure.output.error ?? ProcedureKitError.dependency(finishedWithErrors: errors)))
+                    self.output = .ready(.failure(procedure.output.error ?? ProcedureKitError.dependency(finishedWithError: error)))
                     return
                 }
 
@@ -56,9 +55,7 @@ open class ProcedureKitCoreDataTestCase: ProcedureKitTestCase {
                 self.output = .ready(.success(managedObjects))
             }
 
-            add(child: insert)
-
-            self.managedObjectContext = insert.managedObjectContext
+            addChild(insert)
 
             super.execute()
         }
@@ -100,8 +97,8 @@ open class ProcedureKitCoreDataTestCase: ProcedureKitTestCase {
             persistentStoreDescriptions: persistentStoreDescriptions
         )
 
-        coreDataStack.addWillFinishBlockObserver  { (procedure, errors, _) in
-            guard errors.isEmpty, let container = procedure.output.success else { return }
+        coreDataStack.addWillFinishBlockObserver  { (procedure, error, _) in
+            guard error == nil, let container = procedure.output.success else { return }
             container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             container.viewContext.undoManager = nil
             container.viewContext.shouldDeleteInaccessibleFaults = true

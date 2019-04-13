@@ -17,20 +17,17 @@ Session video | [developer.apple.com](https://developer.apple.com/videos/wwdc/20
 Old but more complete reference documentation | [docs.danthorpe.me/operations](http://docs.danthorpe.me/operations/2.9.0/index.html)
 Updated but not yet complete reference docs | [procedure.kit.run/development](http://procedure.kit.run/development/index.html)
 Programming guide | [operations.readme.io](https://operations.readme.io)
-Example projects | [danthorpe/Examples](https://github.com/danthorpe/Examples)
 
 ## Compatibility
 
 ProcedureKit supports all current Apple platforms. The minimum requirements are:
 
-- iOS 8.0+
-- macOS 10.10+
+- iOS 9.0+
+- macOS 10.11+
 - watchOS 3.0+
 - tvOS 9.2+
 
-The current version of ProcedureKit supports Swift 3+, and the use of Xcode 8.2+ is strongly recommended.
-
-(If you need Swift 2.3 support, see [version 3.4.1](https://github.com/ProcedureKit/ProcedureKit/releases/tag/3.4.1) or the [`swift/2.3` branch](https://github.com/ProcedureKit/ProcedureKit/tree/swift/2.3).)
+The current released version of ProcedureKit (5.1.0) supports Swift 4.2+ and Xcode 10.1. The `development` branch is Swift 5 and Xcode 10.2 compatible.
 
 ## Framework structure
 

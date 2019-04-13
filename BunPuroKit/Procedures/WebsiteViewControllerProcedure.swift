@@ -23,7 +23,7 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
         
         super.init()
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
     
     public override func execute() {

@@ -58,7 +58,7 @@ public protocol ProcedureObserver {
 
      - parameter procedure: the observed `Procedure`.
      */
-    func did(cancel procedure: Procedure, withErrors: [Error])
+    func did(cancel procedure: Procedure, with error: Error?)
 
     /**
      The procedure will add a new `Operation` instance to the
@@ -84,17 +84,17 @@ public protocol ProcedureObserver {
      The procedure will finish. Any errors that were encountered are collected here.
 
      - parameter procedure: the observed `Procedure`.
-     - parameter errors: an array of `Error`s.
+     - parameter errors: an Error.
      */
-    func will(finish procedure: Procedure, withErrors: [Error], pendingFinish: PendingFinishEvent)
+    func will(finish procedure: Procedure, with error: Error?, pendingFinish: PendingFinishEvent)
 
     /**
      The procedure did finish. Any errors that were encountered are collected here.
 
      - parameter procedure: the observed `Procedure`.
-     - parameter errors: an array of `ErrorType`s.
+     - parameter error: an Error.
      */
-    func did(finish procedure: Procedure, withErrors: [Error])
+    func did(finish procedure: Procedure, with error: Error?)
 
     /**
      Provide a queue onto which observer callbacks will be dispatched.
@@ -109,6 +109,21 @@ public extension ProcedureObserver {
 
     @available(*, unavailable, renamed: "will(finish:withErrors:pendingFinish:)")
     func will(finish procedure: Procedure, withErrors: [Error]) { }
+
+    @available(*, deprecated, renamed: "did(cancel:with:)", message: "Use did(cancel:with:) instead.")
+    func did(cancel procedure: Procedure, withErrors errors: [Error]) {
+        did(cancel: procedure, with: errors.first)
+    }
+
+    @available(*, deprecated, renamed: "will(finish:with:pendingFinish:)", message: "Use will(finish:with:pendingFinish:) instead.")
+    func will(finish procedure: Procedure, withErrors errors: [Error], pendingFinish: PendingFinishEvent) {
+        will(finish: procedure, with: errors.first, pendingFinish: pendingFinish)
+    }
+
+    @available(*, deprecated, renamed: "did(finish:with:)", message: "Use did(finish:with:) instead.")
+    func did(finish procedure: Procedure, withErrors errors: [Error]) {
+        did(finish: procedure, with: errors.first)
+    }
 }
 
 public extension ProcedureObserver {
@@ -126,7 +141,7 @@ public extension ProcedureObserver {
     func did(execute procedure: Procedure) { }
 
     /// Do nothing.
-    func did(cancel procedure: Procedure, withErrors: [Error]) { }
+    func did(cancel procedure: Procedure, with error: Error?) { }
 
     /// Do nothing.
     func procedure(_ procedure: Procedure, willAdd newOperation: Operation) { }
@@ -135,10 +150,10 @@ public extension ProcedureObserver {
     func procedure(_ procedure: Procedure, didAdd newOperation: Operation) { }
 
     /// Do nothing.
-    func will(finish procedure: Procedure, withErrors errors: [Error], pendingFinish: PendingFinishEvent) { }
+    func will(finish procedure: Procedure, with error: Error?, pendingFinish: PendingFinishEvent) { }
 
     /// Do nothing.
-    func did(finish procedure: Procedure, withErrors errors: [Error]) { }
+    func did(finish procedure: Procedure, with error: Error?) { }
 
     /// - Returns: nil
     var eventQueue: DispatchQueueProtocol? { return nil }

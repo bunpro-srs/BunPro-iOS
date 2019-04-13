@@ -38,7 +38,7 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
                 try context.save()
                 self.finish()
             } catch {
-                self.finish(withError: error)
+                self.finish(with: error)
             }
         }
     }

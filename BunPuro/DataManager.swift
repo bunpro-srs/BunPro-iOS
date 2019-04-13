@@ -46,7 +46,7 @@ final class DataManager {
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] (_) in
             
             DispatchQueue.main.async {
-                self?.procedureQueue.add(operation: ResetReviewsProcedure())
+                self?.procedureQueue.addOperation(ResetReviewsProcedure())
                 
                 self?.scheduleUpdateProcedure()
             }
@@ -129,7 +129,7 @@ final class DataManager {
                     self.isUpdating = false
                 }
                 
-                self.procedureQueue.add(operation: importProcedure)
+                self.procedureQueue.addOperation(importProcedure)
             }
         }
         
@@ -180,7 +180,7 @@ final class DataManager {
                         self.isUpdating = false
                     }
                     
-                    self.procedureQueue.add(operation: importProcedure)
+                    self.procedureQueue.addOperation(importProcedure)
                 }
                 
                 if let reviews = reviews {
@@ -203,14 +203,14 @@ final class DataManager {
                             let newReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
                             let hasNewReviews = newReviewsCount > oldReviewsCount
                             if hasNewReviews {
-                                UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(1.0), reviewCount: newReviewsCount)
+                                UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(1.0), reviewCount: newReviewsCount - oldReviewsCount)
                             }
                             
                             completion?(hasNewReviews ? .newData : .noData)
                         }
                     }
                     
-                    self.procedureQueue.add(operation: importProcedure)
+                    self.procedureQueue.addOperation(importProcedure)
                 }
             }
         }

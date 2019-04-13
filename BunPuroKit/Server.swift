@@ -52,7 +52,7 @@ public struct Server {
     }
     
     public static func add(procedure: Procedure) {
-        NetworkHandler.shared.queue.add(operation: procedure)
+        NetworkHandler.shared.queue.addOperation(procedure)
     }
 }
 

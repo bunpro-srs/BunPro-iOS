@@ -48,14 +48,12 @@ final class LoginProcedure: GroupProcedure, OutputProcedure {
         
         super.init(operations: [_networkProcedure, _transformProcedure])
         
-        self.add(observer: NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: UIApplication.shared)))
+        self.addObserver(NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: UIApplication.shared)))
     }
     
-    override func procedureDidFinish(withErrors: [Error]) {
+    override func procedureDidFinish(with error: Error?) {
         
-        print(errors)
-        
-        if errors.isEmpty, _transformProcedure.output.success?.errors == nil {
+        if error == nil, _transformProcedure.output.success?.errors == nil {
             let keychain = Keychain()
             keychain[LoginViewController.CredentialsKey.email.rawValue] = email
             keychain[LoginViewController.CredentialsKey.password.rawValue] = password
@@ -133,7 +131,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
                     }
                 }
                 
-                queue.add(operation: loginProcedure)
+                queue.addOperation(loginProcedure)
                 
             } else {
                 

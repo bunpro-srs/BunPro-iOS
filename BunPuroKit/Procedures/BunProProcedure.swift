@@ -31,16 +31,15 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         
         super.init(operations: [])
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
     
     override public func execute() {
         
         guard !isCancelled else { return }
-        guard let token = Server.token else { cancel(withError: ServerError.noAPIToken); super.execute(); return }
+        guard let token = Server.token else { cancel(with: ServerError.noAPIToken); super.execute(); return }
         
         var request = URLRequest(url: url)
-//        print(request)
         
         request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
         
@@ -57,16 +56,15 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
         
-        _transformProcedure.add(condition: NoFailedDependenciesCondition())
+        _transformProcedure.addCondition(NoFailedDependenciesCondition())
         
-        add(child: _networkProcedure)
-        add(child: _transformProcedure)
+        addChild(_networkProcedure)
+        addChild(_transformProcedure)
         
         super.execute()
     }
     
-    override public func procedureDidFinish(withErrors: [Error]) {
-        print(withErrors)
+    override public func procedureDidFinish(with error: Error?) {
         completion?(output.value?.value, output.error)
     }
 }

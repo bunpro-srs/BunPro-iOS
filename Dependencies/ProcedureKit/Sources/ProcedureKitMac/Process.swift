@@ -15,25 +15,25 @@ open class ProcessProcedure: Procedure, InputProcedure, OutputProcedure {
 
     public struct LaunchRequest {
         /// (Read-only) The path to the executable to be launched.
-        let executableURL: URL
+        public let executableURL: URL
 
         /// (Read-only) The command arguments that should be used to launch the executable.
-        let arguments: [String]?
+        public let arguments: [String]?
 
         /// (Read-only) The current directory to be used when launching the executable.
-        let currentDirectoryURL: URL?
+        public let currentDirectoryURL: URL?
 
         /// (Read-only) The environment to be used when launching the executable.
-        let environment: [String : String]?
+        public let environment: [String : String]?
 
         /// (Read-only) The standard error (FileHandle or Pipe object).
-        let standardError: Any?
+        public let standardError: Any?
 
         /// (Read-only) The standard input (FileHandle or Pipe object).
-        let standardInput: Any?
+        public let standardInput: Any?
 
         /// (Read-only) The standard output (FileHandle or Pipe object).
-        let standardOutput: Any?
+        public let standardOutput: Any?
 
         /// Initialize a request to launch a Process.
         ///
@@ -52,7 +52,7 @@ open class ProcessProcedure: Procedure, InputProcedure, OutputProcedure {
         ///   - standardError: (optional) the standard error (FileHandle or Pipe object)
         ///   - standardInput: (optional) the standard input (FileHandle or Pipe object)
         ///   - standardOutput: (optional) the standard output (FileHandle or Pipe object)
-        init(executableURL: URL, arguments: [String]? = nil, currentDirectoryURL: URL? = nil, environment: [String : String]? = nil, standardError: Any? = nil, standardInput: Any? = nil, standardOutput: Any? = nil) {
+        public init(executableURL: URL, arguments: [String]? = nil, currentDirectoryURL: URL? = nil, environment: [String : String]? = nil, standardError: Any? = nil, standardInput: Any? = nil, standardOutput: Any? = nil) {
             self.executableURL = executableURL
             self.arguments = arguments
             self.currentDirectoryURL = currentDirectoryURL
@@ -369,7 +369,7 @@ public extension ProcessProcedure {
     /// The processIdentifier remains non-zero after the ProcessProcedure starts the
     /// Process - even after the Process terminates. Do not assume based on a non-zero
     /// processIdentifier that the expected associated Process is still running.
-    public fileprivate(set) var processIdentifier: Int32 {
+    fileprivate(set) var processIdentifier: Int32 {
         get { return stateLock.withCriticalScope { _processIdentifier } }
         set {
             stateLock.withCriticalScope {
@@ -475,7 +475,7 @@ public extension ProcessProcedure {
 
 fileprivate extension ProcessProcedure {
 
-    fileprivate func createProcess(withRequest request: LaunchRequest) -> Process {
+    func createProcess(withRequest request: LaunchRequest) -> Process {
         let process = Process()
 
         #if swift(>=3.2)
@@ -520,7 +520,7 @@ fileprivate extension ProcessProcedure {
     // On macOS 10.13+, new methods on Process are available that throw errors
     // (instead of raising Objective-C exceptions). This method uses them if
     // possible.
-    fileprivate func run(process: Process) throws {
+    func run(process: Process) throws {
         if #available(OSX 10.13, *) {
             try process.run()
         }

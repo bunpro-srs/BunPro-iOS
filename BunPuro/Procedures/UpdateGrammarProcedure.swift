@@ -58,7 +58,7 @@ fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure, Inp
                     self.finish()
                 }
             } catch {
-                self.finish(withError: error)
+                self.finish(with: error)
             }
         }
     }

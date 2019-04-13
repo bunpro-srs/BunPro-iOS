@@ -9,7 +9,6 @@ steps:
   artifact_paths:
     - ".ci/results/xcodebuild.log"
   agents:
-    queue: "stress-tests"
     xcode: "$XCODE"
 -
   name: "macOS"
@@ -28,7 +27,6 @@ steps:
   artifact_paths:
     - ".ci/results/xcodebuild.log"
   agents:
-    queue: "iOS-Simulator"
     xcode: "$XCODE"
 -
   name: "tvOS"
@@ -38,26 +36,22 @@ steps:
   artifact_paths:
     - ".ci/results/xcodebuild.log"
   agents:
-    queue: "iOS-Simulator"
     xcode: "$XCODE"
-YAML
-
-if [[ "$BUILDKITE_BUILD_CREATOR" == "Daniel Thorpe" ]]; then
-cat <<-YAML
-
+    
 - wait
 
 - 
   name: "Test CocoaPods Integration"
-  trigger: "tryprocedurekit"
-  build:
-    message: "Testing ProcedureKit Integration via Cocoapods"
-    commit: "HEAD"
-    branch: "cocoapods"
-    env:
-      PROCEDUREKIT_HASH: "$COMMIT"
+  command: ".ci/scripts/test-cocoapods"  
+  agents:
+    xcode: "$XCODE"
+- 
+  name: "Test SPM Integration"
+  command: ".ci/scripts/test-spm"  
+  agents:
+    xcode: "$XCODE"
+    
 YAML
-fi
 
 cat <<-YAML
 

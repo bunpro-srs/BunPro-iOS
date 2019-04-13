@@ -10,11 +10,24 @@ import TestingProcedureKit
 
 class BlockProcedureTests: ProcedureKitTestCase {
 
-    func test__block_executes() {
+    func test__void_block_procedure() {
         var blockDidExecute = false
         let block = BlockProcedure { blockDidExecute = true }
         wait(for: block)
         XCTAssertTrue(blockDidExecute)
+        PKAssertProcedureFinished(block)
+    }
+
+    func test__self_block_procedure() {
+        var blockDidExecute = false
+        let block = BlockProcedure { (procedure) in
+            blockDidExecute = true
+            procedure.log.debug.message("Hello world")
+            procedure.finish()
+        }
+        wait(for: block)
+        XCTAssertTrue(blockDidExecute)
+        PKAssertProcedureFinished(block)
     }
 
     func test__block_does_not_execute_if_cancelled() {
@@ -23,12 +36,14 @@ class BlockProcedureTests: ProcedureKitTestCase {
         block.cancel()
         wait(for: block)
         XCTAssertFalse(blockDidExecute)
+        PKAssertProcedureCancelled(block)
     }
 
     func test__block_which_throws_finishes_with_error() {
-        let block = BlockProcedure { throw TestError() }
+        let error = TestError()
+        let block = BlockProcedure { throw error }
         wait(for: block)
-        XCTAssertProcedureFinishedWithErrors(block, count: 1)
+        PKAssertProcedureFinishedWithError(block, error)
     }
 
     func test__block_did_execute_observer() {
@@ -39,6 +54,7 @@ class BlockProcedureTests: ProcedureKitTestCase {
         }
         wait(for: block)
         XCTAssertTrue(didExecuteBlockObserver)
+        PKAssertProcedureFinished(block)
     }
 }
 
@@ -58,42 +74,47 @@ class AsyncBlockProcedureTests: ProcedureKitTestCase {
 
     func test__block_executes() {
         var blockDidExecute = false
-        let block = AsyncBlockProcedure { finishWithResult in
+        let block = BlockProcedure { this in
             self.dispatchQueue.async {
                 blockDidExecute = true
-                finishWithResult(success)
+                this.finish()
             }
         }
         wait(for: block)
         XCTAssertTrue(blockDidExecute)
+        PKAssertProcedureFinished(block)
     }
 
     func test__block_does_not_execute_if_cancelled() {
         var blockDidExecute = false
-        let block = AsyncBlockProcedure { finishWithResult in
+        let block = BlockProcedure { this in
             self.dispatchQueue.async {
                 blockDidExecute = true
-                finishWithResult(success)
+                this.finish()
             }
         }
         block.cancel()
         wait(for: block)
         XCTAssertFalse(blockDidExecute)
+        PKAssertProcedureCancelled(block)
     }
 
     func test__block_which_finishes_with_error() {
-        let block = AsyncBlockProcedure { finishWithResult in
+        let error = TestError()
+        let block = BlockProcedure { this in
             self.dispatchQueue.async {
-                finishWithResult(.failure(TestError()))
+                this.finish(with: error)
             }
         }
         wait(for: block)
-        XCTAssertProcedureFinishedWithErrors(block, count: 1)
+        PKAssertProcedureFinishedWithError(block, error)
     }
 
     func test__block_did_execute_observer() {
-        let block = AsyncBlockProcedure { finishWithResult in
-            self.dispatchQueue.async { finishWithResult(success) }
+        let block = BlockProcedure { this in
+            self.dispatchQueue.async {
+                this.finish()
+            }
         }
         var didExecuteBlockObserver = false
         block.addDidExecuteBlockObserver { procedure in
@@ -101,6 +122,70 @@ class AsyncBlockProcedureTests: ProcedureKitTestCase {
         }
         wait(for: block)
         XCTAssertTrue(didExecuteBlockObserver)
+        PKAssertProcedureFinished(block)
     }
 }
 
+class UIBlockProcedureTests: ProcedureKitTestCase {
+
+    func test__block_executes() {
+        var blockDidExecute = false
+        let block = UIBlockProcedure {
+            blockDidExecute = true
+        }
+        wait(for: block)
+        XCTAssertTrue(blockDidExecute)
+        PKAssertProcedureFinished(block)
+    }
+
+    func test__block_executes_on_main_queue() {
+        var blockDidExecuteOnMainQueue = false
+        let block = UIBlockProcedure {
+            blockDidExecuteOnMainQueue = DispatchQueue.isMainDispatchQueue
+        }
+        wait(for: block)
+        XCTAssertTrue(blockDidExecuteOnMainQueue)
+        PKAssertProcedureFinished(block)
+    }
+
+    func test__willFinishObserversCalled() {
+        var blockDidExecute = false
+        var observerDidExecute = false
+        let block = UIBlockProcedure {
+            blockDidExecute = true
+        }
+        block.addWillFinishBlockObserver { (_, _, pendingFinish) in
+            pendingFinish.doBeforeEvent {
+                observerDidExecute = true
+            }
+        }
+        var dependencyDidExecute = false
+        let dep = BlockProcedure {
+            dependencyDidExecute = true
+        }
+        block.addDependency(dep)
+        wait(for: block, dep)
+        XCTAssertTrue(blockDidExecute)
+        XCTAssertTrue(observerDidExecute)
+        XCTAssertTrue(dependencyDidExecute)
+        PKAssertProcedureFinished(block)
+        PKAssertProcedureFinished(dep)
+    }
+}
+
+class ResultProcedureTests: ProcedureKitTestCase {
+
+    func test__throwing_output() {
+        typealias TypeUnderTest = ResultProcedure<String>
+        var blockDidExecute = false
+
+        let result = TypeUnderTest { (_) -> String in
+            blockDidExecute = true
+            return "Hello World"
+        }
+
+        wait(for: result)
+        XCTAssertTrue(blockDidExecute)
+        PKAssertProcedureOutput(result, "Hello World")
+    }
+}

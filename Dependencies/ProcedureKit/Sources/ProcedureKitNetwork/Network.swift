@@ -97,29 +97,29 @@ class NetworkReachabilityWaitProcedure: Procedure {
     }
 }
 
-class NetworkRecovery<T: Procedure> where T: NetworkOperation {
+open class NetworkRecovery<T: Procedure> where T: NetworkOperation {
 
     let resilience: NetworkResilience
     let connectivity: Reachability.Connectivity
-    var reachability: SystemReachability = Reachability.Manager.shared
+    fileprivate var reachability: SystemReachability = Reachability.Manager.shared
 
     var max: Int { return resilience.maximumNumberOfAttempts }
 
     var wait: WaitStrategy { return resilience.backoffStrategy }
 
-    init(resilience: NetworkResilience, connectivity: Reachability.Connectivity) {
+    public init(resilience: NetworkResilience, connectivity: Reachability.Connectivity) {
         self.resilience = resilience
         self.connectivity = connectivity
     }
 
-    func recover(withInfo info: RetryFailureInfo<T>, payload: RepeatProcedurePayload<T>) -> RepeatProcedurePayload<T>? {
+    open func recover(withInfo info: RetryFailureInfo<T>, payload: RepeatProcedurePayload<T>) -> RepeatProcedurePayload<T>? {
 
         let networkResponse = info.operation.makeNetworkResponse()
 
         // Check to see if we should wait for a network reachability change before retrying
         if shouldWaitForReachabilityChange(givenNetworkResponse: networkResponse) {
             let waiter = NetworkReachabilityWaitProcedure(reachability: reachability, via: connectivity)
-            payload.operation.add(dependency: waiter)
+            payload.operation.addDependency(waiter)
             info.addOperations(waiter)
             return RepeatProcedurePayload(operation: payload.operation, delay: nil, configure: payload.configure)
         }
@@ -135,7 +135,7 @@ class NetworkRecovery<T: Procedure> where T: NetworkOperation {
         return networkError.waitForReachabilityChangeBeforeRetrying
     }
 
-    func shouldRetry(givenNetworkResponse networkResponse: ProcedureKitNetworkResponse) -> Bool {
+    open func shouldRetry(givenNetworkResponse networkResponse: ProcedureKitNetworkResponse) -> Bool {
 
         // Check that we've actually got a network error & suggested delay
         if let networkError = networkResponse.error {
@@ -165,29 +165,33 @@ open class NetworkProcedure<T: Procedure>: RetryProcedure<T> where T: NetworkOpe
         set { recovery.reachability = newValue }
     }
 
-    public init<OperationIterator>(dispatchQueue: DispatchQueue? = nil, resilience: NetworkResilience = DefaultNetworkResilience(), connectivity: Reachability.Connectivity = .any, iterator base: OperationIterator) where OperationIterator: IteratorProtocol, OperationIterator.Element == T {
-        recovery = NetworkRecovery<T>(resilience: resilience, connectivity: connectivity)
+    public init<OperationIterator>(dispatchQueue: DispatchQueue? = nil, recovery: NetworkRecovery<T>, iterator base: OperationIterator) where OperationIterator: IteratorProtocol, OperationIterator.Element == T {
+        self.recovery = recovery
         super.init(dispatchQueue: dispatchQueue, max: recovery.max, wait: recovery.wait, iterator: base, retry: recovery.recover(withInfo:payload:))
-        if let timeout = resilience.requestTimeout {
-            appendConfigureBlock { $0.add(observer: TimeoutObserver(by: timeout)) }
+        if let timeout = recovery.resilience.requestTimeout {
+            appendConfigureBlock { $0.addObserver(TimeoutObserver(by: timeout)) }
         }
+    }
+
+    public convenience init<OperationIterator>(dispatchQueue: DispatchQueue? = nil, resilience: NetworkResilience = DefaultNetworkResilience(), connectivity: Reachability.Connectivity = .any, iterator base: OperationIterator) where OperationIterator: IteratorProtocol, OperationIterator.Element == T {
+        self.init(dispatchQueue: dispatchQueue, recovery: NetworkRecovery<T>(resilience: resilience, connectivity: connectivity), iterator: base)
     }
 
     public convenience init(dispatchQueue: DispatchQueue = DispatchQueue.default, resilience: NetworkResilience = DefaultNetworkResilience(), connectivity: Reachability.Connectivity = .any, body: @escaping () -> T?) {
         self.init(dispatchQueue: dispatchQueue, resilience: resilience, connectivity: connectivity, iterator: AnyIterator(body))
     }
 
-    open override func child(_ child: Procedure, willFinishWithErrors errors: [Error]) {
-        var networkErrors = errors
+    open override func child(_ child: Procedure, willFinishWithError error: Error?) {
+        var networkError = error
 
         // Ultimately, always call super to correctly manage the operation lifecycle.
-        defer { super.child(child, willFinishWithErrors: networkErrors) }
+        defer { super.child(child, willFinishWithError: networkError) }
 
         // Check that the operation is the current one.
         guard child == current else { return }
 
-        // If we have any errors let RetryProcedure (super) deal with it by returning here
-        guard errors.isEmpty else { return }
+        // If we have an error let RetryProcedure (super) deal with it by returning here
+        guard error == nil else { return }
 
         // Create a network response from the network operation
         let networkResponse = current.makeNetworkResponse()
@@ -196,10 +200,10 @@ open class NetworkProcedure<T: Procedure>: RetryProcedure<T> where T: NetworkOpe
         guard recovery.shouldRetry(givenNetworkResponse: networkResponse), let statusCode = networkResponse.httpStatusCode else { return }
 
         // Create resiliency error
-        let error: ProcedureKitNetworkResiliencyError = .receivedErrorStatusCode(statusCode)
+        let resiliencyError: ProcedureKitNetworkResiliencyError = .receivedErrorStatusCode(statusCode)
 
         // Set the network errors
-        networkErrors = [error]
+        networkError = resiliencyError
     }
 }
 

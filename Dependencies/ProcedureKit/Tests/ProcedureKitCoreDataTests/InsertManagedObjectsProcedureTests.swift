@@ -16,11 +16,11 @@ final class InsertManagedObjectsProcedureTests: ProcedureKitCoreDataTestCase {
         let insert = TestInsert(items: items)
             .injectResult(from: coreDataStack)
 
-        fetchTestEntities.add(dependency: insert)
+        fetchTestEntities.addDependency(insert)
 
         wait(for: coreDataStack, insert, fetchTestEntities)
 
-        XCTAssertProcedureFinishedWithoutErrors(insert)
+        PKAssertProcedureFinished(insert)
 
         guard let names = fetchTestEntities.output.success?.map({ $0.name! }) else {
             XCTFail("Did not fetch any test entities.")
@@ -35,11 +35,11 @@ final class InsertManagedObjectsProcedureTests: ProcedureKitCoreDataTestCase {
         let insert = TestInsert(items: [])
             .injectResult(from: coreDataStack)
 
-        fetchTestEntities.add(dependency: insert)
+        fetchTestEntities.addDependency(insert)
 
         wait(for: coreDataStack, insert, fetchTestEntities)
 
-        XCTAssertProcedureFinishedWithoutErrors(insert)
+        PKAssertProcedureFinished(insert)
 
         guard let names = fetchTestEntities.output.success?.map({ $0.name! }) else {
             XCTFail("Did not fetch any test entities.")
@@ -54,11 +54,11 @@ final class InsertManagedObjectsProcedureTests: ProcedureKitCoreDataTestCase {
         let insert = TestInsert(items: items, andSave: false)
             .injectResult(from: coreDataStack)
 
-        fetchTestEntities.add(dependency: insert)
+        fetchTestEntities.addDependency(insert)
 
         wait(for: coreDataStack, insert, fetchTestEntities)
 
-        XCTAssertProcedureFinishedWithoutErrors(insert)
+        PKAssertProcedureFinished(insert)
 
         guard let names = fetchTestEntities.output.success?.map({ $0.name! }) else {
             XCTFail("Did not fetch any test entities.")
@@ -66,7 +66,5 @@ final class InsertManagedObjectsProcedureTests: ProcedureKitCoreDataTestCase {
         }
 
         XCTAssertEqual(names.count, 0)
-        XCTAssertTrue(insert.managedObjectContext.hasChanges)
-
     }
 }

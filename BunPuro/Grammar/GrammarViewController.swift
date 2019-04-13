@@ -195,6 +195,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         let sort = NSSortDescriptor(key: #keyPath(Sentence.identifier), ascending: true)
         request.sortDescriptors = [sort]
         
+        request.fetchLimit = AppDelegate.numberOfAllowedSentences
+        
         exampleSentencesFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,

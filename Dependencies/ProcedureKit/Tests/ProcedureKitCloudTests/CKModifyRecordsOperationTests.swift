@@ -4,8 +4,6 @@
 //  Copyright © 2015-2018 ProcedureKit. All rights reserved.
 //
 
-#if !swift(>=4.1)
-
 import XCTest
 import CloudKit
 import ProcedureKit
@@ -123,7 +121,7 @@ class CKModifyRecordsOperationTests: CKProcedureTestCase {
 
     func test__success_without_completion_block() {
         wait(for: operation)
-        XCTAssertProcedureFinishedWithoutErrors(operation)
+        PKAssertProcedureFinished(operation)
     }
 
     func test__success_with_completion_block() {
@@ -132,14 +130,14 @@ class CKModifyRecordsOperationTests: CKProcedureTestCase {
             didExecuteBlock = true
         }
         wait(for: operation)
-        XCTAssertProcedureFinishedWithoutErrors(operation)
+        PKAssertProcedureFinished(operation)
         XCTAssertTrue(didExecuteBlock)
     }
 
     func test__error_without_completion_block() {
         target.error = TestError()
         wait(for: operation)
-        XCTAssertProcedureFinishedWithoutErrors(operation)
+        PKAssertProcedureFinished(operation)
     }
 
     func test__error_with_completion_block() {
@@ -149,7 +147,7 @@ class CKModifyRecordsOperationTests: CKProcedureTestCase {
         }
         target.error = TestError()
         wait(for: operation)
-        XCTAssertProcedureFinishedWithErrors(operation, count: 1)
+        PKAssertProcedureFinished(operation, withErrors: true)
         XCTAssertFalse(didExecuteBlock)
     }
 }
@@ -251,12 +249,12 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
     func test__cancellation() {
         cloudkit.cancel()
         wait(for: cloudkit)
-        XCTAssertProcedureCancelledWithoutErrors(cloudkit)
+        PKAssertProcedureCancelled(cloudkit)
     }
 
     func test__success_without_completion_block_set() {
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithoutErrors(cloudkit)
+        PKAssertProcedureFinished(cloudkit)
     }
 
     func test__success_with_completion_block_set() {
@@ -265,7 +263,7 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
             didExecuteBlock = true
         }
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithoutErrors(cloudkit)
+        PKAssertProcedureFinished(cloudkit)
         XCTAssertTrue(didExecuteBlock)
     }
 
@@ -276,7 +274,7 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
             return operation
         }
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithoutErrors(cloudkit)
+        PKAssertProcedureFinished(cloudkit)
     }
 
     func test__error_with_completion_block_set() {
@@ -292,7 +290,7 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
         }
 
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithErrors(cloudkit, count: 1)
+        PKAssertProcedureFinished(cloudkit, withErrors: true)
         XCTAssertFalse(didExecuteBlock)
     }
 
@@ -310,7 +308,7 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
         var didExecuteBlock = false
         cloudkit.setModifyRecordsCompletionBlock { _, _ in didExecuteBlock = true }
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithoutErrors(cloudkit)
+        PKAssertProcedureFinished(cloudkit)
         XCTAssertTrue(didExecuteBlock)
     }
 
@@ -333,12 +331,10 @@ class CloudKitProcedureModifyRecordsOperationTests: CKProcedureTestCase {
         var didExecuteBlock = false
         cloudkit.setModifyRecordsCompletionBlock { _, _ in didExecuteBlock = true }
         wait(for: cloudkit)
-        XCTAssertProcedureFinishedWithoutErrors(cloudkit)
+        PKAssertProcedureFinished(cloudkit)
         XCTAssertTrue(didExecuteBlock)
         XCTAssertTrue(didRunCustomHandler)
     }
     
 }
-
-#endif
 

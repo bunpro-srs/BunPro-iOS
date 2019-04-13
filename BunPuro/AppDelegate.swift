@@ -163,6 +163,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return Account.currentAccount?.subscriber ?? false
     }
     
+    static var numberOfAllowedSentences: Int {
+        if isContentAccessable {
+            return Int.max
+        } else {
+            return 1
+        }
+    }
+    
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)

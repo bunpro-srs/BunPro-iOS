@@ -15,6 +15,7 @@
  do not use this procedure if you wish to use delegate based APIs on URLSession.
 */
 open class NetworkDataProcedure: Procedure, InputProcedure, OutputProcedure, NetworkOperation {
+
     public typealias NetworkResult = ProcedureResult<HTTPPayloadResponse<Data>>
     public typealias CompletionBlock = (NetworkResult) -> Void
 
@@ -43,10 +44,6 @@ open class NetworkDataProcedure: Procedure, InputProcedure, OutputProcedure, Net
     internal private(set) var task: NetworkDataTask? // internal for testing
     private var _input: Pending<URLRequest> = .pending
     private var _output: Pending<NetworkResult> = .pending
-
-    public var networkError: Error? {
-        return errors.first
-    }
 
     public init(session: NetworkSession, request: URLRequest? = nil, completionHandler: @escaping CompletionBlock = { _ in }) {
 
@@ -98,7 +95,7 @@ open class NetworkDataProcedure: Procedure, InputProcedure, OutputProcedure, Net
             strongSelf.finish(withResult: .success(http))
         }
 
-        log.notice(message: "Will make request: \(request)")
+        log.info.message("Will make request: \(request)")
         task?.resume()
     }
 }

@@ -81,32 +81,40 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
 
     private let _repeatStateLock = PThreadMutex()
 
+    @discardableResult
+    fileprivate func synchronise<T>(block: () -> T) -> T {
+        return _repeatStateLock.withCriticalScope(block: block)
+    }
+
+    private var _iterator: AnyIterator<Payload>
+
     private var _previous: T?
+
     /// - returns: the previous executing operation instance of T
     public internal(set) var previous: T? {
-        get { return _repeatStateLock.withCriticalScope { _previous } }
-        set { _repeatStateLock.withCriticalScope { _previous = newValue } }
+        get { return synchronise { _previous } }
+        set { synchronise { _previous = newValue } }
     }
 
     private var _current: T
+
     /// - returns: the currently executing operation instance of T
     public internal(set) var current: T {
-        get { return _repeatStateLock.withCriticalScope { _current } }
-        set { _repeatStateLock.withCriticalScope { _current = newValue } }
+        get { return synchronise { _current } }
+        set { synchronise { _current = newValue } }
     }
 
     private var _count: Int = 1
+
     /// - returns: the number of operation instances
     public var count: Int {
-        return _repeatStateLock.withCriticalScope { _count }
+        return synchronise { _count }
     }
 
     private var _configure: Payload.ConfigureBlock = { _ in }
     internal var configure: Payload.ConfigureBlock {
-        return _repeatStateLock.withCriticalScope { _configure }
+        return synchronise { _configure }
     }
-
-    private var _iterator: AnyIterator<Payload>
 
     /// Initialize RepeatProcedure with an iterator, the element of the iterator a `RepeatProcedurePayload<T>`.
     /// Other arguments allow for specific dispatch queues, and a maximum count of iteratations.
@@ -179,7 +187,7 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
             _configure(_current)
             return _current
         }
-        add(child: current)
+        addChild(current)
         super.execute()
     }
 
@@ -191,10 +199,10 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
     ///
     /// - IMPORTANT: If subclassing RepeatProcedure and overriding this method, consider
     /// carefully whether / when / how you should call `super.child(_:willFinishWithErrors:)`.
-    open override func child(_ child: Procedure, willFinishWithErrors errors: [Error]) {
+    open override func child(_ child: Procedure, willFinishWithError error: Error?) {
         eventQueue.debugAssertIsOnQueue()
         _addNextOperation(child === self.current)
-        super.child(child, willFinishWithErrors: errors) // default GroupProcedure error-handling
+        super.child(child, willFinishWithError: error) // default GroupProcedure error-handling
     }
 
     /// Adds the next payload from the iterator to the queue.
@@ -221,7 +229,8 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
 
         guard shouldAddNext(), let payload = _next() else { return false }
 
-        log.notice(message: "Will add next operation.")
+        log.verbose.trace()
+        log.info.message("Will add next operation.")
 
         _repeatStateLock.withCriticalScope {
             if let newConfigureBlock = payload.configure {
@@ -236,11 +245,11 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
         }
 
         if let delay = payload.delay.map({ DelayProcedure(delay: $0) }) {
-            payload.operation.add(dependency: delay)
-            add(children: delay, payload.operation)
+            payload.operation.addDependency(delay)
+            addChildren(delay, payload.operation)
         }
         else {
-            add(child: payload.operation)
+            addChild(payload.operation)
         }
 
         return true
@@ -312,7 +321,8 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
     // of the _repeatStateLock.
     private func _replace(configureBlock block: @escaping Payload.ConfigureBlock) {
         _configure = block
-        log.verbose(message: "did replace configure block.")
+        log.verbose.trace()
+        log.verbose.message("did replace configure block.")
     }
 }
 
@@ -323,7 +333,7 @@ open class RepeatProcedure<T: Operation>: GroupProcedure {
 /// trigger another repeated value. In other words, the current
 /// just finished instance determines whether a new instance is
 /// executed next, or the repeating finishes.
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 public protocol Repeatable {
 
     /// Determines whether or not a subsequent instance of the
@@ -334,7 +344,7 @@ public protocol Repeatable {
     func shouldRepeat(count: Int) -> Bool
 }
 
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 extension RepeatProcedure where T: Repeatable {
 
     /// Initialize RepeatProcedure with a WaitStrategy and a closure. The closure returns
@@ -355,7 +365,7 @@ extension RepeatProcedure where T: Repeatable {
     ///   - max: an optional Int, which defaults to nil.
     ///   - wait: a WaitStrategy value, which defaults to .immediate
     ///   - body: an espacing closure which returns an optional T
-    @available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+    @available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
     public convenience init(dispatchQueue: DispatchQueue? = nil, max: Int? = nil, wait: WaitStrategy = .immediate, body: @escaping () -> T?) {
         self.init(dispatchQueue: dispatchQueue, max: max, wait: wait, iterator: RepeatableGenerator(AnyIterator(body)))
     }
@@ -385,7 +395,7 @@ extension RepeatProcedure: InputProcedure where T: InputProcedure {
                 procedure.input = .ready(try block(output))
             }
             catch {
-                procedure.cancel(withError: ProcedureKitError.dependency(finishedWithErrors: [error]))
+                procedure.cancel(with: ProcedureKitError.dependency(finishedWithError: error))
             }
         }
     }
@@ -420,7 +430,7 @@ extension RepeatProcedure: OutputProcedure where T: OutputProcedure {
 
 // MARK: - Iterators
 
-@available(*, deprecated: 4.6.0, message: "Use RepeatProcedure or RetryProcedure instead")
+@available(*, deprecated, message: "Use RepeatProcedure or RetryProcedure instead")
 internal struct RepeatableGenerator<Element: Repeatable>: IteratorProtocol {
 
     private var iterator: CountingIterator<Element>
@@ -582,11 +592,11 @@ public struct IntervalIterator {
 
 public extension Delay {
 
-    public static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
+    static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
         return AnyIterator(MapIterator(iterator) { Delay.by($0) })
     }
 
-    public struct Iterator {
+    struct Iterator {
 
         static func iterator(_ iterator: AnyIterator<TimeInterval>) -> AnyIterator<Delay> {
             return Delay.iterator(iterator)

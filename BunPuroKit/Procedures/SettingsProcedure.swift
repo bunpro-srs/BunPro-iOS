@@ -47,7 +47,7 @@ public final class SetSettingsProcedure: GroupProcedure {
         
         super.init(operations: [])
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
     
     override public func execute() {
@@ -65,8 +65,8 @@ public final class SetSettingsProcedure: GroupProcedure {
         _userProcedure = UserProcedure(presentingViewController: presentingViewController, completion: completion)
         _userProcedure.addDependency(_networkProcedure)
         
-        add(child: _networkProcedure)
-        add(child: _userProcedure)
+        addChild(_networkProcedure)
+        addChild(_userProcedure)
         
         super.execute()
     }

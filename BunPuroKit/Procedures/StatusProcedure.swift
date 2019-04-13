@@ -18,7 +18,7 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
     public var indicator: NetworkActivityIndicatorProtocol? {
         didSet {
             guard let indicator = indicator else { return }
-            add(observer: NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: indicator)))
+            addObserver(NetworkObserver(controller: NetworkActivityController(timerInterval: 1.0, indicator: indicator)))
         }
     }
     
@@ -29,18 +29,18 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
         
         _userNetworkProcedure = UserProcedure(presentingViewController: presentingViewController)
         _reviewsNetworkProcedure = ReviewsProcedure(presentingViewController: presentingViewController)
-        _reviewsNetworkProcedure.add(dependency: _userNetworkProcedure)
+        _reviewsNetworkProcedure.addDependency(_userNetworkProcedure)
         self.completion = completion
         
         super.init(operations: [_userNetworkProcedure, _reviewsNetworkProcedure])
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
     
-    override public func procedureDidFinish(withErrors: [Error]) {
+    override public func procedureDidFinish(with error: Error?) {
         
-        guard withErrors.isEmpty else {
-            output = Pending.ready(ProcedureResult.failure(withErrors.first ?? ServerError.unknown))
+        guard error == nil else {
+            output = Pending.ready(ProcedureResult.failure(error ?? ServerError.unknown))
             return
         }
         
@@ -49,26 +49,23 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
         
         defer {
             
-            for error in withErrors {
+            if let decodingError = error as? Swift.DecodingError {
                 
-                if let decodingError = error as? Swift.DecodingError {
+                switch decodingError {
                     
-                    switch decodingError {
-                        
-                    case .typeMismatch(_, _), .valueNotFound(_, _):
-                        print("Server changed something!")
-                    case .keyNotFound(_, _):
-                        print("Login token changed")
-                        Server.reset()
-                    case .dataCorrupted(_):
-                        break // Seems to be a bug in swift...
-                    @unknown default:
-                        break
-                    }
+                case .typeMismatch(_, _), .valueNotFound(_, _):
+                    print("Server changed something!")
+                case .keyNotFound(_, _):
+                    print("Login token changed")
+                    Server.reset()
+                case .dataCorrupted(_):
+                break // Seems to be a bug in swift...
+                @unknown default:
+                    break
                 }
             }
             
-            completion?(user, reviews, withErrors.first)
+            completion?(user, reviews, error)
         }
         
         output = Pending.ready(ProcedureResult.success((user, reviews)))

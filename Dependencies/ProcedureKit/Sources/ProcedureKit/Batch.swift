@@ -29,9 +29,7 @@ open class BatchProcedure<Transform: Procedure>: GroupProcedure, InputProcedure,
         defer { super.execute() }
 
         guard let input = input.value else {
-            let error = ProcedureKitError.requirementNotSatisfied()
-            output = .ready(.failure(error))
-            cancel(withError: error)
+            cancel(with: ProcedureKitError.requirementNotSatisfied())
             return
         }
 
@@ -45,7 +43,7 @@ open class BatchProcedure<Transform: Procedure>: GroupProcedure, InputProcedure,
         let gathered = batch.gathered()
         bind(from: gathered)
 
-        add(children: batch)
-        add(child: gathered)
+        addChildren(batch)
+        addChild(gathered)
     }
 }

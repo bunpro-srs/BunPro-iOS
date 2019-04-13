@@ -41,13 +41,13 @@ public final class ModifyReviewProcedure: GroupProcedure {
         
         super.init(operations: [])
         
-        add(condition: LoggedInCondition(presentingViewController: presentingViewController))
+        addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
     
     override public func execute() {
         
         guard !isCancelled else { return }
-        guard let token = Server.token else { finish(withError: ModificationError.noToken); return }
+        guard let token = Server.token else { finish(with: ModificationError.noToken); return }
         
         let urlString: String
         var components: URLComponents
@@ -85,13 +85,13 @@ public final class ModifyReviewProcedure: GroupProcedure {
         
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         
-        add(child: _networkProcedure)
+        addChild(_networkProcedure)
         
         super.execute()
     }
     
-    public override func procedureDidFinish(withErrors: [Error]) {
+    public override func procedureDidFinish(with error: Error?) {
         
-        completion(withErrors.first)
+        completion(error)
     }
 }

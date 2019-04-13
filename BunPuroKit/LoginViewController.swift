@@ -74,7 +74,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
             self.delegate?.loginViewControllerDidLogin(self)
         }
         
-        NetworkHandler.shared.queue.add(operation: loginProcedure)
+        NetworkHandler.shared.queue.addOperation(loginProcedure)
     }
     
     private func displayTokenError(_ error: Error?) {
