@@ -228,10 +228,7 @@
                                     <outlet property="progressView" destination="mDL-WW-bV0" id="bIk-oM-8U8"/>
                                     <outlet property="subtitleLabel" destination="Rej-2W-djk" id="rlT-sa-F8H"/>
                                     <outlet property="titleLabel" destination="TxH-U7-oqL" id="F4L-iX-OZ8"/>
-                                    <segue destination="bja-Sc-W04" kind="show" identifier="showJLPT" id="YWX-Ln-WH0">
-                                        <segue key="commit" inheritsFrom="parent" id="BLv-9j-9dJ"/>
-                                        <segue key="preview" inheritsFrom="commit" id="akl-D7-72r"/>
-                                    </segue>
+                                    <segue destination="bja-Sc-W04" kind="show" identifier="showJLPT" id="YWX-Ln-WH0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -324,10 +321,7 @@
                                     <outlet property="hankoImageView" destination="cSf-Yv-V00" id="ZJK-1z-AhV"/>
                                     <outlet property="japaneseLabel" destination="JgB-cu-9Xo" id="3hD-Eu-3yq"/>
                                     <outlet property="meaningLabel" destination="WwI-7D-wMw" id="rQ9-CH-Rba"/>
-                                    <segue destination="Bfx-j4-Jt9" kind="show" identifier="showGrammar" id="8Tl-dW-Q4E">
-                                        <segue key="commit" inheritsFrom="parent" id="tYY-jU-pdk"/>
-                                        <segue key="preview" inheritsFrom="commit" id="qPI-zK-KpJ"/>
-                                    </segue>
+                                    <segue destination="Bfx-j4-Jt9" kind="show" identifier="showGrammar" id="8Tl-dW-Q4E"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="JLPTProgressTableViewCell" rowHeight="60" id="4l3-6W-5Ha" customClass="JLPTProgressTableViewCell" customModule="BunPuro" customModuleProvider="target">
@@ -1731,8 +1725,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YWX-Ln-WH0"/>
-        <segue reference="tYY-jU-pdk"/>
+        <segue reference="8Tl-dW-Q4E"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main Tint"/>
 </document>

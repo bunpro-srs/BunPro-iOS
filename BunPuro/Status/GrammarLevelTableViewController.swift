@@ -90,7 +90,13 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard AppDelegate.isContentAccessable else { return nil }
         
         let point = fetchedResultsController.object(at: indexPath)
         let review = point.review

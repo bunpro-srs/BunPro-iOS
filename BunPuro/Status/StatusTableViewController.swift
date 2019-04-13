@@ -146,7 +146,19 @@ final class StatusTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? AppDelegate.isContentAccessable ? 3 : 1 : 4//jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+        
+        switch section {
+        case 0:
+            if AppDelegate.isContentAccessable {
+                return 3 // Review, Cram and Study
+            } else if AppDelegate.isTrialPeriodAvailable {
+                return 1
+            } else {
+                return 0
+            }
+        default:
+            return 4 //jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,13 +178,15 @@ final class StatusTableViewController: UITableViewController {
                     cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
                     
                     return cell
-                } else if Account.currentAccount != nil {
-                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-                    
-                    cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
-                    
-                    return cell
-                } else {
+                }
+//                else if Account.currentAccount != nil {
+//                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
+//
+//                    cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
+//
+//                    return cell
+//                }
+                else {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
                     
                     cell.titleLabel.text = NSLocalizedString("status.loading", comment: "The title of the loading indicator")

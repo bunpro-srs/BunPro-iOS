@@ -180,6 +180,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     private func updateEditBarButtonState() {
         
         reviewEditBarButtonItem?.title = review?.complete == true ? NSLocalizedString("review.edit.button.remove_reset", comment: "") : NSLocalizedString("review.edit.button.add", comment: "")
+        
+        reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
     }
     
     private func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
