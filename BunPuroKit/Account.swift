@@ -80,7 +80,7 @@ public enum State: String, Codable {
 
 public enum FuriganaMode: String, Codable {
     case on = "Show"
-    case off = "Off"
+    case off = "Hide"
     case wanikani = "Wanikani"
     
     public init?(string: String) {
@@ -92,7 +92,7 @@ public enum FuriganaMode: String, Codable {
             case "Hide", "Off":
                 self = FuriganaMode.off
             default:
-                self = .on
+                self = FuriganaMode.on
             }
             return
         }
@@ -111,7 +111,7 @@ public enum FuriganaMode: String, Codable {
             print("Invalid value for \(FuriganaMode.self): \(value)")
 
             switch value {
-            case "\"On\"", "\"Show\"", "Yes", "\"Yes\"": self = .on
+            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"": self = .on
             case "Wanikani", "\"Wanikani\"": self = .wanikani
             default: self = .off
             }
