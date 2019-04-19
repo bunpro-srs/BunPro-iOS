@@ -60,18 +60,6 @@
 		2E59791620C6EAAD0007E9BE /* ReusableView+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74081FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift */; };
 		2E59791720C6EAAD0007E9BE /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74091FAA7A3100DE2A08 /* SegueHandlerType.swift */; };
 		2E59791820C6EAAD0007E9BE /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74071FAA7A3000DE2A08 /* StoryboardIdentifiable.swift */; };
-		2E59793720C6F8B10007E9BE /* PasswordManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E59793520C6F8B10007E9BE /* PasswordManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E59793A20C6F8B10007E9BE /* PasswordManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E59793320C6F8B10007E9BE /* PasswordManager.framework */; };
-		2E59793B20C6F8B10007E9BE /* PasswordManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E59793320C6F8B10007E9BE /* PasswordManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2E59793F20C6F8C10007E9BE /* PasswordManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E59793320C6F8B10007E9BE /* PasswordManager.framework */; };
-		2E59794820C6F91E0007E9BE /* PasswordExtension+WebViewIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794020C6F91C0007E9BE /* PasswordExtension+WebViewIntegration.swift */; };
-		2E59794920C6F91E0007E9BE /* PasswordExtension+ProcessItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794120C6F91C0007E9BE /* PasswordExtension+ProcessItem.swift */; };
-		2E59794A20C6F91E0007E9BE /* PasswordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794220C6F91C0007E9BE /* PasswordExtension.swift */; };
-		2E59794B20C6F91E0007E9BE /* PasswordExtension+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794320C6F91C0007E9BE /* PasswordExtension+Errors.swift */; };
-		2E59794C20C6F91E0007E9BE /* PasswordExtensionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794420C6F91D0007E9BE /* PasswordExtensionClasses.swift */; };
-		2E59794D20C6F91E0007E9BE /* PasswordExtension+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794520C6F91D0007E9BE /* PasswordExtension+Helpers.swift */; };
-		2E59794E20C6F91E0007E9BE /* PasswordExtension+ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794620C6F91D0007E9BE /* PasswordExtension+ActivityController.swift */; };
-		2E59794F20C6F91E0007E9BE /* PasswordExtensionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E59794720C6F91E0007E9BE /* PasswordExtensionKeys.swift */; };
 		2E78A15D20179FBA0040D928 /* ModifyReviewProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15C20179FBA0040D928 /* ModifyReviewProcedure.swift */; };
 		2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */; };
 		2E78A1612017AF100040D928 /* StructureInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A1602017AF100040D928 /* StructureInfoCell.swift */; };
@@ -143,13 +131,6 @@
 			remoteGlobalIDString = 2EAD9E071FA26EB400CE52CF;
 			remoteInfo = BunPuroKit;
 		};
-		2E59793820C6F8B10007E9BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2EAD9DC81FA25DF100CE52CF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2E59793220C6F8B10007E9BE;
-			remoteInfo = PasswordManager;
-		};
 		2EAD9DE71FA25DF100CE52CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2EAD9DC81FA25DF100CE52CF /* Project object */;
@@ -205,7 +186,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2E59793B20C6F8B10007E9BE /* PasswordManager.framework in Embed Frameworks */,
 				2EE4E7951FA28F400020E828 /* ProcedureKitNetwork.framework in Embed Frameworks */,
 				2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */,
 				2EBA74061FAA4C1500DE2A08 /* KeychainAccess.framework in Embed Frameworks */,
@@ -261,7 +241,6 @@
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
 		2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Initializer.swift"; sourceTree = "<group>"; };
 		2E59790E20C6E6AD0007E9BE /* BunPuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BunPuro-Bridging-Header.h"; sourceTree = "<group>"; };
-		2E59793320C6F8B10007E9BE /* PasswordManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PasswordManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E59793520C6F8B10007E9BE /* PasswordManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasswordManager.h; sourceTree = "<group>"; };
 		2E59793620C6F8B10007E9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E59794020C6F91C0007E9BE /* PasswordExtension+WebViewIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PasswordExtension+WebViewIntegration.swift"; sourceTree = "<group>"; };
@@ -345,18 +324,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2E59793020C6F8B10007E9BE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2EAD9DCD1FA25DF100CE52CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E59793A20C6F8B10007E9BE /* PasswordManager.framework in Frameworks */,
 				2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */,
 				2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */,
 				2EBA74051FAA4C1500DE2A08 /* KeychainAccess.framework in Frameworks */,
@@ -382,7 +353,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E59793F20C6F8C10007E9BE /* PasswordManager.framework in Frameworks */,
 				2EF752141FAA37D4000A2975 /* KeychainAccess.framework in Frameworks */,
 				2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */,
 				2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */,
@@ -575,7 +545,6 @@
 				2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */,
 				2EAD9E101FA26EB400CE52CF /* BunPuroKitTests.xctest */,
 				2E3D43A3201B50E400B4D5EF /* CreateDatabase.app */,
-				2E59793320C6F8B10007E9BE /* PasswordManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -692,14 +661,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2E59792E20C6F8B10007E9BE /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E59793720C6F8B10007E9BE /* PasswordManager.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2EAD9E051FA26EB400CE52CF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -730,24 +691,6 @@
 			productReference = 2E3D43A3201B50E400B4D5EF /* CreateDatabase.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2E59793220C6F8B10007E9BE /* PasswordManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2E59793C20C6F8B10007E9BE /* Build configuration list for PBXNativeTarget "PasswordManager" */;
-			buildPhases = (
-				2E59792E20C6F8B10007E9BE /* Headers */,
-				2E59792F20C6F8B10007E9BE /* Sources */,
-				2E59793020C6F8B10007E9BE /* Frameworks */,
-				2E59793120C6F8B10007E9BE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PasswordManager;
-			productName = PasswordManager;
-			productReference = 2E59793320C6F8B10007E9BE /* PasswordManager.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		2EAD9DCF1FA25DF100CE52CF /* BunPuro */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuro" */;
@@ -761,7 +704,6 @@
 			);
 			dependencies = (
 				2EAD9E1C1FA26EB400CE52CF /* PBXTargetDependency */,
-				2E59793920C6F8B10007E9BE /* PBXTargetDependency */,
 			);
 			name = BunPuro;
 			productName = BunPuro;
@@ -855,11 +797,6 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
-					2E59793220C6F8B10007E9BE = {
-						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
 					2EAD9DCF1FA25DF100CE52CF = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 1020;
@@ -917,7 +854,6 @@
 				2EAD9E071FA26EB400CE52CF /* BunPuroKit */,
 				2EAD9E0F1FA26EB400CE52CF /* BunPuroKitTests */,
 				2E3D43A2201B50E400B4D5EF /* CreateDatabase */,
-				2E59793220C6F8B10007E9BE /* PasswordManager */,
 			);
 		};
 /* End PBXProject section */
@@ -930,13 +866,6 @@
 				2E3D43B0201B50E500B4D5EF /* LaunchScreen.storyboard in Resources */,
 				2E3D43AD201B50E500B4D5EF /* Assets.xcassets in Resources */,
 				2E3D43AB201B50E500B4D5EF /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E59793120C6F8B10007E9BE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,21 +935,6 @@
 				2E3D43BF201B53EB00B4D5EF /* Link+Initializer.swift in Sources */,
 				2E3D43C4201B53FE00B4D5EF /* String+HTMLAttributedString.swift in Sources */,
 				2E3D43BE201B53EB00B4D5EF /* Sentence+Initializer.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E59792F20C6F8B10007E9BE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E59794A20C6F91E0007E9BE /* PasswordExtension.swift in Sources */,
-				2E59794B20C6F91E0007E9BE /* PasswordExtension+Errors.swift in Sources */,
-				2E59794F20C6F91E0007E9BE /* PasswordExtensionKeys.swift in Sources */,
-				2E59794C20C6F91E0007E9BE /* PasswordExtensionClasses.swift in Sources */,
-				2E59794E20C6F91E0007E9BE /* PasswordExtension+ActivityController.swift in Sources */,
-				2E59794820C6F91E0007E9BE /* PasswordExtension+WebViewIntegration.swift in Sources */,
-				2E59794D20C6F91E0007E9BE /* PasswordExtension+Helpers.swift in Sources */,
-				2E59794920C6F91E0007E9BE /* PasswordExtension+ProcessItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,11 +1052,6 @@
 			isa = PBXTargetDependency;
 			target = 2EAD9E071FA26EB400CE52CF /* BunPuroKit */;
 			targetProxy = 2E3D43B9201B512A00B4D5EF /* PBXContainerItemProxy */;
-		};
-		2E59793920C6F8B10007E9BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2E59793220C6F8B10007E9BE /* PasswordManager */;
-			targetProxy = 2E59793820C6F8B10007E9BE /* PBXContainerItemProxy */;
 		};
 		2EAD9DE81FA25DF100CE52CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1264,62 +1173,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		2E59793D20C6F8B10007E9BE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 549QX23F59;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PasswordManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro.PasswordManager;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2E59793E20C6F8B10007E9BE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 549QX23F59;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PasswordManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro.PasswordManager;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1630,15 +1483,6 @@
 			buildConfigurations = (
 				2E3D43B2201B50E500B4D5EF /* Debug */,
 				2E3D43B3201B50E500B4D5EF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2E59793C20C6F8B10007E9BE /* Build configuration list for PBXNativeTarget "PasswordManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2E59793D20C6F8B10007E9BE /* Debug */,
-				2E59793E20C6F8B10007E9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
