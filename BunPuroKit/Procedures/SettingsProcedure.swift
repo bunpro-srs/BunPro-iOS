@@ -54,7 +54,7 @@ public final class SetSettingsProcedure: GroupProcedure {
         
         guard !isCancelled else { return }
         
-        var components = URLComponents(string: "https://bunpro.jp/api/v2/user/edit")!
+        var components = URLComponents(string: "https://bunpro.jp/api/v3/user/edit")!
         components.queryItems = settings.queryItems
         var request = URLRequest(url: components.url!)
         request.httpMethod = "POST"
