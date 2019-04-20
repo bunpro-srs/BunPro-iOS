@@ -9,7 +9,6 @@
 import Foundation
 
 public final class GrammarPointsProcedure: BunPuroProcedure<[BPKGrammar]> {
-    
     override var hasMilliseconds: Bool { return true }
     override var url: URL { return URL(string: "\(baseUrlString)grammar_points")! }
 }

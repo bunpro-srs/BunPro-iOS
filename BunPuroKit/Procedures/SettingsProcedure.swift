@@ -11,12 +11,11 @@ import ProcedureKit
 import ProcedureKitNetwork
 
 public final class SetSettingsProcedure: GroupProcedure {
-    
     public struct Settings {
         public var furigana: FuriganaMode
         public var english: Active
         public var bunnyMode: State
-        
+
         fileprivate var queryItems: [URLQueryItem] {
             return [
                 URLQueryItem(name: "user[furigana]", value: furigana.rawValue),
@@ -24,50 +23,48 @@ public final class SetSettingsProcedure: GroupProcedure {
                 URLQueryItem(name: "user[bunny_mode]", value: bunnyMode.rawValue)
             ]
         }
-        
+
         public init(furigana: FuriganaMode, english: Active, bunnyMode: State) {
             self.furigana = furigana
             self.english = english
             self.bunnyMode = bunnyMode
         }
     }
-    
+
     private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     private var _userProcedure: UserProcedure!
-    
+
     public let completion: ((BPKAccount?, Error?) -> Void)
     public let presentingViewController: UIViewController
     public let settings: Settings
-    
+
     public init(presentingViewController: UIViewController, settings: Settings, completion: @escaping (BPKAccount?, Error?) -> Void) {
-        
         self.completion = completion
         self.presentingViewController = presentingViewController
         self.settings = settings
-        
+
         super.init(operations: [])
-        
+
         addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
-    
+
     override public func execute() {
-        
         guard !isCancelled else { return }
-        
+
         var components = URLComponents(string: "https://bunpro.jp/api/v3/user/edit")!
         components.queryItems = settings.queryItems
         var request = URLRequest(url: components.url!)
         request.httpMethod = "POST"
-        
+
         request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
-        
+
         _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _userProcedure = UserProcedure(presentingViewController: presentingViewController, completion: completion)
         _userProcedure.addDependency(_networkProcedure)
-        
+
         addChild(_networkProcedure)
         addChild(_userProcedure)
-        
+
         super.execute()
     }
 }

@@ -6,7 +6,5 @@
 import UIKit
 
 final class SignUpTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
 }

@@ -16,7 +16,7 @@ extension ContentViewController where Self: UIViewController {
         if let navigationController = self as? UINavigationController {
             return navigationController.visibleViewController
         }
-        
+
         return self
     }
 }

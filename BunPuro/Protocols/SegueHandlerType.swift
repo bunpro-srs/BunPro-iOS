@@ -57,7 +57,7 @@ public extension SegueHandler where Self: ViewController, SegueIdentifier.RawVal
     func performSegue(withIdentifier identifier: SegueIdentifier, sender: Any?) {
         performSegue(withIdentifier: identifier.rawValue, sender: sender)
     }
-    
+
     /**
      A convenience method to map a `StoryboardSegue` to the  segue identifier
      enum that it represents.
@@ -72,10 +72,10 @@ public extension SegueHandler where Self: ViewController, SegueIdentifier.RawVal
             let segueIdentifier = SegueIdentifier(rawValue: identifier) else {
                 fatalError("Couldn't handle segue identifier \(String(describing: segue.identifier)) for view controller of type \(type(of: self)).")
         }
-        
+
         return segueIdentifier
     }
-    
+
     /**
      A convenience method to map a `String` to the  segue identifier
      enum that it represents.
@@ -89,7 +89,7 @@ public extension SegueHandler where Self: ViewController, SegueIdentifier.RawVal
         guard let segueIdentifier = SegueIdentifier(rawValue: identifier) else {
             fatalError("Couldn't handle segue identifier \(identifier) for view controller of type \(type(of: self)).")
         }
-        
+
         return segueIdentifier
     }
 }

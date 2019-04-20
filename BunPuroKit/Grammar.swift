@@ -1,7 +1,6 @@
 import Foundation
 
 public struct BPKSentence: Codable {
-    
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case grammarIdentifier = "grammar_point_id"
@@ -13,7 +12,7 @@ public struct BPKSentence: Codable {
         case updatedDate = "updated_at"
         case audio = "audio_link"
     }
-    
+
     public let identifier: Int64
     public let grammarIdentifier: Int64
     public let japanese: String
@@ -26,7 +25,6 @@ public struct BPKSentence: Codable {
 }
 
 public struct BPKLink: Codable {
-    
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case grammarIdentifier = "grammar_point_id"
@@ -36,7 +34,7 @@ public struct BPKLink: Codable {
         case createdDate = "created_at"
         case updatedDate = "updated_at"
     }
-    
+
     public let identifier: Int64
     public let grammarIdentifier: Int64
     public let site: String
@@ -47,7 +45,6 @@ public struct BPKLink: Codable {
 }
 
 public struct BPKGrammar: Codable {
-    
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case title
@@ -65,7 +62,7 @@ public struct BPKGrammar: Codable {
         case createdDate = "created_at"
         case updatedDate = "updated_at"
     }
-    
+
     public let identifier: Int64
     public let title: String
     public let createdDate: Date
@@ -81,7 +78,7 @@ public struct BPKGrammar: Codable {
     public let yomikata: String
     public let exampleSentences: [BPKSentence]
     public let supplementalLinks: [BPKLink]
-    
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         identifier = try values.decode(Int64.self, forKey: .identifier)
@@ -103,7 +100,6 @@ public struct BPKGrammar: Codable {
 }
 
 public struct BPKLesson: Codable {
-    
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case jlptLevel = "jlpt_level"
@@ -111,7 +107,7 @@ public struct BPKLesson: Codable {
         case createdDate = "created_at"
         case updatedDate = "updated_at"
     }
-    
+
     public let identifier: Int64
     public let jlptLevel: Int
     public let createdDate: Date
@@ -120,13 +116,12 @@ public struct BPKLesson: Codable {
 }
 
 public struct BPKJlpt {
-    
     public let level: Int
     public var name: String {
         return "N\(level)"
     }
     public let lessons: [BPKLesson]
-    
+
     public init(level: Int, lessons: [BPKLesson]) {
         self.level = level
         self.lessons = lessons

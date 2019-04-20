@@ -6,7 +6,6 @@
 import UIKit
 
 final class GrammarTeaserCell: UITableViewCell {
-
     @IBOutlet weak var japaneseLabel: UILabel! {
         didSet {
             japaneseLabel.numberOfLines = 0
@@ -17,12 +16,11 @@ final class GrammarTeaserCell: UITableViewCell {
             meaningLabel.numberOfLines = 0
         }
     }
-    
+
     @IBOutlet private weak var hankoImageView: UIImageView!
-    
+
     var isComplete: Bool = false {
         didSet {
-            
             hankoImageView?.tintColor = .lightGray
             hankoImageView.isHidden = !isComplete
         }

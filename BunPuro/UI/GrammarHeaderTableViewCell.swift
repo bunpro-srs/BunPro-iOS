@@ -6,7 +6,5 @@
 import UIKit
 
 final class GrammarHeaderTableViewCell: UITableViewCell {
-
     @IBOutlet var titleLabel: UILabel!
-
 }

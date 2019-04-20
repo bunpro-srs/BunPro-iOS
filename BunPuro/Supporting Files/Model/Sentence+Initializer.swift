@@ -3,17 +3,15 @@
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
-import Foundation
-import CoreData
 import BunPuroKit
+import CoreData
+import Foundation
 
 extension Sentence {
-    
     @discardableResult
     convenience init(sentence: BPKSentence, grammar: Grammar, context: NSManagedObjectContext) {
-        
         self.init(context: context)
-        
+
         identifier = sentence.identifier
         japanese = sentence.japanese
         english = sentence.english
@@ -24,7 +22,7 @@ extension Sentence {
         audio = sentence.audio
         self.grammar = grammar
     }
-    
+
     var audioURL: URL? {
         guard let fileName = audio?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
         return URL(string: "https://bunpro.jp/audio/\(fileName)")

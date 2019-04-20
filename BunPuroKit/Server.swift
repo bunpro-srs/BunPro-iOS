@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import KeychainAccess
 import ProcedureKit
 import ProcedureKitNetwork
-import KeychainAccess
 
 let websiteUrlString = "https://bunpro.jp"
 let baseUrlString = "https://bunpro.jp/api/v3/"
@@ -29,48 +29,44 @@ enum ServerError: Error {
 }
 
 public struct Server {
-        
     static var token: Token? {
         get {
             return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token.rawValue]
         }
-        
+
         set {
             _token = newValue
             Keychain()[LoginViewController.CredentialsKey.token.rawValue] = newValue
         }
     }
-    
-    static private var _token: Token?
-    
+
+    private static var _token: Token?
+
     public static func reset() {
         token = nil
     }
-    
+
     public static func logout() {
         add(procedure: LogoutProcedure())
     }
-    
+
     public static func add(procedure: Procedure) {
         NetworkHandler.shared.queue.addOperation(procedure)
     }
 }
 
 class NetworkHandler {
-    
-    static let shared: NetworkHandler = NetworkHandler()
-    
+    static let shared = NetworkHandler()
+
     let queue = ProcedureQueue()
-    
+
     init() { }
 }
 
 struct CustomDecoder {
-    
-    static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T : Decodable {
-        
+    static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T: Decodable {
         let formatter = DateFormatter()
-        
+
         formatter.locale = Locale(identifier: "en_US")
 
         if hasMilliseconds {
@@ -78,10 +74,10 @@ struct CustomDecoder {
         } else {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         }
-        
+
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
-        
+
         return try decoder.decode(type, from: data)
     }
 }

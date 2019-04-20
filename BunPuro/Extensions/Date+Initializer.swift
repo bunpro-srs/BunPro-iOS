@@ -6,14 +6,12 @@
 import Foundation
 
 extension Date {
-    
     init(day: Int, month: Int, year: Int) {
-        
         var component = DateComponents()
         component.year = year
         component.month = month
         component.day = day
-        
+
         self.init(timeIntervalSince1970: Calendar.autoupdatingCurrent.date(from: component)!.timeIntervalSince1970)
     }
 }

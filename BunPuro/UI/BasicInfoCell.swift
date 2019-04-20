@@ -6,7 +6,6 @@
 import UIKit
 
 final class BasicInfoCell: UITableViewCell {
-    
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.numberOfLines = 0
@@ -22,9 +21,8 @@ final class BasicInfoCell: UITableViewCell {
             cautionLabel.numberOfLines = 0
         }
     }
-        
+
     override var canBecomeFirstResponder: Bool {
         return true
     }
-    
 }

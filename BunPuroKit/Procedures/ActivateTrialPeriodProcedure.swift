@@ -11,5 +11,5 @@ import ProcedureKit
 import ProcedureKitNetwork
 
 public final class ActivateTrialPeriodProcedure: BunPuroProcedure<BPKAccount> {
-    override var url: URL  { return URL(string: "\(baseUrlString)user/sign_up_for_trial")! }
+    override var url: URL { return URL(string: "\(baseUrlString)user/sign_up_for_trial")! }
 }
