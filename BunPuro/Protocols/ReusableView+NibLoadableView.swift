@@ -9,7 +9,6 @@
 import UIKit
 
 // MARK: ReusableView
-
 protocol ReusableView { }
 
 extension ReusableView where Self: UIView {
@@ -23,7 +22,6 @@ extension UITableViewHeaderFooterView: ReusableView { }
 extension UICollectionViewCell: ReusableView { }
 
 // MARK: NibLoadableView
-
 protocol NibLoadableView { }
 
 extension NibLoadableView where Self: UIView {
@@ -37,7 +35,6 @@ extension UITableViewHeaderFooterView: NibLoadableView { }
 extension UICollectionViewCell: NibLoadableView { }
 
 // MARK: Functionality
-
 extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return (UIApplication.shared.delegate as! AppDelegate).coreDataStack
     }
 
-    private var modelName = "BunPro"
+    private var modelName: String = "BunPro"
     lazy var coreDataStack = CoreDataStack(modelName: modelName)
 
     private var dataManager: DataManager?

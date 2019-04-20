@@ -69,7 +69,6 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
 
@@ -98,11 +97,12 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         var actions = [UIContextualAction]()
 
         if hasReview {
-            let removeReviewAction = UIContextualAction(style: .normal,
-                                                        title: NSLocalizedString("review.edit.remove.short", comment: "")) { _, _, completion in
-                                                            AppDelegate.modifyReview(.remove(review!.identifier))
-
-                                                            completion(true)
+            let removeReviewAction = UIContextualAction(
+                style: .normal,
+                title: NSLocalizedString("review.edit.remove.short", comment: "")
+            ) { _, _, completion in
+                AppDelegate.modifyReview(.remove(review!.identifier))
+                completion(true)
             }
 
             removeReviewAction.backgroundColor = .red
@@ -119,11 +119,12 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
             actions.append(removeReviewAction)
             actions.append(resetReviewAction)
         } else {
-            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal,
-                                                       title: NSLocalizedString("review.edit.add.short", comment: "")) { _, _, completion in
-                                                        AppDelegate.modifyReview(.add(point.identifier))
-
-                                                        completion(true)
+            let addToReviewAction = UIContextualAction(
+                style: UIContextualAction.Style.normal,
+                title: NSLocalizedString("review.edit.add.short", comment: "")
+            ) { _, _, completion in
+                AppDelegate.modifyReview(.add(point.identifier))
+                completion(true)
             }
 
             actions.append(addToReviewAction)
@@ -150,7 +151,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
         let grammarPoints = fetchedResultsController.fetchedObjects?.filter({ $0.lessonIdentifier == name }) ?? []
         let grammarCount = grammarPoints.count
-        let finishedGrammarCount = grammarPoints.filter({ $0.review?.complete == true }).count
+        let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
         cell.titleLabel.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), correctLevel(level))
         cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
@@ -171,7 +172,6 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     }
 
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammar:

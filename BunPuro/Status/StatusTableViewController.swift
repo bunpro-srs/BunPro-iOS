@@ -28,10 +28,8 @@ final class StatusTableViewController: UITableViewController {
     deinit {
         print("deinit \(String(describing: self))")
 
-        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver, pendingModificationObserver] {
-            if observer != nil {
-                NotificationCenter.default.removeObserver(observer!)
-            }
+        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver, pendingModificationObserver] where observer != nil {
+            NotificationCenter.default.removeObserver(observer!)
         }
     }
 
@@ -97,7 +95,7 @@ final class StatusTableViewController: UITableViewController {
         return tableView.cellForRow(at: indexPath) as? StatusTableViewCell
     }
 
-    @IBAction func refresh(_ sender: UIRefreshControl) {
+    @IBAction private func refresh(_ sender: UIRefreshControl) {
         AppDelegate.setNeedsStatusUpdate()
     }
 
@@ -106,7 +104,12 @@ final class StatusTableViewController: UITableViewController {
 
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
 
-        userFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        userFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         userFetchedResultsController?.delegate = self
 
@@ -255,9 +258,12 @@ final class StatusTableViewController: UITableViewController {
             case 2:
                 presentReviewViewController(website: .study)
 
-            default: break
+            default:
+                break
             }
-        default: break
+
+        default:
+            break
         }
     }
 

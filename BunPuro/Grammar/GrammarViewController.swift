@@ -51,10 +51,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     deinit {
         print("deinit \(String(describing: self))")
 
-        for observer in [beginUpdateObserver, endUpdateObserver] {
-            if observer != nil {
-                NotificationCenter.default.removeObserver(observer!)
-            }
+        for observer in [beginUpdateObserver, endUpdateObserver] where observer != nil {
+            NotificationCenter.default.removeObserver(observer!)
         }
     }
 
@@ -67,16 +65,12 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
         updateEditBarButtonState()
 
-        beginUpdateObserver = NotificationCenter.default.addObserver(
-            forName: .BunProWillBeginUpdating,
-            object: nil,
-            queue: OperationQueue.main,
-            using: { _ in
+        beginUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { _ in
                 let activityIndicator = UIActivityIndicatorView(style: .white)
                 activityIndicator.startAnimating()
 
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
-            })
+        }
 
         endUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
@@ -113,7 +107,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                             self?.tableView.reloadRows(at: [indexPath], with: .none)
                             self?.tableView.endUpdates()
 
-                        default: break
+                        default:
+                            break
                         }
 
                         self?.updateEditBarButtonState()
@@ -187,7 +182,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         exampleSentencesFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: nil, cacheName: nil
+            sectionNameKeyPath: nil,
+            cacheName: nil
         )
 
         exampleSentencesFetchedResultsController?.delegate = self
@@ -209,7 +205,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         readingsFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: nil, cacheName: nil
+            sectionNameKeyPath: nil,
+            cacheName: nil
         )
 
         readingsFetchedResultsController?.delegate = self
@@ -327,7 +324,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: UIColor(named: "Main Tint")!)
+                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
                 cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
                 cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
 
@@ -411,7 +408,9 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                     show(infoViewController, sender: self)
                 }
             }
-        default: break
+
+        default:
+            break
         }
     }
 
@@ -428,7 +427,8 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         guard let cell = (recognizer.view as? UITableViewCell), let indexPath = tableView.indexPath(for: cell) else { return }
 
         switch indexPath.section {
-        case 0: break
+        case 0:
+            break
 
         default:
             switch viewMode {
@@ -502,28 +502,19 @@ extension GrammarViewController: UIPopoverPresentationControllerDelegate {
 
     override var previewActionItems: [UIPreviewActionItem] {
         if let review = review, review.complete {
-            let removeAction = UIPreviewAction(
-                title: NSLocalizedString("review.edit.remove", comment: ""),
-                style: .destructive,
-                handler: { _, _ in
-                    self.modifyReview(.remove(self.review!.identifier))
-                })
+            let removeAction = UIPreviewAction(title: NSLocalizedString("review.edit.remove", comment: ""), style: .destructive) { _, _ in
+                self.modifyReview(.remove(self.review!.identifier))
+            }
 
-            let resetAction = UIPreviewAction(
-                title: NSLocalizedString("review.edit.reset", comment: ""),
-                style: .destructive,
-                handler: { _, _ in
-                    self.modifyReview(.reset(self.review!.identifier))
-                })
+            let resetAction = UIPreviewAction(title: NSLocalizedString("review.edit.reset", comment: ""), style: .destructive) { _, _ in
+                self.modifyReview(.reset(self.review!.identifier))
+            }
 
             return [removeAction, resetAction]
         } else {
-            let addAction = UIPreviewAction(
-                title: NSLocalizedString("review.edit.add", comment: ""),
-                style: .default,
-                handler: { _, _ in
-                    self.modifyReview(.add(self.grammar!.identifier))
-                })
+            let addAction = UIPreviewAction(title: NSLocalizedString("review.edit.add", comment: ""), style: .default) { _, _ in
+                self.modifyReview(.add(self.grammar!.identifier))
+            }
 
             return [addAction]
         }
@@ -531,7 +522,13 @@ extension GrammarViewController: UIPopoverPresentationControllerDelegate {
 }
 
 extension GrammarViewController: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+    ) {
         tableView.reloadData()
     }
 }

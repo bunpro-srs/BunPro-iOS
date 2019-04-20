@@ -1,7 +1,4 @@
 //
-//  LoginProcedure.swift
-//  BunPuroKit
-//
 //  Created by Andreas Braun on 20.11.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //

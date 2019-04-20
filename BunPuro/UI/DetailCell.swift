@@ -41,7 +41,7 @@ final class DetailCell: UITableViewCell {
         progressView?.setProgress(progress, animated: animated)
     }
 
-    @IBAction func didPressCustomAction(_ sender: UIButton) {
+    @IBAction private func didPressCustomAction(_ sender: UIButton) {
         customAction?(self)
     }
 }

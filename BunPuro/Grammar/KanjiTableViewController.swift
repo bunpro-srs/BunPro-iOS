@@ -65,15 +65,14 @@ final class KanjiTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-
                 showCopyJapaneseOrEnglish(at: indexPath)
 
             case 1:
                 showEnglish = !showEnglish
-
                 tableView.reloadData()
 
-            default: break
+            default:
+                break
             }
 
         default:

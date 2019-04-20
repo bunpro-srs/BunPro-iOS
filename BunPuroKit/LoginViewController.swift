@@ -1,7 +1,4 @@
 //
-//  LoginViewController.swift
-//  BunPuroKit
-//
 //  Created by Andreas Braun on 23.11.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
@@ -91,11 +88,11 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         loginButton.isEnabled = true
     }
 
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
+    @IBAction private func loginButtonPressed(_ sender: UIButton) {
         validateCredentials()
     }
 
-    @IBAction func showPrivacy() {
+    @IBAction private func showPrivacy() {
         guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
 
         let configuration = SFSafariViewController.Configuration()
@@ -116,7 +113,9 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
 
         case passwordTextField:
             loginButtonPressed(loginButton)
-        default: break
+
+        default:
+            break
         }
 
         return true

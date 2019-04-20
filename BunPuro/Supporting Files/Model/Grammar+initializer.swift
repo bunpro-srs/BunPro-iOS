@@ -30,8 +30,7 @@ extension Grammar {
 }
 
 extension Grammar {
-    @objc
-    var review: Review? {
+    @objc var review: Review? {
         do {
             return try Review.review(for: self)
         } catch {

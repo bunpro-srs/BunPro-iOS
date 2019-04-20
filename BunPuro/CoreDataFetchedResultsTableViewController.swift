@@ -34,9 +34,14 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .insert: tableView.insertSections([sectionIndex], with: .fade)
-        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
-        default: break
+        case .insert:
+            tableView.insertSections([sectionIndex], with: .fade)
+
+        case .delete:
+            tableView.deleteSections([sectionIndex], with: .fade)
+
+        default:
+            break
         }
     }
 

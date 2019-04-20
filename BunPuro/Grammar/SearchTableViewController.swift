@@ -24,10 +24,12 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         let idSort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
         fetchRequest.sortDescriptors = [jlptSort, lessonSort, idSort]
 
-        let controller = NSFetchedResultsController<Grammar>(fetchRequest: fetchRequest,
-                                                             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-                                                             sectionNameKeyPath: #keyPath(Grammar.level),
-                                                             cacheName: nil)
+        let controller = NSFetchedResultsController<Grammar>(
+            fetchRequest: fetchRequest,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: #keyPath(Grammar.level),
+            cacheName: nil
+        )
         controller.delegate = self
 
         return controller
@@ -39,10 +41,12 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         let sort = NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
         fetchRequest.sortDescriptors = [sort]
 
-        let controller = NSFetchedResultsController<Review>(fetchRequest: fetchRequest,
-                                                             managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-                                                             sectionNameKeyPath: nil,
-                                                             cacheName: nil)
+        let controller = NSFetchedResultsController<Review>(
+            fetchRequest: fetchRequest,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         return controller
     }()
@@ -74,14 +78,24 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
 
             let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
 
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [identifierPredicate, NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])])
+            return NSCompoundPredicate(
+                andPredicateWithSubpredicates: [
+                    identifierPredicate,
+                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+                ]
+            )
 
         case 2:
             let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
 
             let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
 
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [identifierPredicate, NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])])
+            return NSCompoundPredicate(
+                andPredicateWithSubpredicates: [
+                    identifierPredicate,
+                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+                ]
+            )
 
         default:
             return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
@@ -144,7 +158,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
 
@@ -168,9 +181,9 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
 
         let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
 
-        let grammarPoints = fetchedResultsController.fetchedObjects?.filter({ $0.level == name }) ?? []
+        let grammarPoints = fetchedResultsController.fetchedObjects?.filter { $0.level == name } ?? []
         let grammarCount = grammarPoints.count
-        let finishedGrammarCount = grammarPoints.filter({ $0.review?.complete == true }).count
+        let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
         cell.titleLabel.text = name.replacingOccurrences(of: "JLPT", with: "N")
         cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
@@ -204,20 +217,16 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         var actions = [UIContextualAction]()
 
         if hasReview {
-            let removeReviewAction = UIContextualAction(style: .normal,
-                                                        title: NSLocalizedString("review.edit.remove.short", comment: "")) { _, _, completion in
-                                                            AppDelegate.modifyReview(.remove(review!.identifier))
-
-                                                            completion(true)
+            let removeReviewAction = UIContextualAction(style: .normal, title: NSLocalizedString("review.edit.remove.short", comment: "")) { _, _, completion in
+                AppDelegate.modifyReview(.remove(review!.identifier))
+                completion(true)
             }
 
             removeReviewAction.backgroundColor = .red
 
-            let resetReviewAction = UIContextualAction(style: .normal,
-                                                       title: NSLocalizedString("review.edit.reset.short", comment: "")) { _, _, completion in
-                                                        AppDelegate.modifyReview(.reset(review!.identifier))
-
-                                                        completion(true)
+            let resetReviewAction = UIContextualAction(style: .normal, title: NSLocalizedString("review.edit.reset.short", comment: "")) { _, _, completion in
+                AppDelegate.modifyReview(.reset(review!.identifier))
+                completion(true)
             }
 
             resetReviewAction.backgroundColor = .purple
@@ -225,11 +234,12 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
             actions.append(removeReviewAction)
             actions.append(resetReviewAction)
         } else {
-            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal,
-                                                       title: NSLocalizedString("review.edit.add.short", comment: "")) { _, _, completion in
-                                                        AppDelegate.modifyReview(.add(point.identifier))
-
-                                                        completion(true)
+            let addToReviewAction = UIContextualAction(
+                style: UIContextualAction.Style.normal,
+                title: NSLocalizedString("review.edit.add.short", comment: "")
+            ) { _, _, completion in
+                AppDelegate.modifyReview(.add(point.identifier))
+                completion(true)
             }
 
             actions.append(addToReviewAction)
@@ -241,7 +251,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     // MARK: - UISearchController
-
     func updateSearchResults(for searchController: UISearchController) {
         NSFetchedResultsController<Grammar>.deleteCache(withName: nil)
         fetchedResultsController.fetchRequest.predicate = searchPredicate()
@@ -262,7 +271,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammar:

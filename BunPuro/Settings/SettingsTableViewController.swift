@@ -147,7 +147,9 @@ final class SettingsTableViewController: UITableViewController {
                 controller.popoverPresentationController?.sourceRect = cell.bounds
 
                 present(controller, animated: true, completion: nil)
-            default: break
+
+            default:
+                break
             }
         }
     }
@@ -349,8 +351,11 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
 extension Active {
     var localizedString: String {
         switch self {
-        case .yes: return NSLocalizedString("active.yes", comment: "")
-        case .no: return NSLocalizedString("active.no", comment: "")
+        case .yes:
+            return NSLocalizedString("active.yes", comment: "")
+
+        case .no:
+            return NSLocalizedString("active.no", comment: "")
         }
     }
 }
@@ -358,8 +363,11 @@ extension Active {
 extension State {
     var localizedString: String {
         switch self {
-        case .on: return NSLocalizedString("state.on", comment: "")
-        case .off: return NSLocalizedString("state.off", comment: "")
+        case .on:
+            return NSLocalizedString("state.on", comment: "")
+
+        case .off:
+            return NSLocalizedString("state.off", comment: "")
         }
     }
 }
@@ -367,9 +375,14 @@ extension State {
 extension FuriganaMode {
     var localizedString: String {
         switch self {
-        case .on: return NSLocalizedString("furigana.on", comment: "")
-        case .off: return NSLocalizedString("furigana.off", comment: "")
-        case .wanikani: return NSLocalizedString("furigana.wanikani", comment: "")
+        case .on:
+            return NSLocalizedString("furigana.on", comment: "")
+
+        case .off:
+            return NSLocalizedString("furigana.off", comment: "")
+
+        case .wanikani:
+            return NSLocalizedString("furigana.wanikani", comment: "")
         }
     }
 }

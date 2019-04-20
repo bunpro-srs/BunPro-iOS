@@ -29,10 +29,9 @@ struct UserNotificationCenter {
             content.sound = UNNotificationSound.default
             content.badge = AppDelegate.badgeNumber(date: date)
 
-            let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date), repeats: false)
-
-            let request = UNNotificationRequest(identifier: nextReviewIdentifier,
-                                                content: content, trigger: trigger)
+            let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            let request = UNNotificationRequest(identifier: nextReviewIdentifier, content: content, trigger: trigger)
 
             center.removeAllDeliveredNotifications()
 

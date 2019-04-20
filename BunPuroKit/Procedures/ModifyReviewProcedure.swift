@@ -1,7 +1,4 @@
 //
-//  CreateReviewProcedure.swift
-//  BunPuroKit
-//
 //  Created by Andreas Braun on 23.01.18.
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
@@ -50,7 +47,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
         var components: URLComponents
 
         switch modificationType {
-        case .add(let identifier):
+        case let .add(identifier):
             urlString = "https://bunpro.jp/api/v3/reviews/create/\(identifier)"
 
             components = URLComponents(string: urlString)!
@@ -58,7 +55,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
                 URLQueryItem(name: "complete", value: "\(true)")
             ]
 
-        case .remove(let identifier):
+        case let .remove(identifier):
             urlString = "https://bunpro.jp/api/v3/reviews/edit/\(identifier)"
 
             components = URLComponents(string: urlString)!
@@ -66,7 +63,7 @@ public final class ModifyReviewProcedure: GroupProcedure {
                 URLQueryItem(name: "remove_review", value: "\(true)")
             ]
 
-        case .reset(let identifier):
+        case let .reset(identifier):
             urlString = "https://bunpro.jp/api/v3/reviews/edit/\(identifier)"
 
             components = URLComponents(string: urlString)!
