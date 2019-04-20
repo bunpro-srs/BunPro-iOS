@@ -1,0 +1,16 @@
+strings:
+  inputs: BunPuro/Supporting Files/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+      output: BunPuro/Generated/SwiftGen/Strings.swift
+ib:
+  inputs: BunPuro
+  outputs:
+    - templateName: scenes-swift4
+      output: BunPuro/Generated/SwiftGen/Storyboards.swift
+xcassets:
+  inputs:
+    - BunPuro/Assets.xcassets
+  outputs:
+    - templateName: swift4
+      output: BunPuro/Generated/SwiftGen/Assets.swift

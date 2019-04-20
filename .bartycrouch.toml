@@ -1,0 +1,17 @@
+[update]
+tasks = ["interfaces", "transform", "normalize"]
+
+[update.interfaces]
+path = "BunPuro"
+
+[update.transform]
+codePath = "BunPuro"
+localizablePath = "BunPuro/Supporting Files"
+transformer = "swiftgenStructured"
+supportedLanguageEnumPath = "BunPuro/Supporting Files"
+
+[update.normalize]
+path = "BunPuro"
+
+[lint]
+path = "BunPuro"
