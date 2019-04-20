@@ -122,6 +122,8 @@
 		A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */; };
 		A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */; };
 		A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */; };
+		A1D6C1AA226BC15900D25DF1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C1A9226BC15900D25DF1 /* Logger.swift */; };
+		E779385D921D78B15C38070DA983D597 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAE9077CCB06FE9FD048608466B5C6E /* SwiftyBeaver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +197,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0DAE9077CCB06FE9FD048608466B5C6E /* SwiftyBeaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Dependencies/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarLevelTableViewController.swift; sourceTree = "<group>"; };
 		2E01D1FF1FB24FD300E8632D /* UserProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProcedure.swift; sourceTree = "<group>"; };
 		2E01D2011FB2503000E8632D /* ProgressProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressProcedure.swift; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Dependencies/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
 		A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
+		A1D6C1A9226BC15900D25DF1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +341,7 @@
 				A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */,
 				A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */,
 				2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */,
+				E779385D921D78B15C38070DA983D597 /* SwiftyBeaver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +571,7 @@
 				2E27E5881FBB55EF002D906F /* Extensions */,
 				2ECBE3E0203B586200F20EE3 /* Furigana */,
 				A1D6C149226B56A200D25DF1 /* Generated */,
+				A1D6C1A8226BC14700D25DF1 /* Globals */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
 				2E6755891FFFEA1200BD10EB /* Notification */,
 				2E6755871FFFE9C100BD10EB /* Procedures */,
@@ -679,6 +685,7 @@
 				A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */,
 				A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */,
 				A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */,
+				0DAE9077CCB06FE9FD048608466B5C6E /* SwiftyBeaver.framework */,
 			);
 			name = BunPuro;
 			sourceTree = "<group>";
@@ -691,6 +698,14 @@
 				A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */,
 			);
 			name = BunPuroKit;
+			sourceTree = "<group>";
+		};
+		A1D6C1A8226BC14700D25DF1 /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C1A9226BC15900D25DF1 /* Logger.swift */,
+			);
+			path = Globals;
 			sourceTree = "<group>";
 		};
 		CA7A6F00305E401DE9FA57363D7A18D6 /* Dependencies */ = {
@@ -998,12 +1013,14 @@
 				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
 				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
+				"$(SRCROOT)/Dependencies/iOS/SwiftyBeaver.framework",
 			);
 			name = Accio;
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1133,6 +1150,7 @@
 				2E7B36922078144B00542BB8 /* GrammarHeaderTableViewCell.swift in Sources */,
 				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
+				A1D6C1AA226BC15900D25DF1 /* Logger.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
 				2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */,
 				2ECBE3E7203B588200F20EE3 /* FuriganaWordKerner.swift in Sources */,

@@ -14,7 +14,7 @@ enum BartyCrouch {
         let typeName = String(describing: BartyCrouch.self)
         let methodName = #function
 
-        print(
+        log.info(
             "Warning: [BartyCrouch]",
             "Untransformed \(typeName).\(methodName) method call found with key '\(key)' and base translations '\(translations)'.",
             "Please ensure that BartyCrouch is installed and configured correctly."

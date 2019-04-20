@@ -26,7 +26,7 @@ final class StatusTableViewController: UITableViewController {
     private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
 
     deinit {
-        print("deinit \(String(describing: self))")
+        log.info("deinit \(String(describing: self))")
 
         for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver, pendingModificationObserver] where observer != nil {
             NotificationCenter.default.removeObserver(observer!)
@@ -116,7 +116,7 @@ final class StatusTableViewController: UITableViewController {
         do {
             try userFetchedResultsController?.performFetch()
         } catch {
-            print(error)
+            log.error(error)
         }
     }
 
@@ -134,7 +134,7 @@ final class StatusTableViewController: UITableViewController {
         do {
             try reviewsFetchedResultsController?.performFetch()
         } catch {
-            print(error)
+            log.error(error)
         }
     }
 

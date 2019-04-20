@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         center.requestAuthorization(options: [.badge, .sound, .alert]) { _, error in
             guard error == nil else {
-                print(error!)
+                log.error(error!)
                 return
             }
         }
@@ -199,7 +199,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
             return NSNumber(value: reviews.count)
         } catch {
-            print(error)
+            log.error(error)
 
             return nil
         }
