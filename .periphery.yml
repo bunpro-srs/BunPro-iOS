@@ -1,0 +1,8 @@
+project: BunPuro.xcodeproj
+schemes: [BunPuro]
+targets: [BunPuro, BunPuroTests, BunPuroUITests, BunPuroKit, BunPuroKitTests]
+report_exclude:
+  - BunPuro/Generated/SwiftGen/*.swift
+  - BunPuro/Supporting Files/*.swift
+retain_public: false
+quiet: true
