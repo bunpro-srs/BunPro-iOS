@@ -1,7 +1,4 @@
 
-/* Class = "UILabel"; text = " Detail"; ObjectID = "2hI-WD-RH1"; */
-"2hI-WD-RH1.text" = " Detail";
-
 /* Class = "UILabel"; text = "Within 24 Hours"; ObjectID = "4e1-68-2Hr"; */
 "4e1-68-2Hr.text" = "Within 24 Hours";
 
@@ -17,17 +14,8 @@
 /* Class = "UIBarButtonItem"; title = "Edit Review"; ObjectID = "aC3-DB-CTC"; */
 "aC3-DB-CTC.title" = "Edit Review";
 
-/* Class = "UILabel"; text = " Detail"; ObjectID = "acS-sr-A2T"; */
-"acS-sr-A2T.text" = " Detail";
-
 /* Class = "UILabel"; text = " "; ObjectID = "aD2-ep-eCU"; */
 "aD2-ep-eCU.text" = " ";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "AfV-eP-md1"; */
-"AfV-eP-md1.text" = "Label";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "aoh-zG-3Nh"; */
-"aoh-zG-3Nh.text" = "Label";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ch9-PZ-Wxg"; */
 "ch9-PZ-Wxg.title" = "Settings";
@@ -40,9 +28,6 @@
 
 /* Class = "UILabel"; text = "Hide English"; ObjectID = "DYU-WS-Y9g"; */
 "DYU-WS-Y9g.text" = "Hide English";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "e4U-Zd-pNG"; */
-"e4U-Zd-pNG.text" = "Label";
 
 /* Class = "UILabel"; text = "ないほうがいい"; ObjectID = "EFr-Xh-odS"; */
 "EFr-Xh-odS.text" = "ないほうがいい";
@@ -71,12 +56,6 @@
 /* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
 "J16-bo-Kj0.title" = "Loading...";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "JgB-cu-9Xo"; */
-"JgB-cu-9Xo.text" = "Label";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "jkx-I4-trG"; */
-"jkx-I4-trG.text" = "Title";
-
 /* Class = "UILabel"; text = "Furigana"; ObjectID = "jXa-VO-q52"; */
 "jXa-VO-q52.text" = "Furigana";
 
@@ -86,17 +65,11 @@
 /* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "KsY-hy-cih"; */
 "KsY-hy-cih.text" = "Terms and Conditions";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "kvl-0b-ytV"; */
-"kvl-0b-ytV.text" = "Label";
-
 /* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "kYw-Pb-uem"; */
 "kYw-Pb-uem.headerTitle" = " ";
 
 /* Class = "UILabel"; text = "N5"; ObjectID = "mJz-v9-AV7"; */
 "mJz-v9-AV7.text" = "N5";
-
-/* Class = "UILabel"; text = " Detail"; ObjectID = "MUQ-yY-qIY"; */
-"MUQ-yY-qIY.text" = " Detail";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "N0z-Mm-dwv"; */
 "N0z-Mm-dwv.title" = "Settings";
@@ -109,9 +82,6 @@
 
 /* Class = "UILabel"; text = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>"; ObjectID = "oWh-GS-4Cz"; */
 "oWh-GS-4Cz.text" = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "QWH-mN-ikT"; */
-"QWH-mN-ikT.text" = "Label";
 
 /* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
 "Rej-2W-djk.text" = " ";
@@ -139,12 +109,6 @@
 
 /* Class = "UILabel"; text = "Privacy"; ObjectID = "vCz-ZD-8kI"; */
 "vCz-ZD-8kI.text" = "Privacy";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "vmv-DL-ZEx"; */
-"vmv-DL-ZEx.text" = "Label";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "WwI-7D-wMw"; */
-"WwI-7D-wMw.text" = "Label";
 
 /* Class = "UILabel"; text = "Contact"; ObjectID = "yT9-ct-JHx"; */
 "yT9-ct-JHx.text" = "Contact";
