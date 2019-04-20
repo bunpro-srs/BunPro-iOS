@@ -3,6 +3,7 @@ tasks = ["interfaces", "transform", "normalize"]
 
 [update.interfaces]
 path = "BunPuro"
+defaultToBase = true
 
 [update.transform]
 codePath = "BunPuro"
