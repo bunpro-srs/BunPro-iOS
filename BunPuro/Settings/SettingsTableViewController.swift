@@ -133,12 +133,12 @@ final class SettingsTableViewController: UITableViewController {
             case 0:
                 let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-                let logoutAction = UIAlertAction(title: NSLocalizedString("settings.logout.action", comment: "Logout confirmation"), style: .destructive) { _ in
+                let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { _ in
                     Server.logout()
                     self.tabBarController?.selectedIndex = 0
                 }
 
-                let cancelAction = UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
 
                 controller.addAction(logoutAction)
                 controller.addAction(cancelAction)
@@ -172,7 +172,7 @@ final class SettingsTableViewController: UITableViewController {
             self.synchronizeSettings()
         }
 
-        let cancelAction = UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
 
         controller.addAction(yesAction)
         controller.addAction(noAction)
@@ -200,7 +200,7 @@ final class SettingsTableViewController: UITableViewController {
             self.synchronizeSettings()
         }
 
-        let cancelAction = UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
 
         controller.addAction(yesAction)
         controller.addAction(noAction)
@@ -225,7 +225,7 @@ final class SettingsTableViewController: UITableViewController {
             self.synchronizeSettings()
         }
 
-        let cancelAction = UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
 
         controller.addAction(onAction)
         controller.addAction(offAction)
@@ -290,13 +290,11 @@ final class SettingsTableViewController: UITableViewController {
 
     private func updateUI() {
         guard let account = self.account else {
-            subscriptionDetailLabel.text = NSLocalizedString("subscription.unknown", comment: "The string that is displayed if the subscription state is not known, such as the user information is not yet updated.")
+            subscriptionDetailLabel.text = L10n.Subscription.unknown
             return
         }
 
-        subscriptionDetailLabel.text = account.subscriber ?
-            NSLocalizedString("subscription.subscribed", comment: "the string that is displayed if the user is subscribed") :
-        NSLocalizedString("subscription.unsubscribed", comment: "The string that is displayed if the user is not subscribed")
+        subscriptionDetailLabel.text = account.subscriber ? L10n.Subscription.subscribed : L10n.Subscription.unsubscribed
 
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
@@ -352,10 +350,10 @@ extension Active {
     var localizedString: String {
         switch self {
         case .yes:
-            return NSLocalizedString("active.yes", comment: "")
+            return L10n.Active.yes
 
         case .no:
-            return NSLocalizedString("active.no", comment: "")
+            return L10n.Active.no
         }
     }
 }
@@ -364,10 +362,10 @@ extension State {
     var localizedString: String {
         switch self {
         case .on:
-            return NSLocalizedString("state.on", comment: "")
+            return return L10n.State.on
 
         case .off:
-            return NSLocalizedString("state.off", comment: "")
+            return return L10n.State.off
         }
     }
 }
@@ -376,13 +374,13 @@ extension FuriganaMode {
     var localizedString: String {
         switch self {
         case .on:
-            return NSLocalizedString("furigana.on", comment: "")
+            return L10n.Furigana.on
 
         case .off:
-            return NSLocalizedString("furigana.off", comment: "")
+            return L10n.Furigana.off
 
         case .wanikani:
-            return NSLocalizedString("furigana.wanikani", comment: "")
+            return L10n.Furigana.wanikani
         }
     }
 }

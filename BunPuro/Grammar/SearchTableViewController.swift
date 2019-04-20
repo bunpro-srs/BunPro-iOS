@@ -127,13 +127,13 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         searchController.searchBar.sizeToFit()
         navigationItem.hidesSearchBarWhenScrolling = false
 
-        searchController.searchBar.placeholder = NSLocalizedString("search.grammar.placeholder", comment: "Search grammar placeholder")
+        searchController.searchBar.placeholder = L10n.Search.Grammar.placeholder
         searchController.searchBar.barStyle = .black
 
         searchController.searchBar.scopeButtonTitles = [
-            NSLocalizedString("search.grammar.scope.all", comment: ""),
-            NSLocalizedString("search.grammar.scope.unlearned", comment: ""),
-            NSLocalizedString("search.grammar.scope.learned", comment: "")
+            L10n.Search.Grammar.Scope.all,
+            L10n.Search.Grammar.Scope.unlearned,
+            L10n.Search.Grammar.Scope.learned
         ]
 
         fetchedResultsController = newFetchedResultsController()
@@ -217,14 +217,14 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         var actions = [UIContextualAction]()
 
         if hasReview {
-            let removeReviewAction = UIContextualAction(style: .normal, title: NSLocalizedString("review.edit.remove.short", comment: "")) { _, _, completion in
+            let removeReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Remove.short) { _, _, completion in
                 AppDelegate.modifyReview(.remove(review!.identifier))
                 completion(true)
             }
 
             removeReviewAction.backgroundColor = .red
 
-            let resetReviewAction = UIContextualAction(style: .normal, title: NSLocalizedString("review.edit.reset.short", comment: "")) { _, _, completion in
+            let resetReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Reset.short) { _, _, completion in
                 AppDelegate.modifyReview(.reset(review!.identifier))
                 completion(true)
             }
@@ -236,7 +236,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         } else {
             let addToReviewAction = UIContextualAction(
                 style: UIContextualAction.Style.normal,
-                title: NSLocalizedString("review.edit.add.short", comment: "")
+                title: L10n.Review.Edit.Add.short
             ) { _, _, completion in
                 AppDelegate.modifyReview(.add(point.identifier))
                 completion(true)

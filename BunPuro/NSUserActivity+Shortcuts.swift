@@ -20,7 +20,7 @@ extension NSUserActivity {
         activity.isEligibleForSearch = true
         activity.isEligibleForPrediction = true
 
-        activity.title = NSLocalizedString("shortcut.study.title", comment: "")
+        activity.title = L10n.Shortcut.Study.title
         activity.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "shortcut.study.suggetedphrase") as String
         activity.userInfo = ["value": "key"]
 
@@ -38,7 +38,7 @@ extension NSUserActivity {
         activity.isEligibleForSearch = true
         activity.isEligibleForPrediction = true
 
-        activity.title = NSLocalizedString("shortcut.cram.title", comment: "")
+        activity.title = L10n.Shortcut.Cram.title
         activity.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "shortcut.cram.suggetedphrase") as String
         activity.userInfo = ["value": "key"]
 

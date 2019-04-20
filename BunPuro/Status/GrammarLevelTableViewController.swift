@@ -108,7 +108,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
             removeReviewAction.backgroundColor = .red
 
             let resetReviewAction = UIContextualAction(style: .normal,
-                                                       title: NSLocalizedString("review.edit.reset.short", comment: "")) { _, _, completion in
+                                                       title: L10n.Review.Edit.Reset.short) { _, _, completion in
                                                         AppDelegate.modifyReview(.reset(review!.identifier))
 
                                                         completion(true)
@@ -121,7 +121,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         } else {
             let addToReviewAction = UIContextualAction(
                 style: UIContextualAction.Style.normal,
-                title: NSLocalizedString("review.edit.add.short", comment: "")
+                title: L10n.Review.Edit.Add.short
             ) { _, _, completion in
                 AppDelegate.modifyReview(.add(point.identifier))
                 completion(true)
@@ -153,7 +153,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
-        cell.titleLabel.text = String.localizedStringWithFormat(NSLocalizedString("level.number", comment: "Level in a JLPT"), correctLevel(level))
+        cell.titleLabel.text = L10n.Level.number(correctLevel(level))
         cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
         cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
 

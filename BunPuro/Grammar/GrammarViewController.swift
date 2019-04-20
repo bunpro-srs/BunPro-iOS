@@ -133,7 +133,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
             let removeAction = UIAlertAction(
-                title: NSLocalizedString("review.edit.remove", comment: ""),
+                title: L10n.Review.Edit.remove,
                 style: .destructive) { _ in
                     self.modifyReview(.remove(self.review!.identifier))
             }
@@ -141,7 +141,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
             alertController.addAction(removeAction)
 
             let resetAction = UIAlertAction(
-                title: NSLocalizedString("review.edit.reset", comment: ""),
+                title: L10n.Review.Edit.reset,
                 style: .destructive) { _ in
                     self.modifyReview(.reset(self.review!.identifier))
             }
@@ -149,7 +149,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
             alertController.addAction(resetAction)
 
             alertController.addAction(
-                UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel, handler: nil)
+                UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
             )
 
             alertController.popoverPresentationController?.barButtonItem = sender
@@ -161,8 +161,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     }
 
     private func updateEditBarButtonState() {
-        reviewEditBarButtonItem?.title = review?.complete == true ? NSLocalizedString("review.edit.button.remove_reset", comment: "") : NSLocalizedString("review.edit.button.add", comment: "")
-
+        reviewEditBarButtonItem?.title = review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
         reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
     }
 
@@ -447,18 +446,19 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let copyJapanese = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { [weak self] _ in
+        L10n.Copy.japanese
+        let copyJapanese = UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.grammar?.title
         }
 
-        let copyMeaning = UIAlertAction(title: NSLocalizedString("copy.meaning", comment: ""), style: .default) { [weak self] _ in
+        let copyMeaning = UIAlertAction(title: L10n.Copy.meaning, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.grammar?.meaning
         }
 
         alertController.addAction(copyJapanese)
         alertController.addAction(copyMeaning)
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
 
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.sourceRect = cell.bounds
@@ -475,18 +475,18 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let copyJapanese = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { _ in
+        let copyJapanese = UIAlertAction(title: L10n.Copy.japanese, style: .default) { _ in
             UIPasteboard.general.string = sentence.japanese?.htmlAttributedString?.string.cleanStringAndFurigana.string
         }
 
-        let copyMeaning = UIAlertAction(title: NSLocalizedString("copy.english", comment: ""), style: .default) { _ in
+        let copyMeaning = UIAlertAction(title: L10n.Copy.english, style: .default) { _ in
             UIPasteboard.general.string = sentence.english?.htmlAttributedString?.string
         }
 
         alertController.addAction(copyJapanese)
         alertController.addAction(copyMeaning)
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
 
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.sourceRect = cell.bounds
@@ -502,17 +502,17 @@ extension GrammarViewController: UIPopoverPresentationControllerDelegate {
 
     override var previewActionItems: [UIPreviewActionItem] {
         if let review = review, review.complete {
-            let removeAction = UIPreviewAction(title: NSLocalizedString("review.edit.remove", comment: ""), style: .destructive) { _, _ in
+            let removeAction = UIPreviewAction(title: L10n.Review.Edit.remove, style: .destructive) { _, _ in
                 self.modifyReview(.remove(self.review!.identifier))
             }
 
-            let resetAction = UIPreviewAction(title: NSLocalizedString("review.edit.reset", comment: ""), style: .destructive) { _, _ in
+            let resetAction = UIPreviewAction(title: L10n.Review.Edit.reset, style: .destructive) { _, _ in
                 self.modifyReview(.reset(self.review!.identifier))
             }
 
             return [removeAction, resetAction]
         } else {
-            let addAction = UIPreviewAction(title: NSLocalizedString("review.edit.add", comment: ""), style: .default) { _, _ in
+            let addAction = UIPreviewAction(title: L10n.Review.Edit.add, style: .default) { _, _ in
                 self.modifyReview(.add(self.grammar!.identifier))
             }
 

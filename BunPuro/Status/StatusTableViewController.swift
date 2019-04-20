@@ -172,7 +172,7 @@ final class StatusTableViewController: UITableViewController {
                 } else if AppDelegate.isTrialPeriodAvailable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
 
-                    cell.titleLabel.text = NSLocalizedString("status.signuptrail", comment: "The title of the signup for trial button")
+                    cell.titleLabel.text = L10n.Status.signuptrail
 
                     return cell
                 }
@@ -186,7 +186,7 @@ final class StatusTableViewController: UITableViewController {
                 else {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
 
-                    cell.titleLabel.text = NSLocalizedString("status.loading", comment: "The title of the loading indicator")
+                    cell.titleLabel.text = L10n.Status.loading
                     cell.titleLabel.textColor = .white
 
                     return cell
@@ -195,14 +195,14 @@ final class StatusTableViewController: UITableViewController {
             case 1:
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
 
-                cell.titleLabel.text = NSLocalizedString("status.cram", comment: "The title of the cram button")
+                cell.titleLabel.text = L10n.Status.cram
 
                 return cell
 
             default:
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
 
-                cell.titleLabel.text = NSLocalizedString("status.study", comment: "The title of the study button")
+                cell.titleLabel.text = L10n.Status.study
 
                 return cell
             }

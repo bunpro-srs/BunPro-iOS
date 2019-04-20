@@ -24,8 +24,8 @@ struct UserNotificationCenter {
 
             let content = UNMutableNotificationContent()
             content.threadIdentifier = threadIdentifier
-            content.title = String.localizedStringWithFormat(NSLocalizedString("notification.review.title", comment: ""), reviewCount)
-            //        content.body = NSLocalizedString("notification.review.message", comment: "")
+            content.title = L10n.Notification.Review.title(reviewCount)
+            //        content.body = L10n.Notification.Review.message
             content.sound = UNNotificationSound.default
             content.badge = AppDelegate.badgeNumber(date: date)
 

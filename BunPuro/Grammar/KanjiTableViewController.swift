@@ -39,7 +39,7 @@ final class KanjiTableViewController: UITableViewController {
             if indexPath.row == 0 {
                 cell.nameLabel?.attributedText = japanese?.htmlAttributedString(font: cell.textLabel?.font, color: .white)
             } else {
-                cell.nameLabel?.text = showEnglish ? english : NSLocalizedString("kanji.english.show", comment: "")
+                cell.nameLabel?.text = showEnglish ? english : L10n.Kanji.English.show
                 cell.nameLabel?.textColor = showEnglish ? UIColor.white : view.tintColor
             }
         } else {
@@ -56,7 +56,7 @@ final class KanjiTableViewController: UITableViewController {
 
         let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
 
-        view?.titleLabel.text = NSLocalizedString("kanji.header.readings", comment: "")
+        view?.titleLabel.text = L10n.Kanji.Header.readings
         return view
     }
 
@@ -85,18 +85,18 @@ final class KanjiTableViewController: UITableViewController {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let copyKanjiOnly = UIAlertAction(title: NSLocalizedString("copy.japanese", comment: ""), style: .default) { [weak self] _ in
+        let copyKanjiOnly = UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.japanese?.htmlAttributedString?.string
         }
 
-        let copyKana = UIAlertAction(title: NSLocalizedString("copy.english", comment: ""), style: .default) { [weak self] _ in
+        let copyKana = UIAlertAction(title: L10n.Copy.english, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.english?.htmlAttributedString?.string
         }
 
         alertController.addAction(copyKanjiOnly)
         alertController.addAction(copyKana)
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
 
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.sourceRect = cell.bounds
@@ -109,18 +109,18 @@ final class KanjiTableViewController: UITableViewController {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let copyKanjiOnly = UIAlertAction(title: NSLocalizedString("copy.kanji", comment: ""), style: .default) { [weak self] _ in
+        let copyKanjiOnly = UIAlertAction(title: L10n.Copy.kanji, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.furigana[indexPath.row].original
         }
 
-        let copyKana = UIAlertAction(title: NSLocalizedString("copy.kana", comment: ""), style: .default) { [weak self] _ in
+        let copyKana = UIAlertAction(title: L10n.Copy.kana, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.furigana[indexPath.row].text
         }
 
         alertController.addAction(copyKanjiOnly)
         alertController.addAction(copyKana)
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("general.cancel", comment: ""), style: .cancel))
+        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
 
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.sourceRect = cell.bounds
