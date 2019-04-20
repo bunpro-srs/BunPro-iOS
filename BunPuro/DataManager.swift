@@ -124,7 +124,7 @@ final class DataManager {
         let safariViewController = SFSafariViewController(url: url)
 
         safariViewController.preferredBarTintColor = .black
-        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        safariViewController.preferredControlTintColor = Asset.mainTint.color
 
         presentingViewController.present(safariViewController, animated: true, completion: nil)
     }

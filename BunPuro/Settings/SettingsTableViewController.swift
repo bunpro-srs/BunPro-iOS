@@ -333,7 +333,7 @@ final class SettingsTableViewController: UITableViewController {
         let safariViewController = SFSafariViewController(url: url, configuration: configuration)
 
         safariViewController.preferredBarTintColor = .black
-        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        safariViewController.preferredControlTintColor = Asset.mainTint.color
 
         return safariViewController
     }

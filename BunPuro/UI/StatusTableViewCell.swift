@@ -41,7 +41,7 @@ final class StatusTableViewCell: UITableViewCell {
                 reviewStatusLabel.text = L10n.Reviewtime.none
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {
-                reviewStatusLabel.textColor = UIColor(named: "Main Tint")
+                reviewStatusLabel.textColor = Asset.mainTint.color
                 reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
                 reviewStatusNextDateLabel.text = L10n.Reviewtime.now
             }

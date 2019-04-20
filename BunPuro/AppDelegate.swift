@@ -23,19 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(named: "NavigationBarHeader")
+        UINavigationBar.appearance().barTintColor = Asset.navigationBarHeader.color
 
         UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().barTintColor = UIColor(named: "NavigationBarHeader")
+        UITabBar.appearance().barTintColor = Asset.navigationBarHeader.color
 
-        CorneredView.appearance().backgroundColor = UIColor(named: "Tiles")
+        CorneredView.appearance().backgroundColor = Asset.tiles.color
         UITableViewCell.appearance().clipsToBounds = true
         UITableViewCell.appearance().contentView.clipsToBounds = true
 
-        UIProgressView.appearance().trackTintColor = UIColor(named: "Background")
-        UIProgressView.appearance().progressTintColor = UIColor(named: "TilesSymbol")
+        UIProgressView.appearance().trackTintColor = Asset.background.color
+        UIProgressView.appearance().progressTintColor = Asset.tilesSymbol.color
 
-        window?.tintColor = UIColor(named: "Main Tint")
+        window?.tintColor = Asset.mainTint.color
 
         return true
     }

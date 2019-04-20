@@ -349,7 +349,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
 
-                cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1, color: UIColor(named: "Main Tint")!)
+                cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
                 cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2, color: .white)
                 cell.descriptionLabel.isHidden = false
                 cell.customAction = nil

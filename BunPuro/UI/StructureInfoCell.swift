@@ -14,7 +14,7 @@ final class StructureInfoCell: UITableViewCell {
 
     @IBOutlet private weak var structureContentView: UIView! {
         didSet {
-            structureContentView.layer.borderColor = UIColor(named: "Background")?.cgColor
+            structureContentView.layer.borderColor = Asset.background.color.cgColor
             structureContentView.layer.borderWidth = 0.5
             structureContentView.layer.cornerRadius = 9.0
         }
