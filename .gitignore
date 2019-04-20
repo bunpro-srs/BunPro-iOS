@@ -75,3 +75,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Beak Scripts' user-specific symbolic links
+Scripts/SymLinks/
