@@ -1,7 +1,4 @@
 //
-//  Date+Initializer.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 04.05.18.
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //

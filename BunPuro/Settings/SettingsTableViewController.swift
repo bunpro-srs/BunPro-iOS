@@ -1,7 +1,4 @@
 //
-//  SettingsTableViewController.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 06.12.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //

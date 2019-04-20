@@ -1,7 +1,4 @@
 //
-//  SearchTableViewController.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 07.11.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //

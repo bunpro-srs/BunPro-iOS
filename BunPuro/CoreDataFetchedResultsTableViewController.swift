@@ -1,7 +1,4 @@
 //
-//  CoreDataFetchedResultsTableViewController.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 22.11.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //

@@ -1,7 +1,4 @@
 //
-//  StreakInfoCell.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 23.01.18.
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //

@@ -1,7 +1,4 @@
 //
-//  Link+Initializer.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 22.01.18.
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //

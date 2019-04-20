@@ -1,7 +1,4 @@
 //
-//  RightDetailCell.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 15.12.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //

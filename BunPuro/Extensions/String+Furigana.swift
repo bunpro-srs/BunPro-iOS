@@ -1,7 +1,4 @@
 //
-//  String+Furigana.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 28.12.17.
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
