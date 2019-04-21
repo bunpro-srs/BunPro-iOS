@@ -125,9 +125,19 @@ final class StatusTableViewController: UITableViewController {
 
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.updatedDate), ascending: true)]
 
-        request.predicate = NSPredicate(format: "%K < %@ AND %K == true", #keyPath(Review.nextReviewDate), Date().tomorrow.tomorrow.nextMidnight as NSDate, #keyPath(Review.complete))
+        request.predicate = NSPredicate(
+            format: "%K < %@ AND %K == true",
+            #keyPath(Review.nextReviewDate),
+            Date().tomorrow.tomorrow.nextMidnight as NSDate,
+            #keyPath(Review.complete)
+        )
 
-        reviewsFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        reviewsFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
 
         reviewsFetchedResultsController?.delegate = self
 

@@ -37,7 +37,9 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
 
         request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
 
-        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
+        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) {
+            NetworkDataProcedure(session: URLSession.shared, request: request)
+        }
         _transformProcedure = TransformProcedure<Data, T> {
             do {
                 _ = try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)

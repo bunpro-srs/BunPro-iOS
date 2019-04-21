@@ -178,7 +178,10 @@ final class DataManager {
                             let newReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
                             let hasNewReviews = newReviewsCount > oldReviewsCount
                             if hasNewReviews {
-                                UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(1.0), reviewCount: newReviewsCount - oldReviewsCount)
+                                UserNotificationCenter.shared.scheduleNextReviewNotification(
+                                    at: Date().addingTimeInterval(1.0),
+                                    reviewCount: newReviewsCount - oldReviewsCount
+                                )
                             }
 
                             completion?(hasNewReviews ? .newData : .noData)

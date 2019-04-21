@@ -285,7 +285,13 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         }
     }
 
-    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    override func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+        ) {
         if controller == fetchedResultsController {
             super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
         } else if controller == reviewsFetchedResultsController, let visibleRowIndexpaths = tableView.indexPathsForVisibleRows {

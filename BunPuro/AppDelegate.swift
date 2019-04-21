@@ -167,15 +167,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+        ) {
         UserNotificationCenter.shared.updateNotifications(basedOnReceived: notification)
 
         completionHandler([.sound, .badge, .alert])
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+        ) {
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            let statusViewController = (window?.rootViewController as? UITabBarController)?.viewControllers?.first(where: { $0 is StatusTableViewController }) as? StatusTableViewController
+            let statusViewController = (window?.rootViewController as? UITabBarController)?
+                .viewControllers?
+                .first { $0 is StatusTableViewController } as? StatusTableViewController
 
             statusViewController?.showReviewsOnViewDidAppear = true
         }

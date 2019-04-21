@@ -65,7 +65,12 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
         request.sortDescriptors = [levelSort, orderSort, identifierSort]
 
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: #keyPath(Grammar.lessonIdentifier), cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: #keyPath(Grammar.lessonIdentifier),
+            cacheName: nil
+        )
     }
 
     // MARK: - Table view data source

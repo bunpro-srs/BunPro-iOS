@@ -26,7 +26,8 @@ final class LoginProcedure: GroupProcedure, OutputProcedure {
         self.email = username
         self.password = password
 
-        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)")!
+        let percentEscapedPassword: String = password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(percentEscapedPassword)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

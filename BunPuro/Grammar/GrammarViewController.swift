@@ -277,7 +277,12 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""), let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white), !caution.isEmpty {
+                if
+                    let caution = grammar?.caution?
+                        .replacingOccurrences(of: "<span class='chui'>", with: "")
+                        .replacingOccurrences(of: "</span>", with: ""),
+                    let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
+                    !caution.isEmpty {
                     cell.cautionLabel.attributedText = attributed
                 } else {
                     cell.cautionLabel.attributedText = nil
@@ -294,7 +299,9 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                cell.attributedDescriptionText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont, color: .white)
+                cell.attributedDescriptionText = grammar?.structure?
+                    .replacingOccurrences(of: ", ", with: "</br>")
+                    .htmlAttributedString(font: englishFont, color: .white)
 
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
 
