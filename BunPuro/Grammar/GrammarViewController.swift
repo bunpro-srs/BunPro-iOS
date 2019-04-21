@@ -446,7 +446,6 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        L10n.Copy.japanese
         let copyJapanese = UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
             UIPasteboard.general.string = self?.grammar?.title
         }

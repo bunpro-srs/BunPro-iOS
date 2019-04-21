@@ -362,10 +362,10 @@ extension State {
     var localizedString: String {
         switch self {
         case .on:
-            return return L10n.State.on
+            return L10n.State.on
 
         case .off:
-            return return L10n.State.off
+            return L10n.State.off
         }
     }
 }

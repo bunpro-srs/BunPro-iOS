@@ -112,16 +112,16 @@
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
 		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
+		A1D6C148226B568700D25DF1 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C147226B568600D25DF1 /* BartyCrouch.swift */; };
+		A1D6C14E226B56A200D25DF1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
+		A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
+		A1D6C150226B56A200D25DF1 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14D226B56A200D25DF1 /* Storyboards.swift */; };
 		A1D6C19F226BAF0100D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */; };
 		A1D6C1A0226BAF0100D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */; };
 		A1D6C1A1226BAF0100D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */; };
 		A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */; };
 		A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */; };
 		A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */; };
-		A1D6C148226B568700D25DF1 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C147226B568600D25DF1 /* BartyCrouch.swift */; };
-		A1D6C14E226B56A200D25DF1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
-		A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
-		A1D6C150226B56A200D25DF1 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14D226B56A200D25DF1 /* Storyboards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,16 +308,16 @@
 		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
+		A1D6C147226B568600D25DF1 /* BartyCrouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
+		A1D6C14B226B56A200D25DF1 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		A1D6C14C226B56A200D25DF1 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		A1D6C14D226B56A200D25DF1 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKit.framework; path = Dependencies/iOS/ProcedureKit.framework; sourceTree = "<group>"; };
 		A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Dependencies/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKit.framework; path = Dependencies/iOS/ProcedureKit.framework; sourceTree = "<group>"; };
 		A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Dependencies/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
 		A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
-		A1D6C147226B568600D25DF1 /* BartyCrouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
-		A1D6C14B226B56A200D25DF1 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		A1D6C14C226B56A200D25DF1 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
-		A1D6C14D226B56A200D25DF1 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +655,24 @@
 			path = Furigana;
 			sourceTree = "<group>";
 		};
+		A1D6C149226B56A200D25DF1 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C14A226B56A200D25DF1 /* SwiftGen */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		A1D6C14A226B56A200D25DF1 /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C14B226B56A200D25DF1 /* Strings.swift */,
+				A1D6C14C226B56A200D25DF1 /* Assets.swift */,
+				A1D6C14D226B56A200D25DF1 /* Storyboards.swift */,
+			);
+			path = SwiftGen;
+			sourceTree = "<group>";
+		};
 		A1D6C18F226BAE0900D25DF1 /* BunPuro */ = {
 			isa = PBXGroup;
 			children = (
@@ -682,24 +700,6 @@
 				A1D6C190226BAE0F00D25DF1 /* BunPuroKit */,
 			);
 			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		A1D6C149226B56A200D25DF1 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				A1D6C14A226B56A200D25DF1 /* SwiftGen */,
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
-		A1D6C14A226B56A200D25DF1 /* SwiftGen */ = {
-			isa = PBXGroup;
-			children = (
-				A1D6C14B226B56A200D25DF1 /* Strings.swift */,
-				A1D6C14C226B56A200D25DF1 /* Assets.swift */,
-				A1D6C14D226B56A200D25DF1 /* Storyboards.swift */,
-			);
-			path = SwiftGen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -739,13 +739,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuro" */;
 			buildPhases = (
-				A1D6C151226B56DB00D25DF1 /* BartyCrouch */,
-				A1D6C152226B56EF00D25DF1 /* SwiftGen */,
+				A1225ED9226CD6F600EA2885 /* BartyCrouch */,
+				A1225EDB226CD70100EA2885 /* SwiftGen */,
 				2EAD9DCC1FA25DF100CE52CF /* Sources */,
 				2EAD9DCD1FA25DF100CE52CF /* Frameworks */,
 				2EAD9DCE1FA25DF100CE52CF /* Resources */,
 				2EAD9E221FA26EB400CE52CF /* Embed Frameworks */,
-				A1D6C146226B551C00D25DF1 /* SwiftLint */,
+				A1225EDA226CD6FC00EA2885 /* SwiftLint */,
 				82FF38ADFC96BC27A5949432C6350443 /* Accio */,
 			);
 			buildRules = (
@@ -969,20 +969,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A1D6C146226B551C00D25DF1 /* SwiftLint */ = {
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint --quiet\nelse\n    echo \"warning: SwiftLint not installed, download it from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1001,21 +987,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		A1D6C151226B56DB00D25DF1 /* BartyCrouch */ = {
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = BartyCrouch;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		82FF38ADFC96BC27A5949432C6350443 /* Accio */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1036,8 +1008,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		);
-		A1D6C152226B56EF00D25DF1 /* SwiftGen */ = {
+		};
+		A1225ED9226CD6F600EA2885 /* BartyCrouch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = BartyCrouch;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
+		A1225EDA226CD6FC00EA2885 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint --quiet\nelse\n    echo \"warning: SwiftLint not installed, download it from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		A1225EDB226CD70100EA2885 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
 			inputFileListPaths = (
 			);
 			inputPaths = (

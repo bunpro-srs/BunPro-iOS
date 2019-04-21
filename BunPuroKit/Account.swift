@@ -14,8 +14,11 @@ public enum Active: String, Codable {
             print("Invalid value for \(Active.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"", "\"Yes\"": self = .yes
-            default: self = .no
+            case "\"On\"", "Show", "\"Show\"", "\"Yes\"":
+                self = .yes
+
+            default:
+                self = .no
             }
             return
         }
@@ -39,9 +42,14 @@ public enum Visible: String, Codable {
             print("Invalid value for \(Visible.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"": self = .show
-            case "\"Minimal\"": self = .minimal
-            default: self = .hide
+            case "\"On\"", "Show", "\"Show\"":
+                self = .show
+
+            case "\"Minimal\"":
+                self = .minimal
+
+            default:
+                self = .hide
             }
             return
         }
@@ -64,8 +72,11 @@ public enum State: String, Codable {
             print("Invalid value for \(State.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"": self = .on
-            default: self = .off
+            case "\"On\"", "Show", "\"Show\"":
+                self = .on
+
+            default:
+                self = .off
             }
             return
         }
