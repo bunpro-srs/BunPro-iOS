@@ -76,6 +76,9 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# Beak Scripts' user-specific symbolic links
+Scripts/SymLinks/
+
 # Accio dependency management
 Dependencies/
 .accio/
