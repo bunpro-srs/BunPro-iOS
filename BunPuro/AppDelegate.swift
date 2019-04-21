@@ -55,8 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if let rootViewController = window?.rootViewController {
-            dataManager = DataManager(presentingViewController: rootViewController)
+        if let rootViewCtrl = window?.rootViewController {
+            dataManager = DataManager(presentingViewController: rootViewCtrl)
         }
 
 //        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(20))
@@ -94,30 +94,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }
                 tabbarController.selectedIndex = 0
 
-            guard let viewController = tabbarController.viewControllers?.first?.content else { return false }
+            guard let viewCtrl = tabbarController.viewControllers?.first?.content else { return false }
 
-            switch viewController {
+            switch viewCtrl {
             case is StatusTableViewController:
 
-                let statusViewController = viewController as? StatusTableViewController
+                let statusViewCtrl = viewCtrl as? StatusTableViewController
 
                 switch type {
                 case .study:
-                    statusViewController?.presentReviewViewController(website: .study)
+                    statusViewCtrl?.presentReviewViewController(website: .study)
 
                 case .cram:
-                    statusViewController?.presentReviewViewController(website: .cram)
+                    statusViewCtrl?.presentReviewViewController(website: .cram)
                 }
 
             case is ReviewViewController:
-                let reviewViewController = viewController as? ReviewViewController
+                let reviewViewCtrl = viewCtrl as? ReviewViewController
 
                 switch type {
                 case .study:
-                    reviewViewController?.website = .study
+                    reviewViewCtrl?.website = .study
 
                 case .cram:
-                    reviewViewController?.website = .cram
+                    reviewViewCtrl?.website = .cram
                 }
             default: return false
             }
@@ -183,11 +183,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping () -> Void
         ) {
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            let statusViewController = (window?.rootViewController as? UITabBarController)?
+            let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
                 .viewControllers?
                 .first { $0 is StatusTableViewController } as? StatusTableViewController
 
-            statusViewController?.showReviewsOnViewDidAppear = true
+            statusViewCtrl?.showReviewsOnViewDidAppear = true
         }
 
         completionHandler()

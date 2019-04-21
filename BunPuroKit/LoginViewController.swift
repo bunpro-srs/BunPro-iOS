@@ -98,12 +98,12 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         let configuration = SFSafariViewController.Configuration()
         configuration.entersReaderIfAvailable = true
 
-        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
 
-        safariViewController.preferredBarTintColor = .black
-        safariViewController.preferredControlTintColor = UIColor(named: "Main Tint")
+        safariViewCtrl.preferredBarTintColor = .black
+        safariViewCtrl.preferredControlTintColor = UIColor(named: "Main Tint")
 
-        present(safariViewController, animated: true)
+        present(safariViewCtrl, animated: true)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

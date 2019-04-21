@@ -121,12 +121,12 @@ final class DataManager {
 
     func signup() {
         let url = URL(string: "https://bunpro.jp")!
-        let safariViewController = SFSafariViewController(url: url)
+        let safariViewCtrl = SFSafariViewController(url: url)
 
-        safariViewController.preferredBarTintColor = .black
-        safariViewController.preferredControlTintColor = Asset.mainTint.color
+        safariViewCtrl.preferredBarTintColor = .black
+        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
 
-        presentingViewController.present(safariViewController, animated: true, completion: nil)
+        presentingViewController.present(safariViewCtrl, animated: true, completion: nil)
     }
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {

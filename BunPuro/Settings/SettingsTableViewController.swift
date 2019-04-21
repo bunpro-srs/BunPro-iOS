@@ -256,14 +256,14 @@ final class SettingsTableViewController: UITableViewController {
             string = String(describing: error)
         }
 
-        let emailViewController = MFMailComposeViewController()
-        emailViewController.setSubject("BunPro bad reviews")
-        emailViewController.setMessageBody(string, isHTML: true)
-        emailViewController.setToRecipients(["rion-kaneshiro@gmx.net"])
+        let emailViewCtrl = MFMailComposeViewController()
+        emailViewCtrl.setSubject("BunPro bad reviews")
+        emailViewCtrl.setMessageBody(string, isHTML: true)
+        emailViewCtrl.setToRecipients(["rion-kaneshiro@gmx.net"])
 
-        emailViewController.mailComposeDelegate = self
+        emailViewCtrl.mailComposeDelegate = self
 
-        present(emailViewController, animated: true, completion: nil)
+        present(emailViewCtrl, animated: true, completion: nil)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -330,12 +330,12 @@ final class SettingsTableViewController: UITableViewController {
         let configuration = SFSafariViewController.Configuration()
         configuration.entersReaderIfAvailable = true
 
-        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
 
-        safariViewController.preferredBarTintColor = .black
-        safariViewController.preferredControlTintColor = Asset.mainTint.color
+        safariViewCtrl.preferredBarTintColor = .black
+        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
 
-        return safariViewController
+        return safariViewCtrl
     }
 }
 

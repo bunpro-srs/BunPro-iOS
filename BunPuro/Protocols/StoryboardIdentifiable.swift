@@ -20,9 +20,9 @@ extension UIViewController: StoryboardIdentifiable { }
 
 extension UIStoryboard {
     func instantiateViewController<T: UIViewController>() -> T {
-        guard let viewController = instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
+        guard let viewCtrl = instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             fatalError("Could not instantiate View Controller with identifier: \(T.storyboardIdentifier)")
         }
-        return viewController
+        return viewCtrl
     }
 }

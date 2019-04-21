@@ -393,9 +393,9 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
                 guard let url = readingsFetchedResultsController.object(at: correctIndexPath).url else { return }
 
-                let safariViewController = SFSafariViewController(url: url)
+                let safariViewCtrl = SFSafariViewController(url: url)
 
-                present(safariViewController, animated: true, completion: nil)
+                present(safariViewCtrl, animated: true, completion: nil)
 
             case .examples:
 
@@ -404,14 +404,14 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let sentence = exampleSentencesFetchedResultsController.object(at: correctIndexPath)
 
                 if let japanese = sentence.japanese?.cleanStringAndFurigana {
-                    let infoViewController = storyboard!.instantiateViewController() as KanjiTableViewController
+                    let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
 
-                    infoViewController.japanese = japanese.string
-                    infoViewController.english = sentence.english?.htmlAttributedString?.string
-                    infoViewController.furigana = japanese.furigana ?? [Furigana]()
-                    infoViewController.showEnglish = !(account?.englishMode ?? false)
+                    infoViewCtrl.japanese = japanese.string
+                    infoViewCtrl.english = sentence.english?.htmlAttributedString?.string
+                    infoViewCtrl.furigana = japanese.furigana ?? [Furigana]()
+                    infoViewCtrl.showEnglish = !(account?.englishMode ?? false)
 
-                    show(infoViewController, sender: self)
+                    show(infoViewCtrl, sender: self)
                 }
             }
 

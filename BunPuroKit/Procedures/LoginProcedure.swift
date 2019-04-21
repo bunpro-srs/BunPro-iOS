@@ -101,7 +101,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
         self.completion = completion
 
         if Server.token == nil {
-            guard let presentingViewController = presentingViewController else {
+            guard let presentingViewCtrl = presentingViewController else {
                 completion(ConditionResult.failure(Error.noPresentingViewControllerProvided))
                 return
             }
@@ -127,7 +127,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
 
                     controller.modalPresentationStyle = .formSheet
 
-                    presentingViewController.present(controller, animated: true, completion: nil)
+                    presentingViewCtrl.present(controller, animated: true, completion: nil)
                 }
             }
         } else {
