@@ -185,15 +185,7 @@ final class StatusTableViewController: UITableViewController {
                     cell.titleLabel.text = L10n.Status.signuptrail
 
                     return cell
-                }
-//                else if Account.currentAccount != nil {
-//                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-//
-//                    cell.titleLabel.text = NSLocalizedString("status.signup", comment: "The title of the signup button")
-//
-//                    return cell
-//                }
-                else {
+                } else {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
 
                     cell.titleLabel.text = L10n.Status.loading
@@ -333,7 +325,7 @@ final class StatusTableViewController: UITableViewController {
     }
 
     private func setup(account: Account?) {
-        navigationItem.title = account?.name ?? NSLocalizedString("Loading...", comment: "")
+        navigationItem.title = account?.name
 
         tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }

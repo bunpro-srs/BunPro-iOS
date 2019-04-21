@@ -104,7 +104,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         if hasReview {
             let removeReviewAction = UIContextualAction(
                 style: .normal,
-                title: NSLocalizedString("review.edit.remove.short", comment: "")
+                title: L10n.Review.Edit.Remove.short
             ) { _, _, completion in
                 AppDelegate.modifyReview(.remove(review!.identifier))
                 completion(true)
@@ -112,11 +112,13 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
             removeReviewAction.backgroundColor = .red
 
-            let resetReviewAction = UIContextualAction(style: .normal,
-                                                       title: L10n.Review.Edit.Reset.short) { _, _, completion in
-                                                        AppDelegate.modifyReview(.reset(review!.identifier))
+            let resetReviewAction = UIContextualAction(
+                style: .normal,
+                title: L10n.Review.Edit.Reset.short
+            ) { _, _, completion in
+                AppDelegate.modifyReview(.reset(review!.identifier))
 
-                                                        completion(true)
+                completion(true)
             }
 
             resetReviewAction.backgroundColor = .purple
@@ -154,7 +156,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         guard let name = fetchedResultsController?.sections?[section].name, let level = Int(name) else { return nil }
         let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
 
-        let grammarPoints = fetchedResultsController.fetchedObjects?.filter({ $0.lessonIdentifier == name }) ?? []
+        let grammarPoints = fetchedResultsController.fetchedObjects?.filter { $0.lessonIdentifier == name } ?? []
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
