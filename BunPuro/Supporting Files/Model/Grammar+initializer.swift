@@ -34,7 +34,7 @@ extension Grammar {
         do {
             return try Review.review(for: self)
         } catch {
-            print(error)
+            log.error(error)
             return nil
         }
     }

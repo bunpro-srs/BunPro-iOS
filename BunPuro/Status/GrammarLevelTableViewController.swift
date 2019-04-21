@@ -21,7 +21,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     private var didUpdateObserver: NSObjectProtocol?
 
     deinit {
-        print("deinit \(String(describing: self))")
+        log.info("deinit \(String(describing: self))")
 
         for observer in [willUpdateObserver, didUpdateObserver] {
             if let observer = observer {

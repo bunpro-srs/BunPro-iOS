@@ -49,7 +49,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     private var endUpdateObserver: NSObjectProtocol?
 
     deinit {
-        print("deinit \(String(describing: self))")
+        log.info("deinit \(String(describing: self))")
 
         for observer in [beginUpdateObserver, endUpdateObserver] where observer != nil {
             NotificationCenter.default.removeObserver(observer!)
@@ -190,7 +190,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         do {
             try exampleSentencesFetchedResultsController?.performFetch()
         } catch {
-            print(error)
+            log.error(error)
         }
     }
 
@@ -213,14 +213,14 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         do {
             try readingsFetchedResultsController?.performFetch()
         } catch {
-            print(error)
+            log.error(error)
         }
     }
 
     private func playSound(forSentenceAt indexPath: IndexPath) {
         guard let url = exampleSentencesFetchedResultsController.object(at: indexPath).audioURL else { return }
 
-        print("play url: \(url)")
+        log.info("play url: \(url)")
 
         if player == nil {
             player = AVPlayer(url: url)

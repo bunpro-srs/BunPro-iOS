@@ -32,7 +32,7 @@ extension Account {
         do {
             return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
         } catch {
-            print(error)
+            log.error(error)
             return nil
         }
     }

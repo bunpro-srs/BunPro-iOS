@@ -103,7 +103,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     deinit {
-        print("deinit \(String(describing: self))")
+        log.info("deinit \(String(describing: self))")
     }
 
     override func viewDidLoad() {
@@ -143,7 +143,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         do {
             try reviewsFetchedResultsController.performFetch()
         } catch {
-            print(error)
+            log.error(error)
         }
     }
 

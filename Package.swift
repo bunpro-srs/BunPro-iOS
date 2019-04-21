@@ -9,7 +9,10 @@ let package = Package(
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", .upToNextMajor(from: "3.2.0")),
 
         // Advanced Operations in Swift
-        .package(url: "https://github.com/ProcedureKit/ProcedureKit.git", .upToNextMajor(from: "5.2.0"))
+        .package(url: "https://github.com/ProcedureKit/ProcedureKit.git", .upToNextMajor(from: "5.2.0")),
+
+        // Convenient logging during development & release in Swift
+        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", .upToNextMajor(from: "1.7.0")),
     ],
     targets: [
         .target(
@@ -18,6 +21,7 @@ let package = Package(
                 "KeychainAccess",
                 "ProcedureKit",
                 "ProcedureKitNetwork",
+                "SwiftyBeaver",
             ],
             path: "BunPuro"
         ),

@@ -37,10 +37,10 @@ struct UserNotificationCenter {
 
             center.add(request) { error in
                 if let error = error {
-                    print(error)
+                    log.error(error)
                 }
 
-                print("Added notification for: \(date)")
+                log.info("Added notification for: \(date)")
             }
         }
     }

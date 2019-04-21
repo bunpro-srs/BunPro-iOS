@@ -15,7 +15,7 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
             do {
                 try fetchedResultsController.performFetch()
             } catch {
-                print(error)
+                log.error(error)
             }
         }
     }

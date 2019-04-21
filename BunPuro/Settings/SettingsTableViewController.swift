@@ -70,7 +70,7 @@ final class SettingsTableViewController: UITableViewController {
         do {
             return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
         } catch {
-            print(error)
+            log.error(error)
             return nil
         }
     }
@@ -251,7 +251,7 @@ final class SettingsTableViewController: UITableViewController {
 
             string = reviews.description
         } catch {
-            print(error)
+            log.error(error)
 
             string = String(describing: error)
         }
@@ -307,7 +307,7 @@ final class SettingsTableViewController: UITableViewController {
         guard let settings = settings else { return }
         let settingsProcedure = SetSettingsProcedure(presentingViewController: self, settings: settings) { user, error in
             guard let user = user, error == nil else {
-                print(String(describing: error))
+                log.info(String(describing: error))
                 return
             }
 

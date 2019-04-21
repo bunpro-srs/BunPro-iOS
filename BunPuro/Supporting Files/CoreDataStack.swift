@@ -39,11 +39,11 @@ public class CoreDataStack {
 
                     container.loadPersistentStores { _, error in
                         if let error = error as NSError? {
-                            print("Unresolved error: \(error.userInfo)")
+                            log.error("Unresolved error: \(error.userInfo)")
                         }
                     }
                 } catch let fileError {
-                    print("Unresolved error: \(error.userInfo)\n\(fileError)")
+                    log.error("Unresolved error: \(error.userInfo)\n\(fileError)")
                 }
             }
         }
@@ -57,7 +57,7 @@ public class CoreDataStack {
         do {
             try managedObjectContext.save()
         } catch let error as NSError {
-            print("Unresolved error: \(error.userInfo)")
+            log.error("Unresolved error: \(error.userInfo)")
         }
     }
 
@@ -70,7 +70,7 @@ public class CoreDataStack {
             let sqliteSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite"),
             let shmSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-shm"),
             let walSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-wal") else {
-                print("Could not create urls for database.")
+                log.info("Could not create urls for database.")
                 return
         }
 
@@ -82,7 +82,7 @@ public class CoreDataStack {
                 try FileManager.default.copyItem(at: shmSourceUrl, to: shmDestinationUrl)
                 try FileManager.default.copyItem(at: walSourceUrl, to: walDestinationUrl)
             } catch {
-                print(error)
+                log.error(error)
             }
         }
     }

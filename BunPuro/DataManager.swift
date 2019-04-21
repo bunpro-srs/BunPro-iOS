@@ -131,7 +131,7 @@ final class DataManager {
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         let addProcedure = ModifyReviewProcedure(presentingViewController: presentingViewController, modificationType: modificationType) { error in
-            print(error ?? "No Error")
+            log.error(error ?? "No Error")
 
             if error == nil {
                 DispatchQueue.main.async {
