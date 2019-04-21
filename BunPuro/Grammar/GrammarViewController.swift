@@ -59,7 +59,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
 
         assert(grammar != nil)
 

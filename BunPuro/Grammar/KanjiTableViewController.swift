@@ -15,7 +15,7 @@ final class KanjiTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
     }
 
     // MARK: - Table view data source

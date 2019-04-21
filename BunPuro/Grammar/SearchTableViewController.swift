@@ -109,7 +109,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
 
         definesPresentationContext = true
 

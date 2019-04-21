@@ -52,7 +52,7 @@ final class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: nil, queue: OperationQueue.main) { _ in
             self.updateUI()
