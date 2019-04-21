@@ -87,14 +87,10 @@
 		2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EAD9E2B1FA26F1100CE52CF /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2A1FA26F1100CE52CF /* Account.swift */; };
 		2EAD9E2D1FA26F6C00CE52CF /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9E2C1FA26F6C00CE52CF /* Server.swift */; };
-		2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
-		2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
 		2EB4564B1FE4559B003CDD65 /* LogoutProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */; };
 		2EB4564D1FE4710C003CDD65 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4564C1FE4710C003CDD65 /* DetailCell.swift */; };
 		2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4DB561FBCE27B00833897 /* Grammar.swift */; };
 		2EBA74041FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74031FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift */; };
-		2EBA74051FAA4C1500DE2A08 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; };
-		2EBA74061FAA4C1500DE2A08 /* KeychainAccess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EBA740A1FAA7A3100DE2A08 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74071FAA7A3000DE2A08 /* StoryboardIdentifiable.swift */; };
 		2EBA740B1FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74081FAA7A3100DE2A08 /* ReusableView+NibLoadableView.swift */; };
 		2EBA740C1FAA7A3100DE2A08 /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74091FAA7A3100DE2A08 /* SegueHandlerType.swift */; };
@@ -112,15 +108,16 @@
 		2EDF8C5320AC9EAB0024263F /* CorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B36952081061800542BB8 /* CorneredView.swift */; };
 		2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78C1FA2835C0020E828 /* Review.swift */; };
 		2EE4E78F1FA283650020E828 /* AccountProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE4E78E1FA283650020E828 /* AccountProgress.swift */; };
-		2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; };
-		2EE4E7931FA28F350020E828 /* ProcedureKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; };
-		2EE4E7951FA28F400020E828 /* ProcedureKitNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */; };
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
-		2EF752141FAA37D4000A2975 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF752151FAA37D4000A2975 /* KeychainAccess.framework */; };
 		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
+		A1D6C19F226BAF0100D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */; };
+		A1D6C1A0226BAF0100D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */; };
+		A1D6C1A1226BAF0100D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */; };
+		A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */; };
+		A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */; };
+		A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,10 +183,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2EE4E7951FA28F400020E828 /* ProcedureKitNetwork.framework in Embed Frameworks */,
 				2EAD9E1E1FA26EB400CE52CF /* BunPuroKit.framework in Embed Frameworks */,
-				2EBA74061FAA4C1500DE2A08 /* KeychainAccess.framework in Embed Frameworks */,
-				2EE4E7931FA28F350020E828 /* ProcedureKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +279,6 @@
 		2EAD9E191FA26EB400CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EAD9E2A1FA26F1100CE52CF /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKitNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutProcedure.swift; sourceTree = "<group>"; };
 		2EB4564C1FE4710C003CDD65 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		2EB4DB561FBCE27B00833897 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
@@ -310,9 +302,14 @@
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
-		2EF752151FAA37D4000A2975 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
+		A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKit.framework; path = Dependencies/iOS/ProcedureKit.framework; sourceTree = "<group>"; };
+		A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Dependencies/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
+		A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKit.framework; path = Dependencies/iOS/ProcedureKit.framework; sourceTree = "<group>"; };
+		A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Dependencies/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
+		A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
+		A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKitNetwork.framework; path = Dependencies/iOS/ProcedureKitNetwork.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,9 +325,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EE4E7941FA28F400020E828 /* ProcedureKitNetwork.framework in Frameworks */,
-				2EE4E7901FA28F070020E828 /* ProcedureKit.framework in Frameworks */,
-				2EBA74051FAA4C1500DE2A08 /* KeychainAccess.framework in Frameworks */,
+				A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */,
+				A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */,
+				A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */,
 				2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,9 +350,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EF752141FAA37D4000A2975 /* KeychainAccess.framework in Frameworks */,
-				2EAD9E311FA2709400CE52CF /* ProcedureKitNetwork.framework in Frameworks */,
-				2EAD9E2F1FA2708A00CE52CF /* ProcedureKit.framework in Frameworks */,
+				A1D6C1A1226BAF0100D25DF1 /* ProcedureKitNetwork.framework in Frameworks */,
+				A1D6C19F226BAF0100D25DF1 /* KeychainAccess.framework in Frameworks */,
+				A1D6C1A0226BAF0100D25DF1 /* ProcedureKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +529,7 @@
 				2E3D43A4201B50E400B4D5EF /* CreateDatabase */,
 				2E59793420C6F8B10007E9BE /* PasswordManager */,
 				2EAD9DD11FA25DF100CE52CF /* Products */,
-				2EAD9E2E1FA2708A00CE52CF /* Frameworks */,
+				CA7A6F00305E401DE9FA57363D7A18D6 /* Dependencies */,
 			);
 			sourceTree = "<group>";
 		};
@@ -621,16 +618,6 @@
 			path = BunPuroKitTests;
 			sourceTree = "<group>";
 		};
-		2EAD9E2E1FA2708A00CE52CF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2EF752151FAA37D4000A2975 /* KeychainAccess.framework */,
-				2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */,
-				2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2EBB70B720164E9F001AE42E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -656,6 +643,35 @@
 				2ECBE3E2203B588100F20EE3 /* StringFuriganaExt.swift */,
 			);
 			path = Furigana;
+			sourceTree = "<group>";
+		};
+		A1D6C18F226BAE0900D25DF1 /* BunPuro */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */,
+				A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */,
+				A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */,
+			);
+			name = BunPuro;
+			sourceTree = "<group>";
+		};
+		A1D6C190226BAE0F00D25DF1 /* BunPuroKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */,
+				A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */,
+				A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */,
+			);
+			name = BunPuroKit;
+			sourceTree = "<group>";
+		};
+		CA7A6F00305E401DE9FA57363D7A18D6 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				A1D6C18F226BAE0900D25DF1 /* BunPuro */,
+				A1D6C190226BAE0F00D25DF1 /* BunPuroKit */,
+			);
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -699,6 +715,7 @@
 				2EAD9DCD1FA25DF100CE52CF /* Frameworks */,
 				2EAD9DCE1FA25DF100CE52CF /* Resources */,
 				2EAD9E221FA26EB400CE52CF /* Embed Frameworks */,
+				82FF38ADFC96BC27A5949432C6350443 /* Accio */,
 			);
 			buildRules = (
 			);
@@ -754,6 +771,7 @@
 				2EAD9E041FA26EB400CE52CF /* Frameworks */,
 				2EAD9E051FA26EB400CE52CF /* Headers */,
 				2EAD9E061FA26EB400CE52CF /* Resources */,
+				67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */,
 			);
 			buildRules = (
 			);
@@ -918,6 +936,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
+				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
+			);
+			name = Accio;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		82FF38ADFC96BC27A5949432C6350443 /* Accio */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
+				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
+			);
+			name = Accio;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E3D439F201B50E400B4D5EF /* Sources */ = {
@@ -1296,6 +1357,10 @@
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 549QX23F59;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
@@ -1315,6 +1380,10 @@
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 549QX23F59;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
@@ -1403,6 +1472,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/iOS",
+				);
 				INFOPLIST_FILE = BunPuroKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1430,6 +1503,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/iOS",
+				);
 				INFOPLIST_FILE = BunPuroKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
