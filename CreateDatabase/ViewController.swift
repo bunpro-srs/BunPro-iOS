@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func importButtonPressed(_ sender: UIButton) {
+    @IBAction private func importButtonPressed(_ sender: UIButton) {
         
         activityIndicator.startAnimating()
         

@@ -1,22 +1,17 @@
 //
-//  Grammar+initializer.swift
-//  BunPuro
-//
 //  Created by Andreas Braun on 22.01.18.
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
-import Foundation
-import CoreData
 import BunPuroKit
+import CoreData
+import Foundation
 
 extension Grammar {
-    
     @discardableResult
     convenience init(grammar: BPKGrammar, context: NSManagedObjectContext) {
-        
         self.init(context: context)
-        
+
         alternate = grammar.alternate
         caution = grammar.caution
         formal = grammar.formal
@@ -28,17 +23,14 @@ extension Grammar {
         structure = grammar.structure
         title = grammar.title
         yomikata = grammar.yomikata
-                
-        grammar.supplementalLinks.forEach {  Link(link: $0, grammar: self, context: context) }
+
+        grammar.supplementalLinks.forEach { Link(link: $0, grammar: self, context: context) }
         grammar.exampleSentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
     }
 }
 
 extension Grammar {
-    
-    @objc
-    var review: Review? {
-        
+    @objc var review: Review? {
         do {
             return try Review.review(for: self)
         } catch {

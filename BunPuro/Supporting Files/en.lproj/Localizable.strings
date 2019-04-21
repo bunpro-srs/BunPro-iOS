@@ -1,86 +1,105 @@
+
+"active.no" = "No";
+
+"active.yes" = "Yes";
+
+"copy.english" = "Copy English";
+
+"copy.japanese" = "Copy Japanese";
+
+"copy.kana" = "Copy Kana";
+
+"copy.kanji" = "Copy Kanji";
+
+"copy.meaning" = "Copy Meaning";
+
+"furigana.off" = "Never";
+
+"furigana.on" = "Always";
+
+"furigana.wanikani" = "WaniKani";
+
+/* Common cancel action */
+"general.cancel" = "Cancel";
+
+"kanji.english.show" = "Show English";
+
+"kanji.header.readings" = "Kanji Readings";
+
+/* Level in a JLPT */
+"level.number" = "Level %d";
+
 /* No comment provided by engineer. */
 "notification.review.message" = "New Reviews are available.";
 
 /* No comment provided by engineer. */
 "notification.review.title" = "You have %d reviews";
 
-/* The string that indicates that a review is available */
-"reviewtime.now" = "Now";
+"review.edit.add" = "Add to Reviews";
+
+"review.edit.add.short" = "Add";
+
+"review.edit.button.add" = "Add to Reviews";
+
+"review.edit.button.remove_reset" = "Reset/Remove";
+
+"review.edit.remove" = "Remove from Reviews";
+
+"review.edit.remove.short" = "Remove";
+
+"review.edit.reset" = "Reset Review Progress";
+
+"review.edit.reset.short" = "Reset";
 
 /* The string that indicates that no review are available */
 "reviewtime.none" = "No Reviews";
 
-/* The last time an update was made. */
-"status.lastupdate" = "Last update: %@";
-
-/* The title of the signup for trial button */
-"status.signuptrail" = "Signup for Trial";
-
-/* The title of the signup button */
-"status.signup" = "Subscribe";
-
-/* The title of the loading indicator */
-"status.loading" = "Loading";
-
-/* The title of the cram button */
-"status.cram" = "Cram";
-
-/* The title of the study button */
-"status.study" = "Study";
-
-/* Level in a JLPT */
-"level.number" = "Level %d";
+/* The string that indicates that a review is available */
+"reviewtime.now" = "Now";
 
 /* Search grammar placeholder */
 "search.grammar.placeholder" = "Search Grammar";
 
 "search.grammar.scope.all" = "All";
-"search.grammar.scope.unlearned" = "Unlearned";
+
 "search.grammar.scope.learned" = "Learned";
 
-/* Common cancel action */
-"general.cancel" = "Cancel";
+"search.grammar.scope.unlearned" = "Unlearned";
 
-"furigana.on" = "Always";
-"furigana.off" = "Never";
-"furigana.wanikani" = "WaniKani";
-"active.yes" = "Yes";
-"active.no" = "No";
-"state.on" = "On";
-"state.off" = "Off";
 "settings.logout.action" = "Logout";
 
-// Reviews
-"review.edit.remove" = "Remove from Reviews";
-"review.edit.reset" = "Reset Review Progress";
-"review.edit.add" = "Add to Reviews";
-"review.edit.button.remove_reset" = "Reset/Remove";
-"review.edit.button.add" = "Add to Reviews";
-
-"review.edit.remove.short" = "Remove";
-"review.edit.reset.short" = "Reset";
-"review.edit.add.short" = "Add";
-
-// Kanji
-"kanji.english.show" = "Show English";
-"kanji.header.readings" = "Kanji Readings";
-
-// Copying
-"copy.japanese" = "Copy Japanese";
-"copy.meaning" = "Copy Meaning";
-"copy.english" = "Copy English";
-"copy.kanji" = "Copy Kanji";
-"copy.kana" = "Copy Kana";
-
-// Subscription
-"subscription.unknown" = "Unknown";
-"subscription.subscribed" = "Yes";
-"subscription.unsubscribed" = "No";
-
-// Shortcuts
-
-"shortcut.study.title" = "Start studying";
-"shortcut.study.suggetedphrase" = "Study time";
+"shortcut.cram.suggetedphrase" = "Cram time";
 
 "shortcut.cram.title" = "Start cramming";
-"shortcut.cram.suggetedphrase" = "Cram time";
+
+"shortcut.study.suggetedphrase" = "Study time";
+
+"shortcut.study.title" = "Start studying";
+
+"state.off" = "Off";
+
+"state.on" = "On";
+
+/* The title of the cram button */
+"status.cram" = "Cram";
+
+/* The last time an update was made. */
+"status.lastupdate" = "Last update: %@";
+
+/* The title of the loading indicator */
+"status.loading" = "Loading";
+
+/* The title of the signup button */
+"status.signup" = "Subscribe";
+
+/* The title of the signup for trial button */
+"status.signuptrail" = "Signup for Trial";
+
+/* The title of the study button */
+"status.study" = "Study";
+
+"subscription.subscribed" = "Yes";
+
+"subscription.unknown" = "Unknown";
+
+"subscription.unsubscribed" = "No";

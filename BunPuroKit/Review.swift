@@ -1,7 +1,6 @@
 import Foundation
 
 public struct BPKReview: Codable {
-    
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case userIdentifier = "user_id"
@@ -20,12 +19,12 @@ public struct BPKReview: Codable {
         case selfStudy = "self_study"
         case reviewType = "review_type"
     }
-    
+
     public enum ReviewType: String, Codable {
         case standard
         case ghost
     }
-    
+
     public let identifier: Int64
     public let userIdentifier: Int64
     public let studyQuenstionIdentifier: Int64?

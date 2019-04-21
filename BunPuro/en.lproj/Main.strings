@@ -1,57 +1,123 @@
-/* Class = "UILabel"; text = "N2 and N1 coming soon."; ObjectID = "6Vc-Lo-xIJ"; */
-"6Vc-Lo-xIJ.text" = "N2 and N1 coming soon.";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "7zn-LV-HCd"; */
-"7zn-LV-HCd.text" = "Detail";
+/* Class = "UILabel"; text = "Within 24 Hours"; ObjectID = "4e1-68-2Hr"; */
+"4e1-68-2Hr.text" = "Within 24 Hours";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "9iS-9p-zzX"; */
-"9iS-9p-zzX.text" = "Detail";
+/* Class = "UILabel"; text = "Label"; ObjectID = "4Ua-fi-pdL"; */
+"4Ua-fi-pdL.text" = "Label";
 
-/* Class = "UILabel"; text = "N4"; ObjectID = "BF1-YK-x1d"; */
-"BF1-YK-x1d.text" = "N4";
+/* Class = "UILabel"; text = "Within 1 Hour"; ObjectID = "5fe-Qh-MP6"; */
+"5fe-Qh-MP6.text" = "Within 1 Hour";
 
-/* Class = "UILabel"; text = "N3"; ObjectID = "Dr3-cV-SGp"; */
-"Dr3-cV-SGp.text" = "N3";
+/* Class = "UILabel"; text = "Subscription"; ObjectID = "8dM-LI-WRE"; */
+"8dM-LI-WRE.text" = "Subscription";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "G7M-ZD-5rX"; */
-"G7M-ZD-5rX.text" = "Detail";
+/* Class = "UIBarButtonItem"; title = "Edit Review"; ObjectID = "aC3-DB-CTC"; */
+"aC3-DB-CTC.title" = "Edit Review";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "IzM-nP-Glc"; */
-"IzM-nP-Glc.text" = "Detail";
+/* Class = "UILabel"; text = " "; ObjectID = "aD2-ep-eCU"; */
+"aD2-ep-eCU.text" = " ";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ch9-PZ-Wxg"; */
+"ch9-PZ-Wxg.title" = "Settings";
+
+/* Class = "UILabel"; text = "Log current reviews (Debug)"; ObjectID = "Cqb-p6-CBx"; */
+"Cqb-p6-CBx.text" = "Log current reviews (Debug)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "DrH-vm-sEZ"; */
+"DrH-vm-sEZ.text" = "Label";
+
+/* Class = "UILabel"; text = "Hide English"; ObjectID = "DYU-WS-Y9g"; */
+"DYU-WS-Y9g.text" = "Hide English";
+
+/* Class = "UILabel"; text = "ないほうがいい"; ObjectID = "EFr-Xh-odS"; */
+"EFr-Xh-odS.text" = "ないほうがいい";
+
+/* Class = "UILabel"; text = "Community"; ObjectID = "eZU-Q0-dPE"; */
+"eZU-Q0-dPE.text" = "Community";
+
+/* Class = "UILabel"; text = "Next Review"; ObjectID = "f8W-DR-a0O"; */
+"f8W-DR-a0O.text" = "Next Review";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "gCe-49-W5h"; */
+"gCe-49-W5h.text" = "About";
+
+/* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[0] = "Examples"; ObjectID = "gKx-1c-Qvc"; */
+"gKx-1c-Qvc.segmentTitles[0]" = "Examples";
+
+/* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[1] = "Readings"; ObjectID = "gKx-1c-Qvc"; */
+"gKx-1c-Qvc.segmentTitles[1]" = "Readings";
+
+/* Class = "UINavigationItem"; title = "N5"; ObjectID = "idR-FT-oYU"; */
+"idR-FT-oYU.title" = "N5";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "IZ3-Kc-eQR"; */
+"IZ3-Kc-eQR.title" = "Search";
 
 /* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
 "J16-bo-Kj0.title" = "Loading...";
 
-/* Class = "UILabel"; text = "Next Day"; ObjectID = "N0O-ez-tJ9"; */
-"N0O-ez-tJ9.text" = "Tomorrow";
+/* Class = "UILabel"; text = "Furigana"; ObjectID = "jXa-VO-q52"; */
+"jXa-VO-q52.text" = "Furigana";
 
-/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "QlM-tg-lb6"; */
-"QlM-tg-lb6.normalTitle" = "Login";
+/* Class = "UILabel"; text = "N5"; ObjectID = "KfR-Gn-5Wi"; */
+"KfR-Gn-5Wi.text" = "N5";
 
-/* Class = "UILabel"; text = "N5"; ObjectID = "aX1-aW-D3c"; */
-"aX1-aW-D3c.text" = "N5";
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "KsY-hy-cih"; */
+"KsY-hy-cih.text" = "Terms and Conditions";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "frx-CG-Qat"; */
-"frx-CG-Qat.text" = "Detail";
+/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "kYw-Pb-uem"; */
+"kYw-Pb-uem.headerTitle" = " ";
 
-/* Class = "UILabel"; text = "Next Review"; ObjectID = "hQw-yU-T0H"; */
-"hQw-yU-T0H.text" = "Next Review";
+/* Class = "UILabel"; text = "N5"; ObjectID = "mJz-v9-AV7"; */
+"mJz-v9-AV7.text" = "N5";
 
-/* Class = "UITableViewSection"; headerTitle = "Progress"; ObjectID = "l8k-ny-fjF"; */
-"l8k-ny-fjF.headerTitle" = "Lessons";
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "N0z-Mm-dwv"; */
+"N0z-Mm-dwv.title" = "Settings";
 
-/* Class = "UITextField"; placeholder = "API Key"; ObjectID = "lSF-ga-drx"; */
-"lSF-ga-drx.placeholder" = "API Key";
+/* Class = "UILabel"; text = "Structure"; ObjectID = "o7e-rE-rKz"; */
+"o7e-rE-rKz.text" = "Structure";
 
-/* Class = "UITableViewSection"; headerTitle = "Reviews"; ObjectID = "mDD-up-LSi"; */
-"mDD-up-LSi.headerTitle" = "Reviews";
+/* Class = "UILabel"; text = "No \\U3060 with \\U3044Adjectives"; ObjectID = "Oi9-KZ-MZn"; */
+"Oi9-KZ-MZn.text" = "No \\U3060 with \\U3044Adjectives";
 
-/* Class = "UILabel"; text = "Next Hour"; ObjectID = "s4X-iH-s5S"; */
-"s4X-iH-s5S.text" = "Next Hour";
+/* Class = "UILabel"; text = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>"; ObjectID = "oWh-GS-4Cz"; */
+"oWh-GS-4Cz.text" = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>";
+
+/* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
+"Rej-2W-djk.text" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Rsb-ER-M8G"; */
+"Rsb-ER-M8G.text" = "Label";
+
+/* Class = "UILabel"; text = "Sign up for Trial"; ObjectID = "sUd-7z-kjF"; */
+"sUd-7z-kjF.text" = "Sign up for Trial";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "sUx-Ui-3nP"; */
+"sUx-Ui-3nP.text" = "Logout";
+
+/* Class = "UILabel"; text = "N5"; ObjectID = "TxH-U7-oqL"; */
+"TxH-U7-oqL.text" = "N5";
+
+/* Class = "UILabel"; text = " "; ObjectID = "uXq-L9-iw8"; */
+"uXq-L9-iw8.text" = " ";
 
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "wT0-cB-9X3"; */
-"wT0-cB-9X3.text" = "Detail";
+/* Class = "UILabel"; text = "Label"; ObjectID = "V6t-CC-Vo7"; */
+"V6t-CC-Vo7.text" = "Label";
 
+/* Class = "UILabel"; text = "Privacy"; ObjectID = "vCz-ZD-8kI"; */
+"vCz-ZD-8kI.text" = "Privacy";
+
+/* Class = "UILabel"; text = "Contact"; ObjectID = "yT9-ct-JHx"; */
+"yT9-ct-JHx.text" = "Contact";
+
+/* Class = "UITableViewSection"; footerTitle = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct."; ObjectID = "ZHM-bl-R9P"; */
+"ZHM-bl-R9P.footerTitle" = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct.";
+
+/* Class = "UILabel"; text = "Bunny Mode"; ObjectID = "zPG-hb-egu"; */
+"zPG-hb-egu.text" = "Bunny Mode";
+
+/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "Zuh-Sr-MkV"; */
+"Zuh-Sr-MkV.headerTitle" = " ";
