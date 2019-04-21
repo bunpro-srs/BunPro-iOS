@@ -370,8 +370,8 @@ final class StatusTableViewController: UITableViewController {
     }
 
     private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int, metric: (complete: Int, max: Int, progress: Float)) {
-        cell.titleLabel.text = "N\(level)"
-        cell.subtitleLabel.text = "\(metric.complete) / \(metric.max)"
+        cell.title = "N\(level)"
+        cell.subtitle = "\(metric.complete) / \(metric.max)"
         cell.setProgress(metric.progress, animated: false)
     }
 }

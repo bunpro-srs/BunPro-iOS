@@ -37,15 +37,15 @@ final class KanjiTableViewController: UITableViewController {
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                cell.nameLabel?.attributedText = japanese?.htmlAttributedString(font: cell.textLabel?.font, color: .white)
+                cell.attributedName = japanese?.htmlAttributedString(font: cell.textLabel?.font, color: .white)
             } else {
-                cell.nameLabel?.text = showEnglish ? english : L10n.Kanji.English.show
-                cell.nameLabel?.textColor = showEnglish ? UIColor.white : view.tintColor
+                cell.name = showEnglish ? english : L10n.Kanji.English.show
+                cell.nameColor = showEnglish ? UIColor.white : view.tintColor
             }
         } else {
             let info = furigana[indexPath.row]
 
-            cell.nameLabel?.text = "\(info.original)（\(info.text)）"
+            cell.name = "\(info.original)（\(info.text)）"
         }
 
         return cell

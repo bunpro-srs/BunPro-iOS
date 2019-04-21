@@ -153,8 +153,8 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
-        cell.titleLabel.text = L10n.Level.number(correctLevel(level))
-        cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
+        cell.title = L10n.Level.number(correctLevel(level))
+        cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
         cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
 
         return cell.contentView

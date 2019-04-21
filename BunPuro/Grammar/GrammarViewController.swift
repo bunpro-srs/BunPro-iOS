@@ -294,7 +294,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                cell.descriptionLabel.attributedText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont, color: .white)
+                cell.attributedDescriptionText = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont, color: .white)
 
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
 
@@ -323,15 +323,15 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
                 let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                cell.nameLabel?.attributedText = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
-                cell.descriptionLabel?.attributedText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
+                cell.attributedName = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
+                cell.attributedDescriptionText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
                 cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
 
                 cell.customAction = { [weak self] _ in
                     self?.playSound(forSentenceAt: correctIndexPath)
                 }
 
-                cell.descriptionLabel?.isHidden = account?.englishMode ?? false
+                cell.isDescriptionLabelHidden = account?.englishMode ?? false
 
                 cell.selectionStyle = .none
 
@@ -349,9 +349,9 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
                 let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
                 let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
 
-                cell.nameLabel?.attributedText = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
-                cell.descriptionLabel?.attributedText = link.about?.htmlAttributedString(font: font2, color: .white)
-                cell.descriptionLabel.isHidden = false
+                cell.attributedName = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
+                cell.attributedDescriptionText = link.about?.htmlAttributedString(font: font2, color: .white)
+                cell.isDescriptionLabelHidden = false
                 cell.customAction = nil
                 cell.actionImage = nil
 

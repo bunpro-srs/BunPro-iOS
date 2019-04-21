@@ -185,8 +185,8 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
-        cell.titleLabel.text = name.replacingOccurrences(of: "JLPT", with: "N")
-        cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
+        cell.title = name.replacingOccurrences(of: "JLPT", with: "N")
+        cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
         cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
 
         return cell.contentView

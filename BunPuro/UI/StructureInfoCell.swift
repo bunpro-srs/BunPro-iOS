@@ -6,9 +6,19 @@
 import UIKit
 
 final class StructureInfoCell: UITableViewCell {
-    @IBOutlet weak var descriptionLabel: UILabel! {
+
+    @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
             descriptionLabel.numberOfLines = 0
+        }
+    }
+
+    var attributedDescriptionText: NSAttributedString? {
+        get {
+            return descriptionLabel?.attributedText
+        }
+        set {
+            descriptionLabel?.attributedText = newValue
         }
     }
 
