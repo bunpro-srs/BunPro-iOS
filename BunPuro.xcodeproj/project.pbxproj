@@ -279,8 +279,6 @@
 		2EAD9E191FA26EB400CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EAD9E2A1FA26F1100CE52CF /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		2EAD9E2C1FA26F6C00CE52CF /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProcedureKitNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB4564A1FE4559B003CDD65 /* LogoutProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutProcedure.swift; sourceTree = "<group>"; };
 		2EB4564C1FE4710C003CDD65 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		2EB4DB561FBCE27B00833897 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
-		2EF752151FAA37D4000A2975 /* KeychainAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeychainAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
 		A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProcedureKit.framework; path = Dependencies/iOS/ProcedureKit.framework; sourceTree = "<group>"; };
@@ -532,7 +529,6 @@
 				2E3D43A4201B50E400B4D5EF /* CreateDatabase */,
 				2E59793420C6F8B10007E9BE /* PasswordManager */,
 				2EAD9DD11FA25DF100CE52CF /* Products */,
-				2EAD9E2E1FA2708A00CE52CF /* Frameworks */,
 				CA7A6F00305E401DE9FA57363D7A18D6 /* Dependencies */,
 			);
 			sourceTree = "<group>";
@@ -620,16 +616,6 @@
 				2EAD9E191FA26EB400CE52CF /* Info.plist */,
 			);
 			path = BunPuroKitTests;
-			sourceTree = "<group>";
-		};
-		2EAD9E2E1FA2708A00CE52CF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2EF752151FAA37D4000A2975 /* KeychainAccess.framework */,
-				2EAD9E321FA2709400CE52CF /* ProcedureKitNetwork.framework */,
-				2EAD9E301FA2708A00CE52CF /* ProcedureKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2EBB70B720164E9F001AE42E /* Model */ = {
