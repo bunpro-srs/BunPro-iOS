@@ -13,8 +13,11 @@ public enum ReviewCollection {
 
     var rawValue: String {
         switch self {
-        case .all: return "all_reviews_total"
-        case .current: return "current_reviews"
+        case .all:
+            return "all_reviews_total"
+
+        case .current:
+            return "current_reviews"
         }
     }
 }

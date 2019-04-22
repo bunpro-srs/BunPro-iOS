@@ -6,7 +6,6 @@
 import UIKit
 
 final class JLPTProgressTableViewCell: UITableViewCell {
-
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var subtitleLabel: UILabel!
     @IBOutlet private var progressView: UIProgressView! { didSet { progressView.subviews.forEach { $0.layer.cornerRadius = 4; $0.clipsToBounds = true } } }
@@ -31,7 +30,6 @@ final class JLPTProgressTableViewCell: UITableViewCell {
 
     func setProgress(_ progress: Float, animated: Bool) {
         guard progressView.progress != progress else { return }
-
         progressView.setProgress(progress, animated: animated)
     }
 }

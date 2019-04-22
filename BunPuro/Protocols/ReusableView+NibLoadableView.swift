@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: ReusableView
-protocol ReusableView { }
+protocol ReusableView { /* only needed for providing behavior via extension */ }
 
 extension ReusableView where Self: UIView {
     static var reuseIdentifier: String {
@@ -22,7 +22,7 @@ extension UITableViewHeaderFooterView: ReusableView { }
 extension UICollectionViewCell: ReusableView { }
 
 // MARK: NibLoadableView
-protocol NibLoadableView { }
+protocol NibLoadableView { /* only needed for providing behavior via extension */ }
 
 extension NibLoadableView where Self: UIView {
     static var nibName: String {
@@ -40,6 +40,7 @@ extension UITableView {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
         }
+
         return cell
     }
 
@@ -47,6 +48,7 @@ extension UITableView {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier) as? T else {
             fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
         }
+
         return cell
     }
 
@@ -62,13 +64,11 @@ extension UITableView {
 extension UITableView {
     func register<T: UITableViewCell>(_: T.Type, bundle: Bundle? = nil) {
         let nib = UINib(nibName: T.nibName, bundle: bundle)
-
         register(nib, forCellReuseIdentifier: T.reuseIdentifier)
     }
 
     func register<T: UITableViewHeaderFooterView>(_: T.Type, bundle: Bundle? = nil) {
         let nib = UINib(nibName: T.nibName, bundle: bundle)
-
         register(nib, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
     }
 }
@@ -78,6 +78,7 @@ extension UICollectionView {
         guard let cell = dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
         }
+
         return cell
     }
 }
@@ -85,7 +86,6 @@ extension UICollectionView {
 extension UICollectionView {
     func register<T: UICollectionViewCell>(_: T.Type, bundle: Bundle? = nil) {
         let nib = UINib(nibName: T.nibName, bundle: bundle)
-
         register(nib, forCellWithReuseIdentifier: T.reuseIdentifier)
     }
 }

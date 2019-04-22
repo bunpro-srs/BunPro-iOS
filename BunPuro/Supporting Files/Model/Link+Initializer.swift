@@ -21,10 +21,12 @@ extension Link {
         if let newUrl = URL(string: linksString) {
             url = newUrl
         } else {
+            // TODO: either uncomment or remove this code – or explain why it should be kept
 //            log.info("Url seems to be funny: \(linksString)")
 
             url = URL(string: linksString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
 
+            // TODO: either uncomment or remove this code – or explain why it should be kept
 //            log.info(url ?? "Could not create URL!")
         }
 

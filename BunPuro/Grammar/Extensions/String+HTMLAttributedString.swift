@@ -21,8 +21,9 @@ extension String {
         }
 
         guard let data = stringToConvert.data(using: String.Encoding.utf16, allowLossyConversion: false) else { return nil }
-        guard let html = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-            else { return nil }
+        guard
+            let html = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+        else { return nil }
 
         html.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: 0, length: html.length))
         return html

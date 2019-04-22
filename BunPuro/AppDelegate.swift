@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dataManager = DataManager(presentingViewController: rootViewCtrl)
         }
 
+        // TODO: either uncomment or remove this code – or explain why it should be kept
 //        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(20))
 //        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(25))
 
@@ -70,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
+        // TODO: either uncomment or remove this code – or explain why it should be kept
 //        dataManager?.startStatusUpdates()
     }
 
@@ -98,7 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             switch viewCtrl {
             case is StatusTableViewController:
-
                 let statusViewCtrl = viewCtrl as? StatusTableViewController
 
                 switch type {
@@ -119,7 +120,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .cram:
                     reviewViewCtrl?.website = .cram
                 }
-            default: return false
+
+            default:
+                return false
             }
         }
 
@@ -171,9 +174,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-        ) {
+    ) {
         UserNotificationCenter.shared.updateNotifications(basedOnReceived: notification)
-
         completionHandler([.sound, .badge, .alert])
     }
 
@@ -181,7 +183,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
-        ) {
+    ) {
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
                 .viewControllers?
@@ -206,11 +208,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         do {
             let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
-
             return NSNumber(value: reviews.count)
         } catch {
             log.error(error)
-
             return nil
         }
     }

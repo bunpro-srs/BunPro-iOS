@@ -6,8 +6,8 @@
 import Foundation
 import UserNotifications
 
-private let nextReviewIdentifier = "NextReviewNotification"
-private let threadIdentifier = "NotificationThreadIdentifier"
+private let nextReviewIdentifier: String = "NextReviewNotification"
+private let threadIdentifier: String = "NotificationThreadIdentifier"
 
 struct UserNotificationCenter {
     static let shared = UserNotificationCenter()
@@ -25,6 +25,7 @@ struct UserNotificationCenter {
             let content = UNMutableNotificationContent()
             content.threadIdentifier = threadIdentifier
             content.title = L10n.Notification.Review.title(reviewCount)
+            // TODO: either uncomment or remove this code – or explain why it should be kept
             //        content.body = L10n.Notification.Review.message
             content.sound = UNNotificationSound.default
             content.badge = AppDelegate.badgeNumber(date: date)

@@ -13,7 +13,7 @@ protocol GrammarPresenter {
     var grammar: Grammar? { get set }
 }
 
-final class GrammarViewController: UITableViewController, GrammarPresenter {
+final class GrammarTableViewController: UITableViewController, GrammarPresenter {
     enum ViewMode: Int {
         case examples
         case reading
@@ -66,54 +66,55 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
         updateEditBarButtonState()
 
         beginUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { _ in
-                let activityIndicator = UIActivityIndicatorView(style: .white)
-                activityIndicator.startAnimating()
+            let activityIndicator = UIActivityIndicatorView(style: .white)
+            activityIndicator.startAnimating()
 
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         }
 
         endUpdateObserver = NotificationCenter.default.addObserver(
             forName: .BunProDidEndUpdating,
             object: nil,
-            queue: nil) { [weak self] _ in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
-                    self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
+            queue: nil
+        ) { [weak self] _ in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
+                self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
 
-                    if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
-                        let complete = self?.review?.complete ?? false
+                if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
+                    let complete = self?.review?.complete ?? false
 
-                        switch (numberOfRows, complete) {
-                        case (2, true):
+                    switch (numberOfRows, complete) {
+                    case (2, true):
 
-                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                        let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
 
-                            self?.tableView.beginUpdates()
-                            self?.tableView.insertRows(at: [indexPath], with: .fade)
-                            self?.tableView.endUpdates()
+                        self?.tableView.beginUpdates()
+                        self?.tableView.insertRows(at: [indexPath], with: .fade)
+                        self?.tableView.endUpdates()
 
-                        case (3, false):
+                    case (3, false):
 
-                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                        let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
 
-                            self?.tableView.beginUpdates()
-                            self?.tableView.deleteRows(at: [indexPath], with: .fade)
-                            self?.tableView.endUpdates()
+                        self?.tableView.beginUpdates()
+                        self?.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self?.tableView.endUpdates()
 
-                        case (3, true):
+                    case (3, true):
 
-                            let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
+                        let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
 
-                            self?.tableView.beginUpdates()
-                            self?.tableView.reloadRows(at: [indexPath], with: .none)
-                            self?.tableView.endUpdates()
+                        self?.tableView.beginUpdates()
+                        self?.tableView.reloadRows(at: [indexPath], with: .none)
+                        self?.tableView.endUpdates()
 
-                        default:
-                            break
-                        }
-
-                        self?.updateEditBarButtonState()
+                    default:
+                        break
                     }
+
+                    self?.updateEditBarButtonState()
                 }
+            }
         }
 
         setupSentencesFetchedResultsController()
@@ -269,104 +270,112 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
 
             switch Info(rawValue: indexPath.row)! {
             case .basic:
-
-                let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
-
-                cell.titleLabel.text = grammar?.title
-                cell.meaningLabel.text = grammar?.meaning
-
-                let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-
-                if
-                    let caution = grammar?.caution?
-                        .replacingOccurrences(of: "<span class='chui'>", with: "")
-                        .replacingOccurrences(of: "</span>", with: ""),
-                    let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
-                    !caution.isEmpty {
-                    cell.cautionLabel.attributedText = attributed
-                } else {
-                    cell.cautionLabel.attributedText = nil
-                    cell.cautionLabel.isHidden = true
-                }
-
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
-
-                return cell
+                return basicInfoCell(tableView, indexPath)
 
             case .structure:
-
-                let cell = tableView.dequeueReusableCell(for: indexPath) as StructureInfoCell
-
-                let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-
-                cell.attributedDescriptionText = grammar?.structure?
-                    .replacingOccurrences(of: ", ", with: "</br>")
-                    .htmlAttributedString(font: englishFont, color: .white)
-
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
-
-                return cell
+                return structureInfoCell(tableView, indexPath)
 
             case .streak:
-
-                let cell = tableView.dequeueReusableCell(for: indexPath) as StreakInfoCell
-                cell.streak = Int(review?.streak ?? 0)
-
-                return cell
+                return streakInfoCell(tableView, indexPath)
             }
 
         default:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
+            return detailCell(tableView, indexPath)
+        }
+    }
 
-            cell.longPressGestureRecognizer = nil
+    private func basicInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
 
-            switch viewMode {
-            case .examples:
+        cell.titleLabel.text = grammar?.title
+        cell.meaningLabel.text = grammar?.meaning
 
-                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                let sentence = exampleSentencesFetchedResultsController.object(at: correctIndexPath)
+        if
+            let caution = grammar?.caution?
+                .replacingOccurrences(of: "<span class='chui'>", with: "")
+                .replacingOccurrences(of: "</span>", with: ""),
+            let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
+            !caution.isEmpty {
+            cell.cautionLabel.attributedText = attributed
+        } else {
+            cell.cautionLabel.attributedText = nil
+            cell.cautionLabel.isHidden = true
+        }
 
-                let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
-                let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
 
-                cell.attributedName = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
-                cell.attributedDescriptionText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
-                cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
+        return cell
+    }
 
-                cell.customAction = { [weak self] _ in
-                    self?.playSound(forSentenceAt: correctIndexPath)
-                }
+    private func structureInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as StructureInfoCell
 
-                cell.isDescriptionLabelHidden = account?.englishMode ?? false
+        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-                cell.selectionStyle = .none
+        cell.attributedDescriptionText = grammar?.structure?
+            .replacingOccurrences(of: ", ", with: "</br>")
+            .htmlAttributedString(font: englishFont, color: .white)
 
-                if cell.longPressGestureRecognizer == nil {
-                    cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-                    cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
-                }
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
 
-            case .reading:
+        return cell
+    }
 
-                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+    private func streakInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as StreakInfoCell
+        cell.streak = Int(review?.streak ?? 0)
 
-                let link = readingsFetchedResultsController.object(at: correctIndexPath)
+        return cell
+    }
 
-                let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
-                let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
+    private func detailCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
+        cell.longPressGestureRecognizer = nil
 
-                cell.attributedName = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
-                cell.attributedDescriptionText = link.about?.htmlAttributedString(font: font2, color: .white)
-                cell.isDescriptionLabelHidden = false
-                cell.customAction = nil
-                cell.actionImage = nil
+        switch viewMode {
+        case .examples:
+            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+            let sentence = exampleSentencesFetchedResultsController.object(at: correctIndexPath)
 
-                cell.selectionStyle = .none
+            let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
+            let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+
+            cell.attributedName = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
+            cell.attributedDescriptionText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
+            cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
+
+            cell.customAction = { [weak self] _ in
+                self?.playSound(forSentenceAt: correctIndexPath)
             }
 
-            return cell
+            cell.isDescriptionLabelHidden = account?.englishMode ?? false
+            cell.selectionStyle = .none
+
+            if cell.longPressGestureRecognizer == nil {
+                cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+                cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
+            }
+
+        case .reading:
+            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+
+            let link = readingsFetchedResultsController.object(at: correctIndexPath)
+
+            let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
+            let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
+
+            cell.attributedName = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
+            cell.attributedDescriptionText = link.about?.htmlAttributedString(font: font2, color: .white)
+            cell.isDescriptionLabelHidden = false
+            cell.customAction = nil
+            cell.actionImage = nil
+
+            cell.selectionStyle = .none
         }
+
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -501,7 +510,7 @@ final class GrammarViewController: UITableViewController, GrammarPresenter {
     }
 }
 
-extension GrammarViewController: UIPopoverPresentationControllerDelegate {
+extension GrammarTableViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
@@ -527,7 +536,7 @@ extension GrammarViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
-extension GrammarViewController: NSFetchedResultsControllerDelegate {
+extension GrammarTableViewController: NSFetchedResultsControllerDelegate {
     func controller(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>,
         didChange anObject: Any,

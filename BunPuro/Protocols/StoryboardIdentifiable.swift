@@ -1,14 +1,11 @@
 //
-//  StoryboardIdentifiable
-//
-//
 //  Created by Andreas Braun on 19.12.16.
-//
+//  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
 import UIKit
 
-protocol StoryboardIdentifiable { }
+protocol StoryboardIdentifiable { /* only needed for providing behavior via extension */ }
 
 extension StoryboardIdentifiable where Self: UIViewController {
     static var storyboardIdentifier: String {
@@ -23,6 +20,7 @@ extension UIStoryboard {
         guard let viewCtrl = instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             fatalError("Could not instantiate View Controller with identifier: \(T.storyboardIdentifier)")
         }
+
         return viewCtrl
     }
 }

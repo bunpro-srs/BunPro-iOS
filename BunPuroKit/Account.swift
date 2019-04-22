@@ -1,3 +1,8 @@
+//
+//  Created by Andreas Braun on 26.10.17.
+//  Copyright © 2017 Andreas Braun. All rights reserved.
+//
+
 import Foundation
 
 public enum Active: String, Codable {
@@ -95,6 +100,7 @@ public enum FuriganaMode: String, Codable {
             switch string {
             case "Wanikani":
                 self = FuriganaMode.wanikani
+
             case "Hide", "Off":
                 self = FuriganaMode.off
 
@@ -117,10 +123,16 @@ public enum FuriganaMode: String, Codable {
             print("Invalid value for \(FuriganaMode.self): \(value)")
 
             switch value {
-            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"": self = .on
-            case "Wanikani", "\"Wanikani\"": self = .wanikani
-            default: self = .off
+            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"":
+                self = .on
+
+            case "Wanikani", "\"Wanikani\"":
+                self = .wanikani
+
+            default:
+                self = .off
             }
+
             return
         }
 
@@ -128,6 +140,7 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
+// TODO: either uncomment or remove this code – or explain why it should be kept
 //public enum LightMode: String, Codable {
 //    case on = "On"
 //    case off = "Off"
@@ -144,6 +157,7 @@ public struct BPKAccount: Codable {
         case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
+        // TODO: either uncomment or remove this code – or explain why it should be kept
 //        case lightMode = "light_mode"
         case subscriber
     }
@@ -153,6 +167,7 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
+    // TODO: either uncomment or remove this code – or explain why it should be kept
 //    public let lightMode: LightMode
     public let bunnyMode: State
     public let subscriber: Bool

@@ -42,7 +42,7 @@ public class CoreDataStack {
                             log.error("Unresolved error: \(error.userInfo)")
                         }
                     }
-                } catch let fileError {
+                } catch let fileError { // swiftlint:disable:this untyped_error_in_catch
                     log.error("Unresolved error: \(error.userInfo)\n\(fileError)")
                 }
             }
@@ -69,9 +69,10 @@ public class CoreDataStack {
 
             let sqliteSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite"),
             let shmSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-shm"),
-            let walSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-wal") else {
-                log.info("Could not create urls for database.")
-                return
+            let walSourceUrl = Bundle.main.url(forResource: modelName, withExtension: ".sqlite-wal")
+        else {
+            log.info("Could not create urls for database.")
+            return
         }
 
         if !FileManager.default.fileExists(atPath: sqliteDestinationUrl.path) {

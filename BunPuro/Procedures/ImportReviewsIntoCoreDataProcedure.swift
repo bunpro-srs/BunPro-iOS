@@ -12,7 +12,7 @@ final class ImportReviewsIntoCoreDataProcedure: Procedure {
     let stack: CoreDataStack
     let reviews: [BPKReview]
 
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, reviews: [BPKReview]) {
+    init(reviews: [BPKReview], stack: CoreDataStack = AppDelegate.coreDataStack) {
         self.stack = stack
         self.reviews = reviews
 

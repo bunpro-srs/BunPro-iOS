@@ -19,7 +19,6 @@ final class KanjiTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -68,7 +67,7 @@ final class KanjiTableViewController: UITableViewController {
                 showCopyJapaneseOrEnglish(at: indexPath)
 
             case 1:
-                showEnglish = !showEnglish
+                showEnglish.toggle()
                 tableView.reloadData()
 
             default:

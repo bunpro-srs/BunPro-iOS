@@ -42,6 +42,7 @@ final class StatusTableViewCell: UITableViewCell {
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {
                 reviewStatusLabel.textColor = Asset.mainTint.color
+                // swiftlint:disable:next dynamic_string_reference
                 reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
                 reviewStatusNextDateLabel.text = L10n.Reviewtime.now
             }
@@ -57,7 +58,6 @@ final class StatusTableViewCell: UITableViewCell {
     var nextHourReviewCount: Int? {
         didSet {
             guard let nextHourReviewCount = correctedNextHourReviewCount else { reviewNextHourCountLabel.text = " "; return }
-
             reviewNextHourCountLabel.text = "+\(nextHourReviewCount)"
         }
     }
@@ -73,7 +73,6 @@ final class StatusTableViewCell: UITableViewCell {
     var nextDayReviewCount: Int? {
         didSet {
             guard let nextDayReviewCount = correctedNextDayReviewCount else { reviewTomorrowCountLabel.text = " "; return }
-
             reviewTomorrowCountLabel.text = "+\(nextDayReviewCount)"
         }
     }

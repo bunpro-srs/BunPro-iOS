@@ -37,7 +37,7 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         didChange sectionInfo: NSFetchedResultsSectionInfo,
         atSectionIndex sectionIndex: Int,
         for type: NSFetchedResultsChangeType
-        ) {
+    ) {
         switch type {
         case .insert:
             tableView.insertSections([sectionIndex], with: .fade)
@@ -56,7 +56,7 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         at indexPath: IndexPath?,
         for type: NSFetchedResultsChangeType,
         newIndexPath: IndexPath?
-        ) {
+    ) {
         switch type {
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .fade)

@@ -1016,10 +1016,10 @@
             </objects>
             <point key="canvasLocation" x="1534" y="1260"/>
         </scene>
-        <!--Grammar View Controller-->
+        <!--Grammar Table View Controller-->
         <scene sceneID="apt-Zk-0Od">
             <objects>
-                <tableViewController id="Bfx-j4-Jt9" customClass="GrammarViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Bfx-j4-Jt9" customClass="GrammarTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Skf-MI-FuY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1436,13 +1436,13 @@
                                             <rect key="frame" x="4" y="4" width="367" height="84"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW8-8x-13z">
-                                                    <rect key="frame" x="0.0" y="47.666666666666657" width="63.666666666666664" height="36.333333333333343"/>
+                                                    <rect key="frame" x="0.0" y="47" width="64" height="37"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xY2-8M-bJ3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="36.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="37"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvl-0b-ytV">
-                                                                <rect key="frame" x="11" y="7.9999999999999982" width="41.666666666666664" height="20.333333333333329"/>
+                                                                <rect key="frame" x="11" y="7.9999999999999982" width="42" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>

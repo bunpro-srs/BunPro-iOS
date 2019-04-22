@@ -6,7 +6,6 @@
 import UIKit
 
 final class StructureInfoCell: UITableViewCell {
-
     @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
             descriptionLabel.numberOfLines = 0

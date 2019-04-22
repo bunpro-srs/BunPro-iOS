@@ -84,14 +84,12 @@ final class StatusTableViewController: UITableViewController {
 
         if showReviewsOnViewDidAppear {
             showReviewsOnViewDidAppear = false
-
             presentReviewViewController()
         }
     }
 
     private func statusCell() -> StatusTableViewCell? {
         let indexPath = IndexPath(row: 0, section: 0)
-
         return tableView.cellForRow(at: indexPath) as? StatusTableViewCell
     }
 
@@ -124,7 +122,6 @@ final class StatusTableViewController: UITableViewController {
         let request: NSFetchRequest<Review> = Review.fetchRequest()
 
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.updatedDate), ascending: true)]
-
         request.predicate = NSPredicate(
             format: "%K < %@ AND %K == true",
             #keyPath(Review.nextReviewDate),
@@ -164,7 +161,7 @@ final class StatusTableViewController: UITableViewController {
             }
 
         default:
-            return 4 //jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+            return 4 // jlptFetchedResultsController?.fetchedObjects?.count ?? 0
         }
     }
 
@@ -175,13 +172,11 @@ final class StatusTableViewController: UITableViewController {
             case 0:
                 if AppDelegate.isContentAccessable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
-
                     updateStatusCell(cell)
 
                     return cell
                 } else if AppDelegate.isTrialPeriodAvailable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-
                     cell.titleLabel.text = L10n.Status.signuptrail
 
                     return cell
@@ -196,16 +191,12 @@ final class StatusTableViewController: UITableViewController {
 
             case 1:
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-
                 cell.titleLabel.text = L10n.Status.cram
-
                 return cell
 
             default:
                 let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-
                 cell.titleLabel.text = L10n.Status.study
-
                 return cell
             }
 
@@ -227,7 +218,9 @@ final class StatusTableViewController: UITableViewController {
             switch indexPath.row {
             case 0, 1, 2:
                 return indexPath
-            default: return nil
+
+            default:
+                return nil
             }
 
         default:
@@ -294,14 +287,16 @@ final class StatusTableViewController: UITableViewController {
         Server.add(procedure: reviewProcedure)
     }
 
-    private func metricForLevel(_ level: Int) -> (complete: Int, max: Int, progress: Float) {
+    private typealias LevelMetric = (complete: Int, max: Int, progress: Float)
+
+    private func metricForLevel(_ level: Int) -> LevelMetric {
         let completeFetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
         completeFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.level), "JLPT\(level)")
 
         do {
             let grammarPoints = try AppDelegate.coreDataStack.managedObjectContext.fetch(completeFetchRequest)
 
-            let complete = grammarPoints.filter({ $0.review?.complete == true }).count
+            let complete = grammarPoints.filter { $0.review?.complete == true }.count
             let max = grammarPoints.count
 
             var progress: Float = 0.0
@@ -326,7 +321,6 @@ final class StatusTableViewController: UITableViewController {
 
     private func setup(account: Account?) {
         navigationItem.title = account?.name
-
         tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
 
@@ -371,7 +365,9 @@ final class StatusTableViewController: UITableViewController {
         cell.lastUpdateDate = lastUpdateDate
     }
 
-    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int, metric: (complete: Int, max: Int, progress: Float)) {
+    private typealias JLPTCellMetric = (complete: Int, max: Int, progress: Float)
+
+    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int, metric: JLPTCellMetric) {
         cell.title = "N\(level)"
         cell.subtitle = "\(metric.complete) / \(metric.max)"
         cell.setProgress(metric.progress, animated: false)
@@ -388,7 +384,6 @@ extension StatusTableViewController: SegueHandler {
 
         switch segueIdentifier(for: segue) {
         case .showJLPT:
-
             let level = 5 - indexPath.row
 
             let destination = segue.destination.content as? GrammarLevelTableViewController
@@ -418,7 +413,7 @@ extension Collection where Iterator.Element == Review {
     public var nextReviewDate: Date? {
         let allDates = filter { $0.complete }.compactMap { $0.nextReviewDate }
 
-        let tmp = allDates.reduce(Date.distantFuture, { $0 < $1 ? $0 : $1 })
+        let tmp = allDates.reduce(Date.distantFuture) { $0 < $1 ? $0 : $1 }
         return tmp == Date.distantPast ? nil: tmp
     }
 

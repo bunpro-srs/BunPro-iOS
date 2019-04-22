@@ -25,12 +25,10 @@ final class UpdateGrammarProcedure: GroupProcedure {
 
 fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure, InputProcedure {
     var input: Pending<[BPKGrammar]> = .pending
-
     let stack: CoreDataStack
 
     init(stack: CoreDataStack = AppDelegate.coreDataStack) {
         self.stack = stack
-
         super.init()
     }
 
@@ -40,11 +38,11 @@ fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure, Inp
 
         stack.storeContainer.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-
             grammarPoints.filter { $0.level != "0" }.forEach { Grammar(grammar: $0, context: context) }
 
             do {
                 try context.save()
+
                 DispatchQueue.main.async {
                     self.stack.save()
                     self.finish()

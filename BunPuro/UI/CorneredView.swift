@@ -14,12 +14,15 @@ final class CorneredView: UIView {
     @IBInspectable var minXminYCornerMasked: Bool = true {
         didSet { setNeedsDisplay() }
     }
+
     @IBInspectable var minXmaxYCornerMasked: Bool = true {
         didSet { setNeedsDisplay() }
     }
+
     @IBInspectable var maxXminYCornerMasked: Bool = true {
         didSet { setNeedsDisplay() }
     }
+
     @IBInspectable var maxXmaxYCornerMasked: Bool = true {
         didSet { setNeedsDisplay() }
     }

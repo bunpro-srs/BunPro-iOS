@@ -11,7 +11,6 @@ import CoreData
 import BunPuroKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -20,13 +19,7 @@ class ViewController: UIViewController {
         print(NSPersistentContainer.defaultDirectoryURL())
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction private func importButtonPressed(_ sender: UIButton) {
-        
         activityIndicator.startAnimating()
         
         let updateProcedure = UpdateGrammarProcedure(presentingViewController: self)

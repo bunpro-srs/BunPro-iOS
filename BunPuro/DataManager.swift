@@ -40,7 +40,6 @@ final class DataManager {
         logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.procedureQueue.addOperation(ResetReviewsProcedure())
-
                 self?.scheduleUpdateProcedure()
             }
         }
@@ -89,7 +88,6 @@ final class DataManager {
 
     private func updateGrammarDatabase() {
         let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
-
         Server.add(procedure: updateProcedure)
     }
 

@@ -20,6 +20,7 @@ final class SettingsTableViewController: UITableViewController {
     private enum Setting: Int {
         case furigana
         case english
+        // TODO: either uncomment or remove this code – or explain why it should be kept
 //        case reviewEnglish
         case bunny
     }
@@ -88,6 +89,7 @@ final class SettingsTableViewController: UITableViewController {
 
             case .english:
                 didSelectEnglishSettingsCell(cell)
+            // TODO: either uncomment or remove this code – or explain why it should be kept
 //            case .reviewEnglish:
 
             case .bunny:
@@ -99,30 +101,26 @@ final class SettingsTableViewController: UITableViewController {
             switch Info(rawValue: indexPath.row)! {
             case .community:
                 guard let url = URL(string: "https://community.bunpro.jp/") else { return }
-
                 present(customSafariViewController(url: url), animated: true)
 
             case .about:
                 guard let url = URL(string: "https://bunpro.jp/about") else { return }
-
                 present(customSafariViewController(url: url), animated: true)
 
             case .contact:
                 guard let url = URL(string: "https://bunpro.jp/contact") else { return }
-
                 present(customSafariViewController(url: url), animated: true)
 
             case .privacy:
                 guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
-
                 present(customSafariViewController(url: url), animated: true)
 
             case .terms:
                 guard let url = URL(string: "https://bunpro.jp/terms") else { return }
-
                 present(customSafariViewController(url: url), animated: true)
 
-            case .subscription, .empty: break
+            case .subscription, .empty:
+                break
 
             case .debug:
                 didSelectDebugSubscriptionCell()
@@ -248,11 +246,9 @@ final class SettingsTableViewController: UITableViewController {
 
         do {
             let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
-
             string = reviews.description
         } catch {
             log.error(error)
-
             string = String(describing: error)
         }
 
@@ -313,7 +309,6 @@ final class SettingsTableViewController: UITableViewController {
 
             DispatchQueue.main.async {
                 let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
-
                 Server.add(procedure: importProcedure)
             }
         }

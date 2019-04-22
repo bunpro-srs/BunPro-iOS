@@ -37,9 +37,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     weak var delegate: ReviewViewControllerDelegate?
     public var website: Website = .main {
         didSet {
-            guard oldValue != website else {
-                return
-            }
+            guard oldValue != website else { return }
 
             loadWebsite()
         }

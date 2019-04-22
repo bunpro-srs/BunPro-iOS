@@ -17,6 +17,7 @@ extension Account {
         furiganaMode = account.furigana.rawValue
         englishMode = account.hideEnglish == Active.yes
         reviewEnglishMode = account.reviewEnglish.rawValue
+        // TODO: either uncomment or remove this code – or explain why it should be kept
 //        lightMode = (account.lightMode == LightMode.on) || (account.lightMode == LightMode.modern)
         subscriber = account.subscriber
     }

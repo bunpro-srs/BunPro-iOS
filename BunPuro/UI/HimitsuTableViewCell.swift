@@ -6,7 +6,6 @@
 import UIKit
 
 final class HimitsuTableViewCell: UITableViewCell {
-
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cloakView: UIVisualEffectView!
 

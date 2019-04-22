@@ -25,7 +25,7 @@ enum ServerError: Error {
     case unknown
 }
 
-public struct Server {
+public enum Server {
     static var token: Token? {
         get {
             return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token.rawValue]
@@ -52,15 +52,13 @@ public struct Server {
     }
 }
 
-class NetworkHandler {
+final class NetworkHandler {
     static let shared = NetworkHandler()
 
     let queue = ProcedureQueue()
-
-    init() { }
 }
 
-struct CustomDecoder {
+enum CustomDecoder {
     static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T: Decodable {
         let formatter = DateFormatter()
 

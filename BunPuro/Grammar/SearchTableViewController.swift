@@ -154,7 +154,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     private func review(for grammar: Grammar) -> Review? {
-        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier })
+        return reviewsFetchedResultsController.fetchedObjects?.first { $0.grammarIdentifier == grammar.identifier }
     }
 
     // MARK: - Table view data source
@@ -280,7 +280,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
                 fatalError("IndexPath must be provided")
             }
 
-            let destination = segue.destination.content as? GrammarViewController
+            let destination = segue.destination.content as? GrammarTableViewController
             destination?.grammar = fetchedResultsController.object(at: indexPath)
         }
     }

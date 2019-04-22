@@ -76,9 +76,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
-
         let grammar = fetchedResultsController.object(at: indexPath)
-
         let hasReview = grammar.review?.complete == true
 
         cell.japaneseLabel?.text = grammar.title
@@ -102,22 +100,15 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         var actions = [UIContextualAction]()
 
         if hasReview {
-            let removeReviewAction = UIContextualAction(
-                style: .normal,
-                title: L10n.Review.Edit.Remove.short
-            ) { _, _, completion in
+            let removeReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Remove.short) { _, _, completion in
                 AppDelegate.modifyReview(.remove(review!.identifier))
                 completion(true)
             }
 
             removeReviewAction.backgroundColor = .red
 
-            let resetReviewAction = UIContextualAction(
-                style: .normal,
-                title: L10n.Review.Edit.Reset.short
-            ) { _, _, completion in
+            let resetReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Reset.short) { _, _, completion in
                 AppDelegate.modifyReview(.reset(review!.identifier))
-
                 completion(true)
             }
 
@@ -126,10 +117,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
             actions.append(removeReviewAction)
             actions.append(resetReviewAction)
         } else {
-            let addToReviewAction = UIContextualAction(
-                style: UIContextualAction.Style.normal,
-                title: L10n.Review.Edit.Add.short
-            ) { _, _, completion in
+            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal, title: L10n.Review.Edit.Add.short) { _, _, completion in
                 AppDelegate.modifyReview(.add(point.identifier))
                 completion(true)
             }
@@ -185,7 +173,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
             guard let cell = sender as? UITableViewCell else { fatalError() }
             guard let indexPath = tableView.indexPath(for: cell) else { fatalError() }
 
-            let controller = segue.destination.content as? GrammarViewController
+            let controller = segue.destination.content as? GrammarTableViewController
             controller?.grammar = fetchedResultsController.object(at: indexPath)
         }
     }
