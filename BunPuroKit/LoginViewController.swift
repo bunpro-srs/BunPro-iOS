@@ -101,7 +101,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
 
         safariViewCtrl.preferredBarTintColor = .black
-        safariViewCtrl.preferredControlTintColor = UIColor(named: "Main Tint")
+        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
 
         present(safariViewCtrl, animated: true)
     }

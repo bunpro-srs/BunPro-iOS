@@ -1,3 +1,5 @@
+// swiftlint:disable file_header
+
 /*
 Copyright (C) 2015 Apple Inc. All Rights Reserved.
 See LICENSE.txt for this sample’s licensing information

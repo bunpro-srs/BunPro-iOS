@@ -112,6 +112,8 @@
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
 		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
+		A1225EDF226D76E600EA2885 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
+		A1225EE0226D76E600EA2885 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
 		A1D6C148226B568700D25DF1 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C147226B568600D25DF1 /* BartyCrouch.swift */; };
 		A1D6C14E226B56A200D25DF1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
 		A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
@@ -1185,6 +1187,8 @@
 				2E01D2021FB2503000E8632D /* ProgressProcedure.swift in Sources */,
 				2EB4564B1FE4559B003CDD65 /* LogoutProcedure.swift in Sources */,
 				2E59791620C6EAAD0007E9BE /* ReusableView+NibLoadableView.swift in Sources */,
+				A1225EDF226D76E600EA2885 /* Strings.swift in Sources */,
+				A1225EE0226D76E600EA2885 /* Assets.swift in Sources */,
 				2E01D2061FB251ED00E8632D /* GrammarPointsProcedure.swift in Sources */,
 				2EE4E78D1FA2835C0020E828 /* Review.swift in Sources */,
 				2EB4DB571FBCE27B00833897 /* Grammar.swift in Sources */,

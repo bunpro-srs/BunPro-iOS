@@ -1,9 +1,6 @@
 //
-//  Reusable and Nib-loadable
-//
-//
 //  Created by Andreas Braun on 19.12.16.
-//
+//  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
 import UIKit
