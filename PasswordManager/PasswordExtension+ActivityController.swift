@@ -13,7 +13,7 @@ extension PasswordExtension {
             self.handleActivityViewControllerCompletion(activityType: activityType, completed: completed, items: items, error: error, completion: completion)
         })
             else {
-                print("Failed to find login, system API is not available")
+                log.warning("Failed to find login, system API is not available")
                 self.callOnMainThread { [unowned self] () in
                     let error = self.systemAppExtensionAPINotAvailableError()
                     completion(nil, error)
@@ -45,7 +45,7 @@ extension PasswordExtension {
     
     func handleActivityViewControllerCompletion(activityType: UIActivity.ActivityType?, completed: Bool, items: [Any]?, error: Error?, completion: @escaping ((loginDetails: PELoginDetails, loginDict: [String: Any])?, _ error: PEError?) -> Void) {
         if let error = error {
-            print("Failed to contact extension: \(error)")
+            log.warning("Failed to contact extension: \(error)")
             self.callOnMainThread { [unowned self] () in
                 let error = self.failedToContactExtensionError(with: error)
                 completion(nil, error)

@@ -77,7 +77,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     }
 
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("didFinish")
+        log.info("didFinish")
 
         UIView.animate(withDuration: 0.5) {
             self.webView.alpha = 1.0

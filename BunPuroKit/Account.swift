@@ -16,7 +16,7 @@ public enum Active: String, Codable {
         }
 
         guard let state = Active(rawValue: value) else {
-            print("Invalid value for \(Active.self): \(value)")
+            log.warning("Invalid value for \(Active.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"", "\"Yes\"":
@@ -44,7 +44,7 @@ public enum Visible: String, Codable {
         }
 
         guard let state = Visible(rawValue: value) else {
-            print("Invalid value for \(Visible.self): \(value)")
+            log.warning("Invalid value for \(Visible.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"":
@@ -74,7 +74,7 @@ public enum State: String, Codable {
         }
 
         guard let state = State(rawValue: value) else {
-            print("Invalid value for \(State.self): \(value)")
+            log.warning("Invalid value for \(State.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"":
@@ -120,7 +120,7 @@ public enum FuriganaMode: String, Codable {
         }
 
         guard let state = FuriganaMode(rawValue: value) else {
-            print("Invalid value for \(FuriganaMode.self): \(value)")
+            log.warning("Invalid value for \(FuriganaMode.self): \(value)")
 
             switch value {
             case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"":

@@ -39,6 +39,7 @@ let package = Package(
                 "KeychainAccess",
                 "ProcedureKit",
                 "ProcedureKitNetwork",
+                "SwiftyBeaver",
             ],
             path: "BunPuroKit"
         ),

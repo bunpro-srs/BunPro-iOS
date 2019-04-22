@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var dataManager: DataManager?
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        Logger.shared.setup()
+
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = Asset.navigationBarHeader.color
 

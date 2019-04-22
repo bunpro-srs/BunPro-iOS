@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(NSPersistentContainer.defaultDirectoryURL())
+        log.info(NSPersistentContainer.defaultDirectoryURL())
     }
 
     @IBAction private func importButtonPressed(_ sender: UIButton) {

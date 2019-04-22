@@ -44,7 +44,8 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
             do {
                 _ = try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
             } catch {
-                print(try JSONSerialization.jsonObject(with: $0, options: [.allowFragments]))
+                let jsonObject = try JSONSerialization.jsonObject(with: $0, options: [.allowFragments])
+                BunPuroKit.log.info(jsonObject)
             }
 
             return try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
