@@ -34,8 +34,6 @@ final class LoginProcedure: GroupProcedure, OutputProcedure {
 
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, TokenResponse> {
-        // TODO: either uncomment or remove this code – or explain why it should be kept
-//            log.info(try JSONSerialization.jsonObject(with: $0, options: []))
             return try JSONDecoder().decode(TokenResponse.self, from: $0)
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)

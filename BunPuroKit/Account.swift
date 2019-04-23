@@ -140,15 +140,6 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
-// TODO: either uncomment or remove this code – or explain why it should be kept
-//public enum LightMode: String, Codable {
-//    case on = "On"
-//    case off = "Off"
-//    case modern = "Modern"
-//    case classic = "Classic"
-//    case classicLight = "Classic Light"
-//}
-
 public struct BPKAccount: Codable {
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -157,8 +148,6 @@ public struct BPKAccount: Codable {
         case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
-        // TODO: either uncomment or remove this code – or explain why it should be kept
-//        case lightMode = "light_mode"
         case subscriber
     }
 
@@ -167,8 +156,6 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
-    // TODO: either uncomment or remove this code – or explain why it should be kept
-//    public let lightMode: LightMode
     public let bunnyMode: State
     public let subscriber: Bool
 }

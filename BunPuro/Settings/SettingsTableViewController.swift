@@ -20,8 +20,6 @@ final class SettingsTableViewController: UITableViewController {
     private enum Setting: Int {
         case furigana
         case english
-        // TODO: either uncomment or remove this code – or explain why it should be kept
-//        case reviewEnglish
         case bunny
     }
 
@@ -89,8 +87,6 @@ final class SettingsTableViewController: UITableViewController {
 
             case .english:
                 didSelectEnglishSettingsCell(cell)
-            // TODO: either uncomment or remove this code – or explain why it should be kept
-//            case .reviewEnglish:
 
             case .bunny:
                 didSelectBunnySettingsCell(cell)
