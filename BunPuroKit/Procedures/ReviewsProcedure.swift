@@ -23,12 +23,15 @@ public enum ReviewCollection {
 }
 
 private struct _ReviewContainer: Codable {
-    // TODO: consider setting the decoders `keyDecodingStrategy` to `.convertFromSnakeCase` instead
-    // swiftlint:disable identifier_name
+    enum CodingKeys: String, CodingKey {
+        case reviews
+        case ghostReviews = "ghost_reviews"
+        case selfStudyReviews = "self_study_reviews"
+    }
+
     let reviews: [BPKReview]
-    let ghost_reviews: [BPKReview]
-    let self_study_reviews: [BPKReview]
-    // swiftlint:enable identifier_name
+    let ghostReviews: [BPKReview]
+    let selfStudyReviews: [BPKReview]
 }
 
 private final class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
@@ -56,7 +59,7 @@ public final class ReviewsProcedure: GroupProcedure, OutputProcedure {
         self.completion = completion
 
         downloadProcedure = _ReviewsProcedure(presentingViewController: presentingViewController)
-        transformProcedure = TransformProcedure<_ReviewContainer, [BPKReview]> { $0.reviews + $0.ghost_reviews + $0.self_study_reviews }
+        transformProcedure = TransformProcedure<_ReviewContainer, [BPKReview]> { $0.reviews + $0.ghostReviews + $0.selfStudyReviews }
         transformProcedure.injectResult(from: downloadProcedure!)
 
         super.init(operations: [downloadProcedure!, transformProcedure])
