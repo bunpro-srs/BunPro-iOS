@@ -72,11 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataManager?.startStatusUpdates()
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // TODO: either uncomment or remove this code – or explain why it should be kept
-//        dataManager?.startStatusUpdates()
-    }
-
     func applicationDidEnterBackground(_ application: UIApplication) {
         coreDataStack.save()
     }
