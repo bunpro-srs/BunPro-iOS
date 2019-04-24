@@ -7,7 +7,7 @@ https://testflight.apple.com/join/jx9i7aPp
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Rion/BunPro. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ### Getting Started
 
