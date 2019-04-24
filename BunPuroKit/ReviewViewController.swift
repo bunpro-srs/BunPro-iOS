@@ -37,9 +37,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     weak var delegate: ReviewViewControllerDelegate?
     public var website: Website = .main {
         didSet {
-            guard oldValue != website else {
-                return
-            }
+            guard oldValue != website else { return }
 
             loadWebsite()
         }
@@ -79,7 +77,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     }
 
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("didFinish")
+        log.info("didFinish")
 
         UIView.animate(withDuration: 0.5) {
             self.webView.alpha = 1.0

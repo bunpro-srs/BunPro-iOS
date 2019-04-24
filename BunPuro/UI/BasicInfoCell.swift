@@ -11,11 +11,13 @@ final class BasicInfoCell: UITableViewCell {
             titleLabel.numberOfLines = 0
         }
     }
+
     @IBOutlet weak var meaningLabel: UILabel! {
         didSet {
             meaningLabel.numberOfLines = 0
         }
     }
+
     @IBOutlet weak var cautionLabel: UILabel! {
         didSet {
             cautionLabel.numberOfLines = 0

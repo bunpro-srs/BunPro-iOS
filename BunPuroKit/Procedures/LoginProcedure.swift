@@ -11,7 +11,7 @@ import ProcedureKitNetwork
 public typealias Token = String
 private let loginUrlString = "\(baseUrlString)login/"
 
-final class LoginProcedure: GroupProcedure, OutputProcedure {
+class LoginProcedure: GroupProcedure, OutputProcedure {
     var output: Pending<ProcedureResult<TokenResponse>> = .pending
 
     let completion: (Token?, Error?) -> Void
@@ -26,14 +26,14 @@ final class LoginProcedure: GroupProcedure, OutputProcedure {
         self.email = username
         self.password = password
 
-        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!)")!
+        let percentEscapedPassword: String = password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(percentEscapedPassword)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
         _networkProcedure = NetworkProcedure { NetworkDataProcedure(session: URLSession.shared, request: request) }
         _transformProcedure = TransformProcedure<Data, TokenResponse> {
-//            print(try JSONSerialization.jsonObject(with: $0, options: []))
             return try JSONDecoder().decode(TokenResponse.self, from: $0)
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
@@ -100,7 +100,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
         self.completion = completion
 
         if Server.token == nil {
-            guard let presentingViewController = presentingViewController else {
+            guard let presentingViewCtrl = presentingViewController else {
                 completion(ConditionResult.failure(Error.noPresentingViewControllerProvided))
                 return
             }
@@ -126,7 +126,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
 
                     controller.modalPresentationStyle = .formSheet
 
-                    presentingViewController.present(controller, animated: true, completion: nil)
+                    presentingViewCtrl.present(controller, animated: true, completion: nil)
                 }
             }
         } else {

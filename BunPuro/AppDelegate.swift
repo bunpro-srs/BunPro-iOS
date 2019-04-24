@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var dataManager: DataManager?
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        Logger.shared.setup()
+
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = Asset.navigationBarHeader.color
 
@@ -55,22 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if let rootViewController = window?.rootViewController {
-            dataManager = DataManager(presentingViewController: rootViewController)
+        if let rootViewCtrl = window?.rootViewController {
+            dataManager = DataManager(presentingViewController: rootViewCtrl)
         }
-
-//        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(20))
-//        UserNotificationCenter.shared.scheduleNextReviewNotification(at: Date().addingTimeInterval(25))
 
         return true
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         dataManager?.startStatusUpdates()
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-//        dataManager?.startStatusUpdates()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -94,32 +89,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }
                 tabbarController.selectedIndex = 0
 
-            guard let viewController = tabbarController.viewControllers?.first?.content else { return false }
+            guard let viewCtrl = tabbarController.viewControllers?.first?.content else { return false }
 
-            switch viewController {
+            switch viewCtrl {
             case is StatusTableViewController:
-
-                let statusViewController = viewController as? StatusTableViewController
+                let statusViewCtrl = viewCtrl as? StatusTableViewController
 
                 switch type {
                 case .study:
-                    statusViewController?.presentReviewViewController(website: .study)
+                    statusViewCtrl?.presentReviewViewController(website: .study)
 
                 case .cram:
-                    statusViewController?.presentReviewViewController(website: .cram)
+                    statusViewCtrl?.presentReviewViewController(website: .cram)
                 }
 
             case is ReviewViewController:
-                let reviewViewController = viewController as? ReviewViewController
+                let reviewViewCtrl = viewCtrl as? ReviewViewController
 
                 switch type {
                 case .study:
-                    reviewViewController?.website = .study
+                    reviewViewCtrl?.website = .study
 
                 case .cram:
-                    reviewViewController?.website = .cram
+                    reviewViewCtrl?.website = .cram
                 }
-            default: return false
+
+            default:
+                return false
             }
         }
 
@@ -167,17 +163,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         UserNotificationCenter.shared.updateNotifications(basedOnReceived: notification)
-
         completionHandler([.sound, .badge, .alert])
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            let statusViewController = (window?.rootViewController as? UITabBarController)?.viewControllers?.first(where: { $0 is StatusTableViewController }) as? StatusTableViewController
+            let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
+                .viewControllers?
+                .first { $0 is StatusTableViewController } as? StatusTableViewController
 
-            statusViewController?.showReviewsOnViewDidAppear = true
+            statusViewCtrl?.showReviewsOnViewDidAppear = true
         }
 
         completionHandler()
@@ -196,11 +201,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         do {
             let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
-
             return NSNumber(value: reviews.count)
         } catch {
             log.error(error)
-
             return nil
         }
     }

@@ -1,3 +1,8 @@
+//
+//  Created by Andreas Braun on 26.10.17.
+//  Copyright © 2017 Andreas Braun. All rights reserved.
+//
+
 import Foundation
 
 public enum Active: String, Codable {
@@ -11,7 +16,7 @@ public enum Active: String, Codable {
         }
 
         guard let state = Active(rawValue: value) else {
-            print("Invalid value for \(Active.self): \(value)")
+            log.warning("Invalid value for \(Active.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"", "\"Yes\"":
@@ -39,7 +44,7 @@ public enum Visible: String, Codable {
         }
 
         guard let state = Visible(rawValue: value) else {
-            print("Invalid value for \(Visible.self): \(value)")
+            log.warning("Invalid value for \(Visible.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"":
@@ -69,7 +74,7 @@ public enum State: String, Codable {
         }
 
         guard let state = State(rawValue: value) else {
-            print("Invalid value for \(State.self): \(value)")
+            log.warning("Invalid value for \(State.self): \(value)")
 
             switch value {
             case "\"On\"", "Show", "\"Show\"":
@@ -95,6 +100,7 @@ public enum FuriganaMode: String, Codable {
             switch string {
             case "Wanikani":
                 self = FuriganaMode.wanikani
+
             case "Hide", "Off":
                 self = FuriganaMode.off
 
@@ -114,27 +120,25 @@ public enum FuriganaMode: String, Codable {
         }
 
         guard let state = FuriganaMode(rawValue: value) else {
-            print("Invalid value for \(FuriganaMode.self): \(value)")
+            log.warning("Invalid value for \(FuriganaMode.self): \(value)")
 
             switch value {
-            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"": self = .on
-            case "Wanikani", "\"Wanikani\"": self = .wanikani
-            default: self = .off
+            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"":
+                self = .on
+
+            case "Wanikani", "\"Wanikani\"":
+                self = .wanikani
+
+            default:
+                self = .off
             }
+
             return
         }
 
         self = state
     }
 }
-
-//public enum LightMode: String, Codable {
-//    case on = "On"
-//    case off = "Off"
-//    case modern = "Modern"
-//    case classic = "Classic"
-//    case classicLight = "Classic Light"
-//}
 
 public struct BPKAccount: Codable {
     private enum CodingKeys: String, CodingKey {
@@ -144,7 +148,6 @@ public struct BPKAccount: Codable {
         case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
-//        case lightMode = "light_mode"
         case subscriber
     }
 
@@ -153,7 +156,6 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
-//    public let lightMode: LightMode
     public let bunnyMode: State
     public let subscriber: Bool
 }

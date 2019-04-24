@@ -77,7 +77,9 @@ public final class ModifyReviewProcedure: GroupProcedure {
 
         request.setValue("Token token=\(token)", forHTTPHeaderField: "Authorization")
 
-        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
+        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) {
+            NetworkDataProcedure(session: URLSession.shared, request: request)
+        }
 
         addChild(_networkProcedure)
 

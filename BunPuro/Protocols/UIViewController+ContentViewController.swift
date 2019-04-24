@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ContentViewController { }
+protocol ContentViewController { /* only defined for providing extension behavior */ }
 
 extension UIViewController: ContentViewController { }
 

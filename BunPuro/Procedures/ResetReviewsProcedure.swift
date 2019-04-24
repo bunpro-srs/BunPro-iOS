@@ -12,7 +12,6 @@ final class ResetReviewsProcedure: Procedure {
 
     init(stack: CoreDataStack = AppDelegate.coreDataStack) {
         self.stack = stack
-
         super.init()
     }
 
@@ -26,7 +25,6 @@ final class ResetReviewsProcedure: Procedure {
 
             do {
                 let reviews = try context.fetch(fetchRequest)
-
                 reviews.forEach { context.delete($0) }
 
                 try context.save()

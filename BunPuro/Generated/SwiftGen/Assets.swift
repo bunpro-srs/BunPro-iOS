@@ -25,7 +25,7 @@ internal enum Asset {
   internal static let tiles = ColorAsset(name: "Tiles")
   internal static let tilesDimmed = ColorAsset(name: "TilesDimmed")
   internal static let tilesSymbol = ColorAsset(name: "TilesSymbol")
-  internal static let mainTint = ColorAsset(name: "Main Tint")
+  internal static let mainTint = ColorAsset(name: "MainTint")
   internal static let progressGrey = ColorAsset(name: "Progress Grey")
   internal static let translucentBlack = ColorAsset(name: "Translucent Black")
   internal static let bunproHankoReviewComplete = ImageAsset(name: "bunpro-hanko-review-complete")

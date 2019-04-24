@@ -45,14 +45,15 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
             if let decodingError = error as? Swift.DecodingError {
                 switch decodingError {
                 case .typeMismatch, .valueNotFound:
-                    print("Server changed something!")
+                    BunPuroKit.log.info("Server changed something!")
 
                 case .keyNotFound:
-                    print("Login token changed")
+                    BunPuroKit.log.info("Login token changed")
                     Server.reset()
 
                 case .dataCorrupted:
-                break // Seems to be a bug in swift...
+                    break // NOTE: Seems to be a bug in swift...
+
                 @unknown default:
                     break
                 }

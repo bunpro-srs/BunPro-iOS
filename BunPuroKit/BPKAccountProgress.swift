@@ -1,3 +1,8 @@
+//
+//  Created by Andreas Braun on 26.10.17.
+//  Copyright © 2017 Andreas Braun. All rights reserved.
+//
+
 import Foundation
 
 public struct BPKAccountProgress: Codable {
@@ -17,6 +22,7 @@ public struct BPKAccountProgress: Codable {
         }
     }
 
+    // swiftlint:disable identifier_name
     let N5: [Int]
     let N4: [Int]
     let N3: [Int]
@@ -37,4 +43,5 @@ public struct BPKAccountProgress: Codable {
     public var n2: JLPT {
         return JLPT(name: "N2", current: N2[0], max: N2[1])
     }
+    // swiftlint:enable identifier_name
 }

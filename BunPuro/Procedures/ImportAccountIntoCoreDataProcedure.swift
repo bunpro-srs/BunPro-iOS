@@ -13,7 +13,7 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
     let account: BPKAccount
     let progress: BPKAccountProgress?
 
-    init(stack: CoreDataStack = AppDelegate.coreDataStack, account: BPKAccount, progress: BPKAccountProgress? = nil) {
+    init(account: BPKAccount, progress: BPKAccountProgress? = nil, stack: CoreDataStack = AppDelegate.coreDataStack) {
         self.stack = stack
         self.account = account
         self.progress = progress

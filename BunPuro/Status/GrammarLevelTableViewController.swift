@@ -17,23 +17,17 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     private var searchBarButtonItem: UIBarButtonItem!
     private var activityIndicatorView: UIActivityIndicatorView?
 
-    private var willUpdateObserver: NSObjectProtocol?
-    private var didUpdateObserver: NSObjectProtocol?
+    private var willUpdateObserver: NotificationToken?
+    private var didUpdateObserver: NotificationToken?
 
     deinit {
         log.info("deinit \(String(describing: self))")
-
-        for observer in [willUpdateObserver, didUpdateObserver] {
-            if let observer = observer {
-                NotificationCenter.default.removeObserver(observer)
-            }
-        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
 
         activityIndicatorView = UIActivityIndicatorView(style: .white)
         activityIndicatorView?.hidesWhenStopped = true
@@ -41,19 +35,13 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         searchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         navigationItem.rightBarButtonItems = [/*searchBarButtonItem, */UIBarButtonItem(customView: activityIndicatorView!)]
 
-        willUpdateObserver = NotificationCenter.default.addObserver(
-            forName: .BunProWillBeginUpdating,
-            object: nil,
-            queue: OperationQueue.main) { [weak self] _ in
-                self?.activityIndicatorView?.startAnimating()
+        willUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.activityIndicatorView?.startAnimating()
         }
 
-        didUpdateObserver = NotificationCenter.default.addObserver(
-            forName: .BunProDidEndUpdating,
-            object: nil,
-            queue: OperationQueue.main) { [weak self] _ in
-                self?.activityIndicatorView?.stopAnimating()
-                self?.tableView.reloadData()
+        didUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.activityIndicatorView?.stopAnimating()
+            self?.tableView.reloadData()
         }
 
         let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
@@ -65,15 +53,18 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
         request.sortDescriptors = [levelSort, orderSort, identifierSort]
 
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: AppDelegate.coreDataStack.managedObjectContext, sectionNameKeyPath: #keyPath(Grammar.lessonIdentifier), cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            sectionNameKeyPath: #keyPath(Grammar.lessonIdentifier),
+            cacheName: nil
+        )
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
-
         let grammar = fetchedResultsController.object(at: indexPath)
-
         let hasReview = grammar.review?.complete == true
 
         cell.japaneseLabel?.text = grammar.title
@@ -97,21 +88,16 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         var actions = [UIContextualAction]()
 
         if hasReview {
-            let removeReviewAction = UIContextualAction(
-                style: .normal,
-                title: NSLocalizedString("review.edit.remove.short", comment: "")
-            ) { _, _, completion in
+            let removeReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Remove.short) { _, _, completion in
                 AppDelegate.modifyReview(.remove(review!.identifier))
                 completion(true)
             }
 
             removeReviewAction.backgroundColor = .red
 
-            let resetReviewAction = UIContextualAction(style: .normal,
-                                                       title: L10n.Review.Edit.Reset.short) { _, _, completion in
-                                                        AppDelegate.modifyReview(.reset(review!.identifier))
-
-                                                        completion(true)
+            let resetReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Reset.short) { _, _, completion in
+                AppDelegate.modifyReview(.reset(review!.identifier))
+                completion(true)
             }
 
             resetReviewAction.backgroundColor = .purple
@@ -119,10 +105,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
             actions.append(removeReviewAction)
             actions.append(resetReviewAction)
         } else {
-            let addToReviewAction = UIContextualAction(
-                style: UIContextualAction.Style.normal,
-                title: L10n.Review.Edit.Add.short
-            ) { _, _, completion in
+            let addToReviewAction = UIContextualAction(style: UIContextualAction.Style.normal, title: L10n.Review.Edit.Add.short) { _, _, completion in
                 AppDelegate.modifyReview(.add(point.identifier))
                 completion(true)
             }
@@ -149,12 +132,12 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         guard let name = fetchedResultsController?.sections?[section].name, let level = Int(name) else { return nil }
         let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
 
-        let grammarPoints = fetchedResultsController.fetchedObjects?.filter({ $0.lessonIdentifier == name }) ?? []
+        let grammarPoints = fetchedResultsController.fetchedObjects?.filter { $0.lessonIdentifier == name } ?? []
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
-        cell.titleLabel.text = L10n.Level.number(correctLevel(level))
-        cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
+        cell.title = L10n.Level.number(correctLevel(level))
+        cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
         cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
 
         return cell.contentView
@@ -175,10 +158,10 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammar:
-            guard let cell = sender as? UITableViewCell else { fatalError() }
-            guard let indexPath = tableView.indexPath(for: cell) else { fatalError() }
+            guard let cell = sender as? UITableViewCell else { fatalError("expected showGrammer segue to be of type `UITableViewCell`") }
+            guard let indexPath = tableView.indexPath(for: cell) else { fatalError("expected showGrammer cell to be part of a table view") }
 
-            let controller = segue.destination.content as? GrammarViewController
+            let controller = segue.destination.content as? GrammarTableViewController
             controller?.grammar = fetchedResultsController.object(at: indexPath)
         }
     }

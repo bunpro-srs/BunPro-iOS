@@ -55,7 +55,9 @@ public final class SetSettingsProcedure: GroupProcedure {
 
         request.setValue("Token token=\(Server.token!)", forHTTPHeaderField: "Authorization")
 
-        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) { NetworkDataProcedure(session: URLSession.shared, request: request) }
+        _networkProcedure = NetworkProcedure(resilience: DefaultNetworkResilience(requestTimeout: nil)) {
+            NetworkDataProcedure(session: URLSession.shared, request: request)
+        }
         _userProcedure = UserProcedure(presentingViewController: presentingViewController, completion: completion)
         _userProcedure.addDependency(_networkProcedure)
 

@@ -11,6 +11,7 @@ final class GrammarTeaserCell: UITableViewCell {
             japaneseLabel.numberOfLines = 0
         }
     }
+
     @IBOutlet weak var meaningLabel: UILabel! {
         didSet {
             meaningLabel.numberOfLines = 0

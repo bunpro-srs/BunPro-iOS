@@ -37,7 +37,6 @@ opt_in_rules:
 - override_in_extension
 - pattern_matching_keywords
 - private_action
-- private_outlet
 - prohibited_super_call
 - quick_discouraged_call
 - quick_discouraged_focused_test
@@ -61,7 +60,6 @@ opt_in_rules:
 disabled_rules:
 - cyclomatic_complexity
 - force_cast
-- todo
 - type_name
 
 included:
@@ -75,6 +73,7 @@ included:
 excluded:
 - BunPuro/Furigana
 - BunPuro/Generated
+- BunPuro/Supporting Files/BartyCrouch.swift
 
 # Rule Configurations
 conditional_returns_on_newline:
@@ -100,6 +99,7 @@ identifier_name:
   excluded:
     - id
     - on
+    - no
 
 line_length: 160
 

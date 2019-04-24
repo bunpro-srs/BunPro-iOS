@@ -8,13 +8,13 @@ import UIKit
 final class DetailCell: UITableViewCell {
     var longPressGestureRecognizer: UILongPressGestureRecognizer?
 
-    @IBOutlet weak var nameLabel: UILabel! {
+    @IBOutlet private weak var nameLabel: UILabel! {
         didSet {
             nameLabel.numberOfLines = 0
         }
     }
 
-    @IBOutlet weak var descriptionLabel: UILabel! {
+    @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
             descriptionLabel.numberOfLines = 0
         }
@@ -23,6 +23,60 @@ final class DetailCell: UITableViewCell {
     @IBOutlet private weak var progressView: UIProgressView! {
         didSet {
             progressView?.progress = 0.0
+        }
+    }
+
+    var name: String? {
+        get {
+            return nameLabel?.text
+        }
+        set {
+            nameLabel?.text = newValue
+        }
+    }
+
+    var attributedName: NSAttributedString? {
+        get {
+            return nameLabel?.attributedText
+        }
+        set {
+            nameLabel?.attributedText = newValue
+        }
+    }
+
+    var nameColor: UIColor? {
+        get {
+            return nameLabel?.textColor
+        }
+        set {
+            nameLabel?.textColor = newValue
+        }
+    }
+
+    var descriptionText: String? {
+        get {
+            return descriptionLabel?.text
+        }
+        set {
+            descriptionLabel?.text = newValue
+        }
+    }
+
+    var attributedDescriptionText: NSAttributedString? {
+        get {
+            return descriptionLabel?.attributedText
+        }
+        set {
+            descriptionLabel?.attributedText = newValue
+        }
+    }
+
+    var isDescriptionLabelHidden: Bool {
+        get {
+            return descriptionLabel?.isHidden ?? false
+        }
+        set {
+            descriptionLabel?.isHidden = newValue
         }
     }
 

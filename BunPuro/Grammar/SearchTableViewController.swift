@@ -109,7 +109,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor(named: "ModernDark")
+        tableView.backgroundColor = Asset.background.color
 
         definesPresentationContext = true
 
@@ -154,7 +154,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
     }
 
     private func review(for grammar: Grammar) -> Review? {
-        return reviewsFetchedResultsController.fetchedObjects?.first(where: { $0.grammarIdentifier == grammar.identifier })
+        return reviewsFetchedResultsController.fetchedObjects?.first { $0.grammarIdentifier == grammar.identifier }
     }
 
     // MARK: - Table view data source
@@ -185,8 +185,8 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         let grammarCount = grammarPoints.count
         let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
 
-        cell.titleLabel.text = name.replacingOccurrences(of: "JLPT", with: "N")
-        cell.subtitleLabel?.text = "\(finishedGrammarCount) / \(grammarCount)"
+        cell.title = name.replacingOccurrences(of: "JLPT", with: "N")
+        cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
         cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
 
         return cell.contentView
@@ -275,17 +275,23 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         switch segueIdentifier(for: segue) {
         case .showGrammar:
 
-            guard let cell = sender as? UITableViewCell else { fatalError() }
+            guard let cell = sender as? UITableViewCell else { fatalError("expected showGrammer segue to be of type `UITableViewCell`") }
             guard let indexPath = tableView.indexPath(for: cell) else {
                 fatalError("IndexPath must be provided")
             }
 
-            let destination = segue.destination.content as? GrammarViewController
+            let destination = segue.destination.content as? GrammarTableViewController
             destination?.grammar = fetchedResultsController.object(at: indexPath)
         }
     }
 
-    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    override func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+        ) {
         if controller == fetchedResultsController {
             super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
         } else if controller == reviewsFetchedResultsController, let visibleRowIndexpaths = tableView.indexPathsForVisibleRows {

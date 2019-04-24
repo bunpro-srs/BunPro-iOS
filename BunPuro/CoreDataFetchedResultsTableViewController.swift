@@ -28,11 +28,16 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
-    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
 
-    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange sectionInfo: NSFetchedResultsSectionInfo,
+        atSectionIndex sectionIndex: Int,
+        for type: NSFetchedResultsChangeType
+    ) {
         switch type {
         case .insert:
             tableView.insertSections([sectionIndex], with: .fade)
@@ -45,7 +50,13 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         }
     }
 
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+    ) {
         switch type {
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .fade)
@@ -59,8 +70,9 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+
         @unknown default:
-            break
+            log.info("Unknown NSFetchedResultsChangeType \(type).")
         }
     }
 
