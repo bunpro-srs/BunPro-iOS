@@ -17,17 +17,11 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     private var searchBarButtonItem: UIBarButtonItem!
     private var activityIndicatorView: UIActivityIndicatorView?
 
-    private var willUpdateObserver: NSObjectProtocol?
-    private var didUpdateObserver: NSObjectProtocol?
+    private var willUpdateObserver: NotificationToken?
+    private var didUpdateObserver: NotificationToken?
 
     deinit {
         log.info("deinit \(String(describing: self))")
-
-        for observer in [willUpdateObserver, didUpdateObserver] {
-            if let observer = observer {
-                NotificationCenter.default.removeObserver(observer)
-            }
-        }
     }
 
     override func viewDidLoad() {
@@ -41,19 +35,13 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         searchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         navigationItem.rightBarButtonItems = [/*searchBarButtonItem, */UIBarButtonItem(customView: activityIndicatorView!)]
 
-        willUpdateObserver = NotificationCenter.default.addObserver(
-            forName: .BunProWillBeginUpdating,
-            object: nil,
-            queue: OperationQueue.main) { [weak self] _ in
-                self?.activityIndicatorView?.startAnimating()
+        willUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.activityIndicatorView?.startAnimating()
         }
 
-        didUpdateObserver = NotificationCenter.default.addObserver(
-            forName: .BunProDidEndUpdating,
-            object: nil,
-            queue: OperationQueue.main) { [weak self] _ in
-                self?.activityIndicatorView?.stopAnimating()
-                self?.tableView.reloadData()
+        didUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.activityIndicatorView?.stopAnimating()
+            self?.tableView.reloadData()
         }
 
         let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
@@ -170,8 +158,8 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifier(for: segue) {
         case .showGrammar:
-            guard let cell = sender as? UITableViewCell else { fatalError() }
-            guard let indexPath = tableView.indexPath(for: cell) else { fatalError() }
+            guard let cell = sender as? UITableViewCell else { fatalError("expected showGrammer segue to be of type `UITableViewCell`") }
+            guard let indexPath = tableView.indexPath(for: cell) else { fatalError("expected showGrammer cell to be part of a table view") }
 
             let controller = segue.destination.content as? GrammarTableViewController
             controller?.grammar = fetchedResultsController.object(at: indexPath)

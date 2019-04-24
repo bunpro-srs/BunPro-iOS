@@ -10,8 +10,7 @@ import ProcedureKitNetwork
 
 private let logoutUrlString = "\(baseUrlString)logout"
 
-final class LogoutProcedure: Procedure {
-
+class LogoutProcedure: Procedure {
     override func execute() {
         let keychain = Keychain()
         keychain[LoginViewController.CredentialsKey.password.rawValue] = nil

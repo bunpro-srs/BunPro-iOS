@@ -8,4 +8,4 @@
 
 import XCTest
 
-class BunPuroUITests: XCTestCase { /* TODO: not yet implemented */ }
+class BunPuroUITests: XCTestCase { /* not yet implemented */ }

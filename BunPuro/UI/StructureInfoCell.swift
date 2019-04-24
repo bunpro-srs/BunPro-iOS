@@ -12,7 +12,7 @@ final class StructureInfoCell: UITableViewCell {
         }
     }
 
-    var attributedDescriptionText: NSAttributedString? {
+    var attributedDescription: NSAttributedString? {
         get {
             return descriptionLabel?.attributedText
         }

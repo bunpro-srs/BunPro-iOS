@@ -101,7 +101,7 @@
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U42-iM-83P">
                                                 <rect key="frame" x="0.0" y="121" width="337" height="30"/>
-                                                <color key="tintColor" name="Main Tint"/>
+                                                <color key="tintColor" name="MainTint"/>
                                                 <state key="normal" title="Login"/>
                                                 <connections>
                                                     <action selector="loginButtonPressed:" destination="KW3-Jd-vvi" eventType="touchUpInside" id="PX4-2A-HOd"/>
@@ -120,7 +120,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3F-mT-rta">
                                 <rect key="frame" x="0.0" y="307" width="375" height="30"/>
-                                <color key="tintColor" name="Main Tint"/>
+                                <color key="tintColor" name="MainTint"/>
                                 <state key="normal" title="Privacy"/>
                                 <connections>
                                     <action selector="showPrivacy" destination="KW3-Jd-vvi" eventType="touchUpInside" id="RmD-vK-IMD"/>
@@ -172,12 +172,12 @@
         <namedColor name="Background">
             <color red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Main Tint">
+        <namedColor name="MainTint">
             <color red="0.39215686274509803" green="0.70980392156862748" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Tiles">
             <color red="0.25882352941176473" green="0.25882352941176473" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <color key="tintColor" name="Main Tint"/>
+    <color key="tintColor" name="MainTint"/>
 </document>

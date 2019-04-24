@@ -14,44 +14,35 @@ private let updateInterval = TimeInterval(60)
 final class StatusTableViewController: UITableViewController {
     var showReviewsOnViewDidAppear: Bool = false
 
-    private var logoutObserver: NSObjectProtocol?
-    private var beginUpdateObserver: NSObjectProtocol?
-    private var endUpdateObserver: NSObjectProtocol?
-    private var pendingModificationObserver: NSObjectProtocol?
+    private var logoutObserver: NotificationToken?
+    private var beginUpdateObserver: NotificationToken?
+    private var endUpdateObserver: NotificationToken?
+    private var pendingModificationObserver: NotificationToken?
 
     private var nextReviewDate: Date?
     private var reviews: [Review]?
 
-    private var userFetchedResultsController: NSFetchedResultsController<Account>?
-    private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
-
-    deinit {
-        log.info("deinit \(String(describing: self))")
-
-        for observer in [logoutObserver, beginUpdateObserver, endUpdateObserver, pendingModificationObserver] where observer != nil {
-            NotificationCenter.default.removeObserver(observer!)
-        }
-    }
+    private let fetchedResultsController = StatusFetchedResultsController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.backgroundColor = Asset.background.color
 
-        logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
+        logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.setup(account: nil)
                 self?.setup(reviews: nil)
             }
         }
 
-        beginUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProWillBeginUpdating, object: nil, queue: nil) { _ in
+        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
             }
         }
 
-        endUpdateObserver = NotificationCenter.default.addObserver(forName: .BunProDidEndUpdating, object: nil, queue: nil) { _ in
+        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
                 self.statusCell()?.isUpdating = AppDelegate.isUpdating
                 self.refreshControl?.endRefreshing()
@@ -62,21 +53,21 @@ final class StatusTableViewController: UITableViewController {
                     guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
 
                     let level = 5 - $0.row
-                    let metric = self.metricForLevel(level)
+                    let metric = self.fetchedResultsController.metricForLevel(level)
 
                     self.updateJLPTCell(cell, level: level, metric: metric)
                 }
             }
         }
 
-        pendingModificationObserver = NotificationCenter.default.addObserver(forName: .BunProDidModifyReview, object: nil, queue: nil) { _ in
+        pendingModificationObserver = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
                 self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
         }
 
-        setupUserFetchedResultsController()
-        setupReviewsFetchedResultsController()
+        fetchedResultsController.delegate = self
+        fetchedResultsController.setup()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -95,54 +86,6 @@ final class StatusTableViewController: UITableViewController {
 
     @IBAction private func refresh(_ sender: UIRefreshControl) {
         AppDelegate.setNeedsStatusUpdate()
-    }
-
-    private func setupUserFetchedResultsController() {
-        let request: NSFetchRequest<Account> = Account.fetchRequest()
-
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
-
-        userFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-
-        userFetchedResultsController?.delegate = self
-
-        do {
-            try userFetchedResultsController?.performFetch()
-        } catch {
-            log.error(error)
-        }
-    }
-
-    private func setupReviewsFetchedResultsController() {
-        let request: NSFetchRequest<Review> = Review.fetchRequest()
-
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.updatedDate), ascending: true)]
-        request.predicate = NSPredicate(
-            format: "%K < %@ AND %K == true",
-            #keyPath(Review.nextReviewDate),
-            Date().tomorrow.tomorrow.nextMidnight as NSDate,
-            #keyPath(Review.complete)
-        )
-
-        reviewsFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-
-        reviewsFetchedResultsController?.delegate = self
-
-        do {
-            try reviewsFetchedResultsController?.performFetch()
-        } catch {
-            log.error(error)
-        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -204,7 +147,7 @@ final class StatusTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
 
             let level = 5 - indexPath.row
-            let metric = metricForLevel(5 - indexPath.row)
+            let metric = fetchedResultsController.metricForLevel(5 - indexPath.row)
 
             updateJLPTCell(cell, level: level, metric: metric)
 
@@ -242,9 +185,9 @@ final class StatusTableViewController: UITableViewController {
                         presentReviewViewController(website: .main)
                     }
                 } else if AppDelegate.isTrialPeriodAvailable {
-                    signupForTrial()
+                    AppDelegate.signupForTrial()
                 } else if Account.currentAccount != nil {
-                    signup()
+                    AppDelegate.signup()
                 }
 
             case 1:
@@ -285,38 +228,6 @@ final class StatusTableViewController: UITableViewController {
         }
 
         Server.add(procedure: reviewProcedure)
-    }
-
-    private typealias LevelMetric = (complete: Int, max: Int, progress: Float)
-
-    private func metricForLevel(_ level: Int) -> LevelMetric {
-        let completeFetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
-        completeFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.level), "JLPT\(level)")
-
-        do {
-            let grammarPoints = try AppDelegate.coreDataStack.managedObjectContext.fetch(completeFetchRequest)
-
-            let complete = grammarPoints.filter { $0.review?.complete == true }.count
-            let max = grammarPoints.count
-
-            var progress: Float = 0.0
-
-            if max > 0, max >= complete {
-                progress = Float(complete) / Float(max)
-            }
-
-            return (complete, max, progress)
-        } catch {
-            return (0, 0, 0.0)
-        }
-    }
-
-    private func signupForTrial() {
-        AppDelegate.signupForTrial()
-    }
-
-    private func signup() {
-        AppDelegate.signup()
     }
 
     private func setup(account: Account?) {
@@ -393,18 +304,18 @@ extension StatusTableViewController: SegueHandler {
     }
 }
 
-extension StatusTableViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if controller == userFetchedResultsController, let account = userFetchedResultsController?.fetchedObjects?.first {
-            setup(account: account)
-        } else if controller == reviewsFetchedResultsController {
-            setup(reviews: reviewsFetchedResultsController?.fetchedObjects)
-        }
-    }
-}
-
 extension StatusTableViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
+    func fetchedResultsAccountDidChange(account: Account?) {
+        setup(account: account)
+    }
+
+    func fetchedResultsReviewsDidChange(reviews: [Review]?) {
+        setup(reviews: reviews)
     }
 }

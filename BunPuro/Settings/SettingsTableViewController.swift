@@ -23,7 +23,7 @@ final class SettingsTableViewController: UITableViewController {
         case bunny
     }
 
-    private enum Info: Int {
+    fileprivate enum Info: Int {
         case subscription
         case empty
         case community
@@ -48,13 +48,15 @@ final class SettingsTableViewController: UITableViewController {
         }
     }
 
+    private var saveObserver: NotificationToken?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.backgroundColor = Asset.background.color
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: nil, queue: OperationQueue.main) { _ in
-            self.updateUI()
+        saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
+            self?.updateUI()
         }
 
         updateUI()
@@ -93,54 +95,20 @@ final class SettingsTableViewController: UITableViewController {
             }
 
         case .subscription:
-
-            switch Info(rawValue: indexPath.row)! {
-            case .community:
-                guard let url = URL(string: "https://community.bunpro.jp/") else { return }
-                present(customSafariViewController(url: url), animated: true)
-
-            case .about:
-                guard let url = URL(string: "https://bunpro.jp/about") else { return }
-                present(customSafariViewController(url: url), animated: true)
-
-            case .contact:
-                guard let url = URL(string: "https://bunpro.jp/contact") else { return }
-                present(customSafariViewController(url: url), animated: true)
-
-            case .privacy:
-                guard let url = URL(string: "https://bunpro.jp/privacy") else { return }
-                present(customSafariViewController(url: url), animated: true)
-
-            case .terms:
-                guard let url = URL(string: "https://bunpro.jp/terms") else { return }
-                present(customSafariViewController(url: url), animated: true)
-
-            case .subscription, .empty:
-                break
-
+            let info = Info(rawValue: indexPath.row)!
+            switch info {
             case .debug:
                 didSelectDebugSubscriptionCell()
+
+            default:
+                guard let url = info.url else { return }
+                present(customSafariViewController(url: url), animated: true)
             }
 
         case .logout:
             switch indexPath.row {
             case 0:
-                let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-                let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { _ in
-                    Server.logout()
-                    self.tabBarController?.selectedIndex = 0
-                }
-
-                let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
-
-                controller.addAction(logoutAction)
-                controller.addAction(cancelAction)
-
-                controller.popoverPresentationController?.sourceView = cell
-                controller.popoverPresentationController?.sourceRect = cell.bounds
-
-                present(controller, animated: true, completion: nil)
+                didSelectLogoutCell(cell)
 
             default:
                 break
@@ -258,6 +226,25 @@ final class SettingsTableViewController: UITableViewController {
         present(emailViewCtrl, animated: true, completion: nil)
     }
 
+    private func didSelectLogoutCell(_ cell: UITableViewCell) {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { _ in
+            Server.logout()
+            self.tabBarController?.selectedIndex = 0
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
+
+        controller.addAction(logoutAction)
+        controller.addAction(cancelAction)
+
+        controller.popoverPresentationController?.sourceView = cell
+        controller.popoverPresentationController?.sourceRect = cell.bounds
+
+        present(controller, animated: true, completion: nil)
+    }
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch Section(rawValue: indexPath.section)! {
         case .subscription:
@@ -372,6 +359,30 @@ extension FuriganaMode {
 
         case .wanikani:
             return L10n.Furigana.wanikani
+        }
+    }
+}
+
+extension SettingsTableViewController.Info {
+    var url: URL? {
+        switch self {
+        case .community:
+            return URL(string: "https://community.bunpro.jp/")
+
+        case .about:
+            return URL(string: "https://bunpro.jp/about")
+
+        case .contact:
+            return URL(string: "https://bunpro.jp/contact")
+
+        case .privacy:
+            return URL(string: "https://bunpro.jp/privacy")
+
+        case .terms:
+            return URL(string: "https://bunpro.jp/terms")
+
+        case .subscription, .empty, .debug:
+            return nil
         }
     }
 }

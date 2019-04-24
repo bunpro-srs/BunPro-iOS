@@ -275,7 +275,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         switch segueIdentifier(for: segue) {
         case .showGrammar:
 
-            guard let cell = sender as? UITableViewCell else { fatalError() }
+            guard let cell = sender as? UITableViewCell else { fatalError("expected showGrammer segue to be of type `UITableViewCell`") }
             guard let indexPath = tableView.indexPath(for: cell) else {
                 fatalError("IndexPath must be provided")
             }

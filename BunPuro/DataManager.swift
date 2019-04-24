@@ -16,8 +16,8 @@ final class DataManager {
     let presentingViewController: UIViewController
     private let persistentContainer: NSPersistentContainer
 
-    private var loginObserver: NSObjectProtocol?
-    private var logoutObserver: NSObjectProtocol?
+    private var loginObserver: NotificationToken?
+    private var logoutObserver: NotificationToken?
 
     deinit {
         if loginObserver != nil {
@@ -33,11 +33,11 @@ final class DataManager {
         self.presentingViewController = presentingViewController
         self.persistentContainer = persistentContainer
 
-        loginObserver = NotificationCenter.default.addObserver(forName: .ServerDidLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
+        loginObserver = NotificationCenter.default.observe(name: .ServerDidLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             self?.updateGrammarDatabase()
         }
 
-        logoutObserver = NotificationCenter.default.addObserver(forName: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
+        logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.procedureQueue.addOperation(ResetReviewsProcedure())
                 self?.scheduleUpdateProcedure()

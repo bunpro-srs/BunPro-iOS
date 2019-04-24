@@ -11,7 +11,7 @@ import ProcedureKitNetwork
 public typealias Token = String
 private let loginUrlString = "\(baseUrlString)login/"
 
-final class LoginProcedure: GroupProcedure, OutputProcedure {
+class LoginProcedure: GroupProcedure, OutputProcedure {
     var output: Pending<ProcedureResult<TokenResponse>> = .pending
 
     let completion: (Token?, Error?) -> Void
