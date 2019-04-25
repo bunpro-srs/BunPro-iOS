@@ -1,5 +1,24 @@
 # BunPuro
 
+<p align="left">
+    <a href="https://app.bitrise.io/app/2da63a9eebe19b36">
+        <img src="https://app.bitrise.io/app/2da63a9eebe19b36/status.svg?token=29S9gTvVcEPD6koiY297SA&branch=development"
+             alt="Build Status">
+    </a>
+    <a href="https://github.com/Flinesoft/Prayer/releases">
+        <img src="https://img.shields.io/badge/Version-1.0.0--beta.16-blue.svg"
+             alt="Version: 1.0.0-beta.16">
+    </a>
+    <img src="https://img.shields.io/badge/Swift-5.0-FFAC45.svg"
+         alt="Swift: 5.0">
+    <img src="https://img.shields.io/badge/Platforms-iOS-FF69B4.svg"
+        alt="Platforms: iOS">
+    <a href="https://github.com/bunpro-srs/BunPro-iOS/blob/development/LICENSE">
+        <img src="https://img.shields.io/badge/License-MIT-lightgrey.svg"
+             alt="License: MIT">
+    </a>
+</p>
+
 This is the iOS companion app for the [BunPro](https://www.bunpro.jp) Japanese grammar learning service.
 
 This app is currently being beta tested via TestFlight. If you would like to try it, you can access it here:
