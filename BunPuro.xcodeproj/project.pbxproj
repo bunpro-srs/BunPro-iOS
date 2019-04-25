@@ -14,7 +14,6 @@
 		2E01D2061FB251ED00E8632D /* GrammarPointsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2051FB251ED00E8632D /* GrammarPointsProcedure.swift */; };
 		2E01D2081FB2524500E8632D /* StatusProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2071FB2524500E8632D /* StatusProcedure.swift */; };
 		2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D2111FB2686600E8632D /* SearchTableViewController.swift */; };
-		2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2EEE02BF2006A95C005D33FD /* InitialDatabase.json */; };
 		2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */; };
 		2E0EB074217E5300005E8B78 /* NSUserActivity+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */; };
 		2E0F9BB71FCC877600738129 /* BunPuroProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F9BB61FCC877600738129 /* BunPuroProcedure.swift */; };
@@ -260,7 +259,6 @@
 		2EE4E78E1FA283650020E828 /* BPKAccountProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPKAccountProgress.swift; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
-		2EEE02BF2006A95C005D33FD /* InitialDatabase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialDatabase.json; sourceTree = "<group>"; };
 		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
 		A1225EE2226D7B1700EA2885 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Dependencies/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
@@ -546,7 +544,6 @@
 				2E3EE11A1FE925C30027C924 /* Main.storyboard */,
 				2E7B3693207D301A00542BB8 /* Assets.xcassets */,
 				2EAD9E0B1FA26EB400CE52CF /* Info.plist */,
-				2EEE02BF2006A95C005D33FD /* InitialDatabase.json */,
 			);
 			path = BunPuroKit;
 			sourceTree = "<group>";
@@ -851,7 +848,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E02F8A92006AA1D0068D8BF /* InitialDatabase.json in Resources */,
 				2E3074951FACF9650078725B /* InfoPlist.strings in Resources */,
 				2E7B3694207D301A00542BB8 /* Assets.xcassets in Resources */,
 				2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */,
