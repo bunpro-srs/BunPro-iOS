@@ -104,7 +104,7 @@ final class StatusTableViewController: UITableViewController {
             }
 
         default:
-            return 4 // jlptFetchedResultsController?.fetchedObjects?.count ?? 0
+            return 5
         }
     }
 
