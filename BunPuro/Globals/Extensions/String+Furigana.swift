@@ -6,6 +6,12 @@
 import CoreText
 import Foundation
 
+struct Furigana {
+    let text: String
+    let original: String
+    let range: NSRange
+}
+
 extension String {
     /// 「漢字」かどうか
     var isKanji: Bool {
