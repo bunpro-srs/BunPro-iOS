@@ -36,6 +36,7 @@ public enum Visible: String, Codable {
     case show = "Show"
     case hide = "Hide"
     case minimal = "Minimal"
+    case hint = "Hint"
 
     public init(from decoder: Decoder) throws {
         guard let value = try? decoder.singleValueContainer().decode(String.self) else {
