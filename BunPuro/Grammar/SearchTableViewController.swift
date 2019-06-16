@@ -71,6 +71,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
 
         let titlePredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.title), searchText)
         let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
+        let yomikataPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.yomikata), searchText)
 
         switch searchController.searchBar.selectedScopeButtonIndex {
         case 1:
@@ -81,7 +82,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
             return NSCompoundPredicate(
                 andPredicateWithSubpredicates: [
                     identifierPredicate,
-                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
                 ]
             )
 
@@ -93,12 +94,12 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
             return NSCompoundPredicate(
                 andPredicateWithSubpredicates: [
                     identifierPredicate,
-                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
                 ]
             )
 
         default:
-            return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate])
+            return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
         }
     }
 
