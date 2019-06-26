@@ -21,7 +21,7 @@ final class StructureInfoCell: UITableViewCell {
 
             let linkAttributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor.white,
-                NSAttributedString.Key.underlineColor: UIColor.clear
+                .underlineColor: UIColor.clear
             ]
 
             descriptionLabel?.attributedText = NSAttributedString(string: string, attributes: linkAttributes)

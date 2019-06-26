@@ -135,8 +135,10 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
     }
 
     func loginViewControllerDidLogin(_ controller: LoginViewController) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
-        completion?(.success(true))
+        DispatchQueue.main.async {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.completion?(.success(true))
+        }
     }
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,6 +37,10 @@
 		2E3EE1191FE91FA40027C924 /* WebsiteViewControllerProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */; };
 		2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EE11A1FE925C30027C924 /* Main.storyboard */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
+		2E4520AE22BD915F00094530 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520AD22BD915F00094530 /* KeychainAccess */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2E4520B222BD917600094530 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520B122BD917600094530 /* SwiftyBeaver */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2E4520B522BD948900094530 /* SettingsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4520B322BD942C00094530 /* SettingsForm.swift */; };
+		2E4520BA22BD95AB00094530 /* ProcedureKitNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520B922BD95AB00094530 /* ProcedureKitNetwork */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
 		2E59791520C6EAAD0007E9BE /* UIViewController+ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74031FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift */; };
@@ -93,7 +97,6 @@
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
 		A1225EDF226D76E600EA2885 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
 		A1225EE0226D76E600EA2885 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
-		A1225EE3226D7B1700EA2885 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1225EE2226D7B1700EA2885 /* SwiftyBeaver.framework */; };
 		A1225EE5226D7B6D00EA2885 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE4226D7B6D00EA2885 /* Logger.swift */; };
 		A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */; };
 		A1225EE9226D7DA300EA2885 /* Collection+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE8226D7DA300EA2885 /* Collection+Review.swift */; };
@@ -106,14 +109,7 @@
 		A1D6C14E226B56A200D25DF1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14B226B56A200D25DF1 /* Strings.swift */; };
 		A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14C226B56A200D25DF1 /* Assets.swift */; };
 		A1D6C150226B56A200D25DF1 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C14D226B56A200D25DF1 /* Storyboards.swift */; };
-		A1D6C19F226BAF0100D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C192226BAE1C00D25DF1 /* KeychainAccess.framework */; };
-		A1D6C1A0226BAF0100D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C191226BAE1C00D25DF1 /* ProcedureKit.framework */; };
-		A1D6C1A1226BAF0100D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19D226BAEA600D25DF1 /* ProcedureKitNetwork.framework */; };
-		A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C196226BAE2300D25DF1 /* KeychainAccess.framework */; };
-		A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C195226BAE2300D25DF1 /* ProcedureKit.framework */; };
-		A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D6C19B226BAE9D00D25DF1 /* ProcedureKitNetwork.framework */; };
 		A1D6C1AA226BC15900D25DF1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D6C1A9226BC15900D25DF1 /* Logger.swift */; };
-		E779385D921D78B15C38070DA983D597 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAE9077CCB06FE9FD048608466B5C6E /* SwiftyBeaver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +198,7 @@
 		2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewControllerProcedure.swift; sourceTree = "<group>"; };
 		2E3EE11A1FE925C30027C924 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
+		2E4520B322BD942C00094530 /* SettingsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsForm.swift; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
 		2E48ABB420C1A19400BA660B /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
@@ -288,11 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D6C1A4226BAF0300D25DF1 /* ProcedureKitNetwork.framework in Frameworks */,
-				A1D6C1A3226BAF0300D25DF1 /* ProcedureKit.framework in Frameworks */,
-				A1D6C1A2226BAF0300D25DF1 /* KeychainAccess.framework in Frameworks */,
 				2EAD9E1D1FA26EB400CE52CF /* BunPuroKit.framework in Frameworks */,
-				E779385D921D78B15C38070DA983D597 /* SwiftyBeaver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,10 +307,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D6C1A1226BAF0100D25DF1 /* ProcedureKitNetwork.framework in Frameworks */,
-				A1225EE3226D7B1700EA2885 /* SwiftyBeaver.framework in Frameworks */,
-				A1D6C19F226BAF0100D25DF1 /* KeychainAccess.framework in Frameworks */,
-				A1D6C1A0226BAF0100D25DF1 /* ProcedureKit.framework in Frameworks */,
+				2E4520AE22BD915F00094530 /* KeychainAccess in Frameworks */,
+				2E4520B222BD917600094530 /* SwiftyBeaver in Frameworks */,
+				2E4520BA22BD95AB00094530 /* ProcedureKitNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +341,13 @@
 				2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */,
 			);
 			path = Procedures;
+			sourceTree = "<group>";
+		};
+		2E13066022BD8C1F00AA0C0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2E27E5881FBB55EF002D906F /* Extensions */ = {
@@ -456,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */,
+				2E4520B322BD942C00094530 /* SettingsForm.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -470,6 +470,7 @@
 				2EAD9E161FA26EB400CE52CF /* BunPuroKitTests */,
 				2EAD9DD11FA25DF100CE52CF /* Products */,
 				CA7A6F00305E401DE9FA57363D7A18D6 /* Dependencies */,
+				2E13066022BD8C1F00AA0C0D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -657,7 +658,6 @@
 				2EAD9DCE1FA25DF100CE52CF /* Resources */,
 				2EAD9E221FA26EB400CE52CF /* Embed Frameworks */,
 				A1225EDA226CD6FC00EA2885 /* SwiftLint */,
-				82FF38ADFC96BC27A5949432C6350443 /* Accio */,
 			);
 			buildRules = (
 			);
@@ -665,6 +665,8 @@
 				2EAD9E1C1FA26EB400CE52CF /* PBXTargetDependency */,
 			);
 			name = BunPuro;
+			packageProductDependencies = (
+			);
 			productName = BunPuro;
 			productReference = 2EAD9DD01FA25DF100CE52CF /* BunPuro.app */;
 			productType = "com.apple.product-type.application";
@@ -713,13 +715,17 @@
 				2EAD9E041FA26EB400CE52CF /* Frameworks */,
 				2EAD9E051FA26EB400CE52CF /* Headers */,
 				2EAD9E061FA26EB400CE52CF /* Resources */,
-				67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BunPuroKit;
+			packageProductDependencies = (
+				2E4520AD22BD915F00094530 /* KeychainAccess */,
+				2E4520B122BD917600094530 /* SwiftyBeaver */,
+				2E4520B922BD95AB00094530 /* ProcedureKitNetwork */,
+			);
 			productName = BunPuroKit;
 			productReference = 2EAD9E081FA26EB400CE52CF /* BunPuroKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -800,6 +806,11 @@
 				Base,
 			);
 			mainGroup = 2EAD9DC71FA25DF100CE52CF;
+			packageReferences = (
+				2E13065522BD8B2B00AA0C0D /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				2E13065D22BD8BE200AA0C0D /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				2E4520B622BD959A00094530 /* XCRemoteSwiftPackageReference "ProcedureKit" */,
+			);
 			productRefGroup = 2EAD9DD11FA25DF100CE52CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -864,50 +875,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
-				"$(SRCROOT)/Dependencies/iOS/SwiftyBeaver.framework",
-			);
-			name = Accio;
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		82FF38ADFC96BC27A5949432C6350443 /* Accio */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
-				"$(SRCROOT)/Dependencies/iOS/SwiftyBeaver.framework",
-			);
-			name = Accio;
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		A1225ED9226CD6F600EA2885 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -977,6 +944,7 @@
 				2EBA740C1FAA7A3100DE2A08 /* SegueHandler.swift in Sources */,
 				2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */,
 				2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */,
+				2E4520B522BD948900094530 /* SettingsForm.swift in Sources */,
 				A1D6C148226B568700D25DF1 /* BartyCrouch.swift in Sources */,
 				A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */,
 				A146F32022703907002DC511 /* StatusFetchedResultsController.swift in Sources */,
@@ -1265,7 +1233,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1284,7 +1253,10 @@
 					"$(PROJECT_DIR)/Dependencies/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1307,7 +1279,10 @@
 					"$(PROJECT_DIR)/Dependencies/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1323,7 +1298,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1340,7 +1319,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1356,7 +1339,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1372,7 +1359,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1400,7 +1391,11 @@
 				);
 				INFOPLIST_FILE = BunPuroKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1431,7 +1426,11 @@
 				);
 				INFOPLIST_FILE = BunPuroKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1449,7 +1448,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1465,7 +1468,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25D37P63S9;
 				INFOPLIST_FILE = BunPuroKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.andreas.braun.BunPuroKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1532,6 +1539,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2E13065522BD8B2B00AA0C0D /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+		2E13065D22BD8BE200AA0C0D /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
+		2E4520B622BD959A00094530 /* XCRemoteSwiftPackageReference "ProcedureKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ProcedureKit/ProcedureKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2E4520AD22BD915F00094530 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E13065522BD8B2B00AA0C0D /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		2E4520B122BD917600094530 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E13065D22BD8BE200AA0C0D /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		2E4520B922BD95AB00094530 /* ProcedureKitNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E4520B622BD959A00094530 /* XCRemoteSwiftPackageReference "ProcedureKit" */;
+			productName = ProcedureKitNetwork;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */ = {
