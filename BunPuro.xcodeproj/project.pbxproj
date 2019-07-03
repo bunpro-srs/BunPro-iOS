@@ -713,7 +713,6 @@
 				2EAD9E041FA26EB400CE52CF /* Frameworks */,
 				2EAD9E051FA26EB400CE52CF /* Headers */,
 				2EAD9E061FA26EB400CE52CF /* Resources */,
-				67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */,
 			);
 			buildRules = (
 			);
@@ -864,28 +863,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		67378E26CEA842E2C52CEA9B9D1C2E43 /* Accio */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Dependencies/iOS/KeychainAccess.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKit.framework",
-				"$(SRCROOT)/Dependencies/iOS/ProcedureKitNetwork.framework",
-				"$(SRCROOT)/Dependencies/iOS/SwiftyBeaver.framework",
-			);
-			name = Accio;
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ProcedureKitNetwork.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		82FF38ADFC96BC27A5949432C6350443 /* Accio */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
