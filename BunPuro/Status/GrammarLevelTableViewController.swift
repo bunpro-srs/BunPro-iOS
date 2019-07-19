@@ -27,8 +27,6 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = Asset.background.color
-
         activityIndicatorView = UIActivityIndicatorView(style: .white)
         activityIndicatorView?.hidesWhenStopped = true
 

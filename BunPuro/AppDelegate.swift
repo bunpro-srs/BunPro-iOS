@@ -24,21 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         Logger.shared.setup()
 
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = Asset.navigationBarHeader.color
-
-        UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().barTintColor = Asset.navigationBarHeader.color
-
-        CorneredView.appearance().backgroundColor = Asset.tiles.color
-        UITableViewCell.appearance().clipsToBounds = true
-        UITableViewCell.appearance().contentView.clipsToBounds = true
-
-        UIProgressView.appearance().trackTintColor = Asset.background.color
-        UIProgressView.appearance().progressTintColor = Asset.tilesSymbol.color
-
-        window?.tintColor = Asset.mainTint.color
-
         return true
     }
 

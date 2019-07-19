@@ -40,13 +40,20 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = Asset.background.color
 
         assert(grammar != nil)
         updateEditBarButtonState()
 
         beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { _ in
-            let activityIndicator = UIActivityIndicatorView(style: .white)
+
+            let activityIndicator: UIActivityIndicatorView
+
+            if #available(iOS 13.0, *) {
+                activityIndicator = UIActivityIndicatorView(style: .medium)
+            } else {
+                activityIndicator = UIActivityIndicatorView(style: .gray)
+            }
+
             activityIndicator.startAnimating()
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         }
@@ -59,11 +66,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
                     let complete = self?.grammar?.review?.complete ?? false
 
                     let streakUpdateClosure: (UITableView.RowAnimation) -> Void = { rowAnimation in
-                        let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
-
-                        self?.tableView.beginUpdates()
-                        self?.tableView.insertRows(at: [indexPath], with: rowAnimation)
-                        self?.tableView.endUpdates()
+                        self?.tableView.reloadData()
                     }
 
                     switch (numberOfRows, complete) {
@@ -243,9 +246,9 @@ extension GrammarTableViewController {
             let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
             !caution.isEmpty
         {
-            cell.cautionLabel.attributedText = attributed
+            cell.cautionLabel.text = attributed.string
         } else {
-            cell.cautionLabel.attributedText = nil
+            cell.cautionLabel.text = nil
             cell.cautionLabel.isHidden = true
         }
 
@@ -257,7 +260,11 @@ extension GrammarTableViewController {
         let cell = tableView.dequeueReusableCell(for: indexPath) as StructureInfoCell
         let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-        cell.attributedDescription = grammar?.structure?.replacingOccurrences(of: ", ", with: "</br>").htmlAttributedString(font: englishFont, color: .white)
+        cell.attributedDescription = grammar?
+            .structure?
+            .replacingOccurrences(of: ", ", with: "</br>")
+            .htmlAttributedString(font: englishFont, color: .white)?
+            .string
         cell.separatorInset = UIEdgeInsets(top: 0, left: 100_000, bottom: 0, right: 0)
 
         return cell
@@ -281,8 +288,16 @@ extension GrammarTableViewController {
             let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
             let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-            cell.attributedName = sentence.japanese?.cleanStringAndFurigana.string.htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)
-            cell.attributedDescriptionText = sentence.english?.htmlAttributedString(font: englishFont, color: .white)
+            cell.attributedName = sentence
+                .japanese?
+                .cleanStringAndFurigana
+                .string
+                .htmlAttributedString(font: japaneseFont, color: Asset.mainTint.color)?
+                .string
+            cell.attributedDescriptionText = sentence
+                .english?
+                .htmlAttributedString(font: englishFont, color: .white)?
+                .string
             cell.actionImage = sentence.audioURL != nil ? #imageLiteral(resourceName: "play") : nil
 
             cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: correctIndexPath) }
@@ -301,8 +316,14 @@ extension GrammarTableViewController {
             let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
             let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
 
-            cell.attributedName = link.site?.htmlAttributedString(font: font1, color: Asset.mainTint.color)
-            cell.attributedDescriptionText = link.about?.htmlAttributedString(font: font2, color: .white)
+            cell.attributedName = link
+                .site?
+                .htmlAttributedString(font: font1, color: Asset.mainTint.color)?
+                .string
+            cell.attributedDescriptionText = link
+                .about?
+                .htmlAttributedString(font: font2, color: .white)?
+                .string
             cell.isDescriptionLabelHidden = false
             cell.customAction = nil
             cell.actionImage = nil

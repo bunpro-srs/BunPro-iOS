@@ -27,8 +27,6 @@ final class StatusTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = Asset.background.color
-
         logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.setup(account: nil)

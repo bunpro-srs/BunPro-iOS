@@ -13,7 +13,11 @@ final class StreakInfoCell: UITableViewCell {
 
     override func layoutSubviews() {
         for (index, hanko) in hankoCollection.enumerated() {
-            hanko.tintColor = .lightGray
+            if #available(iOS 13.0, *) {
+                hanko.tintColor = .secondaryLabel
+            } else {
+                hanko.tintColor = .darkGray
+            }
             hanko.alpha = (index + 1) <= streak ? 1.0 : 0.1
         }
 

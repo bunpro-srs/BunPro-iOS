@@ -35,12 +35,12 @@ final class DetailCell: UITableViewCell {
         }
     }
 
-    var attributedName: NSAttributedString? {
+    var attributedName: String? {
         get {
-            return nameLabel?.attributedText
+            return nameLabel?.text
         }
         set {
-            nameLabel?.attributedText = newValue
+            nameLabel?.text = newValue
         }
     }
 
@@ -62,12 +62,12 @@ final class DetailCell: UITableViewCell {
         }
     }
 
-    var attributedDescriptionText: NSAttributedString? {
+    var attributedDescriptionText: String? {
         get {
-            return descriptionLabel?.attributedText
+            return descriptionLabel?.text
         }
         set {
-            descriptionLabel?.attributedText = newValue
+            descriptionLabel?.text = newValue
         }
     }
 

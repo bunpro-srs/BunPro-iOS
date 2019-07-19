@@ -12,26 +12,17 @@ final class StructureInfoCell: UITableViewCell {
         }
     }
 
-    var attributedDescription: NSAttributedString? {
+    var attributedDescription: String? {
         get {
-            return descriptionLabel?.attributedText
+            return descriptionLabel?.text
         }
         set {
-            guard let string = newValue?.string else { return }
-
-            let linkAttributes: [NSAttributedString.Key: Any] = [
-                .foregroundColor: UIColor.white,
-                .underlineColor: UIColor.clear
-            ]
-
-            descriptionLabel?.attributedText = NSAttributedString(string: string, attributes: linkAttributes)
+            descriptionLabel.text = newValue
         }
     }
 
     @IBOutlet private weak var structureContentView: UIView! {
         didSet {
-            structureContentView.layer.borderColor = Asset.background.color.cgColor
-            structureContentView.layer.borderWidth = 0.5
             structureContentView.layer.cornerRadius = 9.0
         }
     }

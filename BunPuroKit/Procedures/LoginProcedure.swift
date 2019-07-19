@@ -124,7 +124,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
                     let controller = storyboard.instantiateViewController() as LoginViewController
                     controller.delegate = self
 
-                    controller.modalPresentationStyle = .formSheet
+                    controller.modalPresentationStyle = .fullScreen
 
                     presentingViewCtrl.present(controller, animated: true, completion: nil)
                 }

@@ -2,14 +2,17 @@
 /* Class = "UILabel"; text = "Within 24 Hours"; ObjectID = "4e1-68-2Hr"; */
 "4e1-68-2Hr.text" = "Within 24 Hours";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "4Ua-fi-pdL"; */
-"4Ua-fi-pdL.text" = "Label";
+/* Class = "UILabel"; text = "Detail"; ObjectID = "4QO-x5-t9O"; */
+"4QO-x5-t9O.text" = "Detail";
 
 /* Class = "UILabel"; text = "Within 1 Hour"; ObjectID = "5fe-Qh-MP6"; */
 "5fe-Qh-MP6.text" = "Within 1 Hour";
 
-/* Class = "UILabel"; text = "Subscription"; ObjectID = "8dM-LI-WRE"; */
-"8dM-LI-WRE.text" = "Subscription";
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "6kJ-zb-6Q2"; */
+"6kJ-zb-6Q2.text" = "Terms and Conditions";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "7aR-RJ-rh9"; */
+"7aR-RJ-rh9.text" = "Detail";
 
 /* Class = "UIBarButtonItem"; title = "Edit Review"; ObjectID = "aC3-DB-CTC"; */
 "aC3-DB-CTC.title" = "Edit Review";
@@ -20,32 +23,29 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ch9-PZ-Wxg"; */
 "ch9-PZ-Wxg.title" = "Settings";
 
-/* Class = "UILabel"; text = "Log current reviews (Debug)"; ObjectID = "Cqb-p6-CBx"; */
-"Cqb-p6-CBx.text" = "Log current reviews (Debug)";
+/* Class = "UILabel"; text = "Bunny Mode"; ObjectID = "dd3-Iq-afw"; */
+"dd3-Iq-afw.text" = "Bunny Mode";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "DrH-vm-sEZ"; */
-"DrH-vm-sEZ.text" = "Label";
-
-/* Class = "UILabel"; text = "Hide English"; ObjectID = "DYU-WS-Y9g"; */
-"DYU-WS-Y9g.text" = "Hide English";
+/* Class = "UILabel"; text = "Logout"; ObjectID = "eD4-ov-7JC"; */
+"eD4-ov-7JC.text" = "Logout";
 
 /* Class = "UILabel"; text = "ないほうがいい"; ObjectID = "EFr-Xh-odS"; */
 "EFr-Xh-odS.text" = "ないほうがいい";
 
-/* Class = "UILabel"; text = "Community"; ObjectID = "eZU-Q0-dPE"; */
-"eZU-Q0-dPE.text" = "Community";
-
 /* Class = "UILabel"; text = "Next Review"; ObjectID = "f8W-DR-a0O"; */
 "f8W-DR-a0O.text" = "Next Review";
 
-/* Class = "UILabel"; text = "About"; ObjectID = "gCe-49-W5h"; */
-"gCe-49-W5h.text" = "About";
+/* Class = "UILabel"; text = "About"; ObjectID = "Fme-u3-ggX"; */
+"Fme-u3-ggX.text" = "About";
 
 /* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[0] = "Examples"; ObjectID = "gKx-1c-Qvc"; */
 "gKx-1c-Qvc.segmentTitles[0]" = "Examples";
 
 /* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[1] = "Readings"; ObjectID = "gKx-1c-Qvc"; */
 "gKx-1c-Qvc.segmentTitles[1]" = "Readings";
+
+/* Class = "UILabel"; text = "Furigana"; ObjectID = "I0J-82-EM1"; */
+"I0J-82-EM1.text" = "Furigana";
 
 /* Class = "UINavigationItem"; title = "N5"; ObjectID = "idR-FT-oYU"; */
 "idR-FT-oYU.title" = "N5";
@@ -56,23 +56,29 @@
 /* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
 "J16-bo-Kj0.title" = "Loading...";
 
-/* Class = "UILabel"; text = "Furigana"; ObjectID = "jXa-VO-q52"; */
-"jXa-VO-q52.text" = "Furigana";
-
 /* Class = "UILabel"; text = "N5"; ObjectID = "KfR-Gn-5Wi"; */
 "KfR-Gn-5Wi.text" = "N5";
-
-/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "KsY-hy-cih"; */
-"KsY-hy-cih.text" = "Terms and Conditions";
 
 /* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "kYw-Pb-uem"; */
 "kYw-Pb-uem.headerTitle" = " ";
 
+/* Class = "UILabel"; text = "Privacy"; ObjectID = "L2n-Xt-p85"; */
+"L2n-Xt-p85.text" = "Privacy";
+
+/* Class = "UILabel"; text = "Log current reviews (Debug)"; ObjectID = "ljw-bB-8tB"; */
+"ljw-bB-8tB.text" = "Log current reviews (Debug)";
+
 /* Class = "UILabel"; text = "N5"; ObjectID = "mJz-v9-AV7"; */
 "mJz-v9-AV7.text" = "N5";
 
+/* Class = "UILabel"; text = "Contact"; ObjectID = "mPe-GA-wZA"; */
+"mPe-GA-wZA.text" = "Contact";
+
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "N0z-Mm-dwv"; */
 "N0z-Mm-dwv.title" = "Settings";
+
+/* Class = "UILabel"; text = "Community"; ObjectID = "nDo-ag-hir"; */
+"nDo-ag-hir.text" = "Community";
 
 /* Class = "UILabel"; text = "Structure"; ObjectID = "o7e-rE-rKz"; */
 "o7e-rE-rKz.text" = "Structure";
@@ -83,20 +89,26 @@
 /* Class = "UILabel"; text = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>"; ObjectID = "oWh-GS-4Cz"; */
 "oWh-GS-4Cz.text" = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>";
 
+/* Class = "UILabel"; text = "Detail"; ObjectID = "pEt-ao-5Kl"; */
+"pEt-ao-5Kl.text" = "Detail";
+
+/* Class = "UILabel"; text = "Hide English"; ObjectID = "qKn-gq-pDN"; */
+"qKn-gq-pDN.text" = "Hide English";
+
 /* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
 "Rej-2W-djk.text" = " ";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "Rsb-ER-M8G"; */
-"Rsb-ER-M8G.text" = "Label";
+/* Class = "UILabel"; text = "Subscription"; ObjectID = "sDZ-I2-InT"; */
+"sDZ-I2-InT.text" = "Subscription";
 
 /* Class = "UILabel"; text = "Sign up for Trial"; ObjectID = "sUd-7z-kjF"; */
 "sUd-7z-kjF.text" = "Sign up for Trial";
 
-/* Class = "UILabel"; text = "Logout"; ObjectID = "sUx-Ui-3nP"; */
-"sUx-Ui-3nP.text" = "Logout";
-
 /* Class = "UILabel"; text = "N5"; ObjectID = "TxH-U7-oqL"; */
 "TxH-U7-oqL.text" = "N5";
+
+/* Class = "UILabel"; text = "to be/is, (casual non-past tense)"; ObjectID = "UVI-fC-5ib"; */
+"UVI-fC-5ib.text" = "to be/is, (casual non-past tense)";
 
 /* Class = "UILabel"; text = " "; ObjectID = "uXq-L9-iw8"; */
 "uXq-L9-iw8.text" = " ";
@@ -104,20 +116,8 @@
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "V6t-CC-Vo7"; */
-"V6t-CC-Vo7.text" = "Label";
-
-/* Class = "UILabel"; text = "Privacy"; ObjectID = "vCz-ZD-8kI"; */
-"vCz-ZD-8kI.text" = "Privacy";
-
-/* Class = "UILabel"; text = "Contact"; ObjectID = "yT9-ct-JHx"; */
-"yT9-ct-JHx.text" = "Contact";
+/* Class = "UILabel"; text = "Detail"; ObjectID = "WEp-Yb-tKd"; */
+"WEp-Yb-tKd.text" = "Detail";
 
 /* Class = "UITableViewSection"; footerTitle = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct."; ObjectID = "ZHM-bl-R9P"; */
 "ZHM-bl-R9P.footerTitle" = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct.";
-
-/* Class = "UILabel"; text = "Bunny Mode"; ObjectID = "zPG-hb-egu"; */
-"zPG-hb-egu.text" = "Bunny Mode";
-
-/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "Zuh-Sr-MkV"; */
-"Zuh-Sr-MkV.headerTitle" = " ";

@@ -37,10 +37,10 @@
 		2E3EE1191FE91FA40027C924 /* WebsiteViewControllerProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE1181FE91FA40027C924 /* WebsiteViewControllerProcedure.swift */; };
 		2E3EE11B1FE925C30027C924 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EE11A1FE925C30027C924 /* Main.storyboard */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
-		2E4520AE22BD915F00094530 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520AD22BD915F00094530 /* KeychainAccess */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2E4520B222BD917600094530 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520B122BD917600094530 /* SwiftyBeaver */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2E4520AE22BD915F00094530 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 2E4520AD22BD915F00094530 /* KeychainAccess */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2E4520B222BD917600094530 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 2E4520B122BD917600094530 /* SwiftyBeaver */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2E4520B522BD948900094530 /* SettingsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4520B322BD942C00094530 /* SettingsForm.swift */; };
-		2E4520BA22BD95AB00094530 /* ProcedureKitNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4520B922BD95AB00094530 /* ProcedureKitNetwork */; };
+		2E4520BA22BD95AB00094530 /* ProcedureKitNetwork in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 2E4520B922BD95AB00094530 /* ProcedureKitNetwork */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
 		2E59791520C6EAAD0007E9BE /* UIViewController+ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA74031FAA4A5B00DE2A08 /* UIViewController+ContentViewController.swift */; };

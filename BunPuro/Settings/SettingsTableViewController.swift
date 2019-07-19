@@ -14,6 +14,7 @@ final class SettingsTableViewController: UITableViewController {
     private enum Section: Int {
         case settings
         case subscription
+        case information
         case logout
     }
 
@@ -24,8 +25,6 @@ final class SettingsTableViewController: UITableViewController {
     }
 
     fileprivate enum Info: Int {
-        case subscription
-        case empty
         case community
         case about
         case contact
@@ -52,8 +51,6 @@ final class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.backgroundColor = Asset.background.color
 
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
@@ -95,6 +92,9 @@ final class SettingsTableViewController: UITableViewController {
             }
 
         case .subscription:
+            break
+
+        case .information:
             let info = Info(rawValue: indexPath.row)!
             switch info {
             case .debug:
@@ -261,19 +261,13 @@ final class SettingsTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView {
-            view.textLabel?.textColor = .white
-        }
-    }
-
     private func updateUI() {
         guard let account = self.account else {
-            subscriptionDetailLabel.text = L10n.Subscription.unknown
+            subscriptionDetailLabel?.text = L10n.Subscription.unknown
             return
         }
 
-        subscriptionDetailLabel.text = account.subscriber ? L10n.Subscription.subscribed : L10n.Subscription.unsubscribed
+        subscriptionDetailLabel?.text = account.subscriber ? L10n.Subscription.subscribed : L10n.Subscription.unsubscribed
 
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
@@ -381,7 +375,7 @@ extension SettingsTableViewController.Info {
         case .terms:
             return URL(string: "https://bunpro.jp/terms")
 
-        case .subscription, .empty, .debug:
+        case .debug:
             return nil
         }
     }
