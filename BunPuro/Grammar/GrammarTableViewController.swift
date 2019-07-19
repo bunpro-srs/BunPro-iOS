@@ -58,20 +58,12 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
                 if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
                     let complete = self?.grammar?.review?.complete ?? false
 
-                    let streakUpdateClosure: (UITableView.RowAnimation) -> Void = { rowAnimation in
-                        let indexPath = IndexPath(row: Info.streak.rawValue, section: 0)
-
-                        self?.tableView.beginUpdates()
-                        self?.tableView.insertRows(at: [indexPath], with: rowAnimation)
-                        self?.tableView.endUpdates()
-                    }
-
                     switch (numberOfRows, complete) {
                     case (2, true), (3, false):
-                        streakUpdateClosure(.fade)
+                        self?.tableView.reloadData()
 
                     case (3, true):
-                        streakUpdateClosure(.none)
+                        self?.tableView.reloadData()
 
                     default:
                         break
