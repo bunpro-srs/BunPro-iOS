@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": null,
+          "revision": "0046db4ab8fd7be31a59e57912dbb96639ad8ce9",
+          "version": "3.2.0"
+        }
+      },
+      {
+        "package": "SwiftyBeaver",
+        "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
+        "state": {
+          "branch": null,
+          "revision": "ad66cc41c5d8acbd63d9dcdc9d3609f152e08ed1",
+          "version": "1.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

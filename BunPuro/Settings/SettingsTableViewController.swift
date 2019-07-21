@@ -3,7 +3,7 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import MessageUI
 import ProcedureKit
@@ -303,9 +303,6 @@ final class SettingsTableViewController: UITableViewController {
         configuration.entersReaderIfAvailable = true
 
         let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
-
-        safariViewCtrl.preferredBarTintColor = .black
-        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
 
         return safariViewCtrl
     }

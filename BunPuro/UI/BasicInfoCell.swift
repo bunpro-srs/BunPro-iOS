@@ -24,6 +24,45 @@ final class BasicInfoCell: UITableViewCell {
         }
     }
 
+    @IBOutlet private weak var descriptionLabel: UILabel! {
+        didSet {
+            descriptionLabel.numberOfLines = 0
+        }
+    }
+
+    var attributedDescription: String? {
+        get {
+            return descriptionLabel?.text
+        }
+        set {
+            descriptionLabel.text = newValue
+        }
+    }
+
+    @IBOutlet private weak var structureContentView: UIView! {
+        didSet {
+            structureContentView.layer.cornerRadius = 9.0
+        }
+    }
+
+    @IBOutlet weak var contentStackView: UIStackView!
+    @IBOutlet private var hankoCollection: [UIImageView]!
+
+    var streak: Int = 0
+
+    override func layoutSubviews() {
+        for (index, hanko) in hankoCollection.enumerated() {
+            if #available(iOS 13.0, *) {
+                hanko.tintColor = .secondaryLabel
+            } else {
+                hanko.tintColor = .darkGray
+            }
+            hanko.alpha = (index + 1) <= streak ? 1.0 : 0.2
+        }
+
+        super.layoutSubviews()
+    }
+
     override var canBecomeFirstResponder: Bool {
         return true
     }

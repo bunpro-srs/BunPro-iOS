@@ -3,7 +3,7 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import UIKit
 import UserNotifications
@@ -24,12 +24,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         Logger.shared.setup()
 
+        if let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers {
+            for (index, viewController) in viewControllers.enumerated() {
+                if #available(iOS 13.0, *) {
+                    switch index {
+                    case 0:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.status,
+                            image: UIImage(systemName: "pencil.circle"),
+                            selectedImage: UIImage(systemName: "pencil.circle.fill")
+                        )
+
+                    case 1:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.search,
+                            image: UIImage(systemName: "magnifyingglass.circle"),
+                            selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")
+                        )
+
+                    case 2:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.settings,
+                            image: UIImage(systemName: "ellipsis.circle"),
+                            selectedImage: UIImage(systemName: "ellipsis.circle.fill")
+                        )
+
+                    default:
+                        break
+                    }
+                } else {
+                    switch index {
+                    case 0:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.status,
+                            image: Asset.tabDashboardInactive.image,
+                            selectedImage: Asset.tabDashboardActive.image
+                        )
+
+                    case 1:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.search,
+                            image: Asset.tabSearchInactive.image,
+                            selectedImage: Asset.tabSearchActive.image
+                        )
+
+                    case 2:
+                        viewController.tabBarItem = UITabBarItem(
+                            title: L10n.Tabbar.settings,
+                            image: Asset.tabSettingsInactive.image,
+                            selectedImage: Asset.tabSettingsActive.image
+                        )
+
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+
         return true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
-
         Server.reset()
 
         let center = UNUserNotificationCenter.current()

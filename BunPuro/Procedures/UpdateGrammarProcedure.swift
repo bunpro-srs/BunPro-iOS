@@ -3,10 +3,11 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 import ProcedureKit
+import UIKit
 
 final class UpdateGrammarProcedure: GroupProcedure {
     private let lessonProcedure: GrammarPointsProcedure

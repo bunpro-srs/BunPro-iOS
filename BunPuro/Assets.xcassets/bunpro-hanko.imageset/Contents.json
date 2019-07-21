@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "BunproHankoWhitePNG.png"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "BunproHankoWhitePNG-1.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {
@@ -10,6 +20,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "original"
+    "template-rendering-intent" : "original",
+    "preserves-vector-representation" : true
   }
 }

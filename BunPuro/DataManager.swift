@@ -3,7 +3,7 @@
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 import ProcedureKit
@@ -120,9 +120,6 @@ final class DataManager {
     func signup() {
         let url = URL(string: "https://bunpro.jp")!
         let safariViewCtrl = SFSafariViewController(url: url)
-
-        safariViewCtrl.preferredBarTintColor = .black
-        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
 
         presentingViewController.present(safariViewCtrl, animated: true, completion: nil)
     }

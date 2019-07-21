@@ -103,3 +103,9 @@
 "subscription.unknown" = "Unknown";
 
 "subscription.unsubscribed" = "No";
+
+"tabbar.search" = "Search";
+
+"tabbar.settings" = "Settings";
+
+"tabbar.status" = "Status";

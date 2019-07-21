@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-@testable import BunPuro
+@testable import BunPro
 import XCTest
 
 class BunPuroTests: XCTestCase { /* not yet implemented */ }

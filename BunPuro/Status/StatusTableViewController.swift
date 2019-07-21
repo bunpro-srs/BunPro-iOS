@@ -3,9 +3,10 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import ProcedureKit
+import Protocols
 import SafariServices
 import UIKit
 

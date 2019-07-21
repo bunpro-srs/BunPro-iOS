@@ -3,6 +3,7 @@
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
+import Protocols
 import UIKit
 
 final class KanjiTableViewController: UITableViewController {

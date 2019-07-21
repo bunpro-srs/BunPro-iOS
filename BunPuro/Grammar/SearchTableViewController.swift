@@ -3,8 +3,9 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
+import Protocols
 import UIKit
 
 final class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating, UISearchBarDelegate {
@@ -115,7 +116,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
 
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
 
         navigationItem.searchController = searchController

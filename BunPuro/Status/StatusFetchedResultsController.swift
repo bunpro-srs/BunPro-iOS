@@ -3,7 +3,7 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 

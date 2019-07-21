@@ -180,6 +180,15 @@ internal enum L10n {
     /// No
     internal static let unsubscribed = L10n.tr("Localizable", "subscription.unsubscribed")
   }
+
+  internal enum Tabbar {
+    /// Search
+    internal static let search = L10n.tr("Localizable", "tabbar.search")
+    /// Settings
+    internal static let settings = L10n.tr("Localizable", "tabbar.settings")
+    /// Status
+    internal static let status = L10n.tr("Localizable", "tabbar.status")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

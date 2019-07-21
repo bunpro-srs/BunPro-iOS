@@ -38,12 +38,6 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "Fme-u3-ggX"; */
 "Fme-u3-ggX.text" = "About";
 
-/* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[0] = "Examples"; ObjectID = "gKx-1c-Qvc"; */
-"gKx-1c-Qvc.segmentTitles[0]" = "Examples";
-
-/* Class = "UISegmentedControl"; gKx-1c-Qvc.segmentTitles[1] = "Readings"; ObjectID = "gKx-1c-Qvc"; */
-"gKx-1c-Qvc.segmentTitles[1]" = "Readings";
-
 /* Class = "UILabel"; text = "Furigana"; ObjectID = "I0J-82-EM1"; */
 "I0J-82-EM1.text" = "Furigana";
 
@@ -103,6 +97,9 @@
 
 /* Class = "UILabel"; text = "Sign up for Trial"; ObjectID = "sUd-7z-kjF"; */
 "sUd-7z-kjF.text" = "Sign up for Trial";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "tfg-tB-aDM"; */
+"tfg-tB-aDM.text" = "Title";
 
 /* Class = "UILabel"; text = "N5"; ObjectID = "TxH-U7-oqL"; */
 "TxH-U7-oqL.text" = "N5";

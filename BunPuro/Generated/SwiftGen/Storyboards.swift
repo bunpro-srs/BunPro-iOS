@@ -25,6 +25,8 @@ internal enum StoryboardScene {
     internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: Main.self, identifier: "KanjiTableViewController")
 
     internal static let mainTabBarController = SceneType<UIKit.UITabBarController>(storyboard: Main.self, identifier: "MainTabBarController")
+
+    internal static let sentencesTableViewController = SceneType<BunPuro.SentencesTableViewController>(storyboard: Main.self, identifier: "SentencesTableViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

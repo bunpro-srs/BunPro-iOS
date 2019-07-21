@@ -3,8 +3,9 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
+import Protocols
 import UIKit
 
 final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler {
@@ -22,12 +23,17 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
     deinit {
         log.info("deinit \(String(describing: self))")
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        activityIndicatorView = UIActivityIndicatorView(style: .white)
+        if #available(iOS 13.0, *) {
+            activityIndicatorView = UIActivityIndicatorView(style: .medium)
+        } else {
+            activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        }
         activityIndicatorView?.hidesWhenStopped = true
 
         searchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
