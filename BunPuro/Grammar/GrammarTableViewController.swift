@@ -13,337 +13,338 @@ protocol GrammarPresenter {
 }
 
 final class GrammarTableViewController: UITableViewController, GrammarPresenter {
+    @IBOutlet private var reviewEditBarButtonItem: UIBarButtonItem!
 
-//    @IBOutlet private var reviewEditBarButtonItem: UIBarButtonItem!
+    private var player: AVPlayer?
+    private let fetchedResultsController = GrammarFetchedResultsController()
+    private let flowController = GrammarFlowController()
+
+    var grammar: Grammar?
+
+    private var beginUpdateObserver: NotificationToken?
+    private var endUpdateObserver: NotificationToken?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        assert(grammar != nil)
+
+        if #available(iOS 13.0, *) {
+            navigationItem.largeTitleDisplayMode = .always
+        } else {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+
+        updateEditBarButtonState()
+
+        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { _ in
+            let activityIndicator: UIActivityIndicatorView
+
+            if #available(iOS 13.0, *) {
+                activityIndicator = UIActivityIndicatorView(style: .medium)
+            } else {
+                activityIndicator = UIActivityIndicatorView(style: .gray)
+            }
+
+            activityIndicator.startAnimating()
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        }
+
+        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { [weak self] _ in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
+                self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
+
+                if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
+                    let complete = self?.grammar?.review?.complete ?? false
+
+                    let streakUpdateClosure: (UITableView.RowAnimation) -> Void = { rowAnimation in
+                        self?.tableView.reloadData()
+                    }
+
+                    switch (numberOfRows, complete) {
+                    case (2, true), (3, false):
+                        streakUpdateClosure(.fade)
+
+                    case (3, true):
+                        streakUpdateClosure(.none)
+
+                    default:
+                        break
+                    }
+
+                    self?.updateEditBarButtonState()
+                }
+            }
+        }
+
+        fetchedResultsController.delegate = self
+        fetchedResultsController.setup(grammar: grammar!)
+    }
+
+    @IBAction private func editReviewButtonPressed(_ sender: UIBarButtonItem) {
+        flowController.editReviewButtonPressed(grammar: grammar!, barButtonItem: sender, viewController: self)
+    }
+
+    private func updateEditBarButtonState() {
+        reviewEditBarButtonItem?.title = grammar?.review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
+        reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
+    }
+
+    private func playSound(forSentenceAt indexPath: IndexPath) {
+        guard let url = fetchedResultsController.exampleSentence(at: indexPath).audioURL else { return }
+        log.info("play url: \(url)")
+
+        if player == nil {
+            player = AVPlayer(url: url)
+            player?.volume = 1.0
+        } else {
+            player?.pause()
+
+            let item = AVPlayerItem(url: url)
+            player?.replaceCurrentItem(with: item)
+        }
+
+        player?.play()
+    }
+
+    private func showCopyJapaneseOrMeaning(at indexPath: IndexPath) {
+        showCopyActionSheet(
+            at: indexPath,
+            actions: [
+                UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
+                    UIPasteboard.general.string = self?.grammar?.title
+                },
+                UIAlertAction(title: L10n.Copy.meaning, style: .default) { [weak self] _ in
+                    UIPasteboard.general.string = self?.grammar?.meaning
+                }
+            ]
+        )
+    }
+
+    private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
+        let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+        let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
+
+        showCopyActionSheet(
+            at: indexPath,
+            actions: [
+                UIAlertAction(title: L10n.Copy.japanese, style: .default) { _ in
+                    UIPasteboard.general.string = sentence.japanese?.htmlAttributedString?.string.cleanStringAndFurigana.string
+                },
+                UIAlertAction(title: L10n.Copy.english, style: .default) { _ in
+                    UIPasteboard.general.string = sentence.english?.htmlAttributedString?.string
+                }
+            ]
+        )
+    }
+
+    private func showCopyActionSheet(at indexPath: IndexPath, actions: [UIAlertAction]) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        actions.forEach { alertController.addAction($0) }
+        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
+
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
+
+        present(alertController, animated: true)
+    }
+}
+
+// UITableViewDelegate + UITableViewDataSource Protocol Implementation
+extension GrammarTableViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+
+        default:
+            return 2
+        }
+    }
+
+    private enum Info: Int {
+        case basic
+        case structure
+        case streak
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            return basicInfoCell(tableView, indexPath)
+
+        default:
+            return detailCell(tableView, indexPath)
+        }
+    }
+
+    private func basicInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
+
+        cell.titleLabel.text = grammar?.title
+        cell.meaningLabel.text = grammar?.meaning
+
+        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+
+        if
+            let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""),
+            let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
+            !caution.isEmpty {
+            cell.cautionLabel.text = attributed.string
+        } else {
+            cell.cautionLabel.text = nil
+            cell.cautionLabel.isHidden = true
+        }
+
+        cell.attributedDescription = grammar?
+                    .structure?
+                    .replacingOccurrences(of: ", ", with: "</br>")
+                    .htmlAttributedString(font: englishFont, color: .white)?
+                    .string
+
+        cell.streak = Int(grammar?.review?.streak ?? 0)
+        cell.contentStackView?.isHidden = grammar?.review?.complete == false
+
+        return cell
+    }
+
+    private func detailCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as UITableViewCell
+
+        switch indexPath.row {
+        case 0:
+            cell.textLabel?.text = "Sentences"
+        case 1:
+            cell.textLabel?.text = "Readings"
+        default:
+            break
+        }
+
+//        switch viewMode {
+//        case .examples:
+//            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+//            let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
 //
-//    private var player: AVPlayer?
-//    private let fetchedResultsController = GrammarFetchedResultsController()
-//    private let flowController = GrammarFlowController()
+//            let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
+//            let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 //
-//    var grammar: Grammar?
-//
-//    private var beginUpdateObserver: NotificationToken?
-//    private var endUpdateObserver: NotificationToken?
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        assert(grammar != nil)
-//
-//        if #available(iOS 13.0, *) {
-//            navigationItem.largeTitleDisplayMode = .always
-//        } else {
-//            navigationItem.largeTitleDisplayMode = .never
-//        }
-//
-//        updateEditBarButtonState()
-//
-//        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { _ in
-//            let activityIndicator: UIActivityIndicatorView
+//            cell.attributedName = sentence
+//                .japanese?
+//                .cleanStringAndFurigana
+//                .string
+//                .htmlAttributedString(
+//                    font: japaneseFont,
+//                    color: view.tintColor
+//                )?
+//                .string
+//            cell.attributedDescriptionText = sentence
+//                .english?
+//                .htmlAttributedString(
+//                    font: englishFont,
+//                    color: .white
+//                )?
+//                .string
 //
 //            if #available(iOS 13.0, *) {
-//                activityIndicator = UIActivityIndicatorView(style: .medium)
+//                cell.actionImage = sentence.audioURL != nil ? UIImage(systemName: "play.circle") : nil
 //            } else {
-//                activityIndicator = UIActivityIndicatorView(style: .gray)
+//                cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
 //            }
 //
-//            activityIndicator.startAnimating()
-//            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+//            cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: correctIndexPath) }
+//            cell.isDescriptionLabelHidden = Account.currentAccount?.englishMode ?? false
+//            cell.selectionStyle = .none
+//
+//            if cell.longPressGestureRecognizer == nil {
+//                cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+//                cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
+//            }
+//
+//        case .reading:
+//            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+//            let link = fetchedResultsController.reading(at: correctIndexPath)
+//
+//            let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
+//            let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
+//
+//            cell.attributedName = link
+//                .site?
+//                .htmlAttributedString(
+//                    font: font1,
+//                    color: view.tintColor
+//                )?
+//                .string
+//            cell.attributedDescriptionText = link
+//                .about?
+//                .htmlAttributedString(font: font2, color: .white)?
+//                .string
+//            cell.isDescriptionLabelHidden = false
+//            cell.customAction = nil
+//            cell.actionImage = nil
+//
+//            cell.selectionStyle = .none
 //        }
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            showCopyJapaneseOrMeaning(at: indexPath)
+
+        case 1:
+            defer { tableView.deselectRow(at: indexPath, animated: true) }
+
+            switch indexPath.row {
+            case 0:
+                let controller = storyboard!.instantiateViewController() as SentencesTableViewController
+                controller.grammar = grammar
+
+                show(controller, sender: self)
+                break
+
+            case 1:
+                break
+
+            default:
+                break
+            }
+
+//            switch viewMode {
+//            case .reading:
+//                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+//                guard let url = fetchedResultsController.reading(at: correctIndexPath).url else { return }
 //
-//        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { [weak self] _ in
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
-//                self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
+//                let safariViewCtrl = SFSafariViewController(url: url)
+//                present(safariViewCtrl, animated: true, completion: nil)
 //
-//                if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
-//                    let complete = self?.grammar?.review?.complete ?? false
+//            case .examples:
+//                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
+//                let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
 //
-//                    let streakUpdateClosure: (UITableView.RowAnimation) -> Void = { rowAnimation in
-//                        self?.tableView.reloadData()
-//                    }
+//                if let japanese = sentence.japanese?.cleanStringAndFurigana {
+//                    let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
 //
-//                    switch (numberOfRows, complete) {
-//                    case (2, true), (3, false):
-//                        streakUpdateClosure(.fade)
+//                    infoViewCtrl.japanese = japanese.string
+//                    infoViewCtrl.english = sentence.english?.htmlAttributedString?.string
+//                    infoViewCtrl.furigana = japanese.furigana ?? [Furigana]()
+//                    infoViewCtrl.showEnglish = !(Account.currentAccount?.englishMode ?? false)
 //
-//                    case (3, true):
-//                        streakUpdateClosure(.none)
-//
-//                    default:
-//                        break
-//                    }
-//
-//                    self?.updateEditBarButtonState()
+//                    show(infoViewCtrl, sender: self)
 //                }
 //            }
-//        }
-//
-//        fetchedResultsController.delegate = self
-//        fetchedResultsController.setup(grammar: grammar!)
-//    }
-//
-//    @IBAction private func editReviewButtonPressed(_ sender: UIBarButtonItem) {
-//        flowController.editReviewButtonPressed(grammar: grammar!, barButtonItem: sender, viewController: self)
-//    }
-//
-//    private func updateEditBarButtonState() {
-//        reviewEditBarButtonItem?.title = grammar?.review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
-//        reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
-//    }
-//
-//    private func playSound(forSentenceAt indexPath: IndexPath) {
-//        guard let url = fetchedResultsController.exampleSentence(at: indexPath).audioURL else { return }
-//        log.info("play url: \(url)")
-//
-//        if player == nil {
-//            player = AVPlayer(url: url)
-//            player?.volume = 1.0
-//        } else {
-//            player?.pause()
-//
-//            let item = AVPlayerItem(url: url)
-//            player?.replaceCurrentItem(with: item)
-//        }
-//
-//        player?.play()
-//    }
-//
-//    private func showCopyJapaneseOrMeaning(at indexPath: IndexPath) {
-//        showCopyActionSheet(
-//            at: indexPath,
-//            actions: [
-//                UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
-//                    UIPasteboard.general.string = self?.grammar?.title
-//                },
-//                UIAlertAction(title: L10n.Copy.meaning, style: .default) { [weak self] _ in
-//                    UIPasteboard.general.string = self?.grammar?.meaning
-//                }
-//            ]
-//        )
-//    }
-//
-//    private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
-//        let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-//        let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-//
-//        showCopyActionSheet(
-//            at: indexPath,
-//            actions: [
-//                UIAlertAction(title: L10n.Copy.japanese, style: .default) { _ in
-//                    UIPasteboard.general.string = sentence.japanese?.htmlAttributedString?.string.cleanStringAndFurigana.string
-//                },
-//                UIAlertAction(title: L10n.Copy.english, style: .default) { _ in
-//                    UIPasteboard.general.string = sentence.english?.htmlAttributedString?.string
-//                }
-//            ]
-//        )
-//    }
-//
-//    private func showCopyActionSheet(at indexPath: IndexPath, actions: [UIAlertAction]) {
-//        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-//        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        actions.forEach { alertController.addAction($0) }
-//        alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
-//
-//        alertController.popoverPresentationController?.sourceView = cell
-//        alertController.popoverPresentationController?.sourceRect = cell.bounds
-//
-//        present(alertController, animated: true)
-//    }
-//}
-//
-//// UITableViewDelegate + UITableViewDataSource Protocol Implementation
-//extension GrammarTableViewController {
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch section {
-//        case 0:
-//            return 1
-//
-//        default:
-//            return 2
-//        }
-//    }
-//
-//    private enum Info: Int {
-//        case basic
-//        case structure
-//        case streak
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch indexPath.section {
-//        case 0:
-//            return basicInfoCell(tableView, indexPath)
-//
-//        default:
-//            return detailCell(tableView, indexPath)
-//        }
-//    }
-//
-//    private func basicInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
-//
-//        cell.titleLabel.text = grammar?.title
-//        cell.meaningLabel.text = grammar?.meaning
-//
-//        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-//
-//        if
-//            let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""),
-//            let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
-//            !caution.isEmpty {
-//            cell.cautionLabel.text = attributed.string
-//        } else {
-//            cell.cautionLabel.text = nil
-//            cell.cautionLabel.isHidden = true
-//        }
-//
-//        cell.attributedDescription = grammar?
-//                    .structure?
-//                    .replacingOccurrences(of: ", ", with: "</br>")
-//                    .htmlAttributedString(font: englishFont, color: .white)?
-//                    .string
-//
-//        cell.streak = Int(grammar?.review?.streak ?? 0)
-//        cell.contentStackView?.isHidden = grammar?.review?.complete == false
-//
-//        return cell
-//    }
-//
-//    private func detailCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(for: indexPath) as UITableViewCell
-//
-//        switch indexPath.row {
-//        case 0:
-//            cell.textLabel?.text = "Sentences"
-//        case 1:
-//            cell.textLabel?.text = "Readings"
-//        default:
-//            break
-//        }
-//        
-////        switch viewMode {
-////        case .examples:
-////            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-////            let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-////
-////            let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
-////            let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-////
-////            cell.attributedName = sentence
-////                .japanese?
-////                .cleanStringAndFurigana
-////                .string
-////                .htmlAttributedString(
-////                    font: japaneseFont,
-////                    color: view.tintColor
-////                )?
-////                .string
-////            cell.attributedDescriptionText = sentence
-////                .english?
-////                .htmlAttributedString(
-////                    font: englishFont,
-////                    color: .white
-////                )?
-////                .string
-////
-////            if #available(iOS 13.0, *) {
-////                cell.actionImage = sentence.audioURL != nil ? UIImage(systemName: "play.circle") : nil
-////            } else {
-////                cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
-////            }
-////
-////            cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: correctIndexPath) }
-////            cell.isDescriptionLabelHidden = Account.currentAccount?.englishMode ?? false
-////            cell.selectionStyle = .none
-////
-////            if cell.longPressGestureRecognizer == nil {
-////                cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-////                cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
-////            }
-////
-////        case .reading:
-////            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-////            let link = fetchedResultsController.reading(at: correctIndexPath)
-////
-////            let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
-////            let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
-////
-////            cell.attributedName = link
-////                .site?
-////                .htmlAttributedString(
-////                    font: font1,
-////                    color: view.tintColor
-////                )?
-////                .string
-////            cell.attributedDescriptionText = link
-////                .about?
-////                .htmlAttributedString(font: font2, color: .white)?
-////                .string
-////            cell.isDescriptionLabelHidden = false
-////            cell.customAction = nil
-////            cell.actionImage = nil
-////
-////            cell.selectionStyle = .none
-////        }
-//
-//        return cell
-//    }
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 0:
-//            showCopyJapaneseOrMeaning(at: indexPath)
-//
-//        case 1:
-//            defer { tableView.deselectRow(at: indexPath, animated: true) }
-//
-//            switch indexPath.row {
-//            case 0:
-////                let controller = storyboard!.instantiateViewController() as SentencesTableViewController
-////                controller.grammar = grammar
-////
-////                show(controller, sender: self)
-//                break
-//            case 1:
-//                break
-//            default:
-//                break
-//            }
-//            
-////            switch viewMode {
-////            case .reading:
-////                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-////                guard let url = fetchedResultsController.reading(at: correctIndexPath).url else { return }
-////
-////                let safariViewCtrl = SFSafariViewController(url: url)
-////                present(safariViewCtrl, animated: true, completion: nil)
-////
-////            case .examples:
-////                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-////                let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-////
-////                if let japanese = sentence.japanese?.cleanStringAndFurigana {
-////                    let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
-////
-////                    infoViewCtrl.japanese = japanese.string
-////                    infoViewCtrl.english = sentence.english?.htmlAttributedString?.string
-////                    infoViewCtrl.furigana = japanese.furigana ?? [Furigana]()
-////                    infoViewCtrl.showEnglish = !(Account.currentAccount?.englishMode ?? false)
-////
-////                    show(infoViewCtrl, sender: self)
-////                }
-////            }
-//
-//        default:
-//            break
-//        }
-//    }
+
+        default:
+            break
+        }
+    }
 }
 
 extension GrammarTableViewController: UIPopoverPresentationControllerDelegate {
