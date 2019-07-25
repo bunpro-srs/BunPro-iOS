@@ -22,6 +22,10 @@
 /* Common cancel action */
 "general.cancel" = "Cancel";
 
+"grammar.readings" = "Readings";
+
+"grammar.sentences" = "Sentences";
+
 "kanji.english.show" = "Show English";
 
 "kanji.header.readings" = "Kanji Readings";

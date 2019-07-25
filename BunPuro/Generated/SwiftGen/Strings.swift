@@ -46,6 +46,13 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "general.cancel")
   }
 
+  internal enum Grammar {
+    /// Readings
+    internal static let readings = L10n.tr("Localizable", "grammar.readings")
+    /// Sentences
+    internal static let sentences = L10n.tr("Localizable", "grammar.sentences")
+  }
+
   internal enum Kanji {
     internal enum English {
       /// Show English

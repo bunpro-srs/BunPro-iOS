@@ -42,7 +42,7 @@ fileprivate final class BatchImportGrammarPointsIntoCoreDataProcedure: GroupProc
         }
 
         batches.forEach { self.addChild(ImportGrammarPointsIntoCoreDataProcedure(stack: stack, grammarPoints: $0)) }
-        
+
         super.execute()
     }
 }

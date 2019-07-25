@@ -3,7 +3,6 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import AVFoundation
 import BunProKit
 import SafariServices
 import UIKit
@@ -15,7 +14,6 @@ protocol GrammarPresenter {
 final class GrammarTableViewController: UITableViewController, GrammarPresenter {
     @IBOutlet private var reviewEditBarButtonItem: UIBarButtonItem!
 
-    private var player: AVPlayer?
     private let fetchedResultsController = GrammarFetchedResultsController()
     private let flowController = GrammarFlowController()
 
@@ -29,11 +27,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
         assert(grammar != nil)
 
-        if #available(iOS 13.0, *) {
-            navigationItem.largeTitleDisplayMode = .always
-        } else {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        title = grammar?.title
 
         updateEditBarButtonState()
 
@@ -88,23 +82,6 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
     private func updateEditBarButtonState() {
         reviewEditBarButtonItem?.title = grammar?.review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
         reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
-    }
-
-    private func playSound(forSentenceAt indexPath: IndexPath) {
-        guard let url = fetchedResultsController.exampleSentence(at: indexPath).audioURL else { return }
-        log.info("play url: \(url)")
-
-        if player == nil {
-            player = AVPlayer(url: url)
-            player?.volume = 1.0
-        } else {
-            player?.pause()
-
-            let item = AVPlayerItem(url: url)
-            player?.replaceCurrentItem(with: item)
-        }
-
-        player?.play()
     }
 
     private func showCopyJapaneseOrMeaning(at indexPath: IndexPath) {
@@ -192,8 +169,7 @@ extension GrammarTableViewController {
 
         let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
 
-        if
-            let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""),
+        if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""),
             let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
             !caution.isEmpty {
             cell.cautionLabel.text = attributed.string
@@ -203,10 +179,10 @@ extension GrammarTableViewController {
         }
 
         cell.attributedDescription = grammar?
-                    .structure?
-                    .replacingOccurrences(of: ", ", with: "</br>")
-                    .htmlAttributedString(font: englishFont, color: .white)?
-                    .string
+            .structure?
+            .replacingOccurrences(of: ", ", with: "</br>")
+            .htmlAttributedString(font: englishFont, color: .white)?
+            .string
 
         cell.streak = Int(grammar?.review?.streak ?? 0)
         cell.contentStackView?.isHidden = grammar?.review?.complete == false
@@ -219,77 +195,16 @@ extension GrammarTableViewController {
 
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Sentences"
+            cell.textLabel?.text = L10n.Grammar.sentences
+            cell.detailTextLabel?.text = "\(fetchedResultsController.exampleSentencesCount())"
+
         case 1:
-            cell.textLabel?.text = "Readings"
+            cell.textLabel?.text = L10n.Grammar.readings
+            cell.detailTextLabel?.text = "\(fetchedResultsController.readingsCount())"
+
         default:
             break
         }
-
-//        switch viewMode {
-//        case .examples:
-//            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-//            let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-//
-//            let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
-//            let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-//
-//            cell.attributedName = sentence
-//                .japanese?
-//                .cleanStringAndFurigana
-//                .string
-//                .htmlAttributedString(
-//                    font: japaneseFont,
-//                    color: view.tintColor
-//                )?
-//                .string
-//            cell.attributedDescriptionText = sentence
-//                .english?
-//                .htmlAttributedString(
-//                    font: englishFont,
-//                    color: .white
-//                )?
-//                .string
-//
-//            if #available(iOS 13.0, *) {
-//                cell.actionImage = sentence.audioURL != nil ? UIImage(systemName: "play.circle") : nil
-//            } else {
-//                cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
-//            }
-//
-//            cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: correctIndexPath) }
-//            cell.isDescriptionLabelHidden = Account.currentAccount?.englishMode ?? false
-//            cell.selectionStyle = .none
-//
-//            if cell.longPressGestureRecognizer == nil {
-//                cell.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-//                cell.addGestureRecognizer(cell.longPressGestureRecognizer!)
-//            }
-//
-//        case .reading:
-//            let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-//            let link = fetchedResultsController.reading(at: correctIndexPath)
-//
-//            let font1 = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 12))
-//            let font2 = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 10))
-//
-//            cell.attributedName = link
-//                .site?
-//                .htmlAttributedString(
-//                    font: font1,
-//                    color: view.tintColor
-//                )?
-//                .string
-//            cell.attributedDescriptionText = link
-//                .about?
-//                .htmlAttributedString(font: font2, color: .white)?
-//                .string
-//            cell.isDescriptionLabelHidden = false
-//            cell.customAction = nil
-//            cell.actionImage = nil
-//
-//            cell.selectionStyle = .none
-//        }
 
         return cell
     }
@@ -308,38 +223,16 @@ extension GrammarTableViewController {
                 controller.grammar = grammar
 
                 show(controller, sender: self)
-                break
 
             case 1:
-                break
+                let controller = storyboard!.instantiateViewController() as ReadingsTableViewController
+                controller.grammar = grammar
+
+                show(controller, sender: self)
 
             default:
                 break
             }
-
-//            switch viewMode {
-//            case .reading:
-//                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-//                guard let url = fetchedResultsController.reading(at: correctIndexPath).url else { return }
-//
-//                let safariViewCtrl = SFSafariViewController(url: url)
-//                present(safariViewCtrl, animated: true, completion: nil)
-//
-//            case .examples:
-//                let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
-//                let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-//
-//                if let japanese = sentence.japanese?.cleanStringAndFurigana {
-//                    let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
-//
-//                    infoViewCtrl.japanese = japanese.string
-//                    infoViewCtrl.english = sentence.english?.htmlAttributedString?.string
-//                    infoViewCtrl.furigana = japanese.furigana ?? [Furigana]()
-//                    infoViewCtrl.showEnglish = !(Account.currentAccount?.englishMode ?? false)
-//
-//                    show(infoViewCtrl, sender: self)
-//                }
-//            }
 
         default:
             break

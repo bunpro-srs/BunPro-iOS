@@ -14,9 +14,6 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "7aR-RJ-rh9"; */
 "7aR-RJ-rh9.text" = "Detail";
 
-/* Class = "UIBarButtonItem"; title = "Edit Review"; ObjectID = "aC3-DB-CTC"; */
-"aC3-DB-CTC.title" = "Edit Review";
-
 /* Class = "UILabel"; text = " "; ObjectID = "aD2-ep-eCU"; */
 "aD2-ep-eCU.text" = " ";
 
@@ -28,9 +25,6 @@
 
 /* Class = "UILabel"; text = "Logout"; ObjectID = "eD4-ov-7JC"; */
 "eD4-ov-7JC.text" = "Logout";
-
-/* Class = "UILabel"; text = "ないほうがいい"; ObjectID = "EFr-Xh-odS"; */
-"EFr-Xh-odS.text" = "ないほうがいい";
 
 /* Class = "UILabel"; text = "Next Review"; ObjectID = "f8W-DR-a0O"; */
 "f8W-DR-a0O.text" = "Next Review";
@@ -74,15 +68,6 @@
 /* Class = "UILabel"; text = "Community"; ObjectID = "nDo-ag-hir"; */
 "nDo-ag-hir.text" = "Community";
 
-/* Class = "UILabel"; text = "Structure"; ObjectID = "o7e-rE-rKz"; */
-"o7e-rE-rKz.text" = "Structure";
-
-/* Class = "UILabel"; text = "No \\U3060 with \\U3044Adjectives"; ObjectID = "Oi9-KZ-MZn"; */
-"Oi9-KZ-MZn.text" = "No \\U3060 with \\U3044Adjectives";
-
-/* Class = "UILabel"; text = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>"; ObjectID = "oWh-GS-4Cz"; */
-"oWh-GS-4Cz.text" = "Noun + <strong>\\U3060</strong>, \\U306aAdjective + <strong>\\U3060</strong>";
-
 /* Class = "UILabel"; text = "Detail"; ObjectID = "pEt-ao-5Kl"; */
 "pEt-ao-5Kl.text" = "Detail";
 
@@ -92,29 +77,17 @@
 /* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
 "Rej-2W-djk.text" = " ";
 
-/* Class = "UILabel"; text = "Subscription"; ObjectID = "sDZ-I2-InT"; */
-"sDZ-I2-InT.text" = "Subscription";
-
 /* Class = "UILabel"; text = "Sign up for Trial"; ObjectID = "sUd-7z-kjF"; */
 "sUd-7z-kjF.text" = "Sign up for Trial";
 
-/* Class = "UILabel"; text = "Title"; ObjectID = "tfg-tB-aDM"; */
-"tfg-tB-aDM.text" = "Title";
-
 /* Class = "UILabel"; text = "N5"; ObjectID = "TxH-U7-oqL"; */
 "TxH-U7-oqL.text" = "N5";
-
-/* Class = "UILabel"; text = "to be/is, (casual non-past tense)"; ObjectID = "UVI-fC-5ib"; */
-"UVI-fC-5ib.text" = "to be/is, (casual non-past tense)";
 
 /* Class = "UILabel"; text = " "; ObjectID = "uXq-L9-iw8"; */
 "uXq-L9-iw8.text" = " ";
 
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "WEp-Yb-tKd"; */
-"WEp-Yb-tKd.text" = "Detail";
 
 /* Class = "UITableViewSection"; footerTitle = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct."; ObjectID = "ZHM-bl-R9P"; */
 "ZHM-bl-R9P.footerTitle" = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct.";

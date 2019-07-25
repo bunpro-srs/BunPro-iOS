@@ -117,17 +117,15 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         searchController.searchResultsUpdater = self
 
         searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
 
         navigationItem.searchController = searchController
         searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.setShowsCancelButton(false, animated: false)
         searchController.searchBar.delegate = self
-        searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.sizeToFit()
         navigationItem.hidesSearchBarWhenScrolling = false
 
         searchController.searchBar.placeholder = L10n.Search.Grammar.placeholder
-        searchController.searchBar.barStyle = .black
 
         searchController.searchBar.scopeButtonTitles = [
             L10n.Search.Grammar.Scope.all,
@@ -144,12 +142,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         } catch {
             log.error(error)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        searchController.searchBar.setShowsCancelButton(false, animated: false)
     }
 
     private func review(for grammar: Grammar) -> Review? {

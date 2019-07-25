@@ -17,6 +17,7 @@
 		2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
 		2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */; };
 		2E2AAEBB22E4DFDE00E227B0 /* SentencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */; };
+		2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */; };
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E30749C1FACF9660078725B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E30749E1FACF9660078725B /* Localizable.strings */; };
 		2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */; };
@@ -44,6 +45,7 @@
 		2EAD9DEB1FA25DF100CE52CF /* BunPuroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DEA1FA25DF100CE52CF /* BunPuroTests.swift */; };
 		2EAD9DF61FA25DF100CE52CF /* BunPuroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD9DF51FA25DF100CE52CF /* BunPuroUITests.swift */; };
 		2EB4564D1FE4710C003CDD65 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4564C1FE4710C003CDD65 /* DetailCell.swift */; };
+		2EBA417522EA003500D2765C /* GrammarDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EBA417322EA003500D2765C /* GrammarDetail.storyboard */; };
 		2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70B820164EBA001AE42E /* Account+Initializer.swift */; };
 		2EBB70BB20165021001AE42E /* Sentence+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */; };
 		2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70BC201654F9001AE42E /* Link+Initializer.swift */; };
@@ -110,6 +112,7 @@
 		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
 		2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetchedResultsTableViewController.swift; sourceTree = "<group>"; };
 		2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SentencesTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/SentencesTableViewController.swift"; sourceTree = "<group>"; };
+		2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReadingsTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/ReadingsTableViewController.swift"; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2E3074991FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		2EAD9DF51FA25DF100CE52CF /* BunPuroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroUITests.swift; sourceTree = "<group>"; };
 		2EAD9DF71FA25DF100CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EB4564C1FE4710C003CDD65 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		2EBA417422EA003500D2765C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GrammarDetail.storyboard; sourceTree = "<group>"; };
 		2EBB70B820164EBA001AE42E /* Account+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sentence+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70BC201654F9001AE42E /* Link+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Link+Initializer.swift"; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 				A146F31B227033C3002DC511 /* GrammarFlowController.swift */,
 				2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */,
 				2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */,
+				2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */,
 				2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */,
 				2E01D2111FB2686600E8632D /* SearchTableViewController.swift */,
 			);
@@ -344,6 +349,7 @@
 				2E30749F1FACF96E0078725B /* Supporting Files */,
 				2E6755881FFFE9FF00BD10EB /* UI */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
+				2EBA417322EA003500D2765C /* GrammarDetail.storyboard */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
 			);
 			path = BunPuro;
@@ -542,6 +548,7 @@
 				2E30749C1FACF9660078725B /* Localizable.strings in Resources */,
 				2EAD9DE01FA25DF100CE52CF /* LaunchScreen.storyboard in Resources */,
 				2E7B3698208516B200542BB8 /* Localizable.stringsdict in Resources */,
+				2EBA417522EA003500D2765C /* GrammarDetail.storyboard in Resources */,
 				2E3D43C8201B559A00B4D5EF /* BunPro.sqlite-shm in Resources */,
 				2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */,
 				2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */,
@@ -645,6 +652,7 @@
 				2E1DCA251FC49A72002E67D6 /* GrammarTableViewController.swift in Sources */,
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
 				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
+				2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */,
 				A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */,
 				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
 				2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */,
@@ -743,6 +751,14 @@
 				2E3074981FACF9660078725B /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2EBA417322EA003500D2765C /* GrammarDetail.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EBA417422EA003500D2765C /* Base */,
+			);
+			name = GrammarDetail.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

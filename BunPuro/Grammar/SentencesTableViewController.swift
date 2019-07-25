@@ -3,6 +3,7 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
+import AVFoundation
 import CoreData
 import Protocols
 import UIKit
@@ -10,8 +11,12 @@ import UIKit
 class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Sentence> {
     var grammar: Grammar?
 
+    private var player: AVPlayer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = L10n.Grammar.sentences
 
         setupFetchedResultsController()
     }
@@ -36,8 +41,69 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
 
-        // Configure the cell...
+        let sentence = fetchedResultsController.object(at: indexPath)
+
+        let japaneseFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 15))
+        let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
+
+        cell.attributedName = sentence
+            .japanese?
+            .cleanStringAndFurigana
+            .string
+            .htmlAttributedString(
+                font: japaneseFont,
+                color: view.tintColor
+            )?
+            .string
+
+        cell.attributedDescriptionText = sentence
+            .english?
+            .htmlAttributedString(
+                font: englishFont,
+                color: .white
+            )?
+            .string
+
+        if #available(iOS 13.0, *) {
+            cell.actionImage = sentence.audioURL != nil ? UIImage(systemName: "play.circle") : nil
+        } else {
+            cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
+        }
+
+        cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: indexPath) }
+        cell.isDescriptionLabelHidden = Account.currentAccount?.englishMode ?? false
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sentence = fetchedResultsController.object(at: indexPath)
+
+        if let japanese = sentence.japanese?.cleanStringAndFurigana {
+            let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
+
+            infoViewCtrl.japanese = japanese.string
+            infoViewCtrl.english = sentence.english?.htmlAttributedString?.string
+            infoViewCtrl.furigana = japanese.furigana ?? [Furigana]()
+            infoViewCtrl.showEnglish = !(Account.currentAccount?.englishMode ?? false)
+
+            show(infoViewCtrl, sender: self)
+        }
+    }
+
+    private func playSound(forSentenceAt indexPath: IndexPath) {
+        guard let url = fetchedResultsController.object(at: indexPath).audioURL else { return }
+
+        if player == nil {
+            player = AVPlayer(url: url)
+            player?.volume = 1.0
+        } else {
+            player?.pause()
+
+            let item = AVPlayerItem(url: url)
+            player?.replaceCurrentItem(with: item)
+        }
+
+        player?.play()
     }
 }

@@ -13,7 +13,6 @@ import UIKit
 final class SettingsTableViewController: UITableViewController {
     private enum Section: Int {
         case settings
-        case subscription
         case information
         case logout
     }
@@ -36,7 +35,6 @@ final class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
     @IBOutlet private weak var hideEnglishDetailLabel: UILabel!
     @IBOutlet private weak var bunnyModeDetailLabel: UILabel!
-    @IBOutlet private weak var subscriptionDetailLabel: UILabel!
 
     private let queue = ProcedureQueue()
     private var settings: SetSettingsProcedure.Settings? {
@@ -90,9 +88,6 @@ final class SettingsTableViewController: UITableViewController {
             case .bunny:
                 didSelectBunnySettingsCell(cell)
             }
-
-        case .subscription:
-            break
 
         case .information:
             let info = Info(rawValue: indexPath.row)!
@@ -245,29 +240,8 @@ final class SettingsTableViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch Section(rawValue: indexPath.section)! {
-        case .subscription:
-            switch Info(rawValue: indexPath.row)! {
-            case .debug:
-                return 0
-
-            default:
-                return super.tableView(tableView, heightForRowAt: indexPath)
-            }
-
-        default:
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-    }
-
     private func updateUI() {
-        guard let account = self.account else {
-            subscriptionDetailLabel?.text = L10n.Subscription.unknown
-            return
-        }
-
-        subscriptionDetailLabel?.text = account.subscriber ? L10n.Subscription.subscribed : L10n.Subscription.unsubscribed
+        guard let account = self.account else { return }
 
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
