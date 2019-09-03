@@ -79,6 +79,11 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
         flowController.editReviewButtonPressed(grammar: grammar!, barButtonItem: sender, viewController: self)
     }
 
+    @objc
+    func dismissSelf() {
+        dismiss(animated: true, completion: nil)
+    }
+
     private func updateEditBarButtonState() {
         reviewEditBarButtonItem?.title = grammar?.review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
         reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable

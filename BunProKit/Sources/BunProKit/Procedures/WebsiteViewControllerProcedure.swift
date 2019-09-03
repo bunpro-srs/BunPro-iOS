@@ -12,6 +12,8 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
     public let website: Website
     public var userActivity: NSUserActivity?
 
+    public var openGrammarHandler: ((UIViewController, Int) -> Void)?
+    
     public init(presentingViewController: UIViewController, website: Website = .review) {
         self.presentingViewController = presentingViewController
         self.website = website
@@ -42,5 +44,9 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
         presentingViewController.dismiss(animated: true) {
             self.finish()
         }
+    }
+    
+    func reviewViewControllerWillOpenGrammar(_ controller: ReviewViewController, identifier: Int) {
+        openGrammarHandler?(controller, identifier)
     }
 }

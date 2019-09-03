@@ -53,9 +53,6 @@
 /* Class = "UILabel"; text = "Privacy"; ObjectID = "L2n-Xt-p85"; */
 "L2n-Xt-p85.text" = "Privacy";
 
-/* Class = "UILabel"; text = "Log current reviews (Debug)"; ObjectID = "ljw-bB-8tB"; */
-"ljw-bB-8tB.text" = "Log current reviews (Debug)";
-
 /* Class = "UILabel"; text = "N5"; ObjectID = "mJz-v9-AV7"; */
 "mJz-v9-AV7.text" = "N5";
 

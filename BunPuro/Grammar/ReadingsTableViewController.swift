@@ -35,7 +35,6 @@ class ReadingsTableViewController: CoreDataFetchedResultsTableViewController<Lin
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as DetailCell
 

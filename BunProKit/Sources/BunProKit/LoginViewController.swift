@@ -44,6 +44,7 @@ final class LoginViewController: UITableViewController {
         tableView.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.cellIdentifier)
         
         tableView.separatorStyle = .none
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
         
     override func numberOfSections(in tableView: UITableView) -> Int {

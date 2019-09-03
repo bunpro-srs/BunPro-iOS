@@ -14,10 +14,6 @@ extension Date {
         return Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
     }
 
-    func isTomorrow() -> Bool {
-        return Calendar.autoupdatingCurrent.isDateInTomorrow(self)
-    }
-
     var tomorrow: Date {
         return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
     }

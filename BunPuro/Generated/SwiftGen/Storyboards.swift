@@ -15,13 +15,13 @@ internal enum StoryboardScene {
   internal enum GrammarDetail: StoryboardType {
     internal static let storyboardName = "GrammarDetail"
 
+    internal static let grammarTableViewController = SceneType<BunPuro.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "GrammarTableViewController")
+
     internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: GrammarDetail.self, identifier: "KanjiTableViewController")
 
     internal static let readingsTableViewController = SceneType<BunPuro.ReadingsTableViewController>(storyboard: GrammarDetail.self, identifier: "ReadingsTableViewController")
 
     internal static let sentencesTableViewController = SceneType<BunPuro.SentencesTableViewController>(storyboard: GrammarDetail.self, identifier: "SentencesTableViewController")
-
-    internal static let uiTableViewControllerBfxJ4Jt9 = SceneType<BunPuro.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "UITableViewController-Bfx-j4-Jt9")
   }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"

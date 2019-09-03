@@ -207,6 +207,27 @@ final class StatusTableViewController: UITableViewController {
     func presentReviewViewController(website: Website = .review) {
         let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: tabBarController!, website: website)
 
+        reviewProcedure.openGrammarHandler = { viewController, identifier in
+            let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
+            request.predicate = NSPredicate(format: "%K == %d", #keyPath(Grammar.identifier), identifier)
+            request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)]
+
+            if let grammar = try? AppDelegate.coreDataStack.managedObjectContext.fetch(request).first {
+                let grammarViewCtrl = StoryboardScene.GrammarDetail.grammarTableViewController.instantiate()
+                grammarViewCtrl.grammar = grammar
+
+                let navigationCtrl = UINavigationController(rootViewController: grammarViewCtrl)
+
+                grammarViewCtrl.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    barButtonSystemItem: .done,
+                    target: grammarViewCtrl,
+                    action: #selector(GrammarTableViewController.dismissSelf)
+                )
+
+                viewController.present(navigationCtrl, animated: true, completion: nil)
+            }
+        }
+
         reviewProcedure.completionBlock = {
             DispatchQueue.main.async {
                 AppDelegate.setNeedsStatusUpdate()

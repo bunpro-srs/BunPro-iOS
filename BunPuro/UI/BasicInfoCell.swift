@@ -46,12 +46,11 @@ final class BasicInfoCell: UITableViewCell {
     }
 
     @IBOutlet weak var contentStackView: UIStackView!
-    @IBOutlet private var hankoCollection: [UIImageView]!
 
     var streak: Int = 0
 
     override func layoutSubviews() {
-        for (index, hanko) in hankoCollection.enumerated() {
+        for (index, hanko) in contentStackView.arrangedSubviews.enumerated() {
             if #available(iOS 13.0, *) {
                 hanko.tintColor = .secondaryLabel
             } else {

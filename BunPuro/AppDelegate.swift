@@ -10,7 +10,9 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+    var window: UIWindow? {
+        didSet { window?.tintColor = Asset.tint.color }
+    }
 
     static var coreDataStack: CoreDataStack {
         return (UIApplication.shared.delegate as! AppDelegate).coreDataStack
@@ -21,71 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var dataManager: DataManager?
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(
+        _ application: UIApplication,
+        willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
         Logger.shared.setup()
 
-        if let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers {
-            for (index, viewController) in viewControllers.enumerated() {
-                if #available(iOS 13.0, *) {
-                    switch index {
-                    case 0:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.status,
-                            image: UIImage(systemName: "pencil.circle"),
-                            selectedImage: UIImage(systemName: "pencil.circle.fill")
-                        )
-
-                    case 1:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.search,
-                            image: UIImage(systemName: "magnifyingglass.circle"),
-                            selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")
-                        )
-
-                    case 2:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.settings,
-                            image: UIImage(systemName: "ellipsis.circle"),
-                            selectedImage: UIImage(systemName: "ellipsis.circle.fill")
-                        )
-
-                    default:
-                        break
-                    }
-                } else {
-                    switch index {
-                    case 0:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.status,
-                            image: Asset.tabDashboardInactive.image,
-                            selectedImage: Asset.tabDashboardActive.image
-                        )
-
-                    case 1:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.search,
-                            image: Asset.tabSearchInactive.image,
-                            selectedImage: Asset.tabSearchActive.image
-                        )
-
-                    case 2:
-                        viewController.tabBarItem = UITabBarItem(
-                            title: L10n.Tabbar.settings,
-                            image: Asset.tabSettingsInactive.image,
-                            selectedImage: Asset.tabSettingsActive.image
-                        )
-
-                    default:
-                        break
-                    }
-                }
-            }
-        }
+        setupTabBarViewController()
 
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         Server.reset()
 
         let center = UNUserNotificationCenter.current()
@@ -200,6 +152,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
+    }
+
+    private func setupTabBarViewController() {
+        guard let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers else { return }
+        for (index, viewController) in viewControllers.enumerated() {
+            if #available(iOS 13.0, *) {
+                switch index {
+                case 0:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.status,
+                        image: UIImage(systemName: "pencil.circle"),
+                        selectedImage: UIImage(systemName: "pencil.circle.fill")
+                    )
+
+                case 1:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.search,
+                        image: UIImage(systemName: "magnifyingglass.circle"),
+                        selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")
+                    )
+
+                case 2:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.settings,
+                        image: UIImage(systemName: "ellipsis.circle"),
+                        selectedImage: UIImage(systemName: "ellipsis.circle.fill")
+                    )
+
+                default:
+                    break
+                }
+            } else {
+                switch index {
+                case 0:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.status,
+                        image: Asset.tabDashboardInactive.image,
+                        selectedImage: Asset.tabDashboardActive.image
+                    )
+
+                case 1:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.search,
+                        image: Asset.tabSearchInactive.image,
+                        selectedImage: Asset.tabSearchActive.image
+                    )
+
+                case 2:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.settings,
+                        image: Asset.tabSettingsInactive.image,
+                        selectedImage: Asset.tabSettingsActive.image
+                    )
+
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 

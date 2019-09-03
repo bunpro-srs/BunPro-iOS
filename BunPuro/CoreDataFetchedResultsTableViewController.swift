@@ -28,10 +28,6 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-
     func controller(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>,
         didChange sectionInfo: NSFetchedResultsSectionInfo,
@@ -49,9 +45,5 @@ class CoreDataFetchedResultsTableViewController<T: NSFetchRequestResult>: UITabl
         newIndexPath: IndexPath?
     ) {
         tableView.reloadData()
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
     }
 }

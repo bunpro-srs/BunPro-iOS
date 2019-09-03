@@ -29,7 +29,6 @@ final class SettingsTableViewController: UITableViewController {
         case contact
         case privacy
         case terms
-        case debug
     }
 
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
@@ -91,14 +90,8 @@ final class SettingsTableViewController: UITableViewController {
 
         case .information:
             let info = Info(rawValue: indexPath.row)!
-            switch info {
-            case .debug:
-                didSelectDebugSubscriptionCell()
-
-            default:
-                guard let url = info.url else { return }
-                present(customSafariViewController(url: url), animated: true)
-            }
+            guard let url = info.url else { return }
+            present(customSafariViewController(url: url), animated: true)
 
         case .logout:
             switch indexPath.row {
@@ -192,33 +185,6 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
         present(controller, animated: true, completion: nil)
-    }
-
-    private func didSelectDebugSubscriptionCell() {
-        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%K <= %@ && complete = true", #keyPath(Review.nextReviewDate), NSDate())
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
-        ]
-
-        var string = ""
-
-        do {
-            let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
-            string = reviews.description
-        } catch {
-            log.error(error)
-            string = String(describing: error)
-        }
-
-        let emailViewCtrl = MFMailComposeViewController()
-        emailViewCtrl.setSubject("BunPro bad reviews")
-        emailViewCtrl.setMessageBody(string, isHTML: true)
-        emailViewCtrl.setToRecipients(["rion-kaneshiro@gmx.net"])
-
-        emailViewCtrl.mailComposeDelegate = self
-
-        present(emailViewCtrl, animated: true, completion: nil)
     }
 
     private func didSelectLogoutCell(_ cell: UITableViewCell) {
@@ -345,9 +311,6 @@ extension SettingsTableViewController.Info {
 
         case .terms:
             return URL(string: "https://bunpro.jp/terms")
-
-        case .debug:
-            return nil
         }
     }
 }

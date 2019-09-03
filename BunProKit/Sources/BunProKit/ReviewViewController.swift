@@ -3,11 +3,14 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
+import CoreData
 import UIKit
 import WebKit
+import SafariServices
 
 protocol ReviewViewControllerDelegate: class {
     func reviewViewControllerDidFinish(_ controller: ReviewViewController)
+    func reviewViewControllerWillOpenGrammar(_ controller: ReviewViewController, identifier: Int)
 }
 
 public enum Website {
@@ -107,5 +110,47 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
             self.webView.alpha = 1.0
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        if isValidBunproURL(navigationAction.request.url) {
+            if let identifier = grammarPointIdentifier(for: navigationAction.request.url) {
+                delegate?.reviewViewControllerWillOpenGrammar(self, identifier: identifier)
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
+        } else {
+            if let url = navigationAction.request.url {
+                let safariViewController = SFSafariViewController(url: url)
+                present(safariViewController, animated: true, completion: nil)
+            }
+            
+            decisionHandler(.cancel)
+        }
+    }
+    
+    private func isValidBunproURL(_ url: URL?) -> Bool {
+        if url?.scheme == "about" { return true }
+        guard let host = url?.host else { return false }
+        return [
+            "www.bunpro.jp",
+            "bunpro.jp",
+            "js.stripe.com",
+            "m.stripe.network"
+        ].contains(host)
+    }
+    
+    private func grammarPointIdentifier(for url: URL?) -> Int? {
+        guard
+            url?.pathComponents.contains("grammar_points") ?? false,
+            let idString = url?.pathComponents.last,
+            let id = Int(idString)
+            else { return nil }
+        
+        print(id)
+        
+        return id
     }
 }
