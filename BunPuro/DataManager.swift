@@ -14,7 +14,7 @@ final class DataManager {
     private let procedureQueue = ProcedureQueue()
 
     let presentingViewController: UIViewController
-    private let persistentContainer: NSPersistentContainer
+    let database: Database
 
     private var loginObserver: NotificationToken?
     private var logoutObserver: NotificationToken?
@@ -29,9 +29,9 @@ final class DataManager {
         }
     }
 
-    init(presentingViewController: UIViewController, persistentContainer: NSPersistentContainer = AppDelegate.coreDataStack.storeContainer) {
+    init(presentingViewController: UIViewController, database: Database) {
         self.presentingViewController = presentingViewController
-        self.persistentContainer = persistentContainer
+        self.database = database
 
         loginObserver = NotificationCenter.default.observe(name: .ServerDidLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             self?.updateGrammarDatabase()
@@ -86,42 +86,22 @@ final class DataManager {
         self.scheduleUpdateProcedure()
     }
 
-    private func updateGrammarDatabase() {
-        let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
-        Server.add(procedure: updateProcedure)
+    private func needsGrammarDatabaseUpdate() -> Bool {
+        let lastUpdate = UserDefaults.standard.lastDatabaseUpdate
+
+        return Date().hours(from: lastUpdate) > 7 * 24
     }
 
-    func signupForTrial() {
-        self.isUpdating = true
+    private func updateGrammarDatabase() {
+        guard needsGrammarDatabaseUpdate() else { return }
 
-        let signupForTrialProcedure = ActivateTrialPeriodProcedure(presentingViewController: presentingViewController) { user, _ in
-            guard let user = user else {
-                DispatchQueue.main.async {
-                    self.isUpdating = false
-                }
-
-                return
-            }
-
-            DispatchQueue.main.async {
-                let importProcedure = ImportAccountIntoCoreDataProcedure(account: user, progress: nil)
-
-                importProcedure.addDidFinishBlockObserver { _, _ in
-                    self.isUpdating = false
-                }
-
-                self.procedureQueue.addOperation(importProcedure)
+        let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
+        updateProcedure.addDidFinishBlockObserver { _, error in
+            if error == nil {
+                UserDefaults.standard.lastDatabaseUpdate = Date()
             }
         }
-
-        Server.add(procedure: signupForTrialProcedure)
-    }
-
-    func signup() {
-        let url = URL(string: "https://bunpro.jp")!
-        let safariViewCtrl = SFSafariViewController(url: url)
-
-        presentingViewController.present(safariViewCtrl, animated: true, completion: nil)
+        Server.add(procedure: updateProcedure)
     }
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
@@ -145,19 +125,14 @@ final class DataManager {
         let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { user, reviews, _ in
             DispatchQueue.main.async {
                 if let user = user {
-                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
-
-                    importProcedure.addDidFinishBlockObserver { _, _ in
-                        self.isUpdating = false
-                    }
-
-                    self.procedureQueue.addOperation(importProcedure)
+                    self.database.updateAccount(user)
+                    self.isUpdating = false
                 }
 
                 if let reviews = reviews {
                     let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
 
-                    let importProcedure = ImportReviewsIntoCoreDataProcedure(reviews: reviews)
+                    let importProcedure = UpdateReviewsProcedure(reviews: reviews)
 
                     importProcedure.addDidFinishBlockObserver { _, _ in
                         self.isUpdating = false

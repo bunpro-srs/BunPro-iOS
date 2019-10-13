@@ -37,13 +37,13 @@ final class StatusTableViewController: UITableViewController {
 
         beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = AppDelegate.isUpdating
+                self.statusCell()?.isUpdating = true
             }
         }
 
         endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = AppDelegate.isUpdating
+                self.statusCell()?.isUpdating = false
                 self.refreshControl?.endRefreshing()
 
                 guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
@@ -96,8 +96,6 @@ final class StatusTableViewController: UITableViewController {
         case 0:
             if AppDelegate.isContentAccessable {
                 return 3 // Review, Cram and Study
-            } else if AppDelegate.isTrialPeriodAvailable {
-                return 1
             } else {
                 return 0
             }
@@ -115,11 +113,6 @@ final class StatusTableViewController: UITableViewController {
                 if AppDelegate.isContentAccessable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
                     updateStatusCell(cell)
-
-                    return cell
-                } else if AppDelegate.isTrialPeriodAvailable {
-                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-                    cell.titleLabel.text = L10n.Status.signuptrail
 
                     return cell
                 } else {
@@ -183,10 +176,6 @@ final class StatusTableViewController: UITableViewController {
                     } else {
                         presentReviewViewController(website: .main)
                     }
-                } else if AppDelegate.isTrialPeriodAvailable {
-                    AppDelegate.signupForTrial()
-                } else if Account.currentAccount != nil {
-                    AppDelegate.signup()
                 }
 
             case 1:
@@ -212,7 +201,7 @@ final class StatusTableViewController: UITableViewController {
             request.predicate = NSPredicate(format: "%K == %d", #keyPath(Grammar.identifier), identifier)
             request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)]
 
-            if let grammar = try? AppDelegate.coreDataStack.managedObjectContext.fetch(request).first {
+            if let grammar = try? AppDelegate.database.viewContext.fetch(request).first {
                 let grammarViewCtrl = StoryboardScene.GrammarDetail.grammarTableViewController.instantiate()
                 grammarViewCtrl.grammar = grammar
 
@@ -258,23 +247,22 @@ final class StatusTableViewController: UITableViewController {
     private var lastUpdateDate: Date?
 
     private func setup(reviews: [Review]?) {
-        if let reviewDate = reviews?.nextReviewDate, self.nextReviewDate != reviewDate {
+        let reviewDate = reviews?.nextReviewDate
+        if let reviewDate = reviewDate, self.nextReviewDate != reviewDate {
             UserNotificationCenter.shared.scheduleNextReviewNotification(at: reviewDate, reviewCount: reviews?.count ?? 0)
         }
 
-        DispatchQueue.default.async {
-            self.nextReviewDate = reviews?.nextReviewDate
+        self.nextReviewDate = reviewDate
 
-            self.reviews = reviews
-            self.lastUpdateDate = Date()
+        self.reviews = reviews
+        self.lastUpdateDate = Date()
 
-            DispatchQueue.main.async {
-                if let cell = self.statusCell() {
-                    self.updateStatusCell(cell)
-                }
-
-                AppDelegate.updateAppBadgeIcon()
+        DispatchQueue.main.async {
+            if let cell = self.statusCell() {
+                self.updateStatusCell(cell)
             }
+
+            AppDelegate.updateAppBadgeIcon()
         }
     }
 
@@ -332,10 +320,14 @@ extension StatusTableViewController: SFSafariViewControllerDelegate {
 
 extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
     func fetchedResultsAccountDidChange(account: Account?) {
-        setup(account: account)
+        account?.managedObjectContext?.perform { [weak self] in
+            self?.setup(account: account)
+        }
     }
 
     func fetchedResultsReviewsDidChange(reviews: [Review]?) {
-        setup(reviews: reviews)
+        reviews?.first?.managedObjectContext?.perform { [weak self] in
+            self?.setup(reviews: reviews)
+        }
     }
 }

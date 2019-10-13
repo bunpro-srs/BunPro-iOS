@@ -9,11 +9,15 @@ import Foundation
 import ProcedureKit
 
 final class ImportAccountIntoCoreDataProcedure: Procedure {
-    let stack: CoreDataStack
+    let stack: NSPersistentContainer
     let account: BPKAccount
     let progress: BPKAccountProgress?
 
-    init(account: BPKAccount, progress: BPKAccountProgress? = nil, stack: CoreDataStack = AppDelegate.coreDataStack) {
+    deinit {
+        print("\(self) deinit")
+    }
+
+    init(account: BPKAccount, progress: BPKAccountProgress? = nil, stack: NSPersistentContainer = AppDelegate.database.persistantContainer) {
         self.stack = stack
         self.account = account
         self.progress = progress
@@ -24,7 +28,7 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
     override func execute() {
         guard !isCancelled else { return }
 
-        stack.storeContainer.performBackgroundTask { context in
+        stack.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
 
             _ = Account(account: self.account, context: context)

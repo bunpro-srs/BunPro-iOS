@@ -13,6 +13,11 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
 
     private var player: AVPlayer?
 
+    deinit {
+        log.info("deinit \(String(describing: self))")
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,7 +35,7 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
 
         fetchedResultsController = NSFetchedResultsController<Sentence>(
             fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

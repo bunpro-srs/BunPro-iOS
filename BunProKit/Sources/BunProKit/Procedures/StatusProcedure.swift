@@ -32,8 +32,9 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
 
         addCondition(LoggedInCondition(presentingViewController: presentingViewController))
     }
-
-    override public func procedureDidFinish(with error: Error?) {
+    
+    public override func procedureWillFinish(with error: Error?) {
+        
         guard error == nil else {
             output = Pending.ready(ProcedureResult.failure(error ?? ServerError.unknown))
             return
@@ -59,10 +60,14 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
                     break
                 }
             }
-
-            completion?(user, reviews, error)
         }
 
         output = Pending.ready(ProcedureResult.success((user, reviews)))
+    }
+    
+    public override func procedureDidFinish(with error: Error?) {
+        let account = output.value?.value?.0
+        let reviews = output.value?.value?.1
+        completion?(account, reviews, output.error)
     }
 }

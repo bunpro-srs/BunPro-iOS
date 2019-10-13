@@ -62,8 +62,8 @@ public struct BPKGrammar: Codable {
         case lessonIdentifier = "lesson_id"
         case isNew = "new_grammar"
         case yomikata
-        case exampleSentences = "example_sentences"
-        case supplementalLinks = "supplemental_links"
+        case sentences = "example_sentences"
+        case links = "supplemental_links"
         case createdDate = "created_at"
         case updatedDate = "updated_at"
     }
@@ -81,8 +81,8 @@ public struct BPKGrammar: Codable {
     public let lessonIdentifier: Int
     public let isNew: Bool
     public let yomikata: String
-    public let exampleSentences: [BPKSentence]
-    public let supplementalLinks: [BPKLink]
+    public let sentences: [BPKSentence]
+    public let links: [BPKLink]
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -99,8 +99,8 @@ public struct BPKGrammar: Codable {
         lessonIdentifier = (try? values.decode(Int.self, forKey: .lessonIdentifier)) ?? 0
         isNew = try values.decode(Bool.self, forKey: .isNew)
         yomikata = (try? values.decode(String.self, forKey: .yomikata)) ?? ""
-        exampleSentences = try values.decode([BPKSentence].self, forKey: .exampleSentences)
-        supplementalLinks = try values.decode([BPKLink].self, forKey: .supplementalLinks)
+        sentences = try values.decode([BPKSentence].self, forKey: .sentences)
+        links = try values.decode([BPKLink].self, forKey: .links)
     }
 }
 

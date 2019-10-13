@@ -22,6 +22,10 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
     var url: URL { fatalError("Needs to be implemented by the subclass.") }
     var hasMilliseconds: Bool { return false }
 
+    deinit {
+        print("\(self) deinit")
+    }
+    
     public init(presentingViewController: UIViewController, completion: ((T?, Error?) -> Void)? = nil) {
         self.completion = completion
 

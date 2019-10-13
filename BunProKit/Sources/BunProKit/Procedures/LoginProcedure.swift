@@ -23,6 +23,10 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     private let email: String
     private let password: String
 
+    deinit {
+        print("\(self) deinit")
+    }
+    
     init(username: String, password: String, completion: @escaping (Token?, Error?) -> Void) {
         self.email = username
         self.password = password

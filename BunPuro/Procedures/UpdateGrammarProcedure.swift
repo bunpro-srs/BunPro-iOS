@@ -26,9 +26,9 @@ final class UpdateGrammarProcedure: GroupProcedure {
 
 fileprivate final class BatchImportGrammarPointsIntoCoreDataProcedure: GroupProcedure, InputProcedure {
     var input: Pending<[BPKGrammar]> = .pending
-    let stack: CoreDataStack
-
-    init(stack: CoreDataStack = AppDelegate.coreDataStack) {
+    let stack: NSPersistentContainer
+    
+    init(stack: NSPersistentContainer = AppDelegate.database.persistantContainer) {
         self.stack = stack
         super.init(operations: [])
     }
@@ -37,9 +37,7 @@ fileprivate final class BatchImportGrammarPointsIntoCoreDataProcedure: GroupProc
         guard !isCancelled else { return }
         guard let grammarPoints = input.value else { return }
 
-        let batches: [[BPKGrammar]] = ["JLPT5", "JLPT4", "JLPT3", "JLPT2", "JLPT1"].map { level in
-            return grammarPoints.filter { $0.level == level }
-        }
+        let batches: [[BPKGrammar]] = grammarPoints.chunked(into: 30)
 
         batches.forEach { self.addChild(ImportGrammarPointsIntoCoreDataProcedure(stack: stack, grammarPoints: $0)) }
 
@@ -47,11 +45,11 @@ fileprivate final class BatchImportGrammarPointsIntoCoreDataProcedure: GroupProc
     }
 }
 
-fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure {
-    let stack: CoreDataStack
+final class ImportGrammarPointsIntoCoreDataProcedure: Procedure {
+    let stack: NSPersistentContainer
     let grammarPoints: [BPKGrammar]
 
-    init(stack: CoreDataStack, grammarPoints: [BPKGrammar]) {
+    init(stack: NSPersistentContainer, grammarPoints: [BPKGrammar]) {
         self.stack = stack
         self.grammarPoints = grammarPoints
         super.init()
@@ -60,7 +58,7 @@ fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure {
     override func execute() {
         guard !isCancelled else { return }
 
-        stack.storeContainer.performBackgroundTask { context in
+        stack.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             self.grammarPoints.filter { $0.level != "0" }.forEach { Grammar(grammar: $0, context: context) }
 
@@ -68,7 +66,6 @@ fileprivate final class ImportGrammarPointsIntoCoreDataProcedure: Procedure {
                 try context.save()
 
                 DispatchQueue.main.async {
-                    self.stack.save()
                     self.finish()
                 }
             } catch {

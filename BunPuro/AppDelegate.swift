@@ -14,12 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didSet { window?.tintColor = Asset.tint.color }
     }
 
-    static var coreDataStack: CoreDataStack {
-        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+    static var database: Database {
+        return (UIApplication.shared.delegate as! AppDelegate).database
     }
 
     private var modelName: String = "BunPro"
-    lazy var coreDataStack = CoreDataStack(modelName: modelName)
+    lazy var database = Database(modelName: modelName)
 
     private var dataManager: DataManager?
 
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let rootViewCtrl = window?.rootViewController {
-            dataManager = DataManager(presentingViewController: rootViewCtrl)
+            dataManager = DataManager(presentingViewController: rootViewCtrl, database: database)
         }
 
         return true
@@ -62,11 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        coreDataStack.save()
+        database.save()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        coreDataStack.save()
+        database.save()
     }
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -119,26 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
 
-    static func signupForTrial() {
-        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signupForTrial()
-    }
-
-    static func signup() {
-        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signup()
-    }
-
-    static var isUpdating: Bool {
-        return (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.isUpdating ?? false
-    }
-
-    static var isTrialPeriodAvailable: Bool {
-        let hasBegun = Date() > Date(day: 10, month: 5, year: 2_018)
-        let hasEnded = Date() > Date(day: 11, month: 6, year: 2_018)
-        return hasBegun && !hasEnded
-    }
-
     static var isContentAccessable: Bool {
-        guard Date() > Date(day: 10, month: 5, year: 2_018) else { return true }
         return Account.currentAccount?.subscriber ?? false
     }
 
@@ -252,7 +233,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         ]
 
         do {
-            let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
+            let reviews = try AppDelegate.database.viewContext.fetch(fetchRequest)
             return NSNumber(value: reviews.count)
         } catch {
             log.error(error)

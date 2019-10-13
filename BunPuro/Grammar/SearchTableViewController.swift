@@ -19,6 +19,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         let fetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
 
         fetchRequest.predicate = searchPredicate()
+        fetchRequest.fetchBatchSize = 15
 
         let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.level), ascending: false)
         let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lessonIdentifier), ascending: true)
@@ -27,7 +28,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
 
         let controller = NSFetchedResultsController<Grammar>(
             fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: #keyPath(Grammar.level),
             cacheName: nil
         )
@@ -44,7 +45,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
 
         let controller = NSFetchedResultsController<Review>(
             fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

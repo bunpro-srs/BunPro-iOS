@@ -29,7 +29,7 @@ extension Account {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
 
         do {
-            return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
+            return try AppDelegate.database.viewContext.fetch(fetchRequest).first
         } catch {
             log.error(error)
             return nil

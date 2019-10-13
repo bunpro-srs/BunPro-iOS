@@ -59,7 +59,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
         fetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: #keyPath(Grammar.lessonIdentifier),
             cacheName: nil
         )

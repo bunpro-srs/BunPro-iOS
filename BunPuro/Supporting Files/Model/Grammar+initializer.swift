@@ -24,8 +24,8 @@ extension Grammar {
         title = grammar.title
         yomikata = grammar.yomikata
 
-        grammar.supplementalLinks.forEach { Link(link: $0, grammar: self, context: context) }
-        grammar.exampleSentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
+        grammar.links.forEach { Link(link: $0, grammar: self, context: context) }
+        grammar.sentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
     }
 }
 

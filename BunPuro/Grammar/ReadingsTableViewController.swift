@@ -28,7 +28,7 @@ class ReadingsTableViewController: CoreDataFetchedResultsTableViewController<Lin
 
         fetchedResultsController = NSFetchedResultsController<Link>(
             fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

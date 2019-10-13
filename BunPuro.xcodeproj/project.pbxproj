@@ -27,6 +27,7 @@
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
+		2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E528A20234898740061A92D /* UserDefaults+Custom.swift */; };
 		2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */; };
 		2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */; };
 		2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B368F2077E1DA00542BB8 /* JLPTProgressTableViewCell.swift */; };
@@ -53,10 +54,11 @@
 		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
 		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2ECBE3EA203B5B8B00F20EE3 /* KanjiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */; };
+		2EE0AEB323299F4B00E4BD64 /* Array+Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */; };
 		2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */; };
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
-		2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
+		2EFFE3DD2329893500EA74D4 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE3DC2329893500EA74D4 /* Database.swift */; };
 		A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */; };
 		A1225EE9226D7DA300EA2885 /* Collection+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE8226D7DA300EA2885 /* Collection+Review.swift */; };
 		A146F316227025B4002DC511 /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F315227025B4002DC511 /* NotificationToken.swift */; };
@@ -126,6 +128,7 @@
 		2E48ABB420C1A19400BA660B /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
 		2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Initializer.swift"; sourceTree = "<group>"; };
+		2E528A20234898740061A92D /* UserDefaults+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Custom.swift"; sourceTree = "<group>"; };
 		2E59790E20C6E6AD0007E9BE /* BunPuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BunPuro-Bridging-Header.h"; sourceTree = "<group>"; };
 		2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
 		2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,10 +162,11 @@
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiTableViewController.swift; sourceTree = "<group>"; };
+		2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Batch.swift"; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
-		2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
+		2EFFE3DC2329893500EA74D4 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StatusTableView.swift"; sourceTree = "<group>"; };
 		A1225EE8226D7DA300EA2885 /* Collection+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Review.swift"; sourceTree = "<group>"; };
 		A146F315227025B4002DC511 /* NotificationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
@@ -221,6 +225,8 @@
 				2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */,
 				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
 				2E7B3699208532BC00542BB8 /* UIView+Motion.swift */,
+				2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */,
+				2E528A20234898740061A92D /* UserDefaults+Custom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,7 +239,6 @@
 				2EAD9DE11FA25DF100CE52CF /* Info.plist */,
 				2E7B3697208516B200542BB8 /* Localizable.stringsdict */,
 				A1D6C147226B568600D25DF1 /* BartyCrouch.swift */,
-				2EFB5F981FB389C0004D3DF5 /* CoreDataStack.swift */,
 				2E3074921FACF9640078725B /* InfoPlist.strings */,
 				2EAD9DDE1FA25DF100CE52CF /* LaunchScreen.storyboard */,
 				2E30749E1FACF9660078725B /* Localizable.strings */,
@@ -337,6 +342,7 @@
 				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
+				2EFFE3DC2329893500EA74D4 /* Database.swift */,
 				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
 				2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */,
 				A1D6C149226B56A200D25DF1 /* Generated */,
@@ -648,10 +654,10 @@
 				A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */,
 				A146F32022703907002DC511 /* StatusFetchedResultsController.swift in Sources */,
 				2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */,
+				2EFFE3DD2329893500EA74D4 /* Database.swift in Sources */,
 				A146F31822702634002DC511 /* NotificationCenter+NotificationToken.swift in Sources */,
 				2E1DCA251FC49A72002E67D6 /* GrammarTableViewController.swift in Sources */,
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
-				2EFB5F991FB389C0004D3DF5 /* CoreDataStack.swift in Sources */,
 				2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */,
 				A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */,
 				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
@@ -663,7 +669,9 @@
 				2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */,
 				2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */,
 				A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */,
+				2EE0AEB323299F4B00E4BD64 /* Array+Batch.swift in Sources */,
 				2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */,
+				2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */,
 				2E7B369A208532BC00542BB8 /* UIView+Motion.swift in Sources */,
@@ -884,7 +892,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
@@ -910,7 +918,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";

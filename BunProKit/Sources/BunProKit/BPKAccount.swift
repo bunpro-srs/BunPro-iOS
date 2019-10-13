@@ -19,7 +19,7 @@ public enum Active: String, Codable {
             logger.warning("Invalid value for \(Active.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"", "\"Yes\"":
+            case #""On""#, "Show", #""Show""#, #""Yes""#:
                 self = .yes
 
             default:
@@ -37,6 +37,7 @@ public enum Visible: String, Codable {
     case hide = "Hide"
     case minimal = "Minimal"
     case hint = "Hint"
+    case nuance = "Always Show Nuance"
 
     public init(from decoder: Decoder) throws {
         guard let value = try? decoder.singleValueContainer().decode(String.self) else {
@@ -48,10 +49,10 @@ public enum Visible: String, Codable {
             logger.warning("Invalid value for \(Visible.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"":
+            case #""On""#, "Show", #""Show""#:
                 self = .show
 
-            case "\"Minimal\"":
+            case #""Minimal""#:
                 self = .minimal
 
             default:
@@ -78,7 +79,7 @@ public enum State: String, Codable {
             logger.warning("Invalid value for \(State.self): \(value)")
 
             switch value {
-            case "\"On\"", "Show", "\"Show\"":
+            case #""On""#, "Show", #""Show""#:
                 self = .on
 
             default:
@@ -124,10 +125,10 @@ public enum FuriganaMode: String, Codable {
             logger.warning("Invalid value for \(FuriganaMode.self): \(value)")
 
             switch value {
-            case "On", #""On""#, #""Show""#, "Yes", "\"Yes\"":
+            case "On", #""On""#, #""Show""#, "Yes", #""Yes""#:
                 self = .on
 
-            case "Wanikani", "\"Wanikani\"":
+            case "Wanikani", #""Wanikani""#:
                 self = .wanikani
 
             default:

@@ -49,7 +49,7 @@ class GrammarFetchedResultsController: NSObject {
 
         exampleSentencesFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -72,7 +72,7 @@ class GrammarFetchedResultsController: NSObject {
 
         readingsFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
