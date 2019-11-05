@@ -121,6 +121,7 @@ final class DataManager {
 
     func scheduleUpdateProcedure(completion: ((UIBackgroundFetchResult) -> Void)? = nil) {
         self.isUpdating = true
+//        Server.statusPublisher(presentingViewController: presentingViewController)
 
         let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { user, reviews, _ in
             DispatchQueue.main.async {

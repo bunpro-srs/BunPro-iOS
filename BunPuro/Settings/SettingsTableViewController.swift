@@ -7,10 +7,17 @@ import BunProKit
 import CoreData
 import MessageUI
 import ProcedureKit
+import Protocols
 import SafariServices
 import UIKit
 
-final class SettingsTableViewController: UITableViewController {
+final class SettingsTableViewController: UITableViewController, SegueHandler {
+    enum SegueIdentifier: String {
+        case privacy = "present privacy"
+        case about = "present about"
+        case terms = "present terms"
+    }
+
     private enum Section: Int {
         case settings
         case information
@@ -89,9 +96,20 @@ final class SettingsTableViewController: UITableViewController {
             }
 
         case .information:
-            let info = Info(rawValue: indexPath.row)!
-            guard let url = info.url else { return }
-            present(customSafariViewController(url: url), animated: true)
+
+            guard let info = Info(rawValue: indexPath.row) else { return }
+            switch info {
+            case .community:
+                guard let url = info.url else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            case .contact:
+                let url = URL(string: "mailto:feedback@mail.bunpro.jp")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            case .about, .privacy, .terms:
+                break
+            }
 
         case .logout:
             switch indexPath.row {
@@ -238,13 +256,17 @@ final class SettingsTableViewController: UITableViewController {
         tableView.endUpdates()
     }
 
-    private func customSafariViewController(url: URL) -> SFSafariViewController {
-        let configuration = SFSafariViewController.Configuration()
-        configuration.entersReaderIfAvailable = true
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .privacy:
+            (segue.destination.content as? InformationTableViewController)?.category = .privacy
 
-        let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
+        case .about:
+            (segue.destination.content as? InformationTableViewController)?.category = .about
 
-        return safariViewCtrl
+        case .terms:
+            (segue.destination.content as? InformationTableViewController)?.category = .terms
+        }
     }
 }
 
@@ -301,16 +323,16 @@ extension SettingsTableViewController.Info {
             return URL(string: "https://community.bunpro.jp/")
 
         case .about:
-            return URL(string: "https://bunpro.jp/about")
+            return nil // URL(string: "https://bunpro.jp/about")
 
         case .contact:
             return URL(string: "https://bunpro.jp/contact")
 
         case .privacy:
-            return URL(string: "https://bunpro.jp/privacy")
+            return nil // URL(string: "https://bunpro.jp/privacy")
 
         case .terms:
-            return URL(string: "https://bunpro.jp/terms")
+            return nil // URL(string: "https://bunpro.jp/terms")
         }
     }
 }

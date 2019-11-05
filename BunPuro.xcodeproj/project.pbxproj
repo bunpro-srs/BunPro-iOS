@@ -28,6 +28,7 @@
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
 		2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E528A20234898740061A92D /* UserDefaults+Custom.swift */; };
+		2E6C97082372269B00073707 /* StatusObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C97072372269B00073707 /* StatusObserver.swift */; };
 		2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */; };
 		2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */; };
 		2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B368F2077E1DA00542BB8 /* JLPTProgressTableViewCell.swift */; };
@@ -54,6 +55,11 @@
 		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
 		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2ECBE3EA203B5B8B00F20EE3 /* KanjiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */; };
+		2ECDB1DE236CB12C00B28A29 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */; };
+		2ECDB1E0236CB1D000B28A29 /* privacy.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDB1DF236CB1D000B28A29 /* privacy.json */; };
+		2ECDB1E2236CB2FA00B28A29 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */; };
+		2ECDB1E4236CBED500B28A29 /* about.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDB1E3236CBED500B28A29 /* about.json */; };
+		2ECDB1E6236CDBA400B28A29 /* terms.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDB1E5236CD89A00B28A29 /* terms.json */; };
 		2EE0AEB323299F4B00E4BD64 /* Array+Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */; };
 		2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */; };
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
@@ -130,6 +136,7 @@
 		2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Initializer.swift"; sourceTree = "<group>"; };
 		2E528A20234898740061A92D /* UserDefaults+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Custom.swift"; sourceTree = "<group>"; };
 		2E59790E20C6E6AD0007E9BE /* BunPuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BunPuro-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E6C97072372269B00073707 /* StatusObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusObserver.swift; sourceTree = "<group>"; };
 		2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
 		2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
 		2E7B368F2077E1DA00542BB8 /* JLPTProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLPTProgressTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +169,11 @@
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiTableViewController.swift; sourceTree = "<group>"; };
+		2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		2ECDB1DF236CB1D000B28A29 /* privacy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = privacy.json; sourceTree = "<group>"; };
+		2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
+		2ECDB1E3236CBED500B28A29 /* about.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = about.json; sourceTree = "<group>"; };
+		2ECDB1E5236CD89A00B28A29 /* terms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = terms.json; sourceTree = "<group>"; };
 		2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Batch.swift"; sourceTree = "<group>"; };
 		2EE7C2181FD8722700DA9AB8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
@@ -287,6 +299,7 @@
 				2E01D1FC1FB241A300E8632D /* GrammarLevelTableViewController.swift */,
 				A146F31F22703907002DC511 /* StatusFetchedResultsController.swift */,
 				2EAD9DD51FA25DF100CE52CF /* StatusTableViewController.swift */,
+				2E6C97072372269B00073707 /* StatusObserver.swift */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -351,6 +364,7 @@
 				2E6755891FFFEA1200BD10EB /* Notification */,
 				2E6755871FFFE9C100BD10EB /* Procedures */,
 				2E67558C1FFFEA5000BD10EB /* Settings */,
+				2ECDB1DC236CB0FE00B28A29 /* Web */,
 				2E67558A1FFFEA2900BD10EB /* Status */,
 				2E30749F1FACF96E0078725B /* Supporting Files */,
 				2E6755881FFFE9FF00BD10EB /* UI */,
@@ -393,6 +407,18 @@
 				2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2ECDB1DC236CB0FE00B28A29 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */,
+				2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */,
+				2ECDB1DF236CB1D000B28A29 /* privacy.json */,
+				2ECDB1E5236CD89A00B28A29 /* terms.json */,
+				2ECDB1E3236CBED500B28A29 /* about.json */,
+			);
+			path = Web;
 			sourceTree = "<group>";
 		};
 		A1D6C149226B56A200D25DF1 /* Generated */ = {
@@ -556,9 +582,12 @@
 				2E7B3698208516B200542BB8 /* Localizable.stringsdict in Resources */,
 				2EBA417522EA003500D2765C /* GrammarDetail.storyboard in Resources */,
 				2E3D43C8201B559A00B4D5EF /* BunPro.sqlite-shm in Resources */,
+				2ECDB1E0236CB1D000B28A29 /* privacy.json in Resources */,
 				2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */,
 				2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */,
+				2ECDB1E6236CDBA400B28A29 /* terms.json in Resources */,
 				2E3074901FACF9640078725B /* InfoPlist.strings in Resources */,
+				2ECDB1E4236CBED500B28A29 /* about.json in Resources */,
 				2EAD9DDD1FA25DF100CE52CF /* Assets.xcassets in Resources */,
 				2EAD9DDB1FA25DF100CE52CF /* Main.storyboard in Resources */,
 			);
@@ -660,6 +689,7 @@
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
 				2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */,
 				A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */,
+				2ECDB1E2236CB2FA00B28A29 /* Paragraph.swift in Sources */,
 				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
 				2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */,
 				2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */,
@@ -687,7 +717,9 @@
 				2E01D2121FB2686600E8632D /* SearchTableViewController.swift in Sources */,
 				2E7B36922078144B00542BB8 /* GrammarHeaderTableViewCell.swift in Sources */,
 				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
+				2E6C97082372269B00073707 /* StatusObserver.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
+				2ECDB1DE236CB12C00B28A29 /* InformationViewController.swift in Sources */,
 				A1D6C1AA226BC15900D25DF1 /* Logger.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
 				2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */,
@@ -822,7 +854,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -875,7 +907,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -892,7 +924,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 61;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
@@ -918,7 +951,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 61;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";

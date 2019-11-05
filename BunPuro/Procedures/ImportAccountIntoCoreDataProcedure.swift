@@ -13,10 +13,6 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
     let account: BPKAccount
     let progress: BPKAccountProgress?
 
-    deinit {
-        print("\(self) deinit")
-    }
-
     init(account: BPKAccount, progress: BPKAccountProgress? = nil, stack: NSPersistentContainer = AppDelegate.database.persistantContainer) {
         self.stack = stack
         self.account = account

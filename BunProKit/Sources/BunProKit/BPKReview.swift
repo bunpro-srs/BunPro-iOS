@@ -47,36 +47,3 @@ public struct BPKReview: Codable {
     public let wasCorrect: Bool?
     public let selfStudy: Bool
 }
-
-/*
- {
- history =             (
- {
- attempts = 1;
- id = 1060;
- status = 1;
- streak = 1;
- time = "2018-07-05 06:00:00 +0000";
- }, ...
- );
- "missed_question_ids" =             (
- );
- "review_misses" = 0;
- "review_type" = standard;
- "studied_question_ids" =             (
- 1060, ...
- );
- }
- */
-
-/*
-{
-    history =             (
-    );
-    "review_misses" = 0;
-    "review_type" = ghost;
-    "self_study" = 0;
-},
- 
- 
-*/

@@ -65,6 +65,9 @@
 /* Class = "UILabel"; text = "Community"; ObjectID = "nDo-ag-hir"; */
 "nDo-ag-hir.text" = "Community";
 
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "oQn-yk-LR5"; */
+"oQn-yk-LR5.text" = "Subtitle";
+
 /* Class = "UILabel"; text = "Detail"; ObjectID = "pEt-ao-5Kl"; */
 "pEt-ao-5Kl.text" = "Detail";
 
@@ -85,6 +88,9 @@
 
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "zAB-rS-aRQ"; */
+"zAB-rS-aRQ.text" = "Title";
 
 /* Class = "UITableViewSection"; footerTitle = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct."; ObjectID = "ZHM-bl-R9P"; */
 "ZHM-bl-R9P.footerTitle" = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct.";

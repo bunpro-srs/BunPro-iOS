@@ -15,10 +15,7 @@ private let updateInterval = TimeInterval(60)
 final class StatusTableViewController: UITableViewController {
     var showReviewsOnViewDidAppear: Bool = false
 
-    private var logoutObserver: NotificationToken?
-    private var beginUpdateObserver: NotificationToken?
-    private var endUpdateObserver: NotificationToken?
-    private var pendingModificationObserver: NotificationToken?
+    private var statusObserver: StatusObserverProtocol?
 
     private var nextReviewDate: Date?
     private var reviews: [Review]?
@@ -28,41 +25,37 @@ final class StatusTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.setup(account: nil)
-                self?.setup(reviews: nil)
+        statusObserver = StatusObserver.newObserver()
+
+        statusObserver?.didLogout = { [weak self] in
+            self?.setup(account: nil)
+            self?.setup(reviews: nil)
+        }
+
+        statusObserver?.willBeginUpdating = { [weak self] in
+            self?.statusCell()?.isUpdating = true
+        }
+
+        statusObserver?.didEndUpdating = { [weak self] in
+            guard let `self` = self else { return }
+
+            self.statusCell()?.isUpdating = false
+            self.refreshControl?.endRefreshing()
+
+            guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
+
+            visibleIndexPaths.forEach {
+                guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
+
+                let level = 5 - $0.row
+                let metric = self.fetchedResultsController.metricForLevel(level)
+
+                self.updateJLPTCell(cell, level: level, metric: metric)
             }
         }
 
-        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = true
-            }
-        }
-
-        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = false
-                self.refreshControl?.endRefreshing()
-
-                guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
-
-                visibleIndexPaths.forEach {
-                    guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
-
-                    let level = 5 - $0.row
-                    let metric = self.fetchedResultsController.metricForLevel(level)
-
-                    self.updateJLPTCell(cell, level: level, metric: metric)
-                }
-            }
-        }
-
-        pendingModificationObserver = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
-            }
+        statusObserver?.didUpdateReview = { [weak self] in
+            self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
 
         fetchedResultsController.delegate = self

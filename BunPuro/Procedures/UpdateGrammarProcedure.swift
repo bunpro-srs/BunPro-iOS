@@ -27,7 +27,7 @@ final class UpdateGrammarProcedure: GroupProcedure {
 fileprivate final class BatchImportGrammarPointsIntoCoreDataProcedure: GroupProcedure, InputProcedure {
     var input: Pending<[BPKGrammar]> = .pending
     let stack: NSPersistentContainer
-    
+
     init(stack: NSPersistentContainer = AppDelegate.database.persistantContainer) {
         self.stack = stack
         super.init(operations: [])
