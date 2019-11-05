@@ -18,8 +18,7 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
     private var searchBarButtonItem: UIBarButtonItem!
     private var activityIndicatorView: UIActivityIndicatorView?
 
-    private var willUpdateObserver: NotificationToken?
-    private var didUpdateObserver: NotificationToken?
+    private var statusObserver: StatusObserverProtocol?
 
     deinit {
         log.info("deinit \(String(describing: self))")
@@ -28,6 +27,8 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        statusObserver = StatusObserver.newObserver()
 
         if #available(iOS 13.0, *) {
             activityIndicatorView = UIActivityIndicatorView(style: .medium)
@@ -39,11 +40,11 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         searchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         navigationItem.rightBarButtonItems = [/*searchBarButtonItem, */UIBarButtonItem(customView: activityIndicatorView!)]
 
-        willUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+        statusObserver?.willBeginUpdating = { [weak self] in
             self?.activityIndicatorView?.startAnimating()
         }
 
-        didUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+        statusObserver?.didEndUpdating = { [weak self] in
             self?.activityIndicatorView?.stopAnimating()
             self?.tableView.reloadData()
         }

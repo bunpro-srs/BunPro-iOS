@@ -55,7 +55,7 @@
 		2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C420165DF6001AE42E /* Review+Initializer.swift */; };
 		2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */; };
 		2ECBE3EA203B5B8B00F20EE3 /* KanjiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */; };
-		2ECDB1DE236CB12C00B28A29 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */; };
+		2ECDB1DE236CB12C00B28A29 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDB1DD236CB12C00B28A29 /* InformationTableViewController.swift */; };
 		2ECDB1E0236CB1D000B28A29 /* privacy.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDB1DF236CB1D000B28A29 /* privacy.json */; };
 		2ECDB1E2236CB2FA00B28A29 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */; };
 		2ECDB1E4236CBED500B28A29 /* about.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDB1E3236CBED500B28A29 /* about.json */; };
@@ -169,7 +169,7 @@
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
 		2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiTableViewController.swift; sourceTree = "<group>"; };
-		2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		2ECDB1DD236CB12C00B28A29 /* InformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		2ECDB1DF236CB1D000B28A29 /* privacy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = privacy.json; sourceTree = "<group>"; };
 		2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
 		2ECDB1E3236CBED500B28A29 /* about.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = about.json; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 		2ECDB1DC236CB0FE00B28A29 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				2ECDB1DD236CB12C00B28A29 /* InformationViewController.swift */,
+				2ECDB1DD236CB12C00B28A29 /* InformationTableViewController.swift */,
 				2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */,
 				2ECDB1DF236CB1D000B28A29 /* privacy.json */,
 				2ECDB1E5236CD89A00B28A29 /* terms.json */,
@@ -719,7 +719,7 @@
 				2EE7C2191FD8722700DA9AB8 /* SettingsTableViewController.swift in Sources */,
 				2E6C97082372269B00073707 /* StatusObserver.swift in Sources */,
 				2EAD9DD61FA25DF100CE52CF /* StatusTableViewController.swift in Sources */,
-				2ECDB1DE236CB12C00B28A29 /* InformationViewController.swift in Sources */,
+				2ECDB1DE236CB12C00B28A29 /* InformationTableViewController.swift in Sources */,
 				A1D6C1AA226BC15900D25DF1 /* Logger.swift in Sources */,
 				2E01D1FD1FB241A300E8632D /* GrammarLevelTableViewController.swift in Sources */,
 				2EBB70B920164EBA001AE42E /* Account+Initializer.swift in Sources */,
