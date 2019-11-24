@@ -21,6 +21,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     private enum Section: Int {
         case settings
         case information
+        case appearance
         case logout
     }
 
@@ -41,6 +42,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
     @IBOutlet private weak var hideEnglishDetailLabel: UILabel!
     @IBOutlet private weak var bunnyModeDetailLabel: UILabel!
+    @IBOutlet private weak var appearanceLabel: UILabel!
 
     private let queue = ProcedureQueue()
     private var settings: SetSettingsProcedure.Settings? {
@@ -50,14 +52,31 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
             bunnyModeDetailLabel?.text = settings?.bunnyMode.localizedString
         }
     }
+    private var userDefaults = UserDefaults.standard
 
     private var saveObserver: NotificationToken?
+    private var appearanceObserver: NSKeyValueObservation?
+
+    deinit {
+        if let observer = saveObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        appearanceObserver?.invalidate()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
+        }
+
+        if #available(iOS 13.0, *) {
+            appearanceLabel.text = userDefaults.userInterfaceStyle.localizedTitle
+
+            appearanceObserver = userDefaults.observe(\.userInterfaceStyle) { defaults, _ in
+                self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
+            }
         }
 
         updateUI()
@@ -108,6 +127,18 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
             case .about, .privacy, .terms:
+                break
+            }
+
+        case .appearance:
+
+            switch indexPath.row {
+            case 0:
+                if #available(iOS 13.0, *) {
+                    didSelectAppearanceCell(cell)
+                }
+
+            default:
                 break
             }
 
@@ -205,6 +236,40 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         present(controller, animated: true, completion: nil)
     }
 
+    @available(iOS 13.0, *)
+    private func didSelectAppearanceCell(_ cell: UITableViewCell) {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let systemAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.system.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .system
+        }
+
+        let lightAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.light.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .light
+        }
+
+        let darkAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.dark.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .dark
+        }
+
+        let bunproAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.bunpro.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .bunpro
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
+
+        controller.addAction(systemAction)
+        controller.addAction(lightAction)
+        controller.addAction(darkAction)
+        controller.addAction(bunproAction)
+        controller.addAction(cancelAction)
+
+        controller.popoverPresentationController?.sourceView = cell
+        controller.popoverPresentationController?.sourceRect = cell.bounds
+
+        present(controller, animated: true, completion: nil)
+    }
+
     private func didSelectLogoutCell(_ cell: UITableViewCell) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -266,6 +331,22 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
 
         case .terms:
             (segue.destination.content as? InformationTableViewController)?.category = .terms
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = Section(rawValue: indexPath.section) else { return CGFloat.leastNormalMagnitude }
+
+        switch section {
+        case .appearance:
+            if #available(iOS 13.0, *) {
+                return UITableView.automaticDimension
+            } else {
+                return CGFloat.leastNormalMagnitude
+            }
+
+        default:
+            return UITableView.automaticDimension
         }
     }
 }

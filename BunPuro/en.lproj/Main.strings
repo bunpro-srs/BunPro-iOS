@@ -74,6 +74,9 @@
 /* Class = "UILabel"; text = "Hide English"; ObjectID = "qKn-gq-pDN"; */
 "qKn-gq-pDN.text" = "Hide English";
 
+/* Class = "UILabel"; text = "System"; ObjectID = "QVM-m2-qeR"; */
+"QVM-m2-qeR.text" = "System";
+
 /* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
 "Rej-2W-djk.text" = " ";
 
@@ -88,6 +91,9 @@
 
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
+
+/* Class = "UILabel"; text = "Appearance"; ObjectID = "XZP-3d-1lE"; */
+"XZP-3d-1lE.text" = "Appearance";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "zAB-rS-aRQ"; */
 "zAB-rS-aRQ.text" = "Title";

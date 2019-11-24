@@ -20,11 +20,6 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
 
     private var statusObserver: StatusObserverProtocol?
 
-    deinit {
-        log.info("deinit \(String(describing: self))")
-        NotificationCenter.default.removeObserver(self)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

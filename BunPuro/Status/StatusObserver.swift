@@ -27,63 +27,48 @@ class StatusObserver {
 
 @available(iOS 13.0, *)
 private class StatusObserverImplementationCombine: StatusObserverProtocol {
-    private var logoutCancellable: AnyCancellable?
-    private var beginUpdateCancellable: AnyCancellable?
-    private var endUpdateCancellable: AnyCancellable?
-    private var pendingModificationCancellable: AnyCancellable?
+    private var cancellables: Set<AnyCancellable> = []
 
     var didLogout: (() -> Void)? {
         didSet {
-            logoutCancellable?.cancel()
-
-            logoutCancellable = NotificationCenter
+            NotificationCenter
                 .default
                 .publisher(for: .ServerDidLogoutNotification)
                 .receive(on: RunLoop.main)
-                .sink { [weak self] _ in
-                    self?.didLogout?()
-                }
+                .sink { [weak self] _ in self?.didLogout?() }
+                .store(in: &cancellables)
         }
     }
 
     var willBeginUpdating: (() -> Void)? {
         didSet {
-            beginUpdateCancellable?.cancel()
-
-            beginUpdateCancellable = NotificationCenter
+            NotificationCenter
                 .default
                 .publisher(for: .BunProWillBeginUpdating)
                 .receive(on: RunLoop.main)
-                .sink { [weak self] _ in
-                    self?.willBeginUpdating?()
-                }
+                .sink { [weak self] _ in self?.willBeginUpdating?() }
+                .store(in: &cancellables)
         }
     }
 
     var didEndUpdating: (() -> Void)? {
         didSet {
-            endUpdateCancellable?.cancel()
-
-            endUpdateCancellable = NotificationCenter
+            NotificationCenter
                 .default
                 .publisher(for: .BunProDidEndUpdating)
                 .receive(on: RunLoop.main)
-                .sink { [weak self] _ in
-                    self?.didEndUpdating?()
-                }
+                .sink { [weak self] _ in self?.didEndUpdating?() }
+                .store(in: &cancellables)
         }
     }
     var didUpdateReview: (() -> Void)? {
         didSet {
-            pendingModificationCancellable?.cancel()
-
-            pendingModificationCancellable = NotificationCenter
+            NotificationCenter
                 .default
                 .publisher(for: .BunProDidModifyReview)
                 .receive(on: RunLoop.main)
-                .sink { [weak self] _ in
-                    self?.didUpdateReview?()
-                }
+                .sink { [weak self] _ in self?.didUpdateReview?() }
+                .store(in: &cancellables)
         }
     }
 }

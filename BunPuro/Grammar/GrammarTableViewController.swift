@@ -19,13 +19,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
     var grammar: Grammar?
 
-    private var beginUpdateObserver: NotificationToken?
-    private var endUpdateObserver: NotificationToken?
-
-    deinit {
-        log.info("deinit \(String(describing: self))")
-        NotificationCenter.default.removeObserver(self)
-    }
+    private var statusObserver: StatusObserverProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +28,11 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
         title = grammar?.title
 
+        statusObserver = StatusObserver.newObserver()
+
         updateEditBarButtonState()
 
-        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: OperationQueue.main) { [weak self] _ in
+        statusObserver?.willBeginUpdating = { [weak self] in
             let activityIndicator: UIActivityIndicatorView
 
             if #available(iOS 13.0, *) {
@@ -49,7 +45,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
             self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         }
 
-        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { [weak self] _ in
+        statusObserver?.didEndUpdating = { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
                 self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
 

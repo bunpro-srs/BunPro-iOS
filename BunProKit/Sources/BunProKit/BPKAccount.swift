@@ -142,6 +142,29 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
+public enum Appearance: String, Codable {
+    case light
+    case dark
+    
+    public init(from decoder: Decoder) throws {
+        guard let value = try? decoder.singleValueContainer().decode(String.self) else {
+            self = .light
+            return
+        }
+        
+        switch value {
+        case "Modern":
+            self = .light
+        case "Modern Dark":
+            self = .dark
+        case "Classic":
+            self = .dark
+        default:
+            self = .light
+        }
+    }
+}
+
 public struct BPKAccount: Codable {
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -150,6 +173,7 @@ public struct BPKAccount: Codable {
         case reviewEnglish = "review_english"
         case bunnyMode = "bunny_mode"
         case furigana
+        case appearance = "light_mode"
         case subscriber
     }
 
@@ -159,5 +183,6 @@ public struct BPKAccount: Codable {
     public let furigana: FuriganaMode
     public let name: String
     public let bunnyMode: State
+    public let appearance: Appearance
     public let subscriber: Bool
 }

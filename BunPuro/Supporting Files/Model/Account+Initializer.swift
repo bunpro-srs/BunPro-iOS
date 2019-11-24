@@ -18,6 +18,7 @@ extension Account {
         englishMode = account.hideEnglish == Active.yes
         reviewEnglishMode = account.reviewEnglish.rawValue
         subscriber = account.subscriber
+        lightMode = account.appearance == .light
     }
 }
 

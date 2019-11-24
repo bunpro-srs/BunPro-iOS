@@ -81,6 +81,12 @@ final class Database {
 extension Database: DatabaseHandler {
     func updateAccount(_ account: BPKAccount) {
         handler.updateAccount(account)
+
+        if #available(iOS 13.0, *) {
+            if UserDefaults.standard.userInterfaceStyle == .bunpro {
+                UserDefaults.standard.userInterfaceStyle = .bunpro
+            }
+        }
     }
 
     func updateGrammar(_ grammar: [BPKGrammar]) {

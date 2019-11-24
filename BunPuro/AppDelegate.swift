@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var database = Database(modelName: modelName)
 
     private var dataManager: DataManager?
+    private var appearanceObservation: NSKeyValueObservation?
+
+    deinit {
+        appearanceObservation?.invalidate()
+    }
 
     func application(
         _ application: UIApplication,
@@ -30,6 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.shared.setup()
 
         setupTabBarViewController()
+
+        if #available(iOS 13.0, *) {
+            appearanceObservation = UserDefaults
+                .standard
+                .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
+                    application.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
+                    }
+                }
+        }
 
         return true
     }
