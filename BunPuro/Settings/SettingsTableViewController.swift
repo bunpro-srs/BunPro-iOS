@@ -52,7 +52,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
             bunnyModeDetailLabel?.text = settings?.bunnyMode.localizedString
         }
     }
-    private var userDefaults = UserDefaults.standard
+    private let userDefaults = UserDefaults.standard
 
     private var saveObserver: NotificationToken?
     private var appearanceObserver: NSKeyValueObservation?

@@ -118,7 +118,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         searchController.searchResultsUpdater = self
 
         searchController.hidesNavigationBarDuringPresentation = true
-        searchController.dimsBackgroundDuringPresentation = false
 
         navigationItem.searchController = searchController
         searchController.searchBar.showsScopeBar = true

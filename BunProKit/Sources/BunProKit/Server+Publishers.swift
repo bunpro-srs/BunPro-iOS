@@ -5,7 +5,9 @@
 //  Created by Andreas Braun on 02.11.19.
 //
 
+#if canImport(Combine)
 import Combine
+#endif
 import Foundation
 import UIKit
 

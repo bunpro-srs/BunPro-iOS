@@ -58,7 +58,8 @@ extension UserDefaults {
     }
 
     @objc
-    dynamic var userInterfaceStyle: UserInterfaceStyle {
+    dynamic
+    var userInterfaceStyle: UserInterfaceStyle {
         get {
             return UserInterfaceStyle(rawValue: integer(forKey: "userInterfaceStyle")) ?? .system
         }

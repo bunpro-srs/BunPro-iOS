@@ -3,7 +3,9 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
+#if canImport(Combine)
 import Combine
+#endif
 import Foundation
 
 protocol StatusObserverProtocol {
