@@ -7,6 +7,7 @@ import UIKit
 import Foundation
 import KeychainAccess
 import ProcedureKit
+import ProcedureKitNetwork
 
 
 public typealias Token = String

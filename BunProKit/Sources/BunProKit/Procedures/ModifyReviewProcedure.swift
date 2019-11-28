@@ -6,6 +6,7 @@
 import UIKit
 import Foundation
 import ProcedureKit
+import ProcedureKitNetwork
 
 
 public final class ModifyReviewProcedure: GroupProcedure {

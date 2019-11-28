@@ -19,8 +19,8 @@ let package = Package(
                 .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", .upToNextMajor(from: "3.2.0")),
 
                 // Advanced Operations in Swift
-                .package(path: "../ProcedureKit"),
-//                .package(url: "https://github.com/Rion-Kaneshiro/ProcedureKit.git", .upToNextMajor(from: "5.2.0")),
+//                .package(path: "../ProcedureKit"),
+                .package(url: "https://github.com/ProcedureKit/ProcedureKit.git", .upToNextMajor(from: "5.2.0")),
 
                 // Convenient logging during development & release in Swift
                 .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", .upToNextMajor(from: "1.7.0")),
@@ -30,9 +30,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "BunProKit",
-            dependencies: ["KeychainAccess",
-                            "ProcedureKit",
-                            "SwiftyBeaver"]),
+            dependencies: [
+                "KeychainAccess",
+                .product(name: "ProcedureKitNetwork", package: "ProcedureKit"),
+//                .product(name: "ProcedureKitNetwork"),
+                "SwiftyBeaver"]),
         .testTarget(
             name: "BunProKitTests",
             dependencies: ["BunProKit"]),
