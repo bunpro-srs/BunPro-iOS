@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
           "branch": null,
-          "revision": "0046db4ab8fd7be31a59e57912dbb96639ad8ce9",
-          "version": "3.2.0"
+          "revision": "8d33ffd6f74b3bcfc99af759d4204c6395a3f918",
+          "version": "3.2.1"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
         "state": {
           "branch": null,
-          "revision": "ad66cc41c5d8acbd63d9dcdc9d3609f152e08ed1",
-          "version": "1.7.0"
+          "revision": "1d61211e37d28ca00c155fa4e358ada912ca7b80",
+          "version": "1.8.3"
         }
       }
     ]

@@ -118,6 +118,56 @@ final class GrammarLevelTableViewController: CoreDataFetchedResultsTableViewCont
         return configuration
     }
 
+    @available(iOS 13.0, *)
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard AppDelegate.isContentAccessable else { return nil }
+
+        let point = fetchedResultsController.object(at: indexPath)
+        let review = point.review
+        let hasReview = review?.complete ?? false
+
+        var reviewActions: [UIAction] = []
+        var meaningActions: [UIAction] = []
+
+        if hasReview {
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Remove.short, image: UIImage(systemName: "trash.fill"), attributes: .destructive) { _ in
+                    AppDelegate.modifyReview(.remove(review!.identifier))
+                }
+            )
+
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Reset.short, image: UIImage(systemName: "repeat.1"), attributes: .destructive) { _ in
+                    AppDelegate.modifyReview(.reset(review!.identifier))
+                }
+            )
+        } else {
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Add.short, image: UIImage(systemName: "repeat")) { _ in
+                    AppDelegate.modifyReview(.add(point.identifier))
+                }
+            )
+        }
+
+        meaningActions.append(
+            UIAction(title: L10n.Copy.japanese, image: UIImage(systemName: "doc.on.doc.fill")) { _ in
+                UIPasteboard.general.string = point.title
+            }
+        )
+        meaningActions.append(
+            UIAction(title: L10n.Copy.meaning, image: UIImage(systemName: "doc.on.doc.fill")) { _ in
+                UIPasteboard.general.string = point.meaning
+            }
+        )
+
+        let reviewMenu = UIMenu(title: "Review", options: .displayInline, children: reviewActions)
+        let meaningMenu = UIMenu(title: "Content", options: .displayInline, children: meaningActions)
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "Review", children: [reviewMenu, meaningMenu])
+        }
+    }
+
     private func progress(count: Int, max: Int) -> Float {
         guard max > 0 else { return 0 }
         return Float(count) / Float(max)

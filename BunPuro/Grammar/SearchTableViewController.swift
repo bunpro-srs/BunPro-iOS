@@ -144,10 +144,6 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         }
     }
 
-    private func review(for grammar: Grammar) -> Review? {
-        return reviewsFetchedResultsController.fetchedObjects?.first { $0.grammarIdentifier == grammar.identifier }
-    }
-
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
@@ -202,7 +198,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         guard AppDelegate.isContentAccessable else { return nil }
 
         let point = fetchedResultsController.object(at: indexPath)
-        let review = self.review(for: point)
+        let review = point.review
         let hasReview = review?.complete ?? false
 
         var actions = [UIContextualAction]()
@@ -241,6 +237,56 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         return configuration
     }
 
+    @available(iOS 13.0, *)
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard AppDelegate.isContentAccessable else { return nil }
+
+        let point = fetchedResultsController.object(at: indexPath)
+        let review = point.review
+        let hasReview = review?.complete ?? false
+
+        var reviewActions: [UIAction] = []
+        var meaningActions: [UIAction] = []
+
+        if hasReview {
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Remove.short, image: UIImage(systemName: "trash.fill"), attributes: .destructive) { _ in
+                    AppDelegate.modifyReview(.remove(review!.identifier))
+                }
+            )
+
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Reset.short, image: UIImage(systemName: "repeat.1"), attributes: .destructive) { _ in
+                    AppDelegate.modifyReview(.reset(review!.identifier))
+                }
+            )
+        } else {
+            reviewActions.append(
+                UIAction(title: L10n.Review.Edit.Add.short, image: UIImage(systemName: "repeat")) { _ in
+                    AppDelegate.modifyReview(.add(point.identifier))
+                }
+            )
+        }
+
+        meaningActions.append(
+            UIAction(title: L10n.Copy.japanese, image: UIImage(systemName: "doc.on.doc.fill")) { _ in
+                UIPasteboard.general.string = point.title
+            }
+        )
+        meaningActions.append(
+            UIAction(title: L10n.Copy.meaning, image: UIImage(systemName: "doc.on.doc.fill")) { _ in
+                UIPasteboard.general.string = point.meaning
+            }
+        )
+
+        let reviewMenu = UIMenu(title: "Review", options: .displayInline, children: reviewActions)
+        let meaningMenu = UIMenu(title: "Content", options: .displayInline, children: meaningActions)
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            return UIMenu(title: "Review", children: [reviewMenu, meaningMenu])
+        }
+    }
+
     // MARK: - UISearchController
     func updateSearchResults(for searchController: UISearchController) {
         NSFetchedResultsController<Grammar>.deleteCache(withName: nil)
@@ -257,7 +303,7 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         cell.japaneseLabel?.text = grammar.title
         cell.meaningLabel?.text = grammar.meaning
 
-        let hasReview = review(for: grammar)?.complete ?? false
+        let hasReview = grammar.review?.complete ?? false
         cell.isComplete = hasReview
     }
 
