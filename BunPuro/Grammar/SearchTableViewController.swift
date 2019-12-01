@@ -12,13 +12,14 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     private var searchController: UISearchController!
     private var searchDataSource: SearchDataSource!
 
-    private var beginModificationToken: NotificationToken?
+    private var willBeginUpdatingToken: NotificationToken?
+    private var didEndUpdatingToken: NotificationToken?
     private var endModificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        beginModificationToken = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+        willBeginUpdatingToken = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
             let activityIndicatorView: UIActivityIndicatorView
 
             if #available(iOS 13.0, *) {
@@ -30,6 +31,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             activityIndicatorView.startAnimating()
 
             self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
+        }
+
+        didEndUpdatingToken = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.navigationItem.rightBarButtonItem = nil
         }
 
         endModificationToken = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: .main) { [weak self] _ in
