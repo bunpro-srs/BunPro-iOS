@@ -38,6 +38,7 @@
 		2E8237F0239402E500438E24 /* UIImage+System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8237EF239402E500438E24 /* UIImage+System.swift */; };
 		2E8237F22394186500438E24 /* SearchableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8237F12394186500438E24 /* SearchableDataSource.swift */; };
 		2E8237F42394200400438E24 /* SearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8237F32394200400438E24 /* SearchProvider.swift */; };
+		2E8237F623945FD800438E24 /* GrammarPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8237F523945FD800438E24 /* GrammarPreviewViewController.swift */; };
 		2E82B77E2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */; };
 		2E994AD021294A9D007C4DDB /* ResetReviewsProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */; };
 		2EA29AA52391C39B003B50A9 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA29AA42391C39B003B50A9 /* SearchTableViewController.swift */; };
@@ -151,6 +152,7 @@
 		2E8237EF239402E500438E24 /* UIImage+System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+System.swift"; sourceTree = "<group>"; };
 		2E8237F12394186500438E24 /* SearchableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableDataSource.swift; sourceTree = "<group>"; };
 		2E8237F32394200400438E24 /* SearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProvider.swift; sourceTree = "<group>"; };
+		2E8237F523945FD800438E24 /* GrammarPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarPreviewViewController.swift; sourceTree = "<group>"; };
 		2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingSwipeActionsConfigurationProvider.swift; sourceTree = "<group>"; };
 		2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetReviewsProcedure.swift; sourceTree = "<group>"; };
 		2EA29AA32391AEF1003B50A9 /* BunPro 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BunPro 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				2EA29AA42391C39B003B50A9 /* SearchTableViewController.swift */,
 				2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */,
 				2E8237ED239401A300438E24 /* SearchTableViewController+ContextMenu.swift */,
+				2E8237F523945FD800438E24 /* GrammarPreviewViewController.swift */,
 				2EA29AA62391C4D9003B50A9 /* DiffableSearchDataSource.swift */,
 				2E8237F12394186500438E24 /* SearchableDataSource.swift */,
 				2E8237F32394200400438E24 /* SearchProvider.swift */,
@@ -725,6 +728,7 @@
 				2EE0AEB323299F4B00E4BD64 /* Array+Batch.swift in Sources */,
 				2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */,
 				2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */,
+				2E8237F623945FD800438E24 /* GrammarPreviewViewController.swift in Sources */,
 				2EAD9DD41FA25DF100CE52CF /* AppDelegate.swift in Sources */,
 				2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */,
 				2E7B369A208532BC00542BB8 /* UIView+Motion.swift in Sources */,

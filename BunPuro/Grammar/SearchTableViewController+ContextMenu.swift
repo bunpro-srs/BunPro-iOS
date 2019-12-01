@@ -51,8 +51,16 @@ extension SearchTableViewController {
         let reviewMenu = UIMenu(title: "Review", options: .displayInline, children: reviewActions)
         let meaningMenu = UIMenu(title: "Content", options: .displayInline, children: meaningActions)
 
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+        return UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: {
+                let grammarViewCtrl = StoryboardScene.GrammarDetail.grammarPreviewViewController.instantiate()
+                grammarViewCtrl.grammar = grammar
+
+                return grammarViewCtrl
+            }, actionProvider: { _ in
             return UIMenu(title: "Review", children: [reviewMenu, meaningMenu])
-        }
+            }
+        )
     }
 }

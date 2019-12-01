@@ -15,6 +15,8 @@ internal enum StoryboardScene {
   internal enum GrammarDetail: StoryboardType {
     internal static let storyboardName = "GrammarDetail"
 
+    internal static let grammarPreviewViewController = SceneType<BunPuro.GrammarPreviewViewController>(storyboard: GrammarDetail.self, identifier: "GrammarPreviewViewController")
+
     internal static let grammarTableViewController = SceneType<BunPuro.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "GrammarTableViewController")
 
     internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: GrammarDetail.self, identifier: "KanjiTableViewController")
