@@ -14,9 +14,6 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "7aR-RJ-rh9"; */
 "7aR-RJ-rh9.text" = "Detail";
 
-/* Class = "UILabel"; text = " "; ObjectID = "aD2-ep-eCU"; */
-"aD2-ep-eCU.text" = " ";
-
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ch9-PZ-Wxg"; */
 "ch9-PZ-Wxg.title" = "Settings";
 
@@ -35,17 +32,11 @@
 /* Class = "UILabel"; text = "Furigana"; ObjectID = "I0J-82-EM1"; */
 "I0J-82-EM1.text" = "Furigana";
 
-/* Class = "UINavigationItem"; title = "N5"; ObjectID = "idR-FT-oYU"; */
-"idR-FT-oYU.title" = "N5";
-
 /* Class = "UITabBarItem"; title = "Search"; ObjectID = "IZ3-Kc-eQR"; */
 "IZ3-Kc-eQR.title" = "Search";
 
 /* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
 "J16-bo-Kj0.title" = "Loading...";
-
-/* Class = "UILabel"; text = "N5"; ObjectID = "KfR-Gn-5Wi"; */
-"KfR-Gn-5Wi.text" = "N5";
 
 /* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "kYw-Pb-uem"; */
 "kYw-Pb-uem.headerTitle" = " ";

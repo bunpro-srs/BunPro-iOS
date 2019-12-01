@@ -158,22 +158,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case 0:
                     viewController.tabBarItem = UITabBarItem(
                         title: L10n.Tabbar.status,
-                        image: UIImage(systemName: "pencil.circle"),
-                        selectedImage: UIImage(systemName: "pencil.circle.fill")
+                        image: .pencilCircle,
+                        selectedImage: .pencilCircleFill
                     )
 
                 case 1:
                     viewController.tabBarItem = UITabBarItem(
                         title: L10n.Tabbar.search,
-                        image: UIImage(systemName: "magnifyingglass.circle"),
-                        selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")
+                        image: .magnifyingglassCircle,
+                        selectedImage: .magnifyingglassCircleFill
                     )
 
                 case 2:
                     viewController.tabBarItem = UITabBarItem(
                         title: L10n.Tabbar.settings,
-                        image: UIImage(systemName: "ellipsis.circle"),
-                        selectedImage: UIImage(systemName: "ellipsis.circle.fill")
+                        image: .ellipsisCircle,
+                        selectedImage: .ellipsisCircleFill
                     )
 
                 default:

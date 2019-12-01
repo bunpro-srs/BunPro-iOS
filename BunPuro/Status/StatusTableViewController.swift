@@ -298,8 +298,8 @@ extension StatusTableViewController: SegueHandler {
         case .showJLPT:
             let level = 5 - indexPath.row
 
-            let destination = segue.destination.content as? GrammarLevelTableViewController
-            destination?.level = level
+            let destination = segue.destination.content as? SearchTableViewController
+            destination?.sectionMode = .byLevel(level)
             destination?.title = "N\(level)"
         }
     }

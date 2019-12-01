@@ -69,7 +69,7 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
             .string
 
         if #available(iOS 13.0, *) {
-            cell.actionImage = sentence.audioURL != nil ? UIImage(systemName: "play.circle") : nil
+            cell.actionImage = sentence.audioURL != nil ? .playCircle : nil
         } else {
             cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
         }
