@@ -46,6 +46,13 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "general.cancel")
   }
 
+  internal enum Grammar {
+    /// Readings
+    internal static let readings = L10n.tr("Localizable", "grammar.readings")
+    /// Sentences
+    internal static let sentences = L10n.tr("Localizable", "grammar.sentences")
+  }
+
   internal enum Kanji {
     internal enum English {
       /// Show English
@@ -179,6 +186,15 @@ internal enum L10n {
     internal static let unknown = L10n.tr("Localizable", "subscription.unknown")
     /// No
     internal static let unsubscribed = L10n.tr("Localizable", "subscription.unsubscribed")
+  }
+
+  internal enum Tabbar {
+    /// Search
+    internal static let search = L10n.tr("Localizable", "tabbar.search")
+    /// Settings
+    internal static let settings = L10n.tr("Localizable", "tabbar.settings")
+    /// Status
+    internal static let status = L10n.tr("Localizable", "tabbar.status")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

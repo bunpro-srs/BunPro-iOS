@@ -12,6 +12,19 @@ import UIKit
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
+  internal enum GrammarDetail: StoryboardType {
+    internal static let storyboardName = "GrammarDetail"
+
+    internal static let grammarPreviewViewController = SceneType<BunPuro.GrammarPreviewViewController>(storyboard: GrammarDetail.self, identifier: "GrammarPreviewViewController")
+
+    internal static let grammarTableViewController = SceneType<BunPuro.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "GrammarTableViewController")
+
+    internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: GrammarDetail.self, identifier: "KanjiTableViewController")
+
+    internal static let readingsTableViewController = SceneType<BunPuro.ReadingsTableViewController>(storyboard: GrammarDetail.self, identifier: "ReadingsTableViewController")
+
+    internal static let sentencesTableViewController = SceneType<BunPuro.SentencesTableViewController>(storyboard: GrammarDetail.self, identifier: "SentencesTableViewController")
+  }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
 
@@ -21,8 +34,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Main"
 
     internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Main.self)
-
-    internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: Main.self, identifier: "KanjiTableViewController")
 
     internal static let mainTabBarController = SceneType<UIKit.UITabBarController>(storyboard: Main.self, identifier: "MainTabBarController")
   }

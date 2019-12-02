@@ -8,9 +8,9 @@ import Foundation
 import ProcedureKit
 
 final class ResetReviewsProcedure: Procedure {
-    let stack: CoreDataStack
+    let stack: NSPersistentContainer
 
-    init(stack: CoreDataStack = AppDelegate.coreDataStack) {
+    init(stack: NSPersistentContainer = AppDelegate.database.persistantContainer) {
         self.stack = stack
         super.init()
     }
@@ -18,7 +18,7 @@ final class ResetReviewsProcedure: Procedure {
     override func execute() {
         guard !isCancelled else { return }
 
-        stack.storeContainer.performBackgroundTask { context in
+        stack.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
 
             let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()

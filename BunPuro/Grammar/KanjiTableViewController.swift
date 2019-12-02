@@ -3,6 +3,7 @@
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
+import Protocols
 import UIKit
 
 final class KanjiTableViewController: UITableViewController {
@@ -11,12 +12,6 @@ final class KanjiTableViewController: UITableViewController {
     var furigana = [Furigana]()
 
     var showEnglish: Bool = false
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.backgroundColor = Asset.background.color
-    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,10 +31,16 @@ final class KanjiTableViewController: UITableViewController {
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                cell.attributedName = japanese?.htmlAttributedString(font: cell.textLabel?.font, color: .white)
+                cell.attributedName = japanese?
+                    .htmlAttributedString(font: cell.textLabel?.font, color: .white)?
+                    .string
             } else {
                 cell.name = showEnglish ? english : L10n.Kanji.English.show
-                cell.nameColor = showEnglish ? UIColor.white : view.tintColor
+                if #available(iOS 13.0, *) {
+                    cell.nameColor = showEnglish ? UIColor.label : view.tintColor
+                } else {
+                    cell.nameColor = showEnglish ? UIColor.black : view.tintColor
+                }
             }
         } else {
             let info = furigana[indexPath.row]
@@ -50,13 +51,10 @@ final class KanjiTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 1, tableView.numberOfRows(inSection: section) > 0 else { return nil }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard section == 1, self.tableView(tableView, numberOfRowsInSection: section) > 0 else { return nil }
 
-        let view = tableView.dequeueReusableCell(withIdentifier: GrammarHeaderTableViewCell.reuseIdentifier) as? GrammarHeaderTableViewCell
-
-        view?.titleLabel.text = L10n.Kanji.Header.readings
-        return view
+        return L10n.Kanji.Header.readings
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

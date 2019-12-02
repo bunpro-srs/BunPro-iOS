@@ -3,7 +3,7 @@
 //  Copyright © 2018 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 
@@ -24,8 +24,8 @@ extension Grammar {
         title = grammar.title
         yomikata = grammar.yomikata
 
-        grammar.supplementalLinks.forEach { Link(link: $0, grammar: self, context: context) }
-        grammar.exampleSentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
+        grammar.links.forEach { Link(link: $0, grammar: self, context: context) }
+        grammar.sentences.forEach { Sentence(sentence: $0, grammar: self, context: context) }
     }
 }
 

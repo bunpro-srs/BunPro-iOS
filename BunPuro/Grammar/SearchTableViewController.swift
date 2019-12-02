@@ -1,135 +1,58 @@
 //
-//  Created by Andreas Braun on 07.11.17.
-//  Copyright © 2017 Andreas Braun. All rights reserved.
+//  Created by Andreas Braun on 29.11.19.
+//  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
 import CoreData
 import UIKit
 
-final class SearchTableViewController: CoreDataFetchedResultsTableViewController<Grammar>, SegueHandler, UISearchResultsUpdating, UISearchBarDelegate {
-    enum SegueIdentifier: String {
-        case showGrammar
-    }
+class SearchTableViewController: UITableViewController, UISearchBarDelegate {
+    var sectionMode: SearchSectionMode = .byDifficulty
 
     private var searchController: UISearchController!
+    private var searchDataSource: SearchDataSource!
 
-    private func newFetchedResultsController() -> NSFetchedResultsController<Grammar>? {
-        let fetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
-
-        fetchRequest.predicate = searchPredicate()
-
-        let jlptSort = NSSortDescriptor(key: #keyPath(Grammar.level), ascending: false)
-        let lessonSort = NSSortDescriptor(key: #keyPath(Grammar.lessonIdentifier), ascending: true)
-        let idSort = NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
-        fetchRequest.sortDescriptors = [jlptSort, lessonSort, idSort]
-
-        let controller = NSFetchedResultsController<Grammar>(
-            fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: #keyPath(Grammar.level),
-            cacheName: nil
-        )
-        controller.delegate = self
-
-        return controller
-    }
-
-    private var reviewsFetchedResultsController: NSFetchedResultsController<Review> = {
-        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
-
-        let sort = NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-
-        let controller = NSFetchedResultsController<Review>(
-            fetchRequest: fetchRequest,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-
-        return controller
-    }()
-
-    private func searchPredicate() -> NSPredicate? {
-        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
-            switch searchController.searchBar.selectedScopeButtonIndex {
-            case 1:
-                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
-                let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
-                return identifierPredicate
-
-            case 2:
-                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
-                let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
-                return identifierPredicate
-
-            default:
-                return nil
-            }
-        }
-
-        let titlePredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.title), searchText)
-        let meaningPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.meaning), searchText)
-        let yomikataPredicate = NSPredicate(format: "%K CONTAINS[cs] %@ ", #keyPath(Grammar.yomikata), searchText)
-
-        switch searchController.searchBar.selectedScopeButtonIndex {
-        case 1:
-            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
-
-            let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
-
-            return NSCompoundPredicate(
-                andPredicateWithSubpredicates: [
-                    identifierPredicate,
-                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
-                ]
-            )
-
-        case 2:
-            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
-
-            let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
-
-            return NSCompoundPredicate(
-                andPredicateWithSubpredicates: [
-                    identifierPredicate,
-                    NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
-                ]
-            )
-
-        default:
-            return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
-        }
-    }
-
-    deinit {
-        log.info("deinit \(String(describing: self))")
-    }
+    private var willBeginUpdatingToken: NotificationToken?
+    private var didEndUpdatingToken: NotificationToken?
+    private var endModificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = Asset.background.color
+        willBeginUpdatingToken = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+            let activityIndicatorView: UIActivityIndicatorView
 
-        definesPresentationContext = true
+            if #available(iOS 13.0, *) {
+                activityIndicatorView = UIActivityIndicatorView(style: .medium)
+            } else {
+                activityIndicatorView = UIActivityIndicatorView(style: .gray)
+            }
+
+            activityIndicatorView.startAnimating()
+
+            self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
+        }
+
+        didEndUpdatingToken = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+            self?.navigationItem.rightBarButtonItem = nil
+        }
+
+        endModificationToken = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: .main) { [weak self] _ in
+            self?.navigationItem.rightBarButtonItem = nil
+        }
 
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
 
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
 
         navigationItem.searchController = searchController
         searchController.searchBar.showsScopeBar = true
-        searchController.searchBar.setShowsCancelButton(false, animated: false)
         searchController.searchBar.delegate = self
-        searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.sizeToFit()
         navigationItem.hidesSearchBarWhenScrolling = false
 
         searchController.searchBar.placeholder = L10n.Search.Grammar.placeholder
-        searchController.searchBar.barStyle = .black
 
         searchController.searchBar.scopeButtonTitles = [
             L10n.Search.Grammar.Scope.all,
@@ -137,34 +60,85 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
             L10n.Search.Grammar.Scope.learned
         ]
 
-        fetchedResultsController = newFetchedResultsController()
+        searchController.obscuresBackgroundDuringPresentation = false
 
-        reviewsFetchedResultsController.delegate = self
+        if #available(iOS 13.0, *) {
+            searchDataSource = DiffableSearchDataSource(tableView: tableView) { tableView, indexPath, _ in
+                let grammar = self.searchDataSource.grammar(at: indexPath)
+                let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
 
-        do {
-            try reviewsFetchedResultsController.performFetch()
-        } catch {
-            log.error(error)
+                cell.update(with: grammar)
+
+                return cell
+            }
+        } else {
+            searchDataSource = SearchableDataSource(tableView: tableView)
         }
+
+        searchDataSource.sectionMode = sectionMode
+
+        tableView.dataSource = searchDataSource
     }
+
+    private var didLoad: Bool = false
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        searchController.searchBar.setShowsCancelButton(false, animated: false)
+        if !didLoad {
+            didLoad.toggle()
+            searchDataSource.performSearchQuery(scope: .all, searchText: nil)
+
+            if #available(iOS 13.0, *) {
+                // good here
+            } else {
+                tableView.reloadData()
+            }
+        }
     }
 
-    private func review(for grammar: Grammar) -> Review? {
-        return reviewsFetchedResultsController.fetchedObjects?.first { $0.grammarIdentifier == grammar.identifier }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let name = searchDataSource.jlptLevel(for: section) else { return nil }
+        let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
+
+        switch searchDataSource.sectionMode {
+        case .byDifficulty:
+            cell.title = name.replacingOccurrences(of: "JLPT", with: "N")
+
+        case .byLevel:
+            cell.title = "Level \(searchDataSource.currentLevel(for: section))"
+        }
+
+        let grammarPoints = searchDataSource.grammar(for: name)
+        let grammarCount = grammarPoints.count
+        let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
+
+        let scope = SearchScope(rawValue: searchController.searchBar.selectedScopeButtonIndex)!
+
+        switch scope {
+        case .all:
+            cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
+            cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
+
+        case .unlearned, .learned:
+            cell.subtitle = "\(grammarCount)"
+            cell.setProgress(0.0, animated: false)
+        }
+
+        return cell.contentView
     }
 
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        66
+    }
 
-        updateCell(cell, at: indexPath)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        swipeActionsConfiguration(for: searchDataSource.grammar(at: indexPath))
+    }
 
-        return cell
+    @available(iOS 13.0, *)
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        contextMenuConfiguration(for: searchDataSource.grammar(at: indexPath))
     }
 
     private func progress(count: Int, max: Int) -> Float {
@@ -172,142 +146,49 @@ final class SearchTableViewController: CoreDataFetchedResultsTableViewController
         return Float(count) / Float(max)
     }
 
-    private func correctLevel(_ level: Int) -> Int {
-        let mod = level % 10
-        return mod == 0 ? 10 : mod
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let name = fetchedResultsController?.sections?[section].name else { return nil }
-
-        let cell = tableView.dequeueReusableCell() as JLPTProgressTableViewCell
-
-        let grammarPoints = fetchedResultsController.fetchedObjects?.filter { $0.level == name } ?? []
-        let grammarCount = grammarPoints.count
-        let finishedGrammarCount = grammarPoints.filter { $0.review?.complete == true }.count
-
-        cell.title = name.replacingOccurrences(of: "JLPT", with: "N")
-        cell.subtitle = "\(finishedGrammarCount) / \(grammarCount)"
-        cell.setProgress(progress(count: finishedGrammarCount, max: grammarCount), animated: false)
-
-        return cell.contentView
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 66
-    }
-
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return fetchedResultsController?.sections?.compactMap { section in
-            let name = section.name.replacingOccurrences(of: "JLPT", with: "")
-            return name
+    @IBSegueAction func showGrammar(_ coder: NSCoder, sender: Any?) -> UIViewController? {
+        guard let cell = sender as? GrammarTeaserCell else {
+            fatalError("sender should be an instance of GrammarTeaserCell")
         }
-    }
-
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard AppDelegate.isContentAccessable else { return nil }
-
-        let point = fetchedResultsController.object(at: indexPath)
-        let review = self.review(for: point)
-        let hasReview = review?.complete ?? false
-
-        var actions = [UIContextualAction]()
-
-        if hasReview {
-            let removeReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Remove.short) { _, _, completion in
-                AppDelegate.modifyReview(.remove(review!.identifier))
-                completion(true)
-            }
-
-            removeReviewAction.backgroundColor = .red
-
-            let resetReviewAction = UIContextualAction(style: .normal, title: L10n.Review.Edit.Reset.short) { _, _, completion in
-                AppDelegate.modifyReview(.reset(review!.identifier))
-                completion(true)
-            }
-
-            resetReviewAction.backgroundColor = .purple
-
-            actions.append(removeReviewAction)
-            actions.append(resetReviewAction)
-        } else {
-            let addToReviewAction = UIContextualAction(
-                style: UIContextualAction.Style.normal,
-                title: L10n.Review.Edit.Add.short
-            ) { _, _, completion in
-                AppDelegate.modifyReview(.add(point.identifier))
-                completion(true)
-            }
-
-            actions.append(addToReviewAction)
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            fatalError("No indexPath for cell \(cell)")
         }
 
-        let configuration = UISwipeActionsConfiguration(actions: actions)
-
-        return configuration
+        let grammarViewCtrl = GrammarTableViewController(coder: coder)
+        grammarViewCtrl?.grammar = searchDataSource.grammar(at: indexPath)
+        return grammarViewCtrl
     }
 
-    // MARK: - UISearchController
-    func updateSearchResults(for searchController: UISearchController) {
-        NSFetchedResultsController<Grammar>.deleteCache(withName: nil)
-        fetchedResultsController.fetchRequest.predicate = searchPredicate()
-
-        try? fetchedResultsController.performFetch()
-
-        tableView.reloadData()
-    }
-
-    private func updateCell(_ cell: GrammarTeaserCell, at indexPath: IndexPath) {
-        let grammar = fetchedResultsController.object(at: indexPath)
-
-        cell.japaneseLabel?.text = grammar.title
-        cell.meaningLabel?.text = grammar.meaning
-
-        let hasReview = review(for: grammar)?.complete ?? false
-        cell.isComplete = hasReview
-    }
-
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(for: segue) {
-        case .showGrammar:
-
-            guard let cell = sender as? UITableViewCell else { fatalError("expected showGrammer segue to be of type `UITableViewCell`") }
-            guard let indexPath = tableView.indexPath(for: cell) else {
-                fatalError("IndexPath must be provided")
-            }
-
-            let destination = segue.destination.content as? GrammarTableViewController
-            destination?.grammar = fetchedResultsController.object(at: indexPath)
+        guard segue.identifier == "showGrammar" else {
+            fatalError("segue identifier should be showGrammar")
         }
-    }
-
-    override func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?
-        ) {
-        if controller == fetchedResultsController {
-            super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
-        } else if controller == reviewsFetchedResultsController, let visibleRowIndexpaths = tableView.indexPathsForVisibleRows {
-            tableView.reloadRows(at: visibleRowIndexpaths, with: .automatic)
+        guard let cell = sender as? GrammarTeaserCell else {
+            fatalError("sender should be an instance of GrammarTeaserCell")
         }
-    }
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            fatalError("No indexPath for cell \(cell)")
+        }
 
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        updateSearchResults(for: searchController)
-    }
-
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchController.searchBar.setShowsCancelButton(false, animated: false)
-        searchController.searchBar.sizeToFit()
-
-        return true
+        let grammarViewCtrl = segue.destination.content as? GrammarTableViewController
+        grammarViewCtrl?.grammar = searchDataSource.grammar(at: indexPath)
     }
 }
+
+extension SearchTableViewController: UISearchResultsUpdating {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        let scope = SearchScope(rawValue: selectedScope)!
+        let searchText = searchBar.text
+
+        searchDataSource.performSearchQuery(scope: scope, searchText: searchText)
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        let scope = SearchScope(rawValue: searchController.searchBar.selectedScopeButtonIndex)!
+        let searchText = searchController.searchBar.text
+
+        searchDataSource.performSearchQuery(scope: scope, searchText: searchText)
+    }
+}
+
+extension SearchTableViewController: TrailingSwipeActionsConfigurationProvider { }

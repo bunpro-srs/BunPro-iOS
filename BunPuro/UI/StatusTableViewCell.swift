@@ -37,11 +37,15 @@ final class StatusTableViewCell: UITableViewCell {
             guard let date = nextReviewDate else { reviewStatusNextDateLabel.text = " "; return }
 
             if date > Date() {
-                reviewStatusLabel.textColor = .white
+                if #available(iOS 13.0, *) {
+                    reviewStatusLabel.textColor = .label
+                } else {
+                    reviewStatusLabel.textColor = .black
+                }
                 reviewStatusLabel.text = L10n.Reviewtime.none
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {
-                reviewStatusLabel.textColor = Asset.mainTint.color
+                reviewStatusLabel.textColor = tintColor
                 // swiftlint:disable:next dynamic_string_reference
                 reviewStatusLabel.text = String.localizedStringWithFormat(NSLocalizedString("reviewtime.next", comment: "The"), nextReviewsCount)
                 reviewStatusNextDateLabel.text = L10n.Reviewtime.now

@@ -3,7 +3,7 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 
@@ -30,7 +30,7 @@ class StatusFetchedResultsController: NSObject {
         completeFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.level), "JLPT\(level)")
 
         do {
-            let grammarPoints = try AppDelegate.coreDataStack.managedObjectContext.fetch(completeFetchRequest)
+            let grammarPoints = try AppDelegate.database.viewContext.fetch(completeFetchRequest)
 
             let complete = grammarPoints.filter { $0.review?.complete == true }.count
             let max = grammarPoints.count
@@ -51,10 +51,11 @@ class StatusFetchedResultsController: NSObject {
         let request: NSFetchRequest<Account> = Account.fetchRequest()
 
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
+        request.fetchLimit = 1
 
         userFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -78,10 +79,11 @@ class StatusFetchedResultsController: NSObject {
             Date().tomorrow.tomorrow.nextMidnight as NSDate,
             #keyPath(Review.complete)
         )
+        request.fetchBatchSize = 25
 
         reviewsFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

@@ -3,48 +3,56 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import UIKit
 import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+    var window: UIWindow? {
+        didSet { window?.tintColor = Asset.tint.color }
+    }
 
-    static var coreDataStack: CoreDataStack {
-        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+    static var database: Database {
+        return (UIApplication.shared.delegate as! AppDelegate).database
     }
 
     private var modelName: String = "BunPro"
-    lazy var coreDataStack = CoreDataStack(modelName: modelName)
+    lazy var database = Database(modelName: modelName)
 
     private var dataManager: DataManager?
+    private var appearanceObservation: NSKeyValueObservation?
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    deinit {
+        appearanceObservation?.invalidate()
+    }
+
+    func application(
+        _ application: UIApplication,
+        willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
         Logger.shared.setup()
 
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = Asset.navigationBarHeader.color
+        setupTabBarViewController()
 
-        UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().barTintColor = Asset.navigationBarHeader.color
-
-        CorneredView.appearance().backgroundColor = Asset.tiles.color
-        UITableViewCell.appearance().clipsToBounds = true
-        UITableViewCell.appearance().contentView.clipsToBounds = true
-
-        UIProgressView.appearance().trackTintColor = Asset.background.color
-        UIProgressView.appearance().progressTintColor = Asset.tilesSymbol.color
-
-        window?.tintColor = Asset.mainTint.color
+        if #available(iOS 13.0, *) {
+            appearanceObservation = UserDefaults
+                .standard
+                .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
+                    application.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
+                    }
+                }
+        }
 
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
-
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         Server.reset()
 
         let center = UNUserNotificationCenter.current()
@@ -58,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let rootViewCtrl = window?.rootViewController {
-            dataManager = DataManager(presentingViewController: rootViewCtrl)
+            dataManager = DataManager(presentingViewController: rootViewCtrl, database: database)
         }
 
         return true
@@ -69,11 +77,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        coreDataStack.save()
+        database.save()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        coreDataStack.save()
+        database.save()
     }
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -126,26 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
 
-    static func signupForTrial() {
-        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signupForTrial()
-    }
-
-    static func signup() {
-        (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.signup()
-    }
-
-    static var isUpdating: Bool {
-        return (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.isUpdating ?? false
-    }
-
-    static var isTrialPeriodAvailable: Bool {
-        let hasBegun = Date() > Date(day: 10, month: 5, year: 2_018)
-        let hasEnded = Date() > Date(day: 11, month: 6, year: 2_018)
-        return hasBegun && !hasEnded
-    }
-
     static var isContentAccessable: Bool {
-        guard Date() > Date(day: 10, month: 5, year: 2_018) else { return true }
         return Account.currentAccount?.subscriber ?? false
     }
 
@@ -159,6 +148,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
+    }
+
+    private func setupTabBarViewController() {
+        guard let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers else { return }
+        for (index, viewController) in viewControllers.enumerated() {
+            if #available(iOS 13.0, *) {
+                switch index {
+                case 0:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.status,
+                        image: .pencilCircle,
+                        selectedImage: .pencilCircleFill
+                    )
+
+                case 1:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.search,
+                        image: .magnifyingglassCircle,
+                        selectedImage: .magnifyingglassCircleFill
+                    )
+
+                case 2:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.settings,
+                        image: .ellipsisCircle,
+                        selectedImage: .ellipsisCircleFill
+                    )
+
+                default:
+                    break
+                }
+            } else {
+                switch index {
+                case 0:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.status,
+                        image: Asset.tabDashboardInactive.image,
+                        selectedImage: Asset.tabDashboardActive.image
+                    )
+
+                case 1:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.search,
+                        image: Asset.tabSearchInactive.image,
+                        selectedImage: Asset.tabSearchActive.image
+                    )
+
+                case 2:
+                    viewController.tabBarItem = UITabBarItem(
+                        title: L10n.Tabbar.settings,
+                        image: Asset.tabSettingsInactive.image,
+                        selectedImage: Asset.tabSettingsActive.image
+                    )
+
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 
@@ -200,7 +248,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         ]
 
         do {
-            let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
+            let reviews = try AppDelegate.database.viewContext.fetch(fetchRequest)
             return NSNumber(value: reviews.count)
         } catch {
             log.error(error)

@@ -3,17 +3,25 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import MessageUI
 import ProcedureKit
+import Protocols
 import SafariServices
 import UIKit
 
-final class SettingsTableViewController: UITableViewController {
+final class SettingsTableViewController: UITableViewController, SegueHandler {
+    enum SegueIdentifier: String {
+        case privacy = "present privacy"
+        case about = "present about"
+        case terms = "present terms"
+    }
+
     private enum Section: Int {
         case settings
-        case subscription
+        case information
+        case appearance
         case logout
     }
 
@@ -24,20 +32,17 @@ final class SettingsTableViewController: UITableViewController {
     }
 
     fileprivate enum Info: Int {
-        case subscription
-        case empty
         case community
         case about
         case contact
         case privacy
         case terms
-        case debug
     }
 
     @IBOutlet private weak var furiganaDetailLabel: UILabel!
     @IBOutlet private weak var hideEnglishDetailLabel: UILabel!
     @IBOutlet private weak var bunnyModeDetailLabel: UILabel!
-    @IBOutlet private weak var subscriptionDetailLabel: UILabel!
+    @IBOutlet private weak var appearanceLabel: UILabel!
 
     private let queue = ProcedureQueue()
     private var settings: SetSettingsProcedure.Settings? {
@@ -47,16 +52,31 @@ final class SettingsTableViewController: UITableViewController {
             bunnyModeDetailLabel?.text = settings?.bunnyMode.localizedString
         }
     }
+    private let userDefaults = UserDefaults.standard
 
     private var saveObserver: NotificationToken?
+    private var appearanceObserver: NSKeyValueObservation?
+
+    deinit {
+        if let observer = saveObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        appearanceObserver?.invalidate()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = Asset.background.color
-
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
+        }
+
+        if #available(iOS 13.0, *) {
+            appearanceLabel.text = userDefaults.userInterfaceStyle.localizedTitle
+
+            appearanceObserver = userDefaults.observe(\.userInterfaceStyle) { defaults, _ in
+                self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
+            }
         }
 
         updateUI()
@@ -69,7 +89,7 @@ final class SettingsTableViewController: UITableViewController {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
 
         do {
-            return try AppDelegate.coreDataStack.managedObjectContext.fetch(fetchRequest).first
+            return try AppDelegate.database.viewContext.fetch(fetchRequest).first
         } catch {
             log.error(error)
             return nil
@@ -94,15 +114,32 @@ final class SettingsTableViewController: UITableViewController {
                 didSelectBunnySettingsCell(cell)
             }
 
-        case .subscription:
-            let info = Info(rawValue: indexPath.row)!
+        case .information:
+
+            guard let info = Info(rawValue: indexPath.row) else { return }
             switch info {
-            case .debug:
-                didSelectDebugSubscriptionCell()
+            case .community:
+                guard let url = info.url else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            case .contact:
+                let url = URL(string: "mailto:feedback@mail.bunpro.jp")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+            case .about, .privacy, .terms:
+                break
+            }
+
+        case .appearance:
+
+            switch indexPath.row {
+            case 0:
+                if #available(iOS 13.0, *) {
+                    didSelectAppearanceCell(cell)
+                }
 
             default:
-                guard let url = info.url else { return }
-                present(customSafariViewController(url: url), animated: true)
+                break
             }
 
         case .logout:
@@ -199,31 +236,38 @@ final class SettingsTableViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    private func didSelectDebugSubscriptionCell() {
-        let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%K <= %@ && complete = true", #keyPath(Review.nextReviewDate), NSDate())
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
-        ]
+    @available(iOS 13.0, *)
+    private func didSelectAppearanceCell(_ cell: UITableViewCell) {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        var string = ""
-
-        do {
-            let reviews = try AppDelegate.coreDataStack.storeContainer.viewContext.fetch(fetchRequest)
-            string = reviews.description
-        } catch {
-            log.error(error)
-            string = String(describing: error)
+        let systemAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.system.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .system
         }
 
-        let emailViewCtrl = MFMailComposeViewController()
-        emailViewCtrl.setSubject("BunPro bad reviews")
-        emailViewCtrl.setMessageBody(string, isHTML: true)
-        emailViewCtrl.setToRecipients(["rion-kaneshiro@gmx.net"])
+        let lightAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.light.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .light
+        }
 
-        emailViewCtrl.mailComposeDelegate = self
+        let darkAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.dark.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .dark
+        }
 
-        present(emailViewCtrl, animated: true, completion: nil)
+        let bunproAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.bunpro.localizedTitle, style: .default) { _ in
+            self.userDefaults.userInterfaceStyle = .bunpro
+        }
+
+        let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
+
+        controller.addAction(systemAction)
+        controller.addAction(lightAction)
+        controller.addAction(darkAction)
+        controller.addAction(bunproAction)
+        controller.addAction(cancelAction)
+
+        controller.popoverPresentationController?.sourceView = cell
+        controller.popoverPresentationController?.sourceRect = cell.bounds
+
+        present(controller, animated: true, completion: nil)
     }
 
     private func didSelectLogoutCell(_ cell: UITableViewCell) {
@@ -245,35 +289,8 @@ final class SettingsTableViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch Section(rawValue: indexPath.section)! {
-        case .subscription:
-            switch Info(rawValue: indexPath.row)! {
-            case .debug:
-                return 0
-
-            default:
-                return super.tableView(tableView, heightForRowAt: indexPath)
-            }
-
-        default:
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView {
-            view.textLabel?.textColor = .white
-        }
-    }
-
     private func updateUI() {
-        guard let account = self.account else {
-            subscriptionDetailLabel.text = L10n.Subscription.unknown
-            return
-        }
-
-        subscriptionDetailLabel.text = account.subscriber ? L10n.Subscription.subscribed : L10n.Subscription.unsubscribed
+        guard let account = self.account else { return }
 
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
@@ -304,16 +321,33 @@ final class SettingsTableViewController: UITableViewController {
         tableView.endUpdates()
     }
 
-    private func customSafariViewController(url: URL) -> SFSafariViewController {
-        let configuration = SFSafariViewController.Configuration()
-        configuration.entersReaderIfAvailable = true
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .privacy:
+            (segue.destination.content as? InformationTableViewController)?.category = .privacy
 
-        let safariViewCtrl = SFSafariViewController(url: url, configuration: configuration)
+        case .about:
+            (segue.destination.content as? InformationTableViewController)?.category = .about
 
-        safariViewCtrl.preferredBarTintColor = .black
-        safariViewCtrl.preferredControlTintColor = Asset.mainTint.color
+        case .terms:
+            (segue.destination.content as? InformationTableViewController)?.category = .terms
+        }
+    }
 
-        return safariViewCtrl
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = Section(rawValue: indexPath.section) else { return CGFloat.leastNormalMagnitude }
+
+        switch section {
+        case .appearance:
+            if #available(iOS 13.0, *) {
+                return UITableView.automaticDimension
+            } else {
+                return CGFloat.leastNormalMagnitude
+            }
+
+        default:
+            return UITableView.automaticDimension
+        }
     }
 }
 
@@ -370,19 +404,16 @@ extension SettingsTableViewController.Info {
             return URL(string: "https://community.bunpro.jp/")
 
         case .about:
-            return URL(string: "https://bunpro.jp/about")
+            return nil // URL(string: "https://bunpro.jp/about")
 
         case .contact:
             return URL(string: "https://bunpro.jp/contact")
 
         case .privacy:
-            return URL(string: "https://bunpro.jp/privacy")
+            return nil // URL(string: "https://bunpro.jp/privacy")
 
         case .terms:
-            return URL(string: "https://bunpro.jp/terms")
-
-        case .subscription, .empty, .debug:
-            return nil
+            return nil // URL(string: "https://bunpro.jp/terms")
         }
     }
 }

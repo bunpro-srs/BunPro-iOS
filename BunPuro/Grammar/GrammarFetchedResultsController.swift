@@ -3,7 +3,7 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import Foundation
 
@@ -49,7 +49,7 @@ class GrammarFetchedResultsController: NSObject {
 
         exampleSentencesFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -72,7 +72,7 @@ class GrammarFetchedResultsController: NSObject {
 
         readingsFetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: AppDelegate.coreDataStack.managedObjectContext,
+            managedObjectContext: AppDelegate.database.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )

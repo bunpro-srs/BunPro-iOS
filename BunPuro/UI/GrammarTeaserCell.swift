@@ -26,4 +26,12 @@ final class GrammarTeaserCell: UITableViewCell {
             hankoImageView.isHidden = !isComplete
         }
     }
+
+    func update(with grammar: Grammar) {
+        japaneseLabel?.text = grammar.title
+        meaningLabel?.text = grammar.meaning
+
+        let hasReview = grammar.review?.complete ?? false
+        isComplete = hasReview
+    }
 }

@@ -3,9 +3,10 @@
 //  Copyright © 2017 Andreas Braun. All rights reserved.
 //
 
-import BunPuroKit
+import BunProKit
 import CoreData
 import ProcedureKit
+import Protocols
 import SafariServices
 import UIKit
 
@@ -14,10 +15,7 @@ private let updateInterval = TimeInterval(60)
 final class StatusTableViewController: UITableViewController {
     var showReviewsOnViewDidAppear: Bool = false
 
-    private var logoutObserver: NotificationToken?
-    private var beginUpdateObserver: NotificationToken?
-    private var endUpdateObserver: NotificationToken?
-    private var pendingModificationObserver: NotificationToken?
+    private var statusObserver: StatusObserverProtocol?
 
     private var nextReviewDate: Date?
     private var reviews: [Review]?
@@ -27,43 +25,37 @@ final class StatusTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = Asset.background.color
+        statusObserver = StatusObserver.newObserver()
 
-        logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.setup(account: nil)
-                self?.setup(reviews: nil)
+        statusObserver?.didLogout = { [weak self] in
+            self?.setup(account: nil)
+            self?.setup(reviews: nil)
+        }
+
+        statusObserver?.willBeginUpdating = { [weak self] in
+            self?.statusCell()?.isUpdating = true
+        }
+
+        statusObserver?.didEndUpdating = { [weak self] in
+            guard let `self` = self else { return }
+
+            self.statusCell()?.isUpdating = false
+            self.refreshControl?.endRefreshing()
+
+            guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
+
+            visibleIndexPaths.forEach {
+                guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
+
+                let level = 5 - $0.row
+                let metric = self.fetchedResultsController.metricForLevel(level)
+
+                self.updateJLPTCell(cell, level: level, metric: metric)
             }
         }
 
-        beginUpdateObserver = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = AppDelegate.isUpdating
-            }
-        }
-
-        endUpdateObserver = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.statusCell()?.isUpdating = AppDelegate.isUpdating
-                self.refreshControl?.endRefreshing()
-
-                guard let visibleIndexPaths = self.tableView.indexPathsForVisibleRows?.filter({ $0.section == 1 }) else { return }
-
-                visibleIndexPaths.forEach {
-                    guard let cell = self.tableView.cellForRow(at: $0) as? JLPTProgressTableViewCell else { return }
-
-                    let level = 5 - $0.row
-                    let metric = self.fetchedResultsController.metricForLevel(level)
-
-                    self.updateJLPTCell(cell, level: level, metric: metric)
-                }
-            }
-        }
-
-        pendingModificationObserver = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
-            }
+        statusObserver?.didUpdateReview = { [weak self] in
+            self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
 
         fetchedResultsController.delegate = self
@@ -97,8 +89,6 @@ final class StatusTableViewController: UITableViewController {
         case 0:
             if AppDelegate.isContentAccessable {
                 return 3 // Review, Cram and Study
-            } else if AppDelegate.isTrialPeriodAvailable {
-                return 1
             } else {
                 return 0
             }
@@ -116,11 +106,6 @@ final class StatusTableViewController: UITableViewController {
                 if AppDelegate.isContentAccessable {
                     let cell = tableView.dequeueReusableCell(for: indexPath) as StatusTableViewCell
                     updateStatusCell(cell)
-
-                    return cell
-                } else if AppDelegate.isTrialPeriodAvailable {
-                    let cell = tableView.dequeueReusableCell(for: indexPath) as SignUpTableViewCell
-                    cell.titleLabel.text = L10n.Status.signuptrail
 
                     return cell
                 } else {
@@ -184,10 +169,6 @@ final class StatusTableViewController: UITableViewController {
                     } else {
                         presentReviewViewController(website: .main)
                     }
-                } else if AppDelegate.isTrialPeriodAvailable {
-                    AppDelegate.signupForTrial()
-                } else if Account.currentAccount != nil {
-                    AppDelegate.signup()
                 }
 
             case 1:
@@ -207,6 +188,27 @@ final class StatusTableViewController: UITableViewController {
 
     func presentReviewViewController(website: Website = .review) {
         let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: tabBarController!, website: website)
+
+        reviewProcedure.openGrammarHandler = { viewController, identifier in
+            let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
+            request.predicate = NSPredicate(format: "%K == %d", #keyPath(Grammar.identifier), identifier)
+            request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)]
+
+            if let grammar = try? AppDelegate.database.viewContext.fetch(request).first {
+                let grammarViewCtrl = StoryboardScene.GrammarDetail.grammarTableViewController.instantiate()
+                grammarViewCtrl.grammar = grammar
+
+                let navigationCtrl = UINavigationController(rootViewController: grammarViewCtrl)
+
+                grammarViewCtrl.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    barButtonSystemItem: .done,
+                    target: grammarViewCtrl,
+                    action: #selector(GrammarTableViewController.dismissSelf)
+                )
+
+                viewController.present(navigationCtrl, animated: true, completion: nil)
+            }
+        }
 
         reviewProcedure.completionBlock = {
             DispatchQueue.main.async {
@@ -238,23 +240,22 @@ final class StatusTableViewController: UITableViewController {
     private var lastUpdateDate: Date?
 
     private func setup(reviews: [Review]?) {
-        if let reviewDate = reviews?.nextReviewDate, self.nextReviewDate != reviewDate {
+        let reviewDate = reviews?.nextReviewDate
+        if let reviewDate = reviewDate, self.nextReviewDate != reviewDate {
             UserNotificationCenter.shared.scheduleNextReviewNotification(at: reviewDate, reviewCount: reviews?.count ?? 0)
         }
 
-        DispatchQueue.default.async {
-            self.nextReviewDate = reviews?.nextReviewDate
+        self.nextReviewDate = reviewDate
 
-            self.reviews = reviews
-            self.lastUpdateDate = Date()
+        self.reviews = reviews
+        self.lastUpdateDate = Date()
 
-            DispatchQueue.main.async {
-                if let cell = self.statusCell() {
-                    self.updateStatusCell(cell)
-                }
-
-                AppDelegate.updateAppBadgeIcon()
+        DispatchQueue.main.async {
+            if let cell = self.statusCell() {
+                self.updateStatusCell(cell)
             }
+
+            AppDelegate.updateAppBadgeIcon()
         }
     }
 
@@ -297,8 +298,8 @@ extension StatusTableViewController: SegueHandler {
         case .showJLPT:
             let level = 5 - indexPath.row
 
-            let destination = segue.destination.content as? GrammarLevelTableViewController
-            destination?.level = level
+            let destination = segue.destination.content as? SearchTableViewController
+            destination?.sectionMode = .byLevel(level)
             destination?.title = "N\(level)"
         }
     }
@@ -312,10 +313,14 @@ extension StatusTableViewController: SFSafariViewControllerDelegate {
 
 extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
     func fetchedResultsAccountDidChange(account: Account?) {
-        setup(account: account)
+        account?.managedObjectContext?.perform { [weak self] in
+            self?.setup(account: account)
+        }
     }
 
     func fetchedResultsReviewsDidChange(reviews: [Review]?) {
-        setup(reviews: reviews)
+        reviews?.first?.managedObjectContext?.perform { [weak self] in
+            self?.setup(reviews: reviews)
+        }
     }
 }
