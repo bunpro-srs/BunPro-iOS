@@ -60,6 +60,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             L10n.Search.Grammar.Scope.learned
         ]
 
+        searchController.obscuresBackgroundDuringPresentation = false
+
         if #available(iOS 13.0, *) {
             searchDataSource = DiffableSearchDataSource(tableView: tableView) { tableView, indexPath, _ in
                 let grammar = self.searchDataSource.grammar(at: indexPath)
@@ -70,7 +72,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                 return cell
             }
         } else {
-            searchController.dimsBackgroundDuringPresentation = false
             searchDataSource = SearchableDataSource(tableView: tableView)
         }
 
