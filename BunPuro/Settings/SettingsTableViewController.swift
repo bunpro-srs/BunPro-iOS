@@ -66,6 +66,8 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSelf))
+
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
         }
@@ -81,18 +83,12 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         updateUI()
     }
 
-    private var account: Account? {
-        let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
-        fetchRequest.fetchLimit = 1
-        fetchRequest.fetchBatchSize = 1
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Account.name), ascending: true)]
+    @IBAction private func dismissSelf() {
+        dismiss { }
+    }
 
-        do {
-            return try AppDelegate.database.viewContext.fetch(fetchRequest).first
-        } catch {
-            log.error(error)
-            return nil
-        }
+    private func dismiss(completion: @escaping () -> Void) {
+        presentingViewController?.dismiss(animated: true, completion: completion)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -273,8 +269,10 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { _ in
-            Server.logout()
             self.tabBarController?.selectedIndex = 0
+            self.dismiss {
+                Server.logout()
+            }
         }
 
         let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)

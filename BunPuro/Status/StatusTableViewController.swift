@@ -25,6 +25,10 @@ final class StatusTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.ellipsisCircle, style: .plain, target: self, action: #selector(showSettings))
+        }
+
         statusObserver = StatusObserver.newObserver()
 
         statusObserver?.didLogout = { [weak self] in
@@ -78,6 +82,14 @@ final class StatusTableViewController: UITableViewController {
 
     @IBAction private func refresh(_ sender: UIRefreshControl) {
         AppDelegate.setNeedsStatusUpdate()
+    }
+
+    @IBAction private func showSettings() {
+        let settingsViewCtrl = StoryboardScene.Main.settingsTableViewController.instantiate()
+        let navigationCtrl = UINavigationController(rootViewController: settingsViewCtrl)
+        navigationCtrl.navigationBar.prefersLargeTitles = true
+
+        present(navigationCtrl, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

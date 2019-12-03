@@ -36,6 +36,8 @@ internal enum StoryboardScene {
     internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Main.self)
 
     internal static let mainTabBarController = SceneType<UIKit.UITabBarController>(storyboard: Main.self, identifier: "MainTabBarController")
+
+    internal static let settingsTableViewController = SceneType<BunPuro.SettingsTableViewController>(storyboard: Main.self, identifier: "SettingsTableViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

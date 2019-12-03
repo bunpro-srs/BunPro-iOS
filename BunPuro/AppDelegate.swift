@@ -169,12 +169,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         selectedImage: .magnifyingglassCircleFill
                     )
 
-                case 2:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.settings,
-                        image: .ellipsisCircle,
-                        selectedImage: .ellipsisCircleFill
-                    )
+//                case 2:
+//                    viewController.tabBarItem = UITabBarItem(
+//                        title: L10n.Tabbar.settings,
+//                        image: .ellipsisCircle,
+//                        selectedImage: .ellipsisCircleFill
+//                    )
 
                 default:
                     break
@@ -195,12 +195,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         selectedImage: Asset.tabSearchActive.image
                     )
 
-                case 2:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.settings,
-                        image: Asset.tabSettingsInactive.image,
-                        selectedImage: Asset.tabSettingsActive.image
-                    )
+//                case 2:
+//                    viewController.tabBarItem = UITabBarItem(
+//                        title: L10n.Tabbar.settings,
+//                        image: Asset.tabSettingsInactive.image,
+//                        selectedImage: Asset.tabSettingsActive.image
+//                    )
 
                 default:
                     break

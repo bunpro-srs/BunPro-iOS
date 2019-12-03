@@ -362,9 +362,9 @@
         <!--Settings-->
         <scene sceneID="b4v-X9-XeA">
             <objects>
-                <tableViewController id="z14-3N-uev" customClass="SettingsTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z14-3N-uev" customClass="SettingsTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="WKV-xq-end">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="qn0-jz-P9c">
                             <rect key="frame" x="0.0" y="668" width="375" height="0.0"/>
@@ -695,7 +695,6 @@
                     <connections>
                         <segue destination="Iyf-DW-p5E" kind="relationship" relationship="viewControllers" id="w4Q-6F-qjc"/>
                         <segue destination="jMr-YW-mZt" kind="relationship" relationship="viewControllers" id="I9k-Oh-F19"/>
-                        <segue destination="bxM-61-YKH" kind="relationship" relationship="viewControllers" id="MbF-md-GFf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
