@@ -52,7 +52,6 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
             bunnyModeDetailLabel?.text = settings?.bunnyMode.localizedString
         }
     }
-    private let userDefaults = UserDefaults.standard
 
     private var saveObserver: NotificationToken?
     private var appearanceObserver: NSKeyValueObservation?
@@ -72,9 +71,9 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         }
 
         if #available(iOS 13.0, *) {
-            appearanceLabel.text = userDefaults.userInterfaceStyle.localizedTitle
+            appearanceLabel.text = UserDefaults.standard.userInterfaceStyle.localizedTitle
 
-            appearanceObserver = userDefaults.observe(\.userInterfaceStyle) { defaults, _ in
+            appearanceObserver = UserDefaults.standard.observe(\.userInterfaceStyle) { defaults, _ in
                 self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
             }
         }
@@ -241,19 +240,19 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let systemAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.system.localizedTitle, style: .default) { _ in
-            self.userDefaults.userInterfaceStyle = .system
+            UserDefaults.standard.userInterfaceStyle = .system
         }
 
         let lightAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.light.localizedTitle, style: .default) { _ in
-            self.userDefaults.userInterfaceStyle = .light
+            UserDefaults.standard.userInterfaceStyle = .light
         }
 
         let darkAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.dark.localizedTitle, style: .default) { _ in
-            self.userDefaults.userInterfaceStyle = .dark
+            UserDefaults.standard.userInterfaceStyle = .dark
         }
 
         let bunproAction = UIAlertAction(title: UserDefaults.UserInterfaceStyle.bunpro.localizedTitle, style: .default) { _ in
-            self.userDefaults.userInterfaceStyle = .bunpro
+            UserDefaults.standard.userInterfaceStyle = .bunpro
         }
 
         let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
@@ -290,7 +289,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     }
 
     private func updateUI() {
-        guard let account = self.account else { return }
+        guard let account = Account.currentAccount else { return }
 
         guard let furigana = FuriganaMode(rawValue: account.furiganaMode ?? "") else { return }
         let english = account.englishMode ? Active.yes : Active.no
