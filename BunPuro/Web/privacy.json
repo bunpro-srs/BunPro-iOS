@@ -6,11 +6,11 @@
     },
     {
         "headline": "Disclaimer",
-        "content": "The owners of this site (\"we\", \"us\" or \"our\") operate the website https://bunpro.jp (the \"Service\"). This page contains information about the collection, use and disclosure of Personal Information when you use our Service. We will not use or share your information with anyone except as described in this Privacy Policy. We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy."
+        "content": "The owners of this site (\"we\", \"us\" or \"our\") operate the website https://www.bunpro.jp (the \"Service\"). This page contains information about the collection, use and disclosure of Personal Information when you use our Service. We will not use or share your information with anyone except as described in this Privacy Policy. We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy."
     },
     {
         "headline": "Information Collection and Use",
-        "content": "In order to use this website, a user must first complete the registration form. During registration a user is required to give certain information (such as an email address). This information is used to contact you about the products/services on our site in which you have expressed interest.\nWe may ask you for personal information, such as your email. We collect only the personal information relevant to providing you with the service, and use your information only to ensure the fulfilment of this service. You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services without this information.\nWe will only retain personal information for as long as necessary to provide you with the Service."
+        "content": "In order to use this website, a user must first complete the registration form. During registration a user is required to give certain information (such as an email address). This information is used to contact you about the products/services on our site in which you have expressed interest.\nWe may ask you for personal information, such as your email. We collect only the personal information relevant to providing you with the service, and use your information only to ensure the fulfilment of this service. You are free to refuse our request for your personal information, with the understanding that we may be unable to provide you with some of your desired services without this information.\nWe will only retain personal information for as long as necessary to provide you with the Service.To protect your information, should your account become inactive for an extended period of time, we will remove your account and all associated information."
     },
     {
         "headline": "Log Data",
@@ -30,7 +30,7 @@
     },
     {
         "headline": "Third-Party Services",
-        "content": "You may at any time request, by emailing us at contact@mail.bunpro.jp, that your information be removed or updated and we will do so immediately."
+        "content": "We may employ third-party companies and individuals on our websites - for example, Stripe to process payments. These third parties have access to your personal information only to perform specific tasks on our behalf, and are obligated not to disclose or use it for any other purpose."
     },
     {
         "headline": "Security",
@@ -46,6 +46,6 @@
     },
     {
         "headline": "Changes to This Privacy Policy",
-        "content": "We may from time to time update this Privacy Policy. We will notify you of such changes by posting the new Privacy Policy on this page. Your continued use of this site after any changes to this policy will be regarded as acceptance of our practices around privacy and personal information.\n\nEffective as of: September 22, 2017"
+        "content": "We may from time to time update this Privacy Policy. We will notify you of such changes by posting the new Privacy Policy on this page. Your continued use of this site after any changes to this policy will be regarded as acceptance of our practices around privacy and personal information.\n\nEffective as of: September 22, 2017\nUpdated: December 1st, 2019"
     }
 ]
