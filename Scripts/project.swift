@@ -12,7 +12,6 @@ import SwiftShell
 /// Installs all tools and dependencies required to build the project.
 public func install() throws {
     try execute(bash: "tools install")
-    try execute(bash: "accio install")
     try openXcodeProject()
 }
 
