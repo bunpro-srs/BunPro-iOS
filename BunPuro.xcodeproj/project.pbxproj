@@ -24,7 +24,6 @@
 		2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */; };
 		2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
-		2E4651DA2397000F00E47380 /* RubyLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4651D92397000F00E47380 /* RubyLabel */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E49509A209C4DDE00DA55A5 /* Date+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E495099209C4DDE00DA55A5 /* Date+Initializer.swift */; };
 		2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E528A20234898740061A92D /* UserDefaults+Custom.swift */; };
@@ -136,7 +135,6 @@
 		2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-wal"; sourceTree = "<group>"; };
 		2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BunPro.sqlite; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
-		2E4651D82396FE3D00E47380 /* RubyLabel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RubyLabel; path = ../RubyLabel; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
 		2E48ABB420C1A19400BA660B /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				2E12CA9D238DDAF900C9B588 /* Combine.framework in Frameworks */,
 				2EA878FF22E28570009E5AA9 /* Protocols in Frameworks */,
 				2EA878FD22E2856A009E5AA9 /* BunProKit in Frameworks */,
-				2E4651DA2397000F00E47380 /* RubyLabel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +351,6 @@
 		2EAD9DC71FA25DF100CE52CF = {
 			isa = PBXGroup;
 			children = (
-				2E4651D82396FE3D00E47380 /* RubyLabel */,
 				2EA878FB22E28544009E5AA9 /* BunProKit */,
 				2EA878FA22E2852C009E5AA9 /* Protocols */,
 				2EAD9DD21FA25DF100CE52CF /* BunPuro */,
@@ -498,7 +494,6 @@
 			packageProductDependencies = (
 				2EA878FC22E2856A009E5AA9 /* BunProKit */,
 				2EA878FE22E28570009E5AA9 /* Protocols */,
-				2E4651D92397000F00E47380 /* RubyLabel */,
 			);
 			productName = BunPuro;
 			productReference = 2EAD9DD01FA25DF100CE52CF /* BunPuro.app */;
@@ -1132,10 +1127,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2E4651D92397000F00E47380 /* RubyLabel */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RubyLabel;
-		};
 		2EA878FC22E2856A009E5AA9 /* BunProKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BunProKit;

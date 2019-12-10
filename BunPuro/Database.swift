@@ -164,17 +164,17 @@ private class CombineDatabase: DatabaseHandler {
     }
 
     func updateReviews(_ reviews: [BPKReview]) {
-        persistantContainer.performBackgroundTask { context in
-            context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-            context.automaticallyMergesChangesFromParent = true
+        let batches = reviews.chunked(into: 40)
 
-            let batches = reviews.chunked(into: 40)
-
-            batches.forEach { batch in
+        batches.forEach { batch in
+            persistantContainer.performBackgroundTask { context in
+                context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+                context.automaticallyMergesChangesFromParent = true
+                
                 batch.forEach { Review(review: $0, context: context) }
+                
+                try? context.save()
             }
-
-            try? context.save()
         }
     }
 }
