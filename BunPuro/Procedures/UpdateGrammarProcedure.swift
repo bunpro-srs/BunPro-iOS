@@ -63,11 +63,12 @@ final class ImportGrammarPointsIntoCoreDataProcedure: Procedure {
             self.grammarPoints.filter { $0.level != "0" }.forEach { Grammar(grammar: $0, context: context) }
 
             do {
-                try context.save()
-
-                DispatchQueue.main.async {
-                    self.finish()
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
                 }
+
+                self.finish()
             } catch {
                 self.finish(with: error)
             }

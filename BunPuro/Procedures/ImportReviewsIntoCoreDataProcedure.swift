@@ -53,7 +53,11 @@ private final class ImportReviewsIntoCoreDataProcedure: Procedure {
             self.reviews.forEach { Review(review: $0, context: context) }
 
             do {
-                try context.save()
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
+                }
+
                 self.finish()
             } catch {
                 self.finish(with: error)

@@ -9,9 +9,9 @@ import Foundation
 import ProcedureKit
 
 protocol DatabaseHandler {
-    func updateAccount(_ account: BPKAccount)
-    func updateGrammar(_ grammar: [BPKGrammar])
-    func updateReviews(_ reviews: [BPKReview])
+    func updateAccount(_ account: BPKAccount, completion: (() -> Void)?)
+    func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?)
+    func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?)
 }
 
 final class Database {
@@ -24,6 +24,7 @@ final class Database {
     lazy var viewContext: NSManagedObjectContext = {
         self.persistantContainer.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         self.persistantContainer.viewContext.automaticallyMergesChangesFromParent = true
+        self.persistantContainer.viewContext.shouldDeleteInaccessibleFaults = true
         return self.persistantContainer.viewContext
     }()
 
@@ -79,8 +80,8 @@ final class Database {
 }
 
 extension Database: DatabaseHandler {
-    func updateAccount(_ account: BPKAccount) {
-        handler.updateAccount(account)
+    func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
+        handler.updateAccount(account, completion: completion)
 
         if #available(iOS 13.0, *) {
             if UserDefaults.standard.userInterfaceStyle == .bunpro {
@@ -89,12 +90,12 @@ extension Database: DatabaseHandler {
         }
     }
 
-    func updateGrammar(_ grammar: [BPKGrammar]) {
-        handler.updateGrammar(grammar)
+    func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?) {
+        handler.updateGrammar(grammar, completion: completion)
     }
 
-    func updateReviews(_ reviews: [BPKReview]) {
-        handler.updateReviews(reviews)
+    func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?) {
+        handler.updateReviews(reviews, completion: completion)
     }
 }
 
@@ -108,21 +109,27 @@ private class PrecedureDatabase: DatabaseHandler {
         self.queue.maxConcurrentOperationCount = 1
     }
 
-    func updateAccount(_ account: BPKAccount) {
+    func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
         let procedure = ImportAccountIntoCoreDataProcedure(account: account, stack: persistantContainer)
-        queue.addOperation(procedure)
-    }
-
-    func updateGrammar(_ grammar: [BPKGrammar]) {
-        let procedure = ImportGrammarPointsIntoCoreDataProcedure(stack: persistantContainer, grammarPoints: grammar)
-        procedure.addDidFinishBlockObserver { [weak self] _, _ in
-            try? self?.persistantContainer.viewContext.save()
+        procedure.addDidFinishBlockObserver { _, _ in
+            completion?()
         }
         queue.addOperation(procedure)
     }
 
-    func updateReviews(_ reviews: [BPKReview]) {
+    func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?) {
+        let procedure = ImportGrammarPointsIntoCoreDataProcedure(stack: persistantContainer, grammarPoints: grammar)
+        procedure.addDidFinishBlockObserver { _, _ in
+            completion?()
+        }
+        queue.addOperation(procedure)
+    }
+
+    func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?) {
         let procedure = UpdateReviewsProcedure(reviews: reviews, stack: persistantContainer)
+        procedure.addDidFinishBlockObserver { _, _ in
+            completion?()
+        }
         queue.addOperation(procedure)
     }
 }
@@ -135,45 +142,78 @@ private class CombineDatabase: DatabaseHandler {
         self.persistantContainer = persistantContainer
     }
 
-    func updateAccount(_ account: BPKAccount) {
+    func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
         persistantContainer.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-            context.automaticallyMergesChangesFromParent = true
+            context.undoManager = nil
 
-            _ = Account(account: account, context: context)
+            context.performAndWait {
+                _ = Account(account: account, context: context)
 
-            try? context.save()
+                if context.hasChanges {
+                    do {
+                        try context.save()
+                        context.reset()
+                    } catch {
+                        log.error(error.localizedDescription)
+                    }
+                }
+
+                completion?()
+            }
         }
     }
 
-    func updateGrammar(_ grammar: [BPKGrammar]) {
+    func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?) {
         let batches = grammar.chunked(into: 40)
 
         batches.forEach { batch in
             persistantContainer.performBackgroundTask { context in
                 context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-                context.automaticallyMergesChangesFromParent = true
+                context.undoManager = nil
 
                 let filteredBatch = batch.filter { $0.level != "0" }
 
-                filteredBatch.forEach { Grammar(grammar: $0, context: context) }
+                context.performAndWait {
+                    filteredBatch.forEach { Grammar(grammar: $0, context: context) }
 
-                try? context.save()
+                    if context.hasChanges {
+                        do {
+                            try context.save()
+                            context.reset()
+                        } catch {
+                            log.error(error.localizedDescription)
+                        }
+                    }
+
+                    completion?()
+                }
             }
         }
     }
 
-    func updateReviews(_ reviews: [BPKReview]) {
+    func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?) {
         let batches = reviews.chunked(into: 40)
 
         batches.forEach { batch in
             persistantContainer.performBackgroundTask { context in
                 context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-                context.automaticallyMergesChangesFromParent = true
-                
-                batch.forEach { Review(review: $0, context: context) }
-                
-                try? context.save()
+                context.undoManager = nil
+
+                context.performAndWait {
+                    batch.forEach { Review(review: $0, context: context) }
+
+                    if context.hasChanges {
+                        do {
+                            try context.save()
+                            context.reset()
+                        } catch {
+                            log.error(error.localizedDescription)
+                        }
+
+                        completion?()
+                    }
+                }
             }
         }
     }

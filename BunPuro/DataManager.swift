@@ -95,13 +95,29 @@ final class DataManager {
     private func updateGrammarDatabase() {
         guard needsGrammarDatabaseUpdate() else { return }
 
-        let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
-        updateProcedure.addDidFinishBlockObserver { _, error in
-            if error == nil {
-                UserDefaults.standard.lastDatabaseUpdate = Date()
+        if #available(iOS 13.0, *) {
+            let updateProcedure = GrammarPointsProcedure(presentingViewController: presentingViewController)
+            updateProcedure.addDidFinishBlockObserver { procedure, error in
+                if let error = error {
+                    log.error(error.localizedDescription)
+                } else if let grammar = procedure.output.value?.value {
+                    self.database.updateGrammar(grammar) {
+                        UserDefaults.standard.lastDatabaseUpdate = Date()
+                    }
+                }
             }
+
+            Server.add(procedure: updateProcedure)
+        } else {
+            let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
+            updateProcedure.addDidFinishBlockObserver { _, error in
+                if error == nil {
+                    UserDefaults.standard.lastDatabaseUpdate = Date()
+                }
+            }
+
+            Server.add(procedure: updateProcedure)
         }
-        Server.add(procedure: updateProcedure)
     }
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
@@ -121,21 +137,21 @@ final class DataManager {
 
     func scheduleUpdateProcedure(completion: ((UIBackgroundFetchResult) -> Void)? = nil) {
         self.isUpdating = true
-//        Server.statusPublisher(presentingViewController: presentingViewController)
 
         let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { user, reviews, _ in
-            DispatchQueue.main.async {
-                if let user = user {
-                    self.database.updateAccount(user)
-                    self.isUpdating = false
+            if let user = user {
+                self.database.updateAccount(user) {
+                    DispatchQueue.main.async {
+                        self.isUpdating = false
+                    }
                 }
+            }
 
+            DispatchQueue.main.async {
                 if let reviews = reviews {
                     let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
 
-                    let importProcedure = UpdateReviewsProcedure(reviews: reviews)
-
-                    importProcedure.addDidFinishBlockObserver { _, _ in
+                    self.database.updateReviews(reviews) {
                         self.isUpdating = false
 
                         self.startStatusUpdates()
@@ -158,8 +174,6 @@ final class DataManager {
                             completion?(hasNewReviews ? .newData : .noData)
                         }
                     }
-
-                    self.procedureQueue.addOperation(importProcedure)
                 }
             }
         }

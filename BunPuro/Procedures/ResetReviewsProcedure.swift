@@ -27,7 +27,11 @@ final class ResetReviewsProcedure: Procedure {
                 let reviews = try context.fetch(fetchRequest)
                 reviews.forEach { context.delete($0) }
 
-                try context.save()
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
+                }
+
                 self.finish()
             } catch {
                 self.finish(with: error)

@@ -30,7 +30,11 @@ final class ImportAccountIntoCoreDataProcedure: Procedure {
             _ = Account(account: self.account, context: context)
 
             do {
-                try context.save()
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
+                }
+
                 self.finish()
             } catch {
                 self.finish(with: error)
