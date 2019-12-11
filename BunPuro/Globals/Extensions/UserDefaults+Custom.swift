@@ -6,18 +6,6 @@
 import Foundation
 import UIKit
 
-extension UserDefaults {
-    var lastDatabaseUpdate: Date {
-        get {
-            return Date(timeIntervalSince1970: double(forKey: "lastDatabaseUpdate"))
-        }
-
-        set {
-            set(newValue.timeIntervalSince1970, forKey: "lastDatabaseUpdate")
-        }
-    }
-}
-
 @available(iOS 13.0, *)
 extension UserDefaults {
     @objc

@@ -6,13 +6,10 @@
 import BunProKit
 import CoreData
 import Foundation
-import ProcedureKit
 import SafariServices
 import UIKit
 
 final class DataManager {
-    private let procedureQueue = ProcedureQueue()
-
     let presentingViewController: UIViewController
     let database: Database
 
@@ -39,7 +36,7 @@ final class DataManager {
 
         logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
-                self?.procedureQueue.addOperation(ResetReviewsProcedure())
+                self?.database.resetReviews()
                 self?.scheduleUpdateProcedure()
             }
         }
@@ -60,21 +57,25 @@ final class DataManager {
     private var hasPendingReviewModification: Bool = false
 
     func startStatusUpdates() {
-        if startImmediately {
-            startImmediately = false
-            scheduleUpdateProcedure()
-        }
+        DispatchQueue.main.async {
+            guard UIApplication.shared.applicationState == .active else { return }
 
-        guard !isUpdating else { return }
+            if self.startImmediately {
+                self.startImmediately = false
+                self.scheduleUpdateProcedure()
+            }
 
-        stopStatusUpdates()
-
-        statusUpdateTimer = Timer(timeInterval: updateTimeInterval, repeats: true) { _ in
             guard !self.isUpdating else { return }
-            self.scheduleUpdateProcedure()
-        }
 
-        RunLoop.main.add(statusUpdateTimer!, forMode: RunLoop.Mode.default)
+            self.stopStatusUpdates()
+
+            self.statusUpdateTimer = Timer(timeInterval: self.updateTimeInterval, repeats: true) { _ in
+                guard !self.isUpdating else { return }
+                self.scheduleUpdateProcedure()
+            }
+
+            RunLoop.main.add(self.statusUpdateTimer!, forMode: RunLoop.Mode.default)
+        }
     }
 
     func stopStatusUpdates() {
@@ -87,7 +88,7 @@ final class DataManager {
     }
 
     private func needsGrammarDatabaseUpdate() -> Bool {
-        let lastUpdate = UserDefaults.standard.lastDatabaseUpdate
+        let lastUpdate = Settings.lastDatabaseUpdate
 
         return Date().hours(from: lastUpdate) > 7 * 24
     }
@@ -102,7 +103,7 @@ final class DataManager {
                     log.error(error.localizedDescription)
                 } else if let grammar = procedure.output.value?.value {
                     self.database.updateGrammar(grammar) {
-                        UserDefaults.standard.lastDatabaseUpdate = Date()
+                        Settings.lastDatabaseUpdate = Date()
                     }
                 }
             }
@@ -112,7 +113,7 @@ final class DataManager {
             let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
             updateProcedure.addDidFinishBlockObserver { _, error in
                 if error == nil {
-                    UserDefaults.standard.lastDatabaseUpdate = Date()
+                    Settings.lastDatabaseUpdate = Date()
                 }
             }
 

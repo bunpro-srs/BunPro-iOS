@@ -12,6 +12,7 @@ protocol DatabaseHandler {
     func updateAccount(_ account: BPKAccount, completion: (() -> Void)?)
     func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?)
     func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?)
+    func resetReviews()
 }
 
 final class Database {
@@ -77,6 +78,10 @@ final class Database {
             log.error("Unresolved error: \(error.userInfo)")
         }
     }
+
+    func resetReviews() {
+        handler.resetReviews()
+    }
 }
 
 extension Database: DatabaseHandler {
@@ -131,6 +136,10 @@ private class PrecedureDatabase: DatabaseHandler {
             completion?()
         }
         queue.addOperation(procedure)
+    }
+
+    func resetReviews() {
+        queue.addOperation(ResetReviewsProcedure())
     }
 }
 
@@ -214,6 +223,26 @@ private class CombineDatabase: DatabaseHandler {
                         completion?()
                     }
                 }
+            }
+        }
+    }
+
+    func resetReviews() {
+        persistantContainer.performBackgroundTask { context in
+            context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+
+            let fetchRequest: NSFetchRequest<Review> = Review.fetchRequest()
+
+            do {
+                let reviews = try context.fetch(fetchRequest)
+                reviews.forEach { context.delete($0) }
+
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
+                }
+            } catch {
+                log.error(error.localizedDescription)
             }
         }
     }
