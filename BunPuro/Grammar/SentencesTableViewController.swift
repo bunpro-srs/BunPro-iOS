@@ -33,6 +33,8 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
         let sort = NSSortDescriptor(key: #keyPath(Sentence.identifier), ascending: true)
         fetchRequest.sortDescriptors = [sort]
 
+        fetchRequest.fetchLimit = AppDelegate.numberOfAllowedSentences
+
         fetchedResultsController = NSFetchedResultsController<Sentence>(
             fetchRequest: fetchRequest,
             managedObjectContext: AppDelegate.database.viewContext,

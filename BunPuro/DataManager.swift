@@ -69,7 +69,7 @@ final class DataManager {
 
         stopStatusUpdates()
 
-        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { (_) in
+        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { _ in
             guard !self.isUpdating else { return }
             self.scheduleUpdateProcedure()
         }
