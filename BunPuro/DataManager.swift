@@ -69,12 +69,10 @@ final class DataManager {
 
         stopStatusUpdates()
 
-        statusUpdateTimer = Timer(timeInterval: updateTimeInterval, repeats: true) { _ in
+        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { (_) in
             guard !self.isUpdating else { return }
             self.scheduleUpdateProcedure()
         }
-
-        RunLoop.main.add(statusUpdateTimer!, forMode: RunLoop.Mode.default)
     }
 
     func stopStatusUpdates() {
