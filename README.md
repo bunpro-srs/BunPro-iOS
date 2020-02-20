@@ -1,10 +1,6 @@
 # BunPuro
 
 <p align="left">
-    <a href="https://app.bitrise.io/app/2da63a9eebe19b36">
-        <img src="https://app.bitrise.io/app/2da63a9eebe19b36/status.svg?token=29S9gTvVcEPD6koiY297SA&branch=development"
-             alt="Build Status">
-    </a>
     <a href="https://github.com/bunpro-srs/BunPro-iOS/releases">
         <img src="https://img.shields.io/badge/Version-1.0.0--beta.16-blue.svg"
              alt="Version: 1.0.0-beta.16">
