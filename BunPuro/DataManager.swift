@@ -18,6 +18,7 @@ final class DataManager {
 
     private var loginObserver: NotificationToken?
     private var logoutObserver: NotificationToken?
+    private var backgroundObserver: NotificationToken?
 
     deinit {
         if loginObserver != nil {
@@ -26,6 +27,10 @@ final class DataManager {
 
         if logoutObserver != nil {
             NotificationCenter.default.removeObserver(logoutObserver!)
+        }
+        
+        if backgroundObserver != nil {
+            NotificationCenter.default.removeObserver(backgroundObserver!)
         }
     }
 
@@ -42,6 +47,11 @@ final class DataManager {
                 self?.procedureQueue.addOperation(ResetReviewsProcedure())
                 self?.scheduleUpdateProcedure()
             }
+        }
+        
+        backgroundObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
+            self?.stopStatusUpdates()
+            self?.isUpdating = false
         }
     }
 
