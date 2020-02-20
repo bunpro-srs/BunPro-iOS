@@ -28,7 +28,7 @@ final class DataManager {
         if logoutObserver != nil {
             NotificationCenter.default.removeObserver(logoutObserver!)
         }
-        
+
         if backgroundObserver != nil {
             NotificationCenter.default.removeObserver(backgroundObserver!)
         }
@@ -48,7 +48,7 @@ final class DataManager {
                 self?.scheduleUpdateProcedure()
             }
         }
-        
+
         backgroundObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
             self?.stopStatusUpdates()
             self?.isUpdating = false

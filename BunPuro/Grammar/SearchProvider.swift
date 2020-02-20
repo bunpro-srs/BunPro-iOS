@@ -167,12 +167,12 @@ extension SearchProvider
                 return nil
 
             case .learned:
-                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { $0.grammarIdentifier }
                 let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
                 return identifierPredicate
 
             case .unlearned:
-                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+                let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { $0.grammarIdentifier }
                 let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
                 return identifierPredicate
             }
@@ -187,7 +187,7 @@ extension SearchProvider
             return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, meaningPredicate, yomikataPredicate])
 
         case .learned:
-            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { $0.grammarIdentifier }
 
             let identifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Grammar.identifier), reviewIdentifiers)
 
@@ -199,7 +199,7 @@ extension SearchProvider
             )
 
         case .unlearned:
-            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { return $0.grammarIdentifier }
+            let reviewIdentifiers = (reviewsFetchedResultsController.fetchedObjects ?? []).compactMap { $0.grammarIdentifier }
 
             let identifierPredicate = NSPredicate(format: "NOT (%K IN %@)", #keyPath(Grammar.identifier), reviewIdentifiers)
 

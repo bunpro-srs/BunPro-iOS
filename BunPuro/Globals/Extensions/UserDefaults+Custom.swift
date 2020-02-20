@@ -8,13 +8,8 @@ import UIKit
 
 extension UserDefaults {
     var lastDatabaseUpdate: Date {
-        get {
-            return Date(timeIntervalSince1970: double(forKey: "lastDatabaseUpdate"))
-        }
-
-        set {
-            set(newValue.timeIntervalSince1970, forKey: "lastDatabaseUpdate")
-        }
+        get { Date(timeIntervalSince1970: double(forKey: "lastDatabaseUpdate")) }
+        set { set(newValue.timeIntervalSince1970, forKey: "lastDatabaseUpdate") }
     }
 }
 
@@ -60,12 +55,7 @@ extension UserDefaults {
     @objc
     dynamic
     var userInterfaceStyle: UserInterfaceStyle {
-        get {
-            return UserInterfaceStyle(rawValue: integer(forKey: "userInterfaceStyle")) ?? .system
-        }
-
-        set {
-            set(newValue.rawValue, forKey: "userInterfaceStyle")
-        }
+        get { UserInterfaceStyle(rawValue: integer(forKey: "userInterfaceStyle")) ?? .system }
+        set { set(newValue.rawValue, forKey: "userInterfaceStyle") }
     }
 }

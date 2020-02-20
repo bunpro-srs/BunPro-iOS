@@ -14,9 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didSet { window?.tintColor = Asset.tint.color }
     }
 
-    static var database: Database {
-        return (UIApplication.shared.delegate as! AppDelegate).database
-    }
+    static var database: Database { (UIApplication.shared.delegate as! AppDelegate).database }
 
     private var modelName: String = "BunPro"
     lazy var database = Database(modelName: modelName)
@@ -134,17 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.immidiateStatusUpdate()
     }
 
-    static var isContentAccessable: Bool {
-        return Account.currentAccount?.subscriber ?? false
-    }
+    static var isContentAccessable: Bool { Account.currentAccount?.subscriber ?? false }
 
-    static var numberOfAllowedSentences: Int {
-        if isContentAccessable {
-            return Int.max
-        } else {
-            return 1
-        }
-    }
+    static var numberOfAllowedSentences: Int { isContentAccessable ? Int.max : 1 }
 
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)

@@ -59,7 +59,7 @@ extension SearchTableViewController {
 
                 return grammarViewCtrl
             }, actionProvider: { _ in
-            return UIMenu(title: "Review", children: [reviewMenu, meaningMenu])
+                UIMenu(title: "Review", children: [reviewMenu, meaningMenu])
             }
         )
     }

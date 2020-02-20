@@ -16,8 +16,10 @@ opt_in_rules:
 - fatal_error_message
 - file_header
 - file_name
+- file_types_order
 - first_where
 - function_default_parameter_at_end
+- implicit_return
 - is_disjoint
 - joined_default_parameter
 - let_var_whitespace
@@ -47,10 +49,12 @@ opt_in_rules:
 - sorted_first_last
 - sorted_imports
 - switch_case_on_newline
+- toggle_bool
 - trailing_closure
 - unavailable_function
 - unneeded_parentheses_in_closure_argument
 - untyped_error_in_catch
+- unused_import
 - vertical_parameter_alignment_on_call
 - vertical_whitespace_between_cases
 - vertical_whitespace_closing_braces
