@@ -5,6 +5,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:bunpro.jp</string>
+		<string>webcredentials:www.bunpro.jp</string>
 	</array>
 </dict>
 </plist>
