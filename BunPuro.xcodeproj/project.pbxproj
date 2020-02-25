@@ -971,7 +971,7 @@
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
@@ -998,7 +998,7 @@
 				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
