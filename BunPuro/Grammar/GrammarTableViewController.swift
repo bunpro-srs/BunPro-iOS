@@ -134,7 +134,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 // UITableViewDelegate + UITableViewDataSource Protocol Implementation
 extension GrammarTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -244,7 +244,7 @@ extension GrammarTableViewController {
 
 extension GrammarTableViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
+        .none
     }
 
     override var previewActionItems: [UIPreviewActionItem] {
