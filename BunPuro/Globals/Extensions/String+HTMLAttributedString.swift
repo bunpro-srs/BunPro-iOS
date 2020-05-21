@@ -8,7 +8,7 @@ import UIKit
 
 extension String {
     var htmlAttributedString: NSAttributedString? {
-        return htmlAttributedString(font: nil)
+        htmlAttributedString(font: nil)
     }
 
     func htmlAttributedString(font: UIFont?, color: UIColor = .black) -> NSAttributedString? {

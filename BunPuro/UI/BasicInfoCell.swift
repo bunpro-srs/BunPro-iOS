@@ -32,7 +32,7 @@ final class BasicInfoCell: UITableViewCell {
 
     var attributedDescription: String? {
         get {
-            return descriptionLabel?.text
+            descriptionLabel?.text
         }
         set {
             descriptionLabel.text = newValue
@@ -63,6 +63,6 @@ final class BasicInfoCell: UITableViewCell {
     }
 
     override var canBecomeFirstResponder: Bool {
-        return true
+        true
     }
 }

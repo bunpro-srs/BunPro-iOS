@@ -45,7 +45,7 @@ extension Review {
     static func reviews(for grammar: [Grammar]) throws -> [Review]? {
         let request: NSFetchRequest<Review> = Review.fetchRequest()
 
-        let grammarIdentifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map(\.identifier))
+        let grammarIdentifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map { $0.identifier })
         let reviewTypePredicate = NSPredicate(format: "%K == %@", #keyPath(Review.reviewType), BPKReview.ReviewType.standard.rawValue)
 
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [grammarIdentifierPredicate, reviewTypePredicate])

@@ -23,7 +23,7 @@ class InformationTableViewController: UITableViewController {
         }
 
         var content: [Paragraph] {
-            return loadData(self)
+            loadData(self)
         }
 
         private func loadData(_ category: Category) -> [Paragraph] {

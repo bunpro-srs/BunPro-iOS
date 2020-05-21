@@ -15,8 +15,6 @@
 		2E1DCA251FC49A72002E67D6 /* GrammarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */; };
 		2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */; };
 		2E1DCA2B1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */; };
-		2E2AAEBB22E4DFDE00E227B0 /* SentencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */; };
-		2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */; };
 		2E3074901FACF9640078725B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3074921FACF9640078725B /* InfoPlist.strings */; };
 		2E30749C1FACF9660078725B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E30749E1FACF9660078725B /* Localizable.strings */; };
 		2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */; };
@@ -73,6 +71,8 @@
 		2EE7C21B1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */; };
 		2EFB5F9C1FB38D8A004D3DF5 /* BunPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */; };
 		2EFFE3DD2329893500EA74D4 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE3DC2329893500EA74D4 /* Database.swift */; };
+		327951952475FF440046647D /* ReadingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327951932475FF440046647D /* ReadingsTableViewController.swift */; };
+		327951962475FF440046647D /* SentencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327951942475FF440046647D /* SentencesTableViewController.swift */; };
 		A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */; };
 		A1225EE9226D7DA300EA2885 /* Collection+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE8226D7DA300EA2885 /* Collection+Review.swift */; };
 		A146F316227025B4002DC511 /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F315227025B4002DC511 /* NotificationToken.swift */; };
@@ -126,8 +126,6 @@
 		2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTableViewController.swift; sourceTree = "<group>"; };
 		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
 		2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetchedResultsTableViewController.swift; sourceTree = "<group>"; };
-		2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SentencesTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/SentencesTableViewController.swift"; sourceTree = "<group>"; };
-		2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReadingsTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/ReadingsTableViewController.swift"; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2E30749D1FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -195,6 +193,8 @@
 		2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportAccountIntoCoreDataProcedure.swift; sourceTree = "<group>"; };
 		2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BunPro.xcdatamodel; sourceTree = "<group>"; };
 		2EFFE3DC2329893500EA74D4 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		327951932475FF440046647D /* ReadingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingsTableViewController.swift; sourceTree = "<group>"; };
+		327951942475FF440046647D /* SentencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentencesTableViewController.swift; sourceTree = "<group>"; };
 		A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StatusTableView.swift"; sourceTree = "<group>"; };
 		A1225EE8226D7DA300EA2885 /* Collection+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Review.swift"; sourceTree = "<group>"; };
 		A146F315227025B4002DC511 /* NotificationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
@@ -326,8 +326,8 @@
 				A146F31922702CCE002DC511 /* GrammarFetchedResultsController.swift */,
 				A146F31B227033C3002DC511 /* GrammarFlowController.swift */,
 				2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */,
-				2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */,
-				2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */,
+				327951932475FF440046647D /* ReadingsTableViewController.swift */,
+				327951942475FF440046647D /* SentencesTableViewController.swift */,
 				2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */,
 				2EA29AA42391C39B003B50A9 /* SearchTableViewController.swift */,
 				2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */,
@@ -430,8 +430,8 @@
 				2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */,
 				2EBB70B820164EBA001AE42E /* Account+Initializer.swift */,
 				2EBB70BA20165021001AE42E /* Sentence+Initializer.swift */,
-				2EBB70BC201654F9001AE42E /* Link+Initializer.swift */,
 				2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */,
+				2EBB70BC201654F9001AE42E /* Link+Initializer.swift */,
 				2EBB70C420165DF6001AE42E /* Review+Initializer.swift */,
 				2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */,
 				2E3D43C5201B559A00B4D5EF /* BunPro.sqlite-shm */,
@@ -711,7 +711,6 @@
 				2E1BFFA3200FBC8C00985446 /* DataManager.swift in Sources */,
 				2EBB70C7201667FC001AE42E /* GrammarTeaserCell.swift in Sources */,
 				2E8237EE239401A300438E24 /* SearchTableViewController+ContextMenu.swift in Sources */,
-				2E2AAEBB22E4DFDE00E227B0 /* SentencesTableViewController.swift in Sources */,
 				A1D6C148226B568700D25DF1 /* BartyCrouch.swift in Sources */,
 				A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */,
 				A146F32022703907002DC511 /* StatusFetchedResultsController.swift in Sources */,
@@ -721,7 +720,6 @@
 				2E1DCA251FC49A72002E67D6 /* GrammarTableViewController.swift in Sources */,
 				2E8BC11623A15FE100DF1562 /* Trimmed.swift in Sources */,
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
-				2E2FE36522E61DBB001C0E36 /* ReadingsTableViewController.swift in Sources */,
 				A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */,
 				2E8BC11823A1600C00DF1562 /* Stored.swift in Sources */,
 				2ECDB1E2236CB2FA00B28A29 /* Paragraph.swift in Sources */,
@@ -733,9 +731,11 @@
 				A1D6C14E226B56A200D25DF1 /* Strings.swift in Sources */,
 				A1225EE9226D7DA300EA2885 /* Collection+Review.swift in Sources */,
 				2E0C54021FC8C9CA00697132 /* UpdateGrammarProcedure.swift in Sources */,
+				327951962475FF440046647D /* SentencesTableViewController.swift in Sources */,
 				2E82B77E2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift in Sources */,
 				2E8237F22394186500438E24 /* SearchableDataSource.swift in Sources */,
 				2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */,
+				327951952475FF440046647D /* ReadingsTableViewController.swift in Sources */,
 				A1D6C14F226B56A200D25DF1 /* Assets.swift in Sources */,
 				2EE0AEB323299F4B00E4BD64 /* Array+Batch.swift in Sources */,
 				2EBB70BD201654F9001AE42E /* Link+Initializer.swift in Sources */,

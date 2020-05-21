@@ -22,7 +22,7 @@ extension UIImage {
         case docOnDocFill = "doc.on.doc.fill"
 
         var image: UIImage {
-            return UIImage(systemName: self.rawValue)!
+            UIImage(systemName: self.rawValue)!
         }
     }
 
