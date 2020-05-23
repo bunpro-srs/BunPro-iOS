@@ -25,6 +25,10 @@ final class LoginViewController: UITableViewController {
     
     private let keychain = Keychain()
     
+    
+    private let buttonCellIndexPathSection = 1
+    private let textCellIndexPathSection = 0
+    
     override init(style: UITableView.Style) {
         if #available(iOS 13.0, *) {
             super.init(style: .insetGrouped)
@@ -53,9 +57,9 @@ final class LoginViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case textCellIndexPathSection:
             return 2
-        case 1:
+        case buttonCellIndexPathSection:
             return 1
         default:
             return 0
@@ -64,7 +68,7 @@ final class LoginViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case textCellIndexPathSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldCell.cellIdentifier, for: indexPath) as! TextFieldCell
             
             switch indexPath.row {
@@ -83,7 +87,7 @@ final class LoginViewController: UITableViewController {
             cell.selectionStyle = .none
             
             return cell
-        case 1:
+        case buttonCellIndexPathSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: ButtonCell.cellIdentifier, for: indexPath) as! ButtonCell
             
             cell.title = "Login"
@@ -99,19 +103,22 @@ final class LoginViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        login()
+        if indexPath.section == buttonCellIndexPathSection && buttonCell?.isEnabled == true{
+                login()
+        }
+        
     }
     
     private var emailTextFieldCell: TextFieldCell? {
-        return (tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TextFieldCell)
+        return (tableView.cellForRow(at: IndexPath(row: 0, section: textCellIndexPathSection)) as? TextFieldCell)
     }
     
     private var passwordTextFieldCell: TextFieldCell? {
-        return (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? TextFieldCell)
+        return (tableView.cellForRow(at: IndexPath(row: 1, section: textCellIndexPathSection)) as? TextFieldCell)
     }
     
     private var buttonCell: ButtonCell? {
-        return (tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? ButtonCell)
+        return (tableView.cellForRow(at: IndexPath(row: 0, section: buttonCellIndexPathSection)) as? ButtonCell)
     }
     
     private func textDidChange(cell: TextFieldCell) {
@@ -135,10 +142,11 @@ final class LoginViewController: UITableViewController {
     }
     
     private func login() {
-        updateUI(enabled: false)
-        
+
         guard let email = emailTextFieldCell?.title, !email.isEmpty else { return }
         guard let password = passwordTextFieldCell?.title, !password.isEmpty else { return }
+        
+        updateUI(enabled: false)
         
         let loginProcedure = LoginProcedure(username: email, password: password) { _, error in
             guard error == nil else { DispatchQueue.main.async {
