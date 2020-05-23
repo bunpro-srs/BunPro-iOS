@@ -116,7 +116,7 @@ final class LoginViewController: UITableViewController {
     
     private func textDidChange(cell: TextFieldCell) {
         switch cell.textContentType {
-        case .username, .emailAddress:
+        case .emailAddress:
             keychain[string: CredentialsKey.email] = cell.title
         case .password:
             keychain[string: CredentialsKey.password] = cell.title
@@ -126,11 +126,21 @@ final class LoginViewController: UITableViewController {
         buttonCell?.isEnabled = validateCredentials()
     }
     
+    private func validateEmail(_ candidate: String) -> Bool {
+        
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let isValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
+       
+        emailTextFieldCell?.isInputValid = isValid
+        
+        return isValid
+    }
+    
     private func validateCredentials() -> Bool {
         guard let email = keychain[string: CredentialsKey.email] else { return false }
         guard let password = keychain[string: CredentialsKey.password] else { return false }
         
-        return !email.isEmpty && !password.isEmpty
+        return !email.isEmpty && !password.isEmpty && validateEmail(email)
     }
     
     private func login() {
@@ -140,7 +150,11 @@ final class LoginViewController: UITableViewController {
         guard let password = passwordTextFieldCell?.title, !password.isEmpty else { return }
         
         let loginProcedure = LoginProcedure(username: email, password: password) { _, error in
-            guard error == nil else { DispatchQueue.main.async { self.updateUI(enabled: true) }; return }
+            guard error == nil else { DispatchQueue.main.async {
+                self.updateUI(enabled: true)
+                }
+                return
+            }
             
             DispatchQueue.main.async {
                 self.updateUI(enabled: true)
@@ -166,10 +180,31 @@ extension CellIdentifiable {
 }
 
 final private class TextFieldCell: UITableViewCell, CellIdentifiable {
+    
+    enum Style {
+        case Default
+        case Invalid
+    }
 
     var title: String? {
         get { textField.text }
         set { textField.text = newValue }
+    }
+    
+    private var textfieldStyle: TextFieldCell.Style = .Default {
+        didSet {
+            if textfieldStyle == .Default {
+                textField.textColor = .darkText
+            } else {
+                textField.textColor = .systemRed
+            }
+        }
+    }
+    
+    var isInputValid: Bool = true {
+        didSet {
+            textfieldStyle = isInputValid == true ? .Default : .Invalid
+        }
     }
         
     var textContentType: UITextContentType {
@@ -178,7 +213,7 @@ final private class TextFieldCell: UITableViewCell, CellIdentifiable {
             textField.textContentType = newValue
             
             switch newValue {
-            case .username, .emailAddress:
+            case .emailAddress:
                 placeholder = "Email Address"
                 isSecureTextEntry = false
             case .password:
