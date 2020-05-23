@@ -29,12 +29,12 @@ enum ServerError: Error {
 public enum Server {
     static var token: Token? {
         get {
-            return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token]
+            return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token.rawValue]
         }
 
         set {
             _token = newValue
-            Keychain()[LoginViewController.CredentialsKey.token] = newValue
+            Keychain()[LoginViewController.CredentialsKey.token.rawValue] = newValue
         }
     }
 

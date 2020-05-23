@@ -54,8 +54,8 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     override func procedureDidFinish(with error: Error?) {
         if error == nil, _transformProcedure.output.success?.errors == nil {
             let keychain = Keychain()
-            keychain[LoginViewController.CredentialsKey.email] = email
-            keychain[LoginViewController.CredentialsKey.password] = password
+            keychain[LoginViewController.CredentialsKey.email.rawValue] = email
+            keychain[LoginViewController.CredentialsKey.password.rawValue] = password
             Server.token = _transformProcedure.output.success?.token
 
             NotificationCenter.default.post(name: .ServerDidLoginNotification, object: nil)
@@ -113,8 +113,8 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
 
             let keychain = Keychain()
 
-            if let username = keychain[LoginViewController.CredentialsKey.email],
-                let password = keychain[LoginViewController.CredentialsKey.password] {
+            if let username = keychain[LoginViewController.CredentialsKey.email.rawValue],
+                let password = keychain[LoginViewController.CredentialsKey.password.rawValue] {
                 let loginProcedure = LoginProcedure(username: username, password: password) { _, error in
                     if error == nil {
                         completion(.success(true))

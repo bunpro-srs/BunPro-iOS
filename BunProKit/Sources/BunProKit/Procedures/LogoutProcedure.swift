@@ -13,7 +13,7 @@ private let logoutUrlString = "\(baseUrlString)logout"
 class LogoutProcedure: Procedure {
     override func execute() {
         let keychain = Keychain()
-        keychain[LoginViewController.CredentialsKey.password] = nil
+        keychain[LoginViewController.CredentialsKey.password.rawValue] = nil
         Server.token = nil
 
         NotificationCenter.default.post(name: .ServerDidLogoutNotification, object: nil)

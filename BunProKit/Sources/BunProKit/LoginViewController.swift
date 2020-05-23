@@ -15,10 +15,10 @@ protocol LoginViewControllerDelegate: class {
 
 final class LoginViewController: UITableViewController {
     
-    struct CredentialsKey {
-        static let email = "email"
-        static let password = "password"
-        static let token = "token"
+    enum CredentialsKey: String {
+        case email
+        case password
+        case token
     }
     
     weak var delegate: LoginViewControllerDelegate?
@@ -70,10 +70,10 @@ final class LoginViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.textContentType = .emailAddress
-                cell.title = keychain[string: CredentialsKey.email]
+                cell.title = keychain[string: CredentialsKey.email.rawValue]
             case 1:
                 cell.textContentType = .password
-                cell.title = keychain[string: CredentialsKey.password]
+                cell.title = keychain[string: CredentialsKey.password.rawValue]
             default:
                 fatalError("No such cell")
             }
@@ -115,14 +115,6 @@ final class LoginViewController: UITableViewController {
     }
     
     private func textDidChange(cell: TextFieldCell) {
-        switch cell.textContentType {
-        case .emailAddress:
-            keychain[string: CredentialsKey.email] = cell.title
-        case .password:
-            keychain[string: CredentialsKey.password] = cell.title
-        default: break
-        }
-        
         buttonCell?.isEnabled = validateCredentials()
     }
     
@@ -130,17 +122,16 @@ final class LoginViewController: UITableViewController {
         
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let isValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
-       
         emailTextFieldCell?.isInputValid = isValid
         
         return isValid
     }
     
     private func validateCredentials() -> Bool {
-        guard let email = keychain[string: CredentialsKey.email] else { return false }
-        guard let password = keychain[string: CredentialsKey.password] else { return false }
+        guard let email = emailTextFieldCell?.title else { return false }
+        guard let password = passwordTextFieldCell?.title else { return false }
         
-        return !email.isEmpty && !password.isEmpty && validateEmail(email)
+        return !password.isEmpty && validateEmail(email)
     }
     
     private func login() {
@@ -152,6 +143,7 @@ final class LoginViewController: UITableViewController {
         let loginProcedure = LoginProcedure(username: email, password: password) { _, error in
             guard error == nil else { DispatchQueue.main.async {
                 self.updateUI(enabled: true)
+                self.showLoginError(error!)
                 }
                 return
             }
@@ -159,6 +151,10 @@ final class LoginViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.updateUI(enabled: true)
             }
+            
+            //We should only store login credentials if we logged in successfully
+            self.keychain[string: CredentialsKey.email.rawValue] = email
+            self.keychain[string: CredentialsKey.password.rawValue] = password
             
             self.delegate?.loginViewControllerDidLogin(self)
         }
@@ -170,6 +166,12 @@ final class LoginViewController: UITableViewController {
         emailTextFieldCell?.isEnabled = enabled
         passwordTextFieldCell?.isEnabled = enabled
         buttonCell?.isEnabled = enabled
+    }
+    
+    private func showLoginError(_ error: Error) {
+        let alert = UIAlertController(title: "Login", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        self.present(alert, animated: true)
     }
 }
 
