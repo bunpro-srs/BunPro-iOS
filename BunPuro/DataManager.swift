@@ -151,11 +151,13 @@ final class DataManager {
     func scheduleUpdateProcedure(completion: ((UIBackgroundFetchResult) -> Void)? = nil) {
         self.isUpdating = true
 
-        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { user, reviews, _ in
+        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { [weak self] user, reviews, _ in
+            guard let self = self else { return }
+
             if let user = user {
                 self.database.updateAccount(user) {
-                    DispatchQueue.main.async {
-                        self.isUpdating = false
+                    DispatchQueue.main.async { [weak self] in
+                        self?.isUpdating = false
                     }
                 }
             }
@@ -164,7 +166,9 @@ final class DataManager {
                 if let reviews = reviews {
                     let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
 
-                    self.database.updateReviews(reviews) {
+                    self.database.updateReviews(reviews) { [weak self] in
+                        guard let self = self else { return }
+
                         self.isUpdating = false
 
                         self.startStatusUpdates()
