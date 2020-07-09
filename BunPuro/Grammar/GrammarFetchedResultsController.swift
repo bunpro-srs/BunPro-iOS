@@ -23,19 +23,19 @@ class GrammarFetchedResultsController: NSObject {
     }
 
     func exampleSentence(at indexPath: IndexPath) -> Sentence {
-        return exampleSentencesFetchedResultsController.object(at: indexPath)
+        exampleSentencesFetchedResultsController.object(at: indexPath)
     }
 
     func exampleSentencesCount() -> Int {
-        return exampleSentencesFetchedResultsController.fetchedObjects?.count ?? 0
+        exampleSentencesFetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     func reading(at indexPath: IndexPath) -> Link {
-        return readingsFetchedResultsController.object(at: indexPath)
+        readingsFetchedResultsController.object(at: indexPath)
     }
 
     func readingsCount() -> Int {
-        return readingsFetchedResultsController.fetchedObjects?.count ?? 0
+        readingsFetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     private func setupSentencesFetchedResultsController(grammar: Grammar) {

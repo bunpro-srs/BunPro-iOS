@@ -28,7 +28,7 @@ final class DetailCell: UITableViewCell {
 
     var name: String? {
         get {
-            return nameLabel?.text
+            nameLabel?.text
         }
         set {
             nameLabel?.text = newValue
@@ -37,7 +37,7 @@ final class DetailCell: UITableViewCell {
 
     var attributedName: String? {
         get {
-            return nameLabel?.text
+            nameLabel?.text
         }
         set {
             nameLabel?.text = newValue
@@ -46,7 +46,7 @@ final class DetailCell: UITableViewCell {
 
     var nameColor: UIColor? {
         get {
-            return nameLabel?.textColor
+            nameLabel?.textColor
         }
         set {
             nameLabel?.textColor = newValue
@@ -55,7 +55,7 @@ final class DetailCell: UITableViewCell {
 
     var descriptionText: String? {
         get {
-            return descriptionLabel?.text
+            descriptionLabel?.text
         }
         set {
             descriptionLabel?.text = newValue
@@ -64,7 +64,7 @@ final class DetailCell: UITableViewCell {
 
     var attributedDescriptionText: String? {
         get {
-            return descriptionLabel?.text
+            descriptionLabel?.text
         }
         set {
             descriptionLabel?.text = newValue
@@ -73,7 +73,7 @@ final class DetailCell: UITableViewCell {
 
     var isDescriptionLabelHidden: Bool {
         get {
-            return descriptionLabel?.isHidden ?? false
+            descriptionLabel?.isHidden ?? false
         }
         set {
             descriptionLabel?.isHidden = newValue

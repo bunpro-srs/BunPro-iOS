@@ -17,7 +17,7 @@ enum SearchSectionMode {
     case byLevel(Int)
 }
 
-protocol SearchProvider: class {
+protocol SearchProvider: AnyObject {
     var sectionMode: SearchSectionMode { get set }
     var scope: SearchScope { get set }
     var searchText: String? { get set }
@@ -25,11 +25,11 @@ protocol SearchProvider: class {
     func reload()
 }
 
-protocol GrammarFetchedResultsControllerProvider: class {
+protocol GrammarFetchedResultsControllerProvider: AnyObject {
     var grammarFetchedResultsController: NSFetchedResultsController<Grammar>! { get set }
 }
 
-protocol ReviewsFetchedResultsControllerProvider: class {
+protocol ReviewsFetchedResultsControllerProvider: AnyObject {
     var reviewsFetchedResultsController: NSFetchedResultsController<Review>! { get set }
 }
 

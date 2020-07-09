@@ -35,11 +35,11 @@ final class DataManager {
         self.presentingViewController = presentingViewController
         self.database = database
 
-        loginObserver = NotificationCenter.default.observe(name: .ServerDidLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
+        loginObserver = NotificationCenter.default.observe(name: Server.didLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             self?.updateGrammarDatabase()
         }
 
-        logoutObserver = NotificationCenter.default.observe(name: .ServerDidLogoutNotification, object: nil, queue: nil) { [weak self] _ in
+        logoutObserver = NotificationCenter.default.observe(name: Server.didLogoutNotification, object: nil, queue: nil) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.database.resetReviews()
                 self?.scheduleUpdateProcedure()
@@ -58,7 +58,7 @@ final class DataManager {
     var isUpdating: Bool = false {
         didSet {
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: self.isUpdating ? .BunProWillBeginUpdating : .BunProDidEndUpdating, object: self)
+                NotificationCenter.default.post(name: self.isUpdating ? DataManager.willBeginUpdating : DataManager.didEndUpdating, object: self)
             }
         }
     }
@@ -171,7 +171,7 @@ final class DataManager {
 
                         if self.hasPendingReviewModification {
                             self.hasPendingReviewModification = false
-                            NotificationCenter.default.post(name: .BunProDidModifyReview, object: nil)
+                            NotificationCenter.default.post(name: DataManager.didModifyReview, object: nil)
                         }
 
                         DispatchQueue.main.async {
@@ -195,11 +195,11 @@ final class DataManager {
     }
 }
 
-extension Notification.Name {
-    static let BunProWillBeginUpdating = Notification.Name(rawValue: "BunProWillBeginUpdating")
-    static let BunProDidEndUpdating = Notification.Name(rawValue: "BunProDidEndUpdating")
+extension DataManager {
+    static let willBeginUpdating = Notification.Name(rawValue: "DataManager.willBeginUpdating")
+    static let didEndUpdating = Notification.Name(rawValue: "DataManager.didEndUpdating")
 }
 
-extension Notification.Name {
-    static let BunProDidModifyReview = Notification.Name(rawValue: "BunProDidModifyReview")
+extension DataManager {
+    static let didModifyReview = Notification.Name(rawValue: "DataManager.didModifyReview")
 }

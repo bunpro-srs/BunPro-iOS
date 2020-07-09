@@ -16,12 +16,8 @@ class LogoutProcedure: Procedure {
         keychain[LoginViewController.CredentialsKey.password] = nil
         Server.token = nil
 
-        NotificationCenter.default.post(name: .ServerDidLogoutNotification, object: nil)
+        NotificationCenter.default.post(name: Server.didLogoutNotification, object: nil)
 
         finish()
     }
-}
-
-public extension Notification.Name {
-    static let ServerDidLogoutNotification = Notification.Name(rawValue: "ServerDidLogoutNotification")
 }

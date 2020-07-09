@@ -7,22 +7,22 @@ import Foundation
 
 extension Date {
     func minutes(from date: Date) -> Int {
-        return Calendar.autoupdatingCurrent.dateComponents([.minute], from: date, to: self).minute!
+        Calendar.autoupdatingCurrent.dateComponents([.minute], from: date, to: self).minute!
     }
 
     func hours(from date: Date) -> Int {
-        return Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
+        Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
     }
 
     var tomorrow: Date {
-        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
+        Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
     }
 
     var noon: Date {
-        return Calendar.autoupdatingCurrent.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+        Calendar.autoupdatingCurrent.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
 
     var nextMidnight: Date {
-        return Calendar.autoupdatingCurrent.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+        Calendar.autoupdatingCurrent.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
     }
 }

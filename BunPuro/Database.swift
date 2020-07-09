@@ -174,7 +174,7 @@ private class CombineDatabase: DatabaseHandler {
     }
 
     func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?) {
-        let batches = grammar.chunked(into: 40)
+        let batches = grammar.chunked(into: 60)
 
         batches.forEach { batch in
             persistantContainer.performBackgroundTask { context in
@@ -202,7 +202,7 @@ private class CombineDatabase: DatabaseHandler {
     }
 
     func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?) {
-        let batches = reviews.chunked(into: 40)
+        let batches = reviews.chunked(into: 60)
 
         batches.forEach { batch in
             persistantContainer.performBackgroundTask { context in

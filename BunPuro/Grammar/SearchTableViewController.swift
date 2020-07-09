@@ -19,7 +19,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        willBeginUpdatingToken = NotificationCenter.default.observe(name: .BunProWillBeginUpdating, object: nil, queue: .main) { [weak self] _ in
+        willBeginUpdatingToken = NotificationCenter.default.observe(name: DataManager.willBeginUpdating, object: nil, queue: .main) { [weak self] _ in
             let activityIndicatorView: UIActivityIndicatorView
 
             if #available(iOS 13.0, *) {
@@ -33,11 +33,11 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
         }
 
-        didEndUpdatingToken = NotificationCenter.default.observe(name: .BunProDidEndUpdating, object: nil, queue: .main) { [weak self] _ in
+        didEndUpdatingToken = NotificationCenter.default.observe(name: DataManager.didEndUpdating, object: nil, queue: .main) { [weak self] _ in
             self?.navigationItem.rightBarButtonItem = nil
         }
 
-        endModificationToken = NotificationCenter.default.observe(name: .BunProDidModifyReview, object: nil, queue: .main) { [weak self] _ in
+        endModificationToken = NotificationCenter.default.observe(name: DataManager.didModifyReview, object: nil, queue: .main) { [weak self] _ in
             self?.navigationItem.rightBarButtonItem = nil
         }
 
@@ -146,7 +146,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         return Float(count) / Float(max)
     }
 
-    @IBSegueAction func showGrammar(_ coder: NSCoder, sender: Any?) -> UIViewController? {
+    @IBSegueAction
+    func showGrammar(_ coder: NSCoder, sender: Any?) -> UIViewController? {
         guard let cell = sender as? GrammarTeaserCell else {
             fatalError("sender should be an instance of GrammarTeaserCell")
         }

@@ -58,7 +58,7 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
             keychain[LoginViewController.CredentialsKey.password] = password
             Server.token = _transformProcedure.output.success?.token
 
-            NotificationCenter.default.post(name: .ServerDidLoginNotification, object: nil)
+            NotificationCenter.default.post(name: Server.didLoginNotification, object: nil)
         }
 
         output = _transformProcedure.output
@@ -153,8 +153,4 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
             self.completion?(.success(true))
         }
     }
-}
-
-public extension Notification.Name {
-    static let ServerDidLoginNotification = Notification.Name(rawValue: "ServerDidLoginNotification")
 }

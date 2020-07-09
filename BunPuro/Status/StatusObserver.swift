@@ -6,6 +6,7 @@
 #if canImport(Combine)
 import Combine
 #endif
+import BunProKit
 import Foundation
 
 protocol StatusObserverProtocol {
@@ -35,7 +36,7 @@ private class StatusObserverImplementationCombine: StatusObserverProtocol {
         didSet {
             NotificationCenter
                 .default
-                .publisher(for: .ServerDidLogoutNotification)
+                .publisher(for: Server.didLogoutNotification)
                 .receive(on: RunLoop.main)
                 .sink { [weak self] _ in self?.didLogout?() }
                 .store(in: &cancellables)
@@ -46,7 +47,7 @@ private class StatusObserverImplementationCombine: StatusObserverProtocol {
         didSet {
             NotificationCenter
                 .default
-                .publisher(for: .BunProWillBeginUpdating)
+                .publisher(for: DataManager.willBeginUpdating)
                 .receive(on: RunLoop.main)
                 .sink { [weak self] _ in self?.willBeginUpdating?() }
                 .store(in: &cancellables)
@@ -57,7 +58,7 @@ private class StatusObserverImplementationCombine: StatusObserverProtocol {
         didSet {
             NotificationCenter
                 .default
-                .publisher(for: .BunProDidEndUpdating)
+                .publisher(for: DataManager.didEndUpdating)
                 .receive(on: RunLoop.main)
                 .sink { [weak self] _ in self?.didEndUpdating?() }
                 .store(in: &cancellables)
@@ -67,7 +68,7 @@ private class StatusObserverImplementationCombine: StatusObserverProtocol {
         didSet {
             NotificationCenter
                 .default
-                .publisher(for: .BunProDidModifyReview)
+                .publisher(for: DataManager.didModifyReview)
                 .receive(on: RunLoop.main)
                 .sink { [weak self] _ in self?.didUpdateReview?() }
                 .store(in: &cancellables)
@@ -91,7 +92,7 @@ private class StatusObserverIplementationNotificationCenter: StatusObserverProto
         didSet {
             logoutObserver = NotificationCenter
                 .default.observe(
-                    name: .ServerDidLogoutNotification,
+                    name: Server.didLogoutNotification,
                     object: nil,
                     queue: OperationQueue.main) { [weak self] _ in
                         self?.didLogout?()
@@ -104,7 +105,7 @@ private class StatusObserverIplementationNotificationCenter: StatusObserverProto
             beginUpdateObserver = NotificationCenter
                 .default
                 .observe(
-                    name: .BunProWillBeginUpdating,
+                    name: DataManager.willBeginUpdating,
                     object: nil,
                     queue: OperationQueue.main) { [weak self] _ in
                         self?.willBeginUpdating?()
@@ -116,7 +117,7 @@ private class StatusObserverIplementationNotificationCenter: StatusObserverProto
             endUpdateObserver = NotificationCenter
                 .default
                 .observe(
-                    name: .BunProDidEndUpdating,
+                    name: DataManager.didEndUpdating,
                     object: nil,
                     queue: OperationQueue.main) { [weak self] _ in
                         self?.didEndUpdating?()
@@ -128,7 +129,7 @@ private class StatusObserverIplementationNotificationCenter: StatusObserverProto
             pendingModificationObserver = NotificationCenter
                 .default
                 .observe(
-                    name: .BunProDidModifyReview,
+                    name: DataManager.didModifyReview,
                     object: nil,
                     queue: OperationQueue.main) { [weak self] _ in
                         self?.didUpdateReview?()

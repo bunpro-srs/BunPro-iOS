@@ -33,12 +33,12 @@ extension String {
 
     /// 「ひらがな」に変換 ※１
     var toHiragana: String? {
-        return self.applyingTransform(.hiraganaToKatakana, reverse: false)
+        self.applyingTransform(.hiraganaToKatakana, reverse: false)
     }
 
     /// 「カタカナ」に変換
     var toKatakana: String? {
-        return self.applyingTransform(.hiraganaToKatakana, reverse: true)
+        self.applyingTransform(.hiraganaToKatakana, reverse: true)
     }
 
     /// 「ひらがな」を含むかどうか ※2
