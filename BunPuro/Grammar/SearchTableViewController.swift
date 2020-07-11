@@ -26,11 +26,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         willBeginUpdatingToken = NotificationCenter.default.observe(name: DataManager.willBeginUpdating, object: nil, queue: .main) { [weak self] _ in
             let activityIndicatorView: UIActivityIndicatorView
 
-            if #available(iOS 13.0, *) {
-                activityIndicatorView = UIActivityIndicatorView(style: .medium)
-            } else {
-                activityIndicatorView = UIActivityIndicatorView(style: .gray)
-            }
+            activityIndicatorView = UIActivityIndicatorView(style: .medium)
 
             activityIndicatorView.startAnimating()
 
@@ -66,26 +62,20 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
         searchController.obscuresBackgroundDuringPresentation = false
 
-        if #available(iOS 13.0, *) {
-            searchDataSource = DiffableSearchDataSource(tableView: tableView) { tableView, indexPath, _ in
-                let grammar = self.searchDataSource.grammar(at: indexPath)
-                let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
-
-                cell.update(with: grammar)
-
-                return cell
-            }
-        } else {
-            searchDataSource = SearchableDataSource(tableView: tableView)
+        searchDataSource = DiffableSearchDataSource(tableView: tableView) { tableView, indexPath, _ in
+            let grammar = self.searchDataSource.grammar(at: indexPath)
+            let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
+            
+            cell.update(with: grammar)
+            
+            return cell
         }
-
+        
         searchDataSource.sectionMode = sectionMode
 
         tableView.dataSource = searchDataSource
 
-        if #available(iOS 13.0, *) {
-            setupKeyCommands()
-        }
+        setupKeyCommands()
     }
 
     private var didLoad: Bool = false
@@ -98,12 +88,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         if !didLoad {
             didLoad.toggle()
             searchDataSource.performSearchQuery(scope: .all, searchText: nil)
-
-            if #available(iOS 13.0, *) {
-                // good here
-            } else {
-                tableView.reloadData()
-            }
         }
     }
 

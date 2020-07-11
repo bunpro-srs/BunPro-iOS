@@ -26,11 +26,7 @@ final class LoginViewController: UITableViewController {
     private let keychain = Keychain()
     
     override init(style: UITableView.Style) {
-        if #available(iOS 13.0, *) {
-            super.init(style: .insetGrouped)
-        } else {
-            super.init(style: .grouped)
-        }
+        super.init(style: .insetGrouped)
     }
     
     required init?(coder: NSCoder) {

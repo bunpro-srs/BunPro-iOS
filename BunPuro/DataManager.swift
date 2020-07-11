@@ -107,30 +107,19 @@ final class DataManager {
 
     private func updateGrammarDatabase() {
         guard needsGrammarDatabaseUpdate() else { return }
-
-        if #available(iOS 13.0, *) {
-            let updateProcedure = GrammarPointsProcedure(presentingViewController: presentingViewController)
-            updateProcedure.addDidFinishBlockObserver { procedure, error in
-                if let error = error {
-                    log.error(error.localizedDescription)
-                } else if let grammar = procedure.output.value?.value {
-                    self.database.updateGrammar(grammar) {
-                        Settings.lastDatabaseUpdate = Date()
-                    }
-                }
-            }
-
-            Server.add(procedure: updateProcedure)
-        } else {
-            let updateProcedure = UpdateGrammarProcedure(presentingViewController: presentingViewController)
-            updateProcedure.addDidFinishBlockObserver { _, error in
-                if error == nil {
+        
+        let updateProcedure = GrammarPointsProcedure(presentingViewController: presentingViewController)
+        updateProcedure.addDidFinishBlockObserver { procedure, error in
+            if let error = error {
+                log.error(error.localizedDescription)
+            } else if let grammar = procedure.output.value?.value {
+                self.database.updateGrammar(grammar) {
                     Settings.lastDatabaseUpdate = Date()
                 }
             }
-
-            Server.add(procedure: updateProcedure)
         }
+        
+        Server.add(procedure: updateProcedure)
     }
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {

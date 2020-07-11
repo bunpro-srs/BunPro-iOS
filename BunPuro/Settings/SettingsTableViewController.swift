@@ -69,15 +69,13 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
         }
-
-        if #available(iOS 13.0, *) {
-            appearanceLabel.text = UserDefaults.standard.userInterfaceStyle.localizedTitle
-
-            appearanceObserver = UserDefaults.standard.observe(\.userInterfaceStyle) { defaults, _ in
-                self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
-            }
+        
+        appearanceLabel.text = UserDefaults.standard.userInterfaceStyle.localizedTitle
+        
+        appearanceObserver = UserDefaults.standard.observe(\.userInterfaceStyle) { defaults, _ in
+            self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
         }
-
+        
         updateUI()
     }
 
@@ -133,9 +131,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
 
             switch indexPath.row {
             case 0:
-                if #available(iOS 13.0, *) {
-                    didSelectAppearanceCell(cell)
-                }
+                didSelectAppearanceCell(cell)
 
             default:
                 break
@@ -334,19 +330,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let section = Section(rawValue: indexPath.section) else { return CGFloat.leastNormalMagnitude }
-
-        switch section {
-        case .appearance:
-            if #available(iOS 13.0, *) {
-                return UITableView.automaticDimension
-            } else {
-                return CGFloat.leastNormalMagnitude
-            }
-
-        default:
-            return UITableView.automaticDimension
-        }
+        UITableView.automaticDimension
     }
 }
 

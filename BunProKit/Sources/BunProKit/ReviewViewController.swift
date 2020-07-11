@@ -59,13 +59,8 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
-            activityIndicator = UIActivityIndicatorView(style: .medium)
-        } else {
-            view.backgroundColor = .white
-            activityIndicator = UIActivityIndicatorView(style: .gray)
-        }
+        view.backgroundColor = .systemBackground
+        activityIndicator = UIActivityIndicatorView(style: .medium)
         
         activityIndicator.hidesWhenStopped = true
         

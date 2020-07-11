@@ -70,11 +70,7 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
             )?
             .string
 
-        if #available(iOS 13.0, *) {
-            cell.actionImage = sentence.audioURL != nil ? .playCircle : nil
-        } else {
-            cell.actionImage = sentence.audioURL != nil ? Asset.play.image : nil
-        }
+        cell.actionImage = sentence.audioURL != nil ? .playCircle : nil
 
         cell.customAction = { [weak self] _ in self?.playSound(forSentenceAt: indexPath) }
         cell.isDescriptionLabelHidden = Account.currentAccount?.englishMode ?? false

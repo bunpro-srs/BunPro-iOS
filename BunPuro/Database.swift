@@ -62,11 +62,7 @@ final class Database {
     }()
 
     fileprivate lazy var handler: DatabaseHandler = {
-        if #available(iOS 13, *) {
-            return CombineDatabase(persistantContainer: self.persistantContainer)
-        } else {
-            return PrecedureDatabase(persistantContainer: self.persistantContainer)
-        }
+        CombineDatabase(persistantContainer: self.persistantContainer)
     }()
 
     func save() {
@@ -87,11 +83,9 @@ final class Database {
 extension Database: DatabaseHandler {
     func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
         handler.updateAccount(account, completion: completion)
-
-        if #available(iOS 13.0, *) {
-            if UserDefaults.standard.userInterfaceStyle == .bunpro {
-                UserDefaults.standard.userInterfaceStyle = .bunpro
-            }
+        
+        if UserDefaults.standard.userInterfaceStyle == .bunpro {
+            UserDefaults.standard.userInterfaceStyle = .bunpro
         }
     }
 
@@ -104,46 +98,6 @@ extension Database: DatabaseHandler {
     }
 }
 
-private class PrecedureDatabase: DatabaseHandler {
-    private let persistantContainer: NSPersistentContainer
-    private let queue: ProcedureQueue
-
-    init(persistantContainer: NSPersistentContainer) {
-        self.persistantContainer = persistantContainer
-        self.queue = ProcedureQueue()
-        self.queue.maxConcurrentOperationCount = 1
-    }
-
-    func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
-        let procedure = ImportAccountIntoCoreDataProcedure(account: account, stack: persistantContainer)
-        procedure.addDidFinishBlockObserver { _, _ in
-            completion?()
-        }
-        queue.addOperation(procedure)
-    }
-
-    func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?) {
-        let procedure = ImportGrammarPointsIntoCoreDataProcedure(stack: persistantContainer, grammarPoints: grammar)
-        procedure.addDidFinishBlockObserver { _, _ in
-            completion?()
-        }
-        queue.addOperation(procedure)
-    }
-
-    func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?) {
-        let procedure = UpdateReviewsProcedure(reviews: reviews, stack: persistantContainer)
-        procedure.addDidFinishBlockObserver { _, _ in
-            completion?()
-        }
-        queue.addOperation(procedure)
-    }
-
-    func resetReviews() {
-        queue.addOperation(ResetReviewsProcedure())
-    }
-}
-
-@available(iOS 13, *)
 private class CombineDatabase: DatabaseHandler {
     private let persistantContainer: NSPersistentContainer
 

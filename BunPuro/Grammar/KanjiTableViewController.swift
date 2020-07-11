@@ -36,11 +36,7 @@ final class KanjiTableViewController: UITableViewController {
                     .string
             } else {
                 cell.name = showEnglish ? english : L10n.Kanji.English.show
-                if #available(iOS 13.0, *) {
-                    cell.nameColor = showEnglish ? UIColor.label : view.tintColor
-                } else {
-                    cell.nameColor = showEnglish ? UIColor.black : view.tintColor
-                }
+                cell.nameColor = showEnglish ? UIColor.label : view.tintColor
             }
         } else {
             let info = furigana[indexPath.row]

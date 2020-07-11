@@ -129,11 +129,7 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
                     
                     let controller: LoginViewController
                     
-                    if #available(iOS 13.0, *) {
-                        controller = LoginViewController(style: .insetGrouped)
-                    } else {
-                        controller = LoginViewController(style: .grouped)
-                    }
+                    controller = LoginViewController(style: .insetGrouped)
                     
                     controller.delegate = self
 

@@ -37,11 +37,7 @@ final class StatusTableViewCell: UITableViewCell {
             guard let date = nextReviewDate else { reviewStatusNextDateLabel.text = " "; return }
 
             if date > Date() {
-                if #available(iOS 13.0, *) {
-                    reviewStatusLabel.textColor = .label
-                } else {
-                    reviewStatusLabel.textColor = .black
-                }
+                reviewStatusLabel.textColor = .label
                 reviewStatusLabel.text = L10n.Reviewtime.none
                 reviewStatusNextDateLabel.text = dateFormatter.string(from: date)
             } else {

@@ -63,9 +63,7 @@ final class StatusTableViewController: UITableViewController {
         fetchedResultsController.delegate = self
         fetchedResultsController.setup()
 
-        if #available(iOS 13, *) {
-            setupKeyCommands()
-        }
+        setupKeyCommands()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -238,20 +236,18 @@ final class StatusTableViewController: UITableViewController {
                 AppDelegate.setNeedsStatusUpdate()
             }
         }
-
-        if #available(iOS 12.0, *) {
-            switch website {
-            case .study:
-                reviewProcedure.userActivity = NSUserActivity.studyActivity
-
-            case .cram:
-                reviewProcedure.userActivity = NSUserActivity.cramActivity
-
-            default:
-                break
-            }
+        
+        switch website {
+        case .study:
+            reviewProcedure.userActivity = NSUserActivity.studyActivity
+            
+        case .cram:
+            reviewProcedure.userActivity = NSUserActivity.cramActivity
+            
+        default:
+            break
         }
-
+        
         Server.add(procedure: reviewProcedure)
     }
 

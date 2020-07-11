@@ -51,11 +51,7 @@ class GrammarPreviewViewController: UIViewController {
         let streak = grammar.review?.streak ?? 0
 
         for (index, hanko) in contentStackView.arrangedSubviews.enumerated() {
-            if #available(iOS 13.0, *) {
-                hanko.tintColor = .secondaryLabel
-            } else {
-                hanko.tintColor = .darkGray
-            }
+            hanko.tintColor = .secondaryLabel
             hanko.alpha = (index + 1) <= streak ? 1.0 : 0.2
         }
     }

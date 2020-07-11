@@ -31,19 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         Logger.shared.setup()
-
+        
         setupTabBarViewController()
-
-        if #available(iOS 13.0, *) {
-            appearanceObservation = UserDefaults
-                .standard
-                .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
-                    application.windows.forEach { window in
-                        window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
-                    }
+        
+        appearanceObservation = UserDefaults
+            .standard
+            .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
+                application.windows.forEach { window in
+                    window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
                 }
-        }
-
+            }
+        
         return true
     }
 
@@ -139,62 +137,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
     }
-
+    
     private func setupTabBarViewController() {
         guard let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers else { return }
         for (index, viewController) in viewControllers.enumerated() {
-            if #available(iOS 13.0, *) {
-                switch index {
-                case 0:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.status,
-                        image: .pencilCircle,
-                        selectedImage: .pencilCircleFill
-                    )
-
-                case 1:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.search,
-                        image: .magnifyingglassCircle,
-                        selectedImage: .magnifyingglassCircleFill
-                    )
-
-                case 2:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.settings,
-                        image: .ellipsisCircle,
-                        selectedImage: .ellipsisCircleFill
-                    )
-
-                default:
-                    break
-                }
-            } else {
-                switch index {
-                case 0:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.status,
-                        image: Asset.tabDashboardInactive.image,
-                        selectedImage: Asset.tabDashboardActive.image
-                    )
-
-                case 1:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.search,
-                        image: Asset.tabSearchInactive.image,
-                        selectedImage: Asset.tabSearchActive.image
-                    )
-
-                case 2:
-                    viewController.tabBarItem = UITabBarItem(
-                        title: L10n.Tabbar.settings,
-                        image: Asset.tabSettingsInactive.image,
-                        selectedImage: Asset.tabSettingsActive.image
-                    )
-
-                default:
-                    break
-                }
+            switch index {
+            case 0:
+                viewController.tabBarItem = UITabBarItem(
+                    title: L10n.Tabbar.status,
+                    image: .pencilCircle,
+                    selectedImage: .pencilCircleFill
+                )
+                
+            case 1:
+                viewController.tabBarItem = UITabBarItem(
+                    title: L10n.Tabbar.search,
+                    image: .magnifyingglassCircle,
+                    selectedImage: .magnifyingglassCircleFill
+                )
+                
+            case 2:
+                viewController.tabBarItem = UITabBarItem(
+                    title: L10n.Tabbar.settings,
+                    image: .ellipsisCircle,
+                    selectedImage: .ellipsisCircleFill
+                )
+                
+            default:
+                break
             }
         }
     }
