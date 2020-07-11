@@ -107,7 +107,7 @@ final class DataManager {
 
     private func updateGrammarDatabase() {
         guard needsGrammarDatabaseUpdate() else { return }
-        
+
         let updateProcedure = GrammarPointsProcedure(presentingViewController: presentingViewController)
         updateProcedure.addDidFinishBlockObserver { procedure, error in
             if let error = error {
@@ -118,7 +118,7 @@ final class DataManager {
                 }
             }
         }
-        
+
         Server.add(procedure: updateProcedure)
     }
 

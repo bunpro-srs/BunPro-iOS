@@ -83,7 +83,7 @@ final class Database {
 extension Database: DatabaseHandler {
     func updateAccount(_ account: BPKAccount, completion: (() -> Void)?) {
         handler.updateAccount(account, completion: completion)
-        
+
         if UserDefaults.standard.userInterfaceStyle == .bunpro {
             UserDefaults.standard.userInterfaceStyle = .bunpro
         }

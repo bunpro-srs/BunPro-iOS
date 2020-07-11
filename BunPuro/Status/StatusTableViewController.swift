@@ -236,18 +236,18 @@ final class StatusTableViewController: UITableViewController {
                 AppDelegate.setNeedsStatusUpdate()
             }
         }
-        
+
         switch website {
         case .study:
             reviewProcedure.userActivity = NSUserActivity.studyActivity
-            
+
         case .cram:
             reviewProcedure.userActivity = NSUserActivity.cramActivity
-            
+
         default:
             break
         }
-        
+
         Server.add(procedure: reviewProcedure)
     }
 

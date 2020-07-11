@@ -13,90 +13,90 @@ protocol GrammarPresenter {
 
 final class GrammarTableViewController: UITableViewController, GrammarPresenter {
     @IBOutlet private var reviewEditBarButtonItem: UIBarButtonItem!
-    
+
     private let fetchedResultsController = GrammarFetchedResultsController()
     private let flowController = GrammarFlowController()
-    
+
     var grammar: Grammar?
-    
+
     private var statusObserver: StatusObserverProtocol?
-    
+
     override var canBecomeFirstResponder: Bool { true }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         assert(grammar != nil)
-        
+
         title = grammar?.title
-        
+
         statusObserver = StatusObserver.newObserver()
-        
+
         updateEditBarButtonState()
-        
+
         statusObserver?.willBeginUpdating = { [weak self] in
             let activityIndicator: UIActivityIndicatorView
-            
+
             activityIndicator = UIActivityIndicatorView(style: .medium)
-            
+
             activityIndicator.startAnimating()
             self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         }
-        
+
         statusObserver?.didEndUpdating = { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) { [weak self] in
                 self?.navigationItem.rightBarButtonItem = self?.reviewEditBarButtonItem
-                
+
                 if let numberOfRows = self?.tableView.numberOfRows(inSection: 0) {
                     let complete = self?.grammar?.review?.complete ?? false
-                    
+
                     switch (numberOfRows, complete) {
                     case (2, true), (3, false):
                         self?.tableView.reloadData()
-                        
+
                     case (3, true):
                         self?.tableView.reloadData()
-                        
+
                     default:
                         break
                     }
-                    
+
                     self?.updateEditBarButtonState()
                 }
             }
         }
-        
+
         fetchedResultsController.delegate = self
         fetchedResultsController.setup(grammar: grammar!)
-        
+
         setupKeyCommands()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         becomeFirstResponder()
     }
-    
+
     @IBAction private func editReviewButtonPressed(_ sender: UIBarButtonItem) {
         flowController.editReviewButtonPressed(grammar: grammar!, barButtonItem: sender, viewController: self)
     }
-    
+
     @objc
     func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
-    
+
     private func updateEditBarButtonState() {
         reviewEditBarButtonItem.image = UIImage(systemName: "ellipsis.circle")
-        
+
         if #available(iOS 14.0, *) {
             reviewEditBarButtonItem.action = nil
-            
+
             guard let grammar = grammar else { return }
-            
+
             let complete = grammar.review?.complete ?? false
-            
+
             reviewEditBarButtonItem.menu = UIMenu(
                 title: L10n.Review.Edit.Menu.review,
                 children: [
@@ -126,10 +126,10 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
                 ]
             )
         }
-        
+
         reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
     }
-    
+
     private func showCopyJapaneseOrMeaning(at indexPath: IndexPath) {
         showCopyActionSheet(
             at: indexPath,
@@ -143,11 +143,11 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
             ]
         )
     }
-    
+
     private func showCopyJapaneseOrEnglish(at indexPath: IndexPath) {
         let correctIndexPath = IndexPath(row: indexPath.row, section: 0)
         let sentence = fetchedResultsController.exampleSentence(at: correctIndexPath)
-        
+
         showCopyActionSheet(
             at: indexPath,
             actions: [
@@ -160,17 +160,17 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
             ]
         )
     }
-    
+
     private func showCopyActionSheet(at indexPath: IndexPath, actions: [UIAlertAction]) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         actions.forEach { alertController.addAction($0) }
         alertController.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel))
-        
+
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.sourceRect = cell.bounds
-        
+
         present(alertController, animated: true)
     }
 }
@@ -180,41 +180,41 @@ extension GrammarTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
-            
+
         default:
             return 2
         }
     }
-    
+
     private enum Info: Int {
         case basic
         case structure
         case streak
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             return basicInfoCell(tableView, indexPath)
-            
+
         default:
             return detailCell(tableView, indexPath)
         }
     }
-    
+
     private func basicInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as BasicInfoCell
-        
+
         cell.titleLabel.text = grammar?.title
         cell.meaningLabel.text = grammar?.meaning
-        
+
         let englishFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: UIFont.systemFont(ofSize: 12))
-        
+
         if let caution = grammar?.caution?.replacingOccurrences(of: "<span class='chui'>", with: "").replacingOccurrences(of: "</span>", with: ""),
            let attributed = "⚠️ \(caution)".htmlAttributedString(font: englishFont, color: .white),
            !caution.isEmpty {
@@ -223,63 +223,63 @@ extension GrammarTableViewController {
             cell.cautionLabel.text = nil
             cell.cautionLabel.isHidden = true
         }
-        
+
         cell.attributedDescription = grammar?
             .structure?
             .replacingOccurrences(of: ", ", with: "</br>")
             .htmlAttributedString(font: englishFont, color: .white)?
             .string
-        
+
         cell.streak = Int(grammar?.review?.streak ?? 0)
         cell.contentStackView?.isHidden = grammar?.review?.complete == false
-        
+
         return cell
     }
-    
+
     private func detailCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as UITableViewCell
-        
+
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = L10n.Grammar.sentences
             cell.detailTextLabel?.text = "\(fetchedResultsController.exampleSentencesCount())"
-            
+
         case 1:
             cell.textLabel?.text = L10n.Grammar.readings
             cell.detailTextLabel?.text = "\(fetchedResultsController.readingsCount())"
-            
+
         default:
             break
         }
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             showCopyJapaneseOrMeaning(at: indexPath)
-            
+
         case 1:
             defer { tableView.deselectRow(at: indexPath, animated: true) }
-            
+
             switch indexPath.row {
             case 0:
                 let controller = storyboard!.instantiateViewController() as SentencesTableViewController
                 controller.grammar = grammar
-                
+
                 show(controller, sender: self)
-                
+
             case 1:
                 let controller = storyboard!.instantiateViewController() as ReadingsTableViewController
                 controller.grammar = grammar
-                
+
                 show(controller, sender: self)
-                
+
             default:
                 break
             }
-            
+
         default:
             break
         }
@@ -290,7 +290,7 @@ extension GrammarTableViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         .none
     }
-    
+
     override var previewActionItems: [UIPreviewActionItem] {
         if let review = grammar?.review, review.complete {
             return [
@@ -328,7 +328,7 @@ extension GrammarTableViewController {
                 modifierFlags: .command
             )
         )
-        
+
         addKeyCommand(
             UIKeyCommand(
                 title: L10n.Copy.meaning,
@@ -338,12 +338,12 @@ extension GrammarTableViewController {
             )
         )
     }
-    
+
     @objc
     private func copyJapanese() {
         UIPasteboard.general.string = grammar?.title
     }
-    
+
     @objc
     private func copyMeaning() {
         UIPasteboard.general.string = grammar?.meaning

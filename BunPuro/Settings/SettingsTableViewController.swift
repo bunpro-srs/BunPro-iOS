@@ -69,13 +69,13 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
             self?.updateUI()
         }
-        
+
         appearanceLabel.text = UserDefaults.standard.userInterfaceStyle.localizedTitle
-        
+
         appearanceObserver = UserDefaults.standard.observe(\.userInterfaceStyle) { defaults, _ in
             self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
         }
-        
+
         updateUI()
     }
 

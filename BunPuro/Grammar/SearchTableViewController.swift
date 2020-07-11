@@ -65,12 +65,12 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         searchDataSource = DiffableSearchDataSource(tableView: tableView) { tableView, indexPath, _ in
             let grammar = self.searchDataSource.grammar(at: indexPath)
             let cell = tableView.dequeueReusableCell(for: indexPath) as GrammarTeaserCell
-            
+
             cell.update(with: grammar)
-            
+
             return cell
         }
-        
+
         searchDataSource.sectionMode = sectionMode
 
         tableView.dataSource = searchDataSource

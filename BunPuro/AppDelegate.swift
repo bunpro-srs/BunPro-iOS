@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         Logger.shared.setup()
-        
+
         setupTabBarViewController()
-        
+
         appearanceObservation = UserDefaults
             .standard
             .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
                 }
             }
-        
+
         return true
     }
 
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
     }
-    
+
     private func setupTabBarViewController() {
         guard let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers else { return }
         for (index, viewController) in viewControllers.enumerated() {
@@ -148,21 +148,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     image: .pencilCircle,
                     selectedImage: .pencilCircleFill
                 )
-                
+
             case 1:
                 viewController.tabBarItem = UITabBarItem(
                     title: L10n.Tabbar.search,
                     image: .magnifyingglassCircle,
                     selectedImage: .magnifyingglassCircleFill
                 )
-                
+
             case 2:
                 viewController.tabBarItem = UITabBarItem(
                     title: L10n.Tabbar.settings,
                     image: .ellipsisCircle,
                     selectedImage: .ellipsisCircleFill
                 )
-                
+
             default:
                 break
             }
