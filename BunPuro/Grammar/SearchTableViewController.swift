@@ -16,8 +16,12 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     private var didEndUpdatingToken: NotificationToken?
     private var endModificationToken: NotificationToken?
 
+    override var canBecomeFirstResponder: Bool { true }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.title = L10n.Tabbar.search
 
         willBeginUpdatingToken = NotificationCenter.default.observe(name: DataManager.willBeginUpdating, object: nil, queue: .main) { [weak self] _ in
             let activityIndicatorView: UIActivityIndicatorView
@@ -78,12 +82,18 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         searchDataSource.sectionMode = sectionMode
 
         tableView.dataSource = searchDataSource
+
+        if #available(iOS 13.0, *) {
+            setupKeyCommands()
+        }
     }
 
     private var didLoad: Bool = false
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        becomeFirstResponder()
 
         if !didLoad {
             didLoad.toggle()
@@ -193,3 +203,53 @@ extension SearchTableViewController: UISearchResultsUpdating {
 }
 
 extension SearchTableViewController: TrailingSwipeActionsConfigurationProvider { }
+
+extension SearchTableViewController {
+    @available(iOS 13.0, *)
+    fileprivate func setupKeyCommands() {
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Show all grammar",
+                action: #selector(toggleShowAllGrammar),
+                input: "1",
+                modifierFlags: .command
+            )
+        )
+
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Show unlearned grammar",
+                action: #selector(toggleShowUnlearnedGrammar),
+                input: "2",
+                modifierFlags: .command
+            )
+        )
+
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Show learned grammar",
+                action: #selector(toggleShowLearnedGrammar),
+                input: "3",
+                modifierFlags: .command
+            )
+        )
+    }
+
+    @objc
+    private func toggleShowAllGrammar() {
+        searchController.searchBar.selectedScopeButtonIndex = 0
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: searchController.searchBar.selectedScopeButtonIndex)
+    }
+
+    @objc
+    private func toggleShowUnlearnedGrammar() {
+        searchController.searchBar.selectedScopeButtonIndex = 1
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: searchController.searchBar.selectedScopeButtonIndex)
+    }
+
+    @objc
+    private func toggleShowLearnedGrammar() {
+        searchController.searchBar.selectedScopeButtonIndex = 2
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: searchController.searchBar.selectedScopeButtonIndex)
+    }
+}

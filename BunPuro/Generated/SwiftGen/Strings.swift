@@ -97,8 +97,14 @@ internal enum L10n {
       internal enum Button {
         /// Add to Reviews
         internal static let add = L10n.tr("Localizable", "review.edit.button.add")
-        /// Reset/Remove
-        internal static let removeReset = L10n.tr("Localizable", "review.edit.button.remove_reset")
+        /// Options
+        internal static let options = L10n.tr("Localizable", "review.edit.button.options")
+      }
+      internal enum Menu {
+        /// Copy
+        internal static let copy = L10n.tr("Localizable", "review.edit.menu.copy")
+        /// Review
+        internal static let review = L10n.tr("Localizable", "review.edit.menu.review")
       }
       internal enum Remove {
         /// Remove

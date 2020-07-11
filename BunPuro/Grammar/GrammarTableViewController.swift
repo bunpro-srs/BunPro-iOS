@@ -21,6 +21,8 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
     private var statusObserver: StatusObserverProtocol?
 
+    override var canBecomeFirstResponder: Bool { true }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,6 +72,16 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
         fetchedResultsController.delegate = self
         fetchedResultsController.setup(grammar: grammar!)
+
+        if #available(iOS 13.0, *) {
+            setupKeyCommands()
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        becomeFirstResponder()
     }
 
     @IBAction private func editReviewButtonPressed(_ sender: UIBarButtonItem) {
@@ -82,7 +94,49 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
     }
 
     private func updateEditBarButtonState() {
-        reviewEditBarButtonItem?.title = grammar?.review?.complete == true ? L10n.Review.Edit.Button.removeReset : L10n.Review.Edit.Button.add
+        if #available(iOS 13.0, *) {
+            reviewEditBarButtonItem.image = UIImage(systemName: "ellipsis.circle")
+
+            if #available(iOS 14.0, *) {
+                reviewEditBarButtonItem.action = nil
+
+                guard let grammar = grammar else { return }
+
+                let complete = grammar.review?.complete ?? false
+
+                reviewEditBarButtonItem.menu = UIMenu(
+                    title: L10n.Review.Edit.Menu.review,
+                    children: [
+                        UIAction(title: L10n.Review.Edit.Add.short, image: .repeat, attributes: complete ? .hidden : []) { _ in
+                            AppDelegate.modifyReview(.add(grammar.identifier))
+                        },
+                        UIAction(title: L10n.Review.Edit.Reset.short, image: .repeatOne, attributes: complete ? .destructive : .hidden) { _ in
+                            guard let review = grammar.review else { return }
+                            AppDelegate.modifyReview(.reset(review.identifier))
+                        },
+                        UIAction(title: L10n.Review.Edit.Remove.short, image: .trashFill, attributes: complete ? .destructive : .hidden) { _ in
+                            guard let review = grammar.review else { return }
+                            AppDelegate.modifyReview(.remove(review.identifier))
+                        },
+                        UIMenu(
+                            title: L10n.Review.Edit.Menu.copy,
+                            options: .displayInline,
+                            children: [
+                                UIAction(title: L10n.Copy.japanese, image: .docOnDocFill) { [weak self] _ in
+                                    self?.copyJapanese()
+                                },
+                                UIAction(title: L10n.Copy.meaning, image: .docOnDocFill) { [weak self] _ in
+                                    self?.copyMeaning()
+                                }
+                            ]
+                        )
+                    ]
+                )
+            }
+        } else {
+            reviewEditBarButtonItem?.title = L10n.Review.Edit.Button.options
+        }
+
         reviewEditBarButtonItem.isEnabled = AppDelegate.isContentAccessable
     }
 
@@ -91,10 +145,10 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
             at: indexPath,
             actions: [
                 UIAlertAction(title: L10n.Copy.japanese, style: .default) { [weak self] _ in
-                    UIPasteboard.general.string = self?.grammar?.title
+                    self?.copyJapanese()
                 },
                 UIAlertAction(title: L10n.Copy.meaning, style: .default) { [weak self] _ in
-                    UIPasteboard.general.string = self?.grammar?.meaning
+                    self?.copyMeaning()
                 }
             ]
         )
@@ -270,5 +324,38 @@ extension GrammarTableViewController: UIPopoverPresentationControllerDelegate {
 extension GrammarTableViewController: GrammarFetchedResultsControllerDelegate {
     func fetchedResultsDidChange() {
         tableView.reloadData()
+    }
+}
+
+extension GrammarTableViewController {
+    @available(iOS 13.0, *)
+    fileprivate func setupKeyCommands() {
+        addKeyCommand(
+            UIKeyCommand(
+                title: L10n.Copy.japanese,
+                action: #selector(copyJapanese),
+                input: "C",
+                modifierFlags: .command
+            )
+        )
+
+        addKeyCommand(
+            UIKeyCommand(
+                title: L10n.Copy.meaning,
+                action: #selector(copyMeaning),
+                input: "C",
+                modifierFlags: [.command, .shift]
+            )
+        )
+    }
+
+    @objc
+    private func copyJapanese() {
+        UIPasteboard.general.string = grammar?.title
+    }
+
+    @objc
+    private func copyMeaning() {
+        UIPasteboard.general.string = grammar?.meaning
     }
 }

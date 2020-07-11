@@ -22,6 +22,8 @@ final class StatusTableViewController: UITableViewController {
 
     private let fetchedResultsController = StatusFetchedResultsController()
 
+    override var canBecomeFirstResponder: Bool { true }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,10 +62,16 @@ final class StatusTableViewController: UITableViewController {
 
         fetchedResultsController.delegate = self
         fetchedResultsController.setup()
+
+        if #available(iOS 13, *) {
+            setupKeyCommands()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        becomeFirstResponder()
 
         if showReviewsOnViewDidAppear {
             showReviewsOnViewDidAppear = false
@@ -163,19 +171,13 @@ final class StatusTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                if AppDelegate.isContentAccessable {
-                    if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
-                        presentReviewViewController()
-                    } else {
-                        presentReviewViewController(website: .main)
-                    }
-                }
+                presentReviewViewControllerIfPossible()
 
             case 1:
-                presentReviewViewController(website: .cram)
+                presentCramViewController()
 
             case 2:
-                presentReviewViewController(website: .study)
+                presentStudyViewController()
 
             default:
                 break
@@ -184,6 +186,27 @@ final class StatusTableViewController: UITableViewController {
         default:
             break
         }
+    }
+
+    @objc
+    private func presentReviewViewControllerIfPossible() {
+        if AppDelegate.isContentAccessable {
+            if let nextReviewDate = nextReviewDate, nextReviewDate < Date() {
+                presentReviewViewController()
+            } else {
+                presentReviewViewController(website: .main)
+            }
+        }
+    }
+
+    @objc
+    private func presentCramViewController() {
+        presentReviewViewController(website: .cram)
+    }
+
+    @objc
+    private func presentStudyViewController() {
+        presentReviewViewController(website: .study)
     }
 
     func presentReviewViewController(website: Website = .review) {
@@ -233,7 +256,7 @@ final class StatusTableViewController: UITableViewController {
     }
 
     private func setup(account: Account?) {
-        navigationItem.title = account?.name
+        navigationItem.title = L10n.Tabbar.status
         tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
 
@@ -322,5 +345,40 @@ extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
         reviews?.first?.managedObjectContext?.perform { [weak self] in
             self?.setup(reviews: reviews)
         }
+    }
+}
+
+extension StatusTableViewController {
+    @available(iOS 13, *)
+    private func setupKeyCommands() {
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Review",
+                action: #selector(presentReviewViewControllerIfPossible),
+                input: "R",
+                modifierFlags: .command,
+                state: AppDelegate.isContentAccessable ? .on : .off
+            )
+        )
+
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Cram",
+                action: #selector(presentCramViewController),
+                input: "C",
+                modifierFlags: .command,
+                state: AppDelegate.isContentAccessable ? .on : .off
+            )
+            )
+
+        addKeyCommand(
+            UIKeyCommand(
+                title: "Study",
+                action: #selector(presentStudyViewController),
+                input: "S",
+                modifierFlags: .command,
+                state: AppDelegate.isContentAccessable ? .on : .off
+            )
+        )
     }
 }

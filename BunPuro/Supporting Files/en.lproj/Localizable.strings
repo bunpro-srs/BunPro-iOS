@@ -45,7 +45,11 @@
 
 "review.edit.button.add" = "Add to Reviews";
 
-"review.edit.button.remove_reset" = "Reset/Remove";
+"review.edit.button.options" = "Options";
+
+"review.edit.menu.copy" = "Copy";
+
+"review.edit.menu.review" = "Review";
 
 "review.edit.remove" = "Remove from Reviews";
 
