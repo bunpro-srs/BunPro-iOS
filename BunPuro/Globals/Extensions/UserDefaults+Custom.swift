@@ -13,7 +13,6 @@ extension UserDefaults {
     }
 }
 
-@available(iOS 13.0, *)
 extension UserDefaults {
     @objc
     enum UserInterfaceStyle: Int {

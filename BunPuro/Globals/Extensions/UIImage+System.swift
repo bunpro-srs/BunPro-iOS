@@ -6,7 +6,6 @@
 import Foundation
 import UIKit
 
-@available(iOS 13.0, *)
 extension UIImage {
     private enum SystemName: String {
         case pencilCircle = "pencil.circle"

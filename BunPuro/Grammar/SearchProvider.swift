@@ -12,7 +12,7 @@ enum SearchScope: Int {
     case learned
 }
 
-enum SearchSectionMode {
+enum SearchSectionMode: Equatable {
     case byDifficulty
     case byLevel(Int)
 }

@@ -24,7 +24,6 @@ class StatusObserver {
     }
 }
 
-@available(iOS 13.0, *)
 private class StatusObserverImplementationCombine: StatusObserverProtocol {
     private var cancellables: Set<AnyCancellable> = []
 

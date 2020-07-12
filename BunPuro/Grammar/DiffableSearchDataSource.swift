@@ -6,7 +6,6 @@
 import CoreData
 import UIKit
 
-@available(iOS 13.0, *)
 final class DiffableSearchDataSource: UITableViewDiffableDataSource<String, NSManagedObjectID>,
     SearchDataSource {
     typealias Scope = SearchScope

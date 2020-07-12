@@ -359,7 +359,7 @@ extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
 }
 
 extension StatusTableViewController {
-    @available(iOS 13, *)
+
     private func setupKeyCommands() {
         addKeyCommand(
             UIKeyCommand(

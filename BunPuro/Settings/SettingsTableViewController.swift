@@ -231,7 +231,6 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         present(controller, animated: true, completion: nil)
     }
 
-    @available(iOS 13.0, *)
     private func didSelectAppearanceCell(_ cell: UITableViewCell) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 

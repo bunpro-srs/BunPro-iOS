@@ -318,7 +318,6 @@ extension GrammarTableViewController: GrammarFetchedResultsControllerDelegate {
 }
 
 extension GrammarTableViewController {
-    @available(iOS 13.0, *)
     fileprivate func setupKeyCommands() {
         addKeyCommand(
             UIKeyCommand(
