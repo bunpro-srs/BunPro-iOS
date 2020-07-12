@@ -4,6 +4,7 @@
 //
 
 import BunProKit
+import Combine
 import CoreData
 import MessageUI
 import ProcedureKit
@@ -53,28 +54,27 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         }
     }
 
-    private var saveObserver: NotificationToken?
-    private var appearanceObserver: NSKeyValueObservation?
-
-    deinit {
-        if let observer = saveObserver {
-            NotificationCenter.default.removeObserver(observer)
-        }
-        appearanceObserver?.invalidate()
-    }
+    private var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        saveObserver = NotificationCenter.default.observe(name: .NSManagedObjectContextDidSave, object: nil, queue: .main) { [weak self] _ in
-            self?.updateUI()
-        }
+        NotificationCenter.default
+            .publisher(for: .NSManagedObjectContextDidSave)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.updateUI()
+            }
+            .store(in: &subscriptions)
 
         appearanceLabel.text = UserDefaults.standard.userInterfaceStyle.localizedTitle
 
-        appearanceObserver = UserDefaults.standard.observe(\.userInterfaceStyle) { defaults, _ in
-            self.appearanceLabel.text = defaults.userInterfaceStyle.localizedTitle
-        }
+        UserDefaults.standard
+            .publisher(for: \.userInterfaceStyle)
+            .map { $0.localizedTitle }
+            .receive(on: RunLoop.main)
+            .assign(to: \.text, on: appearanceLabel)
+            .store(in: &subscriptions)
 
         updateUI()
     }

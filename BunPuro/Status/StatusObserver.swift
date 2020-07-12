@@ -3,8 +3,8 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
-import Combine
 import BunProKit
+import Combine
 import Foundation
 
 protocol StatusObserverProtocol {

@@ -4,6 +4,7 @@
 //
 
 import BunProKit
+import Combine
 import CoreData
 import Foundation
 import SafariServices
@@ -13,43 +14,39 @@ final class DataManager {
     let presentingViewController: UIViewController
     let database: Database
 
-    private var loginObserver: NotificationToken?
-    private var logoutObserver: NotificationToken?
-    private var backgroundObserver: NotificationToken?
-
-    deinit {
-        if loginObserver != nil {
-            NotificationCenter.default.removeObserver(loginObserver!)
-        }
-
-        if logoutObserver != nil {
-            NotificationCenter.default.removeObserver(logoutObserver!)
-        }
-
-        if backgroundObserver != nil {
-            NotificationCenter.default.removeObserver(backgroundObserver!)
-        }
-    }
+    private var subscriptions = Set<AnyCancellable>()
 
     init(presentingViewController: UIViewController, database: Database) {
         self.presentingViewController = presentingViewController
         self.database = database
 
-        loginObserver = NotificationCenter.default.observe(name: Server.didLoginNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
-            self?.updateGrammarDatabase()
-        }
+        let notificationCenter = NotificationCenter.default
 
-        logoutObserver = NotificationCenter.default.observe(name: Server.didLogoutNotification, object: nil, queue: nil) { [weak self] _ in
-            DispatchQueue.main.async {
+        notificationCenter
+            .publisher(for: Server.didLoginNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.updateGrammarDatabase()
+            }
+            .store(in: &subscriptions)
+
+        notificationCenter
+            .publisher(for: Server.didLogoutNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
                 self?.database.resetReviews()
                 self?.scheduleUpdateProcedure()
             }
-        }
+            .store(in: &subscriptions)
 
-        backgroundObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
-            self?.stopStatusUpdates()
-            self?.isUpdating = false
-        }
+        notificationCenter
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.stopStatusUpdates()
+                self?.isUpdating = false
+            }
+            .store(in: &subscriptions)
     }
 
     // Status Updates

@@ -76,8 +76,6 @@
 		2EFFE3DD2329893500EA74D4 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE3DC2329893500EA74D4 /* Database.swift */; };
 		A1225EE7226D7D7400EA2885 /* Date+StatusTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */; };
 		A1225EE9226D7DA300EA2885 /* Collection+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1225EE8226D7DA300EA2885 /* Collection+Review.swift */; };
-		A146F316227025B4002DC511 /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F315227025B4002DC511 /* NotificationToken.swift */; };
-		A146F31822702634002DC511 /* NotificationCenter+NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F31722702634002DC511 /* NotificationCenter+NotificationToken.swift */; };
 		A146F31A22702CCE002DC511 /* GrammarFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F31922702CCE002DC511 /* GrammarFetchedResultsController.swift */; };
 		A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F31B227033C3002DC511 /* GrammarFlowController.swift */; };
 		A146F32022703907002DC511 /* StatusFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146F31F22703907002DC511 /* StatusFetchedResultsController.swift */; };
@@ -199,8 +197,6 @@
 		2EFFE3DC2329893500EA74D4 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+StatusTableView.swift"; sourceTree = "<group>"; };
 		A1225EE8226D7DA300EA2885 /* Collection+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Review.swift"; sourceTree = "<group>"; };
-		A146F315227025B4002DC511 /* NotificationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
-		A146F31722702634002DC511 /* NotificationCenter+NotificationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+NotificationToken.swift"; sourceTree = "<group>"; };
 		A146F31922702CCE002DC511 /* GrammarFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarFetchedResultsController.swift; sourceTree = "<group>"; };
 		A146F31B227033C3002DC511 /* GrammarFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarFlowController.swift; sourceTree = "<group>"; };
 		A146F31F22703907002DC511 /* StatusFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFetchedResultsController.swift; sourceTree = "<group>"; };
@@ -252,7 +248,6 @@
 			children = (
 				A1225EE8226D7DA300EA2885 /* Collection+Review.swift */,
 				A1225EE6226D7D7400EA2885 /* Date+StatusTableView.swift */,
-				A146F31722702634002DC511 /* NotificationCenter+NotificationToken.swift */,
 				2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */,
 				2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */,
 				2EE0AEB223299F4B00E4BD64 /* Array+Batch.swift */,
@@ -477,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				A1D6C1A9226BC15900D25DF1 /* Logger.swift */,
-				A146F315227025B4002DC511 /* NotificationToken.swift */,
 				2E8BC11223A05EFD00DF1562 /* Settings.swift */,
 				2E8BC11423A15FD200DF1562 /* Property Wrappers */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
@@ -721,7 +715,6 @@
 				A146F32022703907002DC511 /* StatusFetchedResultsController.swift in Sources */,
 				2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */,
 				2EFFE3DD2329893500EA74D4 /* Database.swift in Sources */,
-				A146F31822702634002DC511 /* NotificationCenter+NotificationToken.swift in Sources */,
 				2E1DCA251FC49A72002E67D6 /* GrammarTableViewController.swift in Sources */,
 				2E8BC11623A15FE100DF1562 /* Trimmed.swift in Sources */,
 				2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */,
@@ -749,7 +742,6 @@
 				2E7B36902077E1DA00542BB8 /* JLPTProgressTableViewCell.swift in Sources */,
 				A146F31A22702CCE002DC511 /* GrammarFetchedResultsController.swift in Sources */,
 				2E8BC11323A05EFD00DF1562 /* Settings.swift in Sources */,
-				A146F316227025B4002DC511 /* NotificationToken.swift in Sources */,
 				2EBB70C520165DF6001AE42E /* Review+Initializer.swift in Sources */,
 				2E8237F42394200400438E24 /* SearchProvider.swift in Sources */,
 				2E1DCA291FC4E722002E67D6 /* String+HTMLAttributedString.swift in Sources */,

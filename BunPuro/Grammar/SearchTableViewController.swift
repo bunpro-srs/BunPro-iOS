@@ -3,6 +3,7 @@
 //  Copyright © 2019 Andreas Braun. All rights reserved.
 //
 
+import Combine
 import CoreData
 import UIKit
 
@@ -12,9 +13,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     private var searchController: UISearchController!
     private var searchDataSource: SearchDataSource!
 
-    private var willBeginUpdatingToken: NotificationToken?
-    private var didEndUpdatingToken: NotificationToken?
-    private var endModificationToken: NotificationToken?
+    private var subscriptions = Set<AnyCancellable>()
 
     override var canBecomeFirstResponder: Bool { true }
 
@@ -23,23 +22,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
         navigationItem.title = L10n.Tabbar.search
 
-        willBeginUpdatingToken = NotificationCenter.default.observe(name: DataManager.willBeginUpdating, object: nil, queue: .main) { [weak self] _ in
-            let activityIndicatorView: UIActivityIndicatorView
-
-            activityIndicatorView = UIActivityIndicatorView(style: .medium)
-
-            activityIndicatorView.startAnimating()
-
-            self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
-        }
-
-        didEndUpdatingToken = NotificationCenter.default.observe(name: DataManager.didEndUpdating, object: nil, queue: .main) { [weak self] _ in
-            self?.navigationItem.rightBarButtonItem = nil
-        }
-
-        endModificationToken = NotificationCenter.default.observe(name: DataManager.didModifyReview, object: nil, queue: .main) { [weak self] _ in
-            self?.navigationItem.rightBarButtonItem = nil
-        }
+        setupNotifications()
 
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -132,6 +115,40 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         contextMenuConfiguration(for: searchDataSource.grammar(at: indexPath))
+    }
+
+    private func setupNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        notificationCenter
+            .publisher(for: DataManager.willBeginUpdating)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                let activityIndicatorView: UIActivityIndicatorView
+
+                activityIndicatorView = UIActivityIndicatorView(style: .medium)
+
+                activityIndicatorView.startAnimating()
+
+                self?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
+            }
+            .store(in: &subscriptions)
+
+        notificationCenter
+            .publisher(for: DataManager.didEndUpdating)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.navigationItem.rightBarButtonItem = nil
+            }
+            .store(in: &subscriptions)
+
+        notificationCenter
+            .publisher(for: DataManager.didModifyReview)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.navigationItem.rightBarButtonItem = nil
+            }
+            .store(in: &subscriptions)
     }
 
     private func progress(count: Int, max: Int) -> Float {
