@@ -28,7 +28,7 @@ final class DashboardTableViewController: UITableViewController {
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: .ellipsisCircle, style: .done, target: self, action: #selector(presentSettingsViewController(_:)))
+            UIBarButtonItem(image: .ellipsisCircle, style: .plain, target: self, action: #selector(presentSettingsViewController(_:)))
         ]
 
         statusObserver = StatusObserver()

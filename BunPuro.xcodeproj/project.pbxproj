@@ -125,8 +125,8 @@
 		2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTableViewController.swift; sourceTree = "<group>"; };
 		2E1DCA281FC4E722002E67D6 /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
 		2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetchedResultsTableViewController.swift; sourceTree = "<group>"; };
-		2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SentencesTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/SentencesTableViewController.swift"; sourceTree = "<group>"; };
-		2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReadingsTableViewController.swift; path = "../../../../../../System/Volumes/Data/Users/andreasbraun/Development/BunPro-iOS/BunPuro/Grammar/ReadingsTableViewController.swift"; sourceTree = "<group>"; };
+		2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTableViewController.swift; sourceTree = "<group>"; };
+		2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingsTableViewController.swift; sourceTree = "<group>"; };
 		2E3074911FACF9640078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3074981FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2E30749D1FACF9660078725B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -345,6 +345,24 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		2E76350C24BB85B800E35072 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2E67558A1FFFEA2900BD10EB /* Dasboard */,
+				2E67558B1FFFEA3C00BD10EB /* Grammar */,
+				2E67558C1FFFEA5000BD10EB /* Settings */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2E76350D24BB874A00E35072 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2EBB23F624BB698D006B9302 /* Database */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		2E8BC11423A15FD200DF1562 /* Property Wrappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,13 +375,14 @@
 		2EAD9DC71FA25DF100CE52CF = {
 			isa = PBXGroup;
 			children = (
-				2EA878FB22E28544009E5AA9 /* BunProKit */,
 				2EA878FA22E2852C009E5AA9 /* Protocols */,
+				2EA878FB22E28544009E5AA9 /* BunProKit */,
+				2E76350D24BB874A00E35072 /* Shared */,
 				2EAD9DD21FA25DF100CE52CF /* BunPuro */,
 				2EAD9DE91FA25DF100CE52CF /* BunPuroTests */,
 				2EAD9DF41FA25DF100CE52CF /* BunPuroUITests */,
-				2EAD9DD11FA25DF100CE52CF /* Products */,
 				2E13066022BD8C1F00AA0C0D /* Frameworks */,
+				2EAD9DD11FA25DF100CE52CF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -383,14 +402,11 @@
 				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
-				2E67558A1FFFEA2900BD10EB /* Dasboard */,
-				2EBB23F624BB698D006B9302 /* Database */,
 				A1D6C149226B56A200D25DF1 /* Generated */,
 				A1D6C1A8226BC14700D25DF1 /* Globals */,
-				2E67558B1FFFEA3C00BD10EB /* Grammar */,
 				2E6755891FFFEA1200BD10EB /* Notification */,
 				2E6755871FFFE9C100BD10EB /* Procedures */,
-				2E67558C1FFFEA5000BD10EB /* Settings */,
+				2E76350C24BB85B800E35072 /* Screens */,
 				2EBB23F524BB6682006B9302 /* Shortcuts */,
 				2EBB23F424BB6652006B9302 /* Storyboards */,
 				2E30749F1FACF96E0078725B /* Supporting Files */,
