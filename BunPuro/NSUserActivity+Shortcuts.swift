@@ -14,7 +14,6 @@ extension NSUserActivity {
         case cram = "com.bunpro.activity.cram"
     }
 
-    @available (iOS 12.0, *)
     static var studyActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: ActivityType.study.rawValue)
         activity.isEligibleForSearch = true
@@ -32,7 +31,6 @@ extension NSUserActivity {
         return activity
     }
 
-    @available (iOS 12.0, *)
     static var cramActivity: NSUserActivity {
         let activity = NSUserActivity(activityType: ActivityType.cram.rawValue)
         activity.isEligibleForSearch = true
