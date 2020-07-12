@@ -4,6 +4,7 @@
 //
 
 import BunProKit
+import Combine
 import CoreData
 import UIKit
 import UserNotifications
@@ -20,11 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var database = Database(modelName: modelName)
 
     private var dataManager: DataManager?
-    private var appearanceObservation: NSKeyValueObservation?
 
-    deinit {
-        appearanceObservation?.invalidate()
-    }
+    private var subscriptions = Set<AnyCancellable>()
 
     func application(
         _ application: UIApplication,
@@ -34,13 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupTabBarViewController()
 
-        appearanceObservation = UserDefaults
-            .standard
-            .observe(\.userInterfaceStyle, options: [.initial, .new]) { defaults, _ in
+        UserDefaults.standard
+            .publisher(for: \.userInterfaceStyle, options: [.initial, .new])
+            .receive(on: RunLoop.main)
+            .sink { userInterfaceStyle in
                 application.windows.forEach { window in
-                    window.overrideUserInterfaceStyle = defaults.userInterfaceStyle.systemStyle
+                    window.overrideUserInterfaceStyle = userInterfaceStyle.systemStyle
                 }
             }
+            .store(in: &subscriptions)
 
         return true
     }
