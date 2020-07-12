@@ -7,18 +7,18 @@ import BunProKit
 import CoreData
 import Foundation
 
-protocol StatusFetchedResultsControllerDelegate: AnyObject {
+protocol DashboardFetchedResultsControllerDelegate: AnyObject {
     func fetchedResultsAccountDidChange(account: Account?)
     func fetchedResultsReviewsDidChange(reviews: [Review]?)
 }
 
-class StatusFetchedResultsController: NSObject {
+class DashboardFetchedResultsController: NSObject {
     typealias LevelMetric = (complete: Int, max: Int, progress: Float)
 
     private var userFetchedResultsController: NSFetchedResultsController<Account>?
     private var reviewsFetchedResultsController: NSFetchedResultsController<Review>?
 
-    weak var delegate: StatusFetchedResultsControllerDelegate?
+    weak var delegate: DashboardFetchedResultsControllerDelegate?
 
     func setup() {
         setupUserFetchedResultsController()
@@ -98,7 +98,7 @@ class StatusFetchedResultsController: NSObject {
     }
 }
 
-extension StatusFetchedResultsController: NSFetchedResultsControllerDelegate {
+extension DashboardFetchedResultsController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if controller == userFetchedResultsController, let account = userFetchedResultsController?.fetchedObjects?.first {
             delegate?.fetchedResultsAccountDidChange(account: account)

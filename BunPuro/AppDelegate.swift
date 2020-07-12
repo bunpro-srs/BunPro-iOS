@@ -96,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let viewCtrl = tabbarController.viewControllers?.first?.content else { return false }
 
             switch viewCtrl {
-            case is StatusTableViewController:
-                let statusViewCtrl = viewCtrl as? StatusTableViewController
+            case is DashboardTableViewController:
+                let statusViewCtrl = viewCtrl as? DashboardTableViewController
 
                 switch type {
                 case .study:
@@ -188,7 +188,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
                 .viewControllers?
-                .first { $0 is StatusTableViewController } as? StatusTableViewController
+                .first { $0 is DashboardTableViewController } as? DashboardTableViewController
 
             statusViewCtrl?.showReviewsOnViewDidAppear = true
         }

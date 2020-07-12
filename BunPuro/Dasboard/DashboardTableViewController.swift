@@ -12,7 +12,7 @@ import UIKit
 
 private let updateInterval = TimeInterval(60)
 
-final class StatusTableViewController: UITableViewController {
+final class DashboardTableViewController: UITableViewController {
     var showReviewsOnViewDidAppear: Bool = false
 
     private var statusObserver: StatusObserverProtocol?
@@ -20,7 +20,7 @@ final class StatusTableViewController: UITableViewController {
     private var nextReviewDate: Date?
     private var reviews: [Review]?
 
-    private let fetchedResultsController = StatusFetchedResultsController()
+    private let fetchedResultsController = DashboardFetchedResultsController()
 
     override var canBecomeFirstResponder: Bool { true }
 
@@ -319,7 +319,7 @@ final class StatusTableViewController: UITableViewController {
     }
 }
 
-extension StatusTableViewController: SegueHandler {
+extension DashboardTableViewController: SegueHandler {
     enum SegueIdentifier: String {
         case showJLPT
     }
@@ -338,13 +338,13 @@ extension StatusTableViewController: SegueHandler {
     }
 }
 
-extension StatusTableViewController: SFSafariViewControllerDelegate {
+extension DashboardTableViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
+extension DashboardTableViewController: DashboardFetchedResultsControllerDelegate {
     func fetchedResultsAccountDidChange(account: Account?) {
         account?.managedObjectContext?.perform { [weak self] in
             self?.setup(account: account)
@@ -358,7 +358,7 @@ extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
     }
 }
 
-extension StatusTableViewController {
+extension DashboardTableViewController {
     private func setupKeyCommands() {
         addKeyCommand(
             UIKeyCommand(
@@ -392,7 +392,7 @@ extension StatusTableViewController {
     }
 }
 
-extension StatusTableViewController: UIAdaptivePresentationControllerDelegate {
+extension DashboardTableViewController: UIAdaptivePresentationControllerDelegate {
     func presentationController(
         _ controller: UIPresentationController,
         viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle

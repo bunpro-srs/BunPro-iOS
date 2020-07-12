@@ -13,7 +13,7 @@
         <!--Status Table View Controller-->
         <scene sceneID="kSI-g3-WtJ">
             <objects>
-                <tableViewController id="OgJ-2b-cKe" userLabel="Status Table View Controller" customClass="StatusTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="OgJ-2b-cKe" userLabel="Status Table View Controller" customClass="DashboardTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="zYh-s0-Zmd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
