@@ -4,7 +4,6 @@
 //
 
 import Combine
-import CoreData
 import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchBarDelegate {

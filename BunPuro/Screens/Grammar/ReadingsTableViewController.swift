@@ -4,7 +4,6 @@
 //
 
 import CoreData
-import Protocols
 import SafariServices
 import UIKit
 

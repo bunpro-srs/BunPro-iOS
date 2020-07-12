@@ -5,7 +5,6 @@
 
 import AVFoundation
 import CoreData
-import Protocols
 import UIKit
 
 class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Sentence> {

@@ -7,7 +7,6 @@ import BunProKit
 import Combine
 import CoreData
 import UIKit
-import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
