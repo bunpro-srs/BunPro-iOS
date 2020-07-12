@@ -288,7 +288,7 @@
             <objects>
                 <tableViewController id="hqB-Oh-NNx" customClass="InformationTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SYD-AI-FOd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -322,13 +322,7 @@
                             <outlet property="delegate" destination="hqB-Oh-NNx" id="Hc6-Ed-z7Q"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Gkk-Sr-yRA">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="DH9-IG-MdU">
-                            <connections>
-                                <action selector="close" destination="hqB-Oh-NNx" id="DUl-7u-Mj4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Gkk-Sr-yRA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GG-w5-tck" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
