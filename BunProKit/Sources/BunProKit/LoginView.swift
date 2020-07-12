@@ -19,9 +19,13 @@ struct LoginView: View {
                     .textContentType(.emailAddress)
                     .disabled(loginController.state == .loggingIn || loginController.state == .loggedIn)
                 Divider()
-                SecureField("Password", text: $loginController.password)
-                    .textContentType(.password)
-                    .disabled(loginController.state == .loggingIn || loginController.state == .loggedIn)
+                SecureField("Password", text: $loginController.password) {
+                    if loginController.hasValidCredential.value {
+                        loginController.login()
+                    }
+                }
+                .textContentType(.password)
+                .disabled(loginController.state == .loggingIn || loginController.state == .loggedIn)
             }
             .padding()
             .background(Color(.secondarySystemGroupedBackground))
