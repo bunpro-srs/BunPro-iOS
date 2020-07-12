@@ -8,6 +8,7 @@ import Foundation
 import KeychainAccess
 import ProcedureKit
 import ProcedureKitNetwork
+import SwiftUI
 
 
 public typealias Token = String
@@ -31,9 +32,10 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     init(username: String, password: String, completion: @escaping (Token?, Error?) -> Void) {
         self.email = username
         self.password = password
-
+        
+        let percentEscapedEmail: String = username.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
         let percentEscapedPassword: String = password.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
-        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(username)&user_login%5Bpassword%5D=\(percentEscapedPassword)")!
+        let url = URL(string: loginUrlString + "?user_login%5Bemail%5D=\(percentEscapedEmail)&user_login%5Bpassword%5D=\(percentEscapedPassword)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -54,8 +56,8 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
     override func procedureDidFinish(with error: Error?) {
         if error == nil, _transformProcedure.output.success?.errors == nil {
             let keychain = Keychain()
-            keychain[LoginViewController.CredentialsKey.email] = email
-            keychain[LoginViewController.CredentialsKey.password] = password
+            keychain[CredentialKey.email] = email
+            keychain[CredentialKey.password] = password
             Server.token = _transformProcedure.output.success?.token
 
             NotificationCenter.default.post(name: Server.didLoginNotification, object: nil)
@@ -85,7 +87,7 @@ struct TokenResponse: Codable {
     let errors: [TokenError]?
 }
 
-class LoggedInCondition: Condition, LoginViewControllerDelegate {
+class LoggedInCondition: Condition {
     enum Error: Swift.Error {
         case noPresentingViewControllerProvided
     }
@@ -113,8 +115,8 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
 
             let keychain = Keychain()
 
-            if let username = keychain[LoginViewController.CredentialsKey.email],
-                let password = keychain[LoginViewController.CredentialsKey.password] {
+            if let username = keychain[CredentialKey.email],
+                let password = keychain[CredentialKey.password] {
                 let loginProcedure = LoginProcedure(username: username, password: password) { _, error in
                     if error == nil {
                         completion(.success(true))
@@ -127,11 +129,17 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
             } else {
                 DispatchQueue.main.async {
                     
-                    let controller: LoginViewController
+                    let loginController = LoginController { [unowned presentingViewCtrl] in
+                        DispatchQueue.main.async { [weak self] in
+                            presentingViewCtrl.dismiss(animated: true, completion: nil)
+                            self?.completion?(.success(true))
+                        }
+                    }
                     
-                    controller = LoginViewController(style: .insetGrouped)
+                    let loginView = LoginView(loginController: loginController)
                     
-                    controller.delegate = self
+                    let controller = UIHostingController(rootView: loginView)
+                    controller.view.backgroundColor = .systemGroupedBackground
 
                     controller.modalPresentationStyle = .fullScreen
 
@@ -140,13 +148,6 @@ class LoggedInCondition: Condition, LoginViewControllerDelegate {
             }
         } else {
             completion(.success(true))
-        }
-    }
-
-    func loginViewControllerDidLogin(_ controller: LoginViewController) {
-        DispatchQueue.main.async {
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
-            self.completion?(.success(true))
         }
     }
 }

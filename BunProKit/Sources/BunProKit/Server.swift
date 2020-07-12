@@ -28,13 +28,11 @@ enum ServerError: Error {
 
 public enum Server {
     static var token: Token? {
-        get {
-            return _token ?? Keychain()[string: LoginViewController.CredentialsKey.token]
-        }
+        get { _token ?? Keychain()[string: CredentialKey.token] }
 
         set {
             _token = newValue
-            Keychain()[LoginViewController.CredentialsKey.token] = newValue
+            Keychain()[CredentialKey.token] = newValue
         }
     }
 

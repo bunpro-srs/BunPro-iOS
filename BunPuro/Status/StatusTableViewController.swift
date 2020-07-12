@@ -27,6 +27,10 @@ final class StatusTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: .ellipsisCircle, style: .done, target: self, action: #selector(presentSettingsViewController(_:)))
+        ]
+
         statusObserver = StatusObserver.newObserver()
 
         statusObserver?.didLogout = { [weak self] in
@@ -84,6 +88,16 @@ final class StatusTableViewController: UITableViewController {
 
     @IBAction private func refresh(_ sender: UIRefreshControl) {
         AppDelegate.setNeedsStatusUpdate()
+    }
+
+    @IBAction private func presentSettingsViewController(_ sender: UIBarButtonItem) {
+        let settingsViewCtrl = StoryboardScene.Settings.settingsTableViewController.instantiate()
+
+        settingsViewCtrl.modalPresentationStyle = .popover
+        settingsViewCtrl.popoverPresentationController?.barButtonItem = sender
+        settingsViewCtrl.presentationController?.delegate = self
+
+        present(settingsViewCtrl, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -376,5 +390,24 @@ extension StatusTableViewController {
                 state: AppDelegate.isContentAccessable ? .on : .off
             )
         )
+    }
+}
+
+extension StatusTableViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationController(
+        _ controller: UIPresentationController,
+        viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle
+    ) -> UIViewController? {
+        let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+
+        controller.presentedViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeSettingsViewController))
+
+        return navigationController
+    }
+
+    @objc
+    private func closeSettingsViewController() {
+        dismiss(animated: true, completion: nil)
     }
 }

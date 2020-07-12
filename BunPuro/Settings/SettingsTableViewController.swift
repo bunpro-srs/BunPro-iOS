@@ -268,9 +268,12 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     private func didSelectLogoutCell(_ cell: UITableViewCell) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { _ in
-            Server.logout()
-            self.tabBarController?.selectedIndex = 0
+        let logoutAction = UIAlertAction(title: L10n.Settings.Logout.action, style: .destructive) { [weak self] _ in
+            self?.presentingViewController?.dismiss(animated: true) {
+                Server.logout()
+            }
+
+            self?.tabBarController?.selectedIndex = 0
         }
 
         let cancelAction = UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)

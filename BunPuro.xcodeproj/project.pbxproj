@@ -24,6 +24,7 @@
 		2E3D43C9201B559A00B4D5EF /* BunPro.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */; };
 		2E3D43CA201B559A00B4D5EF /* BunPro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */; };
 		2E3EE11D1FF4EF870027C924 /* String+Furigana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */; };
+		2E40190A24BA3E1F007B74C7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E40190924BA3E1F007B74C7 /* Settings.storyboard */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E528A20234898740061A92D /* UserDefaults+Custom.swift */; };
 		2E6C97082372269B00073707 /* StatusObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C97072372269B00073707 /* StatusObserver.swift */; };
@@ -136,6 +137,7 @@
 		2E3D43C6201B559A00B4D5EF /* BunPro.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BunPro.sqlite-wal"; sourceTree = "<group>"; };
 		2E3D43C7201B559A00B4D5EF /* BunPro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BunPro.sqlite; sourceTree = "<group>"; };
 		2E3EE11C1FF4EF870027C924 /* String+Furigana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Furigana.swift"; sourceTree = "<group>"; };
+		2E40190924BA3E1F007B74C7 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HimitsuTableViewCell.swift; sourceTree = "<group>"; };
 		2E48ABB420C1A19400BA660B /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				2E30749F1FACF96E0078725B /* Supporting Files */,
 				2E6755881FFFE9FF00BD10EB /* UI */,
 				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
+				2E40190924BA3E1F007B74C7 /* Settings.storyboard */,
 				2EBA417322EA003500D2765C /* GrammarDetail.storyboard */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
 			);
@@ -622,6 +625,7 @@
 				2ECDB1E4236CBED500B28A29 /* about.json in Resources */,
 				2EAD9DDD1FA25DF100CE52CF /* Assets.xcassets in Resources */,
 				2EAD9DDB1FA25DF100CE52CF /* Main.storyboard in Resources */,
+				2E40190A24BA3E1F007B74C7 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

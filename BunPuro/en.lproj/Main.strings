@@ -2,35 +2,11 @@
 /* Class = "UILabel"; text = "Within 24 Hours"; ObjectID = "4e1-68-2Hr"; */
 "4e1-68-2Hr.text" = "Within 24 Hours";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "4QO-x5-t9O"; */
-"4QO-x5-t9O.text" = "Detail";
-
 /* Class = "UILabel"; text = "Within 1 Hour"; ObjectID = "5fe-Qh-MP6"; */
 "5fe-Qh-MP6.text" = "Within 1 Hour";
 
-/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "6kJ-zb-6Q2"; */
-"6kJ-zb-6Q2.text" = "Terms and Conditions";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "7aR-RJ-rh9"; */
-"7aR-RJ-rh9.text" = "Detail";
-
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ch9-PZ-Wxg"; */
-"ch9-PZ-Wxg.title" = "Settings";
-
-/* Class = "UILabel"; text = "Bunny Mode"; ObjectID = "dd3-Iq-afw"; */
-"dd3-Iq-afw.text" = "Bunny Mode";
-
-/* Class = "UILabel"; text = "Logout"; ObjectID = "eD4-ov-7JC"; */
-"eD4-ov-7JC.text" = "Logout";
-
 /* Class = "UILabel"; text = "Next Review"; ObjectID = "f8W-DR-a0O"; */
 "f8W-DR-a0O.text" = "Next Review";
-
-/* Class = "UILabel"; text = "About"; ObjectID = "Fme-u3-ggX"; */
-"Fme-u3-ggX.text" = "About";
-
-/* Class = "UILabel"; text = "Furigana"; ObjectID = "I0J-82-EM1"; */
-"I0J-82-EM1.text" = "Furigana";
 
 /* Class = "UITabBarItem"; title = "Search"; ObjectID = "IZ3-Kc-eQR"; */
 "IZ3-Kc-eQR.title" = "Search";
@@ -38,35 +14,11 @@
 /* Class = "UINavigationItem"; title = "Loading..."; ObjectID = "J16-bo-Kj0"; */
 "J16-bo-Kj0.title" = "Loading...";
 
-/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "kYw-Pb-uem"; */
-"kYw-Pb-uem.headerTitle" = " ";
-
-/* Class = "UILabel"; text = "Privacy"; ObjectID = "L2n-Xt-p85"; */
-"L2n-Xt-p85.text" = "Privacy";
-
 /* Class = "UILabel"; text = "N5"; ObjectID = "mJz-v9-AV7"; */
 "mJz-v9-AV7.text" = "N5";
 
-/* Class = "UILabel"; text = "Contact"; ObjectID = "mPe-GA-wZA"; */
-"mPe-GA-wZA.text" = "Contact";
-
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "N0z-Mm-dwv"; */
 "N0z-Mm-dwv.title" = "Settings";
-
-/* Class = "UILabel"; text = "Community"; ObjectID = "nDo-ag-hir"; */
-"nDo-ag-hir.text" = "Community";
-
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "oQn-yk-LR5"; */
-"oQn-yk-LR5.text" = "Subtitle";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "pEt-ao-5Kl"; */
-"pEt-ao-5Kl.text" = "Detail";
-
-/* Class = "UILabel"; text = "Hide English"; ObjectID = "qKn-gq-pDN"; */
-"qKn-gq-pDN.text" = "Hide English";
-
-/* Class = "UILabel"; text = "System"; ObjectID = "QVM-m2-qeR"; */
-"QVM-m2-qeR.text" = "System";
 
 /* Class = "UILabel"; text = " "; ObjectID = "Rej-2W-djk"; */
 "Rej-2W-djk.text" = " ";
@@ -82,12 +34,3 @@
 
 /* Class = "UITabBarItem"; title = "Status"; ObjectID = "v4v-7c-p8j"; */
 "v4v-7c-p8j.title" = "Status";
-
-/* Class = "UILabel"; text = "Appearance"; ObjectID = "XZP-3d-1lE"; */
-"XZP-3d-1lE.text" = "Appearance";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "zAB-rS-aRQ"; */
-"zAB-rS-aRQ.text" = "Title";
-
-/* Class = "UITableViewSection"; footerTitle = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct."; ObjectID = "ZHM-bl-R9P"; */
-"ZHM-bl-R9P.footerTitle" = "When Bunny Mode is active, you'll advance to the next review without further confirmation if your answer was correct.";

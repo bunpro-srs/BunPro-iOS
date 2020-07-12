@@ -21,13 +21,6 @@ internal enum Asset {
   internal static let tint = ColorAsset(name: "Tint")
   internal static let bunproHankoReviewCompleteSmall = ImageAsset(name: "bunpro-hanko-review-complete_small")
   internal static let bunproHanko = ImageAsset(name: "bunpro-hanko")
-  internal static let play = ImageAsset(name: "play")
-  internal static let tabDashboardActive = ImageAsset(name: "tab_dashboard_active")
-  internal static let tabDashboardInactive = ImageAsset(name: "tab_dashboard_inactive")
-  internal static let tabSearchActive = ImageAsset(name: "tab_search_active")
-  internal static let tabSearchInactive = ImageAsset(name: "tab_search_inactive")
-  internal static let tabSettingsActive = ImageAsset(name: "tab_settings_active")
-  internal static let tabSettingsInactive = ImageAsset(name: "tab_settings_inactive")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
