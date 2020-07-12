@@ -400,7 +400,11 @@ extension StatusTableViewController: UIAdaptivePresentationControllerDelegate {
         let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
         navigationController.navigationBar.prefersLargeTitles = true
 
-        controller.presentedViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeSettingsViewController))
+        controller.presentedViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(closeSettingsViewController)
+        )
 
         return navigationController
     }

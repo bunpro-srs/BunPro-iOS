@@ -416,25 +416,6 @@
             </objects>
             <point key="canvasLocation" x="625" y="457"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="Cd4-Li-eda">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bxM-61-YKH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="ellipsis.circle" catalog="system" selectedImage="ellipsis.circle.fill" id="N0z-Mm-dwv"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GVR-ym-TH5">
-                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="rB6-PI-7Pi" kind="relationship" relationship="rootViewController" id="g8t-LW-e6j"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IG2-dZ-DLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="625" y="1260"/>
-        </scene>
         <!--GrammarTableViewController-->
         <scene sceneID="hyL-nq-Feu">
             <objects>
@@ -445,16 +426,6 @@
             </objects>
             <point key="canvasLocation" x="2460" y="456.65024630541876"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="vic-AM-deE">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" id="rB6-PI-7Pi" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="YHN-Qb-eQY"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J6S-Vw-eSd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1533.5999999999999" y="1259.8522167487686"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="BGx-Vr-zzb"/>
@@ -462,8 +433,6 @@
     <color key="tintColor" name="Tint"/>
     <resources>
         <image name="bunpro-hanko-review-complete_small" width="24" height="24"/>
-        <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
-        <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="121"/>
         <image name="pencil.circle" catalog="system" width="128" height="121"/>

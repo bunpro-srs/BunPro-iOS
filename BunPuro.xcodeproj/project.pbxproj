@@ -380,26 +380,24 @@
 		2EAD9DD21FA25DF100CE52CF /* BunPuro */ = {
 			isa = PBXGroup;
 			children = (
-				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
+				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
+				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
 				2EFFE3DC2329893500EA74D4 /* Database.swift */,
 				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
-				2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */,
 				A1D6C149226B56A200D25DF1 /* Generated */,
 				A1D6C1A8226BC14700D25DF1 /* Globals */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
 				2E6755891FFFEA1200BD10EB /* Notification */,
 				2E6755871FFFE9C100BD10EB /* Procedures */,
 				2E67558C1FFFEA5000BD10EB /* Settings */,
-				2ECDB1DC236CB0FE00B28A29 /* Web */,
+				2EBB23F524BB6682006B9302 /* Shortcuts */,
 				2E67558A1FFFEA2900BD10EB /* Status */,
+				2EBB23F424BB6652006B9302 /* Storyboards */,
 				2E30749F1FACF96E0078725B /* Supporting Files */,
 				2E6755881FFFE9FF00BD10EB /* UI */,
-				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
-				2E40190924BA3E1F007B74C7 /* Settings.storyboard */,
-				2EBA417322EA003500D2765C /* GrammarDetail.storyboard */,
-				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
+				2ECDB1DC236CB0FE00B28A29 /* Web */,
 			);
 			path = BunPuro;
 			sourceTree = "<group>";
@@ -420,6 +418,24 @@
 				2EAD9DF71FA25DF100CE52CF /* Info.plist */,
 			);
 			path = BunPuroUITests;
+			sourceTree = "<group>";
+		};
+		2EBB23F424BB6652006B9302 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2EBA417322EA003500D2765C /* GrammarDetail.storyboard */,
+				2EAD9DD91FA25DF100CE52CF /* Main.storyboard */,
+				2E40190924BA3E1F007B74C7 /* Settings.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2EBB23F524BB6682006B9302 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				2E0EB073217E5300005E8B78 /* NSUserActivity+Shortcuts.swift */,
+			);
+			path = Shortcuts;
 			sourceTree = "<group>";
 		};
 		2EBB70B720164E9F001AE42E /* Model */ = {
