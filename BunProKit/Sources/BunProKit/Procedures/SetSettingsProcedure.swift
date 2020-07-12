@@ -33,11 +33,11 @@ public final class SetSettingsProcedure: GroupProcedure {
     private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     private var _userProcedure: UserProcedure!
 
-    public let completion: ((BPKAccount?, Error?) -> Void)
+    public let completion: ((Result<BPKAccount, Error>) -> Void)
     public let presentingViewController: UIViewController
     public let settings: Settings
 
-    public init(presentingViewController: UIViewController, settings: Settings, completion: @escaping (BPKAccount?, Error?) -> Void) {
+    public init(presentingViewController: UIViewController, settings: Settings, completion: @escaping (Result<BPKAccount, Error>) -> Void) {
         self.completion = completion
         self.presentingViewController = presentingViewController
         self.settings = settings

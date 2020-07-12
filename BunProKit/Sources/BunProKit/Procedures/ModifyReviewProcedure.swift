@@ -23,14 +23,14 @@ public final class ModifyReviewProcedure: GroupProcedure {
         case reset(Int64)
     }
 
-    public let completion: ((Error?) -> Void)
+    public let completion: ((Result<Void, Error>) -> Void)
     public let presentingViewController: UIViewController
 
     private let modificationType: ModificationType
 
     private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
 
-    public init(presentingViewController: UIViewController, modificationType: ModificationType, completion: @escaping ((Error?) -> Void)) {
+    public init(presentingViewController: UIViewController, modificationType: ModificationType, completion: @escaping ((Result<Void, Error>) -> Void)) {
         self.completion = completion
         self.presentingViewController = presentingViewController
 
@@ -89,6 +89,10 @@ public final class ModifyReviewProcedure: GroupProcedure {
     }
 
     override public func procedureDidFinish(with error: Error?) {
-        completion(error)
+        if let error = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(()))
+        }
     }
 }

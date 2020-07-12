@@ -120,10 +120,11 @@ final class DataManager {
     }
 
     func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
-        let addProcedure = ModifyReviewProcedure(presentingViewController: presentingViewController, modificationType: modificationType) { error in
-            log.error(error ?? "No Error")
-
-            if error == nil {
+        let addProcedure = ModifyReviewProcedure(presentingViewController: presentingViewController, modificationType: modificationType) { result in
+            switch result {
+            case let .failure(error):
+                log.error(error)
+            case .success:
                 DispatchQueue.main.async {
                     self.hasPendingReviewModification = true
                     AppDelegate.setNeedsStatusUpdate()
@@ -137,45 +138,46 @@ final class DataManager {
     func scheduleUpdateProcedure(completion: ((UIBackgroundFetchResult) -> Void)? = nil) {
         self.isUpdating = true
 
-        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { [weak self] user, reviews, _ in
+        let statusProcedure = StatusProcedure(presentingViewController: presentingViewController) { [weak self] result in
             guard let self = self else { return }
 
-            if let user = user {
-                self.database.updateAccount(user) {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.isUpdating = false
-                    }
-                }
-            }
+            switch result {
+            case let .failure(error):
+                log.debug(error)
+            case let .success((account, reviews)):
+                self.database.updateAccount(account) { }
+                
+                DispatchQueue.main.async { [weak self] in
+                    if !reviews.isEmpty {
+                        let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
 
-            DispatchQueue.main.async {
-                if let reviews = reviews {
-                    let oldReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
+                        self?.database.updateReviews(reviews) { [weak self] in
+                            guard let self = self else { return }
 
-                    self.database.updateReviews(reviews) { [weak self] in
-                        guard let self = self else { return }
+                            self.isUpdating = false
 
-                        self.isUpdating = false
+                            self.startStatusUpdates()
 
-                        self.startStatusUpdates()
-
-                        if self.hasPendingReviewModification {
-                            self.hasPendingReviewModification = false
-                            NotificationCenter.default.post(name: DataManager.didModifyReview, object: nil)
-                        }
-
-                        DispatchQueue.main.async {
-                            let newReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
-                            let hasNewReviews = newReviewsCount > oldReviewsCount
-                            if hasNewReviews {
-                                UserNotificationCenter.shared.scheduleNextReviewNotification(
-                                    at: Date().addingTimeInterval(1.0),
-                                    reviewCount: newReviewsCount - oldReviewsCount
-                                )
+                            if self.hasPendingReviewModification {
+                                self.hasPendingReviewModification = false
+                                NotificationCenter.default.post(name: DataManager.didModifyReview, object: nil)
                             }
 
-                            completion?(hasNewReviews ? .newData : .noData)
+                            DispatchQueue.main.async {
+                                let newReviewsCount = AppDelegate.badgeNumber()?.intValue ?? 0
+                                let hasNewReviews = newReviewsCount > oldReviewsCount
+                                if hasNewReviews {
+                                    UserNotificationCenter.shared.scheduleNextReviewNotification(
+                                        at: Date().addingTimeInterval(1.0),
+                                        reviewCount: newReviewsCount - oldReviewsCount
+                                    )
+                                }
+
+                                completion?(hasNewReviews ? .newData : .noData)
+                            }
                         }
+                    } else {
+                        self?.isUpdating = false
                     }
                 }
             }

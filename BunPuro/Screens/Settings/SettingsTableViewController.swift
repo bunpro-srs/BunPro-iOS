@@ -298,15 +298,16 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
 
     private func synchronizeSettings() {
         guard let settings = settings else { return }
-        let settingsProcedure = SetSettingsProcedure(presentingViewController: self, settings: settings) { user, error in
-            guard let user = user, error == nil else {
+        let settingsProcedure = SetSettingsProcedure(presentingViewController: self, settings: settings) { result in
+            switch result {
+            case let .failure(error):
                 log.info(String(describing: error))
-                return
-            }
 
-            DispatchQueue.main.async {
-                let importProcedure = ImportAccountIntoCoreDataProcedure(account: user)
-                Server.add(procedure: importProcedure)
+            case let .success(account):
+                DispatchQueue.main.async {
+                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: account)
+                    Server.add(procedure: importProcedure)
+                }
             }
         }
 

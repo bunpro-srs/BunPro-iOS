@@ -41,7 +41,7 @@ private final class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
     override var hasMilliseconds: Bool { return true }
     override var url: URL { return URL(string: "\(baseUrlString)reviews/\(collection.rawValue)")! }
 
-    init(presentingViewController: UIViewController, collection: ReviewCollection = .all, completion: ((_ReviewContainer?, Error?) -> Void)? = nil) {
+    init(presentingViewController: UIViewController, collection: ReviewCollection = .all, completion: ((Result<_ReviewContainer, Error>) -> Void)? = nil) {
         self.collection = collection
 
         super.init(presentingViewController: presentingViewController, completion: completion)
@@ -51,12 +51,12 @@ private final class _ReviewsProcedure: BunPuroProcedure<_ReviewContainer> {
 public final class ReviewsProcedure: GroupProcedure, OutputProcedure {
     public var output: Pending<ProcedureResult<[BPKReview]>> = .pending
 
-    public let completion: (([BPKReview]?, Error?) -> Void)?
+    public let completion: ((Result<[BPKReview], Error>) -> Void)?
 
     private let downloadProcedure: _ReviewsProcedure?
     private let transformProcedure: TransformProcedure<_ReviewContainer, [BPKReview]>
 
-    public init(presentingViewController: UIViewController, completion: (([BPKReview]?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, completion: ((Result<[BPKReview], Error>) -> Void)? = nil) {
         self.completion = completion
 
         downloadProcedure = _ReviewsProcedure(presentingViewController: presentingViewController)

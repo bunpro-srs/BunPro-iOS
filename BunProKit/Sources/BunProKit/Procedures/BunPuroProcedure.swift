@@ -18,7 +18,7 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
     private var _networkProcedure: NetworkProcedure<NetworkDataProcedure>!
     private var _transformProcedure: TransformProcedure<Data, T>!
 
-    public let completion: ((T?, Error?) -> Void)?
+    public let completion: ((Result<T, Error>) -> Void)?
 
     var url: URL { fatalError("Needs to be implemented by the subclass.") }
     var hasMilliseconds: Bool { return false }
@@ -27,7 +27,7 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         print("\(self) deinit")
     }
     
-    public init(presentingViewController: UIViewController, completion: ((T?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, completion: ((Result<T, Error>) -> Void)? = nil) {
         self.completion = completion
 
         super.init(operations: [])
@@ -67,6 +67,13 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
     }
 
     override public func procedureDidFinish(with error: Error?) {
-        completion?(output.value?.value, output.error)
+        guard let result = output.value else { return }
+        
+        switch result {
+        case .failure(let error):
+            completion?(.failure(error))
+        case .success(let value):
+            completion?(.success(value))
+        }
     }
 }

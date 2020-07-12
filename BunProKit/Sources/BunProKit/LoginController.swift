@@ -55,15 +55,15 @@ class LoginController: ObservableObject {
             self.state = .loggingIn
         }
 
-        let loginProcedure = LoginProcedure(username: email, password: password) { _, error in
+        let loginProcedure = LoginProcedure(username: email, password: password) { result in
             DispatchQueue.main.async { [weak self] in
-                guard error == nil else {
+                switch result {
+                case .failure:
                     self?.state = .loginFailed
-                    return
+                case .success:
+                    self?.state = .loggedIn
+                    self?.didLoginHandler()
                 }
-                
-                self?.state = .loggedIn
-                self?.didLoginHandler()
             }
         }
         

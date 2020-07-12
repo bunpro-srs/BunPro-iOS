@@ -11,7 +11,7 @@ import ProcedureKit
 public final class StatusProcedure: GroupProcedure, OutputProcedure {
     public var output: Pending<ProcedureResult<(BPKAccount?, [BPKReview]?)>> = .pending
 
-    public let completion: ((BPKAccount?, [BPKReview]?, Error?) -> Void)?
+    public let completion: ((Result<(BPKAccount, [BPKReview]), Error>) -> Void)?
     public var indicator: NetworkActivityIndicatorProtocol? {
         didSet {
             guard let indicator = indicator else { return }
@@ -22,7 +22,7 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
     private let _userNetworkProcedure: UserProcedure
     private let _reviewsNetworkProcedure: ReviewsProcedure
 
-    public init(presentingViewController: UIViewController, completion: ((BPKAccount?, [BPKReview]?, Error?) -> Void)? = nil) {
+    public init(presentingViewController: UIViewController, completion: ((Result<(BPKAccount, [BPKReview]), Error>) -> Void)? = nil) {
         _userNetworkProcedure = UserProcedure(presentingViewController: presentingViewController)
         _reviewsNetworkProcedure = ReviewsProcedure(presentingViewController: presentingViewController)
         _reviewsNetworkProcedure.addDependency(_userNetworkProcedure)
@@ -66,8 +66,10 @@ public final class StatusProcedure: GroupProcedure, OutputProcedure {
     }
     
     public override func procedureDidFinish(with error: Error?) {
-        let account = output.value?.value?.0
-        let reviews = output.value?.value?.1
-        completion?(account, reviews, output.error)
+        if let error = output.error {
+            completion?(.failure(error))
+        } else if let account = output.value?.value?.0, let reviews = output.value?.value?.1 {
+            completion?(.success((account, reviews)))
+        }
     }
 }

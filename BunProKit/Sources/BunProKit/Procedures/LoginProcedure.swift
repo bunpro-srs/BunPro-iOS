@@ -17,7 +17,7 @@ private let loginUrlString = "\(baseUrlString)login/"
 class LoginProcedure: GroupProcedure, OutputProcedure {
     var output: Pending<ProcedureResult<TokenResponse>> = .pending
 
-    let completion: (Token?, Error?) -> Void
+    let completion: (Result<Token, Error>) -> Void
 
     private let _networkProcedure: NetworkProcedure<NetworkDataProcedure>
     private let _transformProcedure: TransformProcedure<Data, TokenResponse>
@@ -29,7 +29,7 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
         print("\(self) deinit")
     }
     
-    init(username: String, password: String, completion: @escaping (Token?, Error?) -> Void) {
+    init(username: String, password: String, completion: @escaping (Result<Token, Error>) -> Void) {
         self.email = username
         self.password = password
         
@@ -65,7 +65,11 @@ class LoginProcedure: GroupProcedure, OutputProcedure {
 
         output = _transformProcedure.output
 
-        completion(output.success?.token, output.success?.errors?.first?.error)
+        if let token = output.success?.token {
+            completion(.success(token))
+        } else if let error = output.success?.errors?.first?.error {
+            completion(.failure(error))
+        }
     }
 }
 
@@ -117,11 +121,12 @@ class LoggedInCondition: Condition {
 
             if let username = keychain[CredentialKey.email],
                 let password = keychain[CredentialKey.password] {
-                let loginProcedure = LoginProcedure(username: username, password: password) { _, error in
-                    if error == nil {
+                let loginProcedure = LoginProcedure(username: username, password: password) { result in
+                    switch result {
+                    case let .failure(error):
+                        completion(.failure(error))
+                    case .success:
                         completion(.success(true))
-                    } else {
-                        completion(.failure(error!))
                     }
                 }
 
