@@ -276,10 +276,10 @@
 		2E6755871FFFE9C100BD10EB /* Procedures */ = {
 			isa = PBXGroup;
 			children = (
-				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 				2EE7C21A1FD87EDF00DA9AB8 /* ImportAccountIntoCoreDataProcedure.swift */,
 				2E14485A201288590079DD72 /* ImportReviewsIntoCoreDataProcedure.swift */,
 				2E994ACF21294A9D007C4DDB /* ResetReviewsProcedure.swift */,
+				2E0C54011FC8C9CA00697132 /* UpdateGrammarProcedure.swift */,
 			);
 			path = Procedures;
 			sourceTree = "<group>";
@@ -287,14 +287,14 @@
 		2E6755881FFFE9FF00BD10EB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */,
-				2E7B368F2077E1DA00542BB8 /* JLPTProgressTableViewCell.swift */,
+				2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */,
 				2EB4564C1FE4710C003CDD65 /* DetailCell.swift */,
-				2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */,
 				2E7B36912078144B00542BB8 /* GrammarHeaderTableViewCell.swift */,
 				2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */,
-				2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */,
+				2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */,
+				2E7B368F2077E1DA00542BB8 /* JLPTProgressTableViewCell.swift */,
 				2E32A9AA209EEF16003406CA /* SignUpTableViewCell.swift */,
+				2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -320,19 +320,19 @@
 		2E67558B1FFFEA3C00BD10EB /* Grammar */ = {
 			isa = PBXGroup;
 			children = (
+				2EA29AA62391C4D9003B50A9 /* DiffableSearchDataSource.swift */,
 				A146F31922702CCE002DC511 /* GrammarFetchedResultsController.swift */,
 				A146F31B227033C3002DC511 /* GrammarFlowController.swift */,
-				2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */,
-				2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */,
-				2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */,
-				2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */,
-				2EA29AA42391C39B003B50A9 /* SearchTableViewController.swift */,
-				2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */,
-				2E8237ED239401A300438E24 /* SearchTableViewController+ContextMenu.swift */,
 				2E8237F523945FD800438E24 /* GrammarPreviewViewController.swift */,
-				2EA29AA62391C4D9003B50A9 /* DiffableSearchDataSource.swift */,
+				2E1DCA241FC49A72002E67D6 /* GrammarTableViewController.swift */,
+				2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */,
+				2E2FE36422E61DBB001C0E36 /* ReadingsTableViewController.swift */,
 				2E8237F12394186500438E24 /* SearchableDataSource.swift */,
 				2E8237F32394200400438E24 /* SearchProvider.swift */,
+				2EA29AA42391C39B003B50A9 /* SearchTableViewController.swift */,
+				2E8237ED239401A300438E24 /* SearchTableViewController+ContextMenu.swift */,
+				2E2AAEBA22E4DFDE00E227B0 /* SentencesTableViewController.swift */,
+				2E82B77D2393FD07003AF22C /* TrailingSwipeActionsConfigurationProvider.swift */,
 			);
 			path = Grammar;
 			sourceTree = "<group>";
@@ -380,12 +380,11 @@
 		2EAD9DD21FA25DF100CE52CF /* BunPuro */ = {
 			isa = PBXGroup;
 			children = (
+				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
 				2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */,
 				2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */,
-				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
-				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
-				2EFFE3DC2329893500EA74D4 /* Database.swift */,
-				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
+				2E67558A1FFFEA2900BD10EB /* Dasboard */,
+				2EBB23F624BB698D006B9302 /* Database */,
 				A1D6C149226B56A200D25DF1 /* Generated */,
 				A1D6C1A8226BC14700D25DF1 /* Globals */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
@@ -393,7 +392,6 @@
 				2E6755871FFFE9C100BD10EB /* Procedures */,
 				2E67558C1FFFEA5000BD10EB /* Settings */,
 				2EBB23F524BB6682006B9302 /* Shortcuts */,
-				2E67558A1FFFEA2900BD10EB /* Dasboard */,
 				2EBB23F424BB6652006B9302 /* Storyboards */,
 				2E30749F1FACF96E0078725B /* Supporting Files */,
 				2E6755881FFFE9FF00BD10EB /* UI */,
@@ -438,6 +436,15 @@
 			path = Shortcuts;
 			sourceTree = "<group>";
 		};
+		2EBB23F624BB698D006B9302 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				2EFFE3DC2329893500EA74D4 /* Database.swift */,
+				2E1BFFA2200FBC8C00985446 /* DataManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		2EBB70B720164E9F001AE42E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,11 +464,11 @@
 		2ECDB1DC236CB0FE00B28A29 /* Web */ = {
 			isa = PBXGroup;
 			children = (
+				2ECDB1E3236CBED500B28A29 /* about.json */,
 				2ECDB1DD236CB12C00B28A29 /* InformationTableViewController.swift */,
 				2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */,
 				2ECDB1DF236CB1D000B28A29 /* privacy.json */,
 				2ECDB1E5236CD89A00B28A29 /* terms.json */,
-				2ECDB1E3236CBED500B28A29 /* about.json */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -477,9 +484,9 @@
 		A1D6C14A226B56A200D25DF1 /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
-				A1D6C14B226B56A200D25DF1 /* Strings.swift */,
 				A1D6C14C226B56A200D25DF1 /* Assets.swift */,
 				A1D6C14D226B56A200D25DF1 /* Storyboards.swift */,
+				A1D6C14B226B56A200D25DF1 /* Strings.swift */,
 			);
 			path = SwiftGen;
 			sourceTree = "<group>";
@@ -487,10 +494,11 @@
 		A1D6C1A8226BC14700D25DF1 /* Globals */ = {
 			isa = PBXGroup;
 			children = (
+				2E1DCA2A1FC5F84F002E67D6 /* CoreDataFetchedResultsTableViewController.swift */,
 				A1D6C1A9226BC15900D25DF1 /* Logger.swift */,
 				2E8BC11223A05EFD00DF1562 /* Settings.swift */,
-				2E8BC11423A15FD200DF1562 /* Property Wrappers */,
 				2E27E5881FBB55EF002D906F /* Extensions */,
+				2E8BC11423A15FD200DF1562 /* Property Wrappers */,
 			);
 			path = Globals;
 			sourceTree = "<group>";
