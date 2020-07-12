@@ -3,8 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
@@ -172,8 +171,8 @@ internal enum L10n {
     /// Cram
     internal static let cram = L10n.tr("Localizable", "status.cram")
     /// Last update: %@
-    internal static func lastupdate(_ p1: String) -> String {
-      return L10n.tr("Localizable", "status.lastupdate", p1)
+    internal static func lastupdate(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "status.lastupdate", String(describing: p1))
     }
     /// Loading
     internal static let loading = L10n.tr("Localizable", "status.loading")
@@ -210,10 +209,15 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

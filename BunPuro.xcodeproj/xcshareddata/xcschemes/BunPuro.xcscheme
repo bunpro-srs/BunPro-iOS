@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2EAD9DCF1FA25DF100CE52CF"
-               BuildableName = "BunPuro.app"
-               BlueprintName = "BunPuro"
+               BuildableName = "iOS.app"
+               BlueprintName = "iOS"
                ReferencedContainer = "container:BunPuro.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2EAD9DE51FA25DF100CE52CF"
-               BuildableName = "BunPuroTests.xctest"
-               BlueprintName = "BunPuroTests"
+               BuildableName = "iOSTests.xctest"
+               BlueprintName = "iOSTests"
                ReferencedContainer = "container:BunPuro.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2EAD9DF01FA25DF100CE52CF"
-               BuildableName = "BunPuroUITests.xctest"
-               BlueprintName = "BunPuroUITests"
+               BuildableName = "iOSUITests.xctest"
+               BlueprintName = "iOSUITests"
                ReferencedContainer = "container:BunPuro.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2EAD9DCF1FA25DF100CE52CF"
-            BuildableName = "BunPuro.app"
-            BlueprintName = "BunPuro"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:BunPuro.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -83,8 +83,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2EAD9DCF1FA25DF100CE52CF"
-            BuildableName = "BunPuro.app"
-            BlueprintName = "BunPuro"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:BunPuro.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

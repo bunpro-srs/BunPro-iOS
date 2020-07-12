@@ -2,17 +2,17 @@
 tasks = ["interfaces", "transform", "normalize"]
 
 [update.interfaces]
-path = "BunPuro"
+path = "iOS"
 defaultToBase = true
 
 [update.transform]
-codePath = "BunPuro"
-localizablePath = "BunPuro/Supporting Files"
+codePath = "iOS"
+localizablePath = "iOS/Supporting Files"
 transformer = "swiftgenStructured"
-supportedLanguageEnumPath = "BunPuro/Supporting Files"
+supportedLanguageEnumPath = "iOS/Supporting Files"
 
 [update.normalize]
-path = "BunPuro"
+path = "iOS"
 
 [lint]
-path = "BunPuro"
+path = "iOS"

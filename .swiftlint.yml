@@ -67,17 +67,17 @@ disabled_rules:
 - type_name
 
 included:
-- BunPuro
-- BunPuroTests
-- BunPuroUITests
+- iOS
+- iOSTests
+- iOSUITests
 - BunPuroKit
 - BunPuroKitTests
 - Extensions
 
 excluded:
-- BunPuro/Furigana
-- BunPuro/Generated
-- BunPuro/Supporting Files/BartyCrouch.swift
+- iOS/Furigana
+- iOS/Generated
+- iOS/Supporting Files/BartyCrouch.swift
 
 # Rule Configurations
 conditional_returns_on_newline:

@@ -15,15 +15,15 @@ internal enum StoryboardScene {
   internal enum GrammarDetail: StoryboardType {
     internal static let storyboardName = "GrammarDetail"
 
-    internal static let grammarPreviewViewController = SceneType<BunPuro.GrammarPreviewViewController>(storyboard: GrammarDetail.self, identifier: "GrammarPreviewViewController")
+    internal static let grammarPreviewViewController = SceneType<iOS.GrammarPreviewViewController>(storyboard: GrammarDetail.self, identifier: "GrammarPreviewViewController")
 
-    internal static let grammarTableViewController = SceneType<BunPuro.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "GrammarTableViewController")
+    internal static let grammarTableViewController = SceneType<iOS.GrammarTableViewController>(storyboard: GrammarDetail.self, identifier: "GrammarTableViewController")
 
-    internal static let kanjiTableViewController = SceneType<BunPuro.KanjiTableViewController>(storyboard: GrammarDetail.self, identifier: "KanjiTableViewController")
+    internal static let kanjiTableViewController = SceneType<iOS.KanjiTableViewController>(storyboard: GrammarDetail.self, identifier: "KanjiTableViewController")
 
-    internal static let readingsTableViewController = SceneType<BunPuro.ReadingsTableViewController>(storyboard: GrammarDetail.self, identifier: "ReadingsTableViewController")
+    internal static let readingsTableViewController = SceneType<iOS.ReadingsTableViewController>(storyboard: GrammarDetail.self, identifier: "ReadingsTableViewController")
 
-    internal static let sentencesTableViewController = SceneType<BunPuro.SentencesTableViewController>(storyboard: GrammarDetail.self, identifier: "SentencesTableViewController")
+    internal static let sentencesTableViewController = SceneType<iOS.SentencesTableViewController>(storyboard: GrammarDetail.self, identifier: "SentencesTableViewController")
   }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
@@ -40,9 +40,9 @@ internal enum StoryboardScene {
   internal enum Settings: StoryboardType {
     internal static let storyboardName = "Settings"
 
-    internal static let initialScene = InitialSceneType<BunPuro.SettingsTableViewController>(storyboard: Settings.self)
+    internal static let initialScene = InitialSceneType<iOS.SettingsTableViewController>(storyboard: Settings.self)
 
-    internal static let settingsTableViewController = SceneType<BunPuro.SettingsTableViewController>(storyboard: Settings.self, identifier: "SettingsTableViewController")
+    internal static let settingsTableViewController = SceneType<iOS.SettingsTableViewController>(storyboard: Settings.self, identifier: "SettingsTableViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
@@ -56,7 +56,7 @@ internal protocol StoryboardType {
 internal extension StoryboardType {
   static var storyboard: UIStoryboard {
     let name = self.storyboardName
-    return UIStoryboard(name: name, bundle: Bundle(for: BundleToken.self))
+    return UIStoryboard(name: name, bundle: BundleToken.bundle)
   }
 }
 
@@ -84,4 +84,10 @@ internal struct InitialSceneType<T: UIViewController> {
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    Bundle(for: BundleToken.self)
+  }()
+}
+// swiftlint:enable convenience_type

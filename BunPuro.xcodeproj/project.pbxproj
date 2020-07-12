@@ -156,17 +156,17 @@
 		2EA4612A1FABAA4500B4F3BD /* UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
 		2EA878FA22E2852C009E5AA9 /* Protocols */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Protocols; sourceTree = "<group>"; };
 		2EA878FB22E28544009E5AA9 /* BunProKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BunProKit; sourceTree = "<group>"; };
-		2EAD9DD01FA25DF100CE52CF /* BunPuro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BunPuro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAD9DD01FA25DF100CE52CF /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DD31FA25DF100CE52CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAD9DD51FA25DF100CE52CF /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
 		2EAD9DDA1FA25DF100CE52CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EAD9DDC1FA25DF100CE52CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAD9DDF1FA25DF100CE52CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAD9DE11FA25DF100CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAD9DE61FA25DF100CE52CF /* BunPuroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunPuroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAD9DE61FA25DF100CE52CF /* iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DEA1FA25DF100CE52CF /* BunPuroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroTests.swift; sourceTree = "<group>"; };
 		2EAD9DEC1FA25DF100CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAD9DF11FA25DF100CE52CF /* BunPuroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BunPuroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAD9DF11FA25DF100CE52CF /* iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAD9DF51FA25DF100CE52CF /* BunPuroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunPuroUITests.swift; sourceTree = "<group>"; };
 		2EAD9DF71FA25DF100CE52CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EB4564C1FE4710C003CDD65 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -359,9 +359,9 @@
 				2EA878FA22E2852C009E5AA9 /* Protocols */,
 				2EA878FB22E28544009E5AA9 /* BunProKit */,
 				2E76350D24BB874A00E35072 /* Shared */,
-				2EAD9DD21FA25DF100CE52CF /* BunPuro */,
-				2EAD9DE91FA25DF100CE52CF /* BunPuroTests */,
-				2EAD9DF41FA25DF100CE52CF /* BunPuroUITests */,
+				2EAD9DD21FA25DF100CE52CF /* iOS */,
+				2EAD9DE91FA25DF100CE52CF /* iOSTests */,
+				2EAD9DF41FA25DF100CE52CF /* iOSUITests */,
 				2E13066022BD8C1F00AA0C0D /* Frameworks */,
 				2EAD9DD11FA25DF100CE52CF /* Products */,
 			);
@@ -370,14 +370,14 @@
 		2EAD9DD11FA25DF100CE52CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2EAD9DD01FA25DF100CE52CF /* BunPuro.app */,
-				2EAD9DE61FA25DF100CE52CF /* BunPuroTests.xctest */,
-				2EAD9DF11FA25DF100CE52CF /* BunPuroUITests.xctest */,
+				2EAD9DD01FA25DF100CE52CF /* iOS.app */,
+				2EAD9DE61FA25DF100CE52CF /* iOSTests.xctest */,
+				2EAD9DF11FA25DF100CE52CF /* iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2EAD9DD21FA25DF100CE52CF /* BunPuro */ = {
+		2EAD9DD21FA25DF100CE52CF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */,
@@ -393,25 +393,25 @@
 				2E6755881FFFE9FF00BD10EB /* UI */,
 				2ECDB1DC236CB0FE00B28A29 /* Web */,
 			);
-			path = BunPuro;
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		2EAD9DE91FA25DF100CE52CF /* BunPuroTests */ = {
+		2EAD9DE91FA25DF100CE52CF /* iOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				2EAD9DEA1FA25DF100CE52CF /* BunPuroTests.swift */,
 				2EAD9DEC1FA25DF100CE52CF /* Info.plist */,
 			);
-			path = BunPuroTests;
+			path = iOSTests;
 			sourceTree = "<group>";
 		};
-		2EAD9DF41FA25DF100CE52CF /* BunPuroUITests */ = {
+		2EAD9DF41FA25DF100CE52CF /* iOSUITests */ = {
 			isa = PBXGroup;
 			children = (
 				2EAD9DF51FA25DF100CE52CF /* BunPuroUITests.swift */,
 				2EAD9DF71FA25DF100CE52CF /* Info.plist */,
 			);
-			path = BunPuroUITests;
+			path = iOSUITests;
 			sourceTree = "<group>";
 		};
 		2EBB23F424BB6652006B9302 /* Storyboards */ = {
@@ -502,9 +502,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2EAD9DCF1FA25DF100CE52CF /* BunPuro */ = {
+		2EAD9DCF1FA25DF100CE52CF /* iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuro" */;
+			buildConfigurationList = 2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOS" */;
 			buildPhases = (
 				A1225ED9226CD6F600EA2885 /* BartyCrouch */,
 				A1225EDB226CD70100EA2885 /* SwiftGen */,
@@ -518,18 +518,18 @@
 			);
 			dependencies = (
 			);
-			name = BunPuro;
+			name = iOS;
 			packageProductDependencies = (
 				2EA878FC22E2856A009E5AA9 /* BunProKit */,
 				2EA878FE22E28570009E5AA9 /* Protocols */,
 			);
 			productName = BunPuro;
-			productReference = 2EAD9DD01FA25DF100CE52CF /* BunPuro.app */;
+			productReference = 2EAD9DD01FA25DF100CE52CF /* iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2EAD9DE51FA25DF100CE52CF /* BunPuroTests */ = {
+		2EAD9DE51FA25DF100CE52CF /* iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2EAD9DFD1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuroTests" */;
+			buildConfigurationList = 2EAD9DFD1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOSTests" */;
 			buildPhases = (
 				2EAD9DE21FA25DF100CE52CF /* Sources */,
 				2EAD9DE31FA25DF100CE52CF /* Frameworks */,
@@ -540,14 +540,14 @@
 			dependencies = (
 				2EAD9DE81FA25DF100CE52CF /* PBXTargetDependency */,
 			);
-			name = BunPuroTests;
+			name = iOSTests;
 			productName = BunPuroTests;
-			productReference = 2EAD9DE61FA25DF100CE52CF /* BunPuroTests.xctest */;
+			productReference = 2EAD9DE61FA25DF100CE52CF /* iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2EAD9DF01FA25DF100CE52CF /* BunPuroUITests */ = {
+		2EAD9DF01FA25DF100CE52CF /* iOSUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2EAD9E001FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuroUITests" */;
+			buildConfigurationList = 2EAD9E001FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOSUITests" */;
 			buildPhases = (
 				2EAD9DED1FA25DF100CE52CF /* Sources */,
 				2EAD9DEE1FA25DF100CE52CF /* Frameworks */,
@@ -558,9 +558,9 @@
 			dependencies = (
 				2EAD9DF31FA25DF100CE52CF /* PBXTargetDependency */,
 			);
-			name = BunPuroUITests;
+			name = iOSUITests;
 			productName = BunPuroUITests;
-			productReference = 2EAD9DF11FA25DF100CE52CF /* BunPuroUITests.xctest */;
+			productReference = 2EAD9DF11FA25DF100CE52CF /* iOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -614,9 +614,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2EAD9DCF1FA25DF100CE52CF /* BunPuro */,
-				2EAD9DE51FA25DF100CE52CF /* BunPuroTests */,
-				2EAD9DF01FA25DF100CE52CF /* BunPuroUITests */,
+				2EAD9DCF1FA25DF100CE52CF /* iOS */,
+				2EAD9DE51FA25DF100CE52CF /* iOSTests */,
+				2EAD9DF01FA25DF100CE52CF /* iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -799,12 +799,12 @@
 /* Begin PBXTargetDependency section */
 		2EAD9DE81FA25DF100CE52CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2EAD9DCF1FA25DF100CE52CF /* BunPuro */;
+			target = 2EAD9DCF1FA25DF100CE52CF /* iOS */;
 			targetProxy = 2EAD9DE71FA25DF100CE52CF /* PBXContainerItemProxy */;
 		};
 		2EAD9DF31FA25DF100CE52CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2EAD9DCF1FA25DF100CE52CF /* BunPuro */;
+			target = 2EAD9DCF1FA25DF100CE52CF /* iOS */;
 			targetProxy = 2EAD9DF21FA25DF100CE52CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -982,18 +982,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 74;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
-				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LD_VERIFY_BITCODE = NO;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1008,18 +1009,19 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BunPuro/BunPuro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 74;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
-				INFOPLIST_FILE = "$(SRCROOT)/BunPuro/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LD_VERIFY_BITCODE = NO;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.bunpro.bunpro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1044,7 +1046,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BunPuro.app/BunPuro";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS.app/iOS";
 			};
 			name = Debug;
 		};
@@ -1065,7 +1067,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BunPuro.app/BunPuro";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS.app/iOS";
 			};
 			name = Release;
 		};
@@ -1121,7 +1123,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuro" */ = {
+		2EAD9DFA1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2EAD9DFB1FA25DF100CE52CF /* Debug */,
@@ -1130,7 +1132,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2EAD9DFD1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuroTests" */ = {
+		2EAD9DFD1FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2EAD9DFE1FA25DF100CE52CF /* Debug */,
@@ -1139,7 +1141,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2EAD9E001FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "BunPuroUITests" */ = {
+		2EAD9E001FA25DF100CE52CF /* Build configuration list for PBXNativeTarget "iOSUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2EAD9E011FA25DF100CE52CF /* Debug */,
