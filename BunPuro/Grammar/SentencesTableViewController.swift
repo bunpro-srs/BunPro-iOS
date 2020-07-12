@@ -82,7 +82,7 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
         let sentence = fetchedResultsController.object(at: indexPath)
 
         if let japanese = sentence.japanese?.cleanStringAndFurigana {
-            let infoViewCtrl = storyboard!.instantiateViewController() as KanjiTableViewController
+            let infoViewCtrl = StoryboardScene.GrammarDetail.kanjiTableViewController.instantiate()
 
             infoViewCtrl.japanese = japanese.string
             infoViewCtrl.english = sentence.english?.htmlAttributedString?.string

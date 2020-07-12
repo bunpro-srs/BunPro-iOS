@@ -265,13 +265,13 @@ extension GrammarTableViewController {
 
             switch indexPath.row {
             case 0:
-                let controller = storyboard!.instantiateViewController() as SentencesTableViewController
+                let controller = StoryboardScene.GrammarDetail.sentencesTableViewController.instantiate()
                 controller.grammar = grammar
 
                 show(controller, sender: self)
 
             case 1:
-                let controller = storyboard!.instantiateViewController() as ReadingsTableViewController
+                let controller = StoryboardScene.GrammarDetail.readingsTableViewController.instantiate()
                 controller.grammar = grammar
 
                 show(controller, sender: self)
