@@ -31,7 +31,7 @@ final class StatusTableViewController: UITableViewController {
             UIBarButtonItem(image: .ellipsisCircle, style: .done, target: self, action: #selector(presentSettingsViewController(_:)))
         ]
 
-        statusObserver = StatusObserver.newObserver()
+        statusObserver = StatusObserver()
 
         statusObserver?.didLogout = { [weak self] in
             self?.setup(account: nil)
@@ -359,7 +359,6 @@ extension StatusTableViewController: StatusFetchedResultsControllerDelegate {
 }
 
 extension StatusTableViewController {
-
     private func setupKeyCommands() {
         addKeyCommand(
             UIKeyCommand(

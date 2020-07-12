@@ -30,7 +30,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
         title = grammar?.title
 
-        statusObserver = StatusObserver.newObserver()
+        statusObserver = StatusObserver()
 
         updateEditBarButtonState()
 
