@@ -80,14 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         database.save()
     }
 
-//    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        if let dataManager = dataManager {
-//            dataManager.scheduleUpdateProcedure(completion: completionHandler)
-//        } else {
-//            completionHandler(.failed)
-//        }
-//    }
-
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         if let type = NSUserActivity.ActivityType(rawValue: userActivityType) {
             guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }

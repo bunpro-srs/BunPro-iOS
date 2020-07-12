@@ -305,8 +305,7 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
 
             case let .success(account):
                 DispatchQueue.main.async {
-                    let importProcedure = ImportAccountIntoCoreDataProcedure(account: account)
-                    Server.add(procedure: importProcedure)
+                    AppDelegate.database.updateAccount(account) { }
                 }
             }
         }
