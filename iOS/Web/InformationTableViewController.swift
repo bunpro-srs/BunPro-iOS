@@ -52,6 +52,9 @@ class InformationTableViewController: UITableViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
 
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        tableView.separatorStyle = .none
+
         content = category.content
         title = category.title
     }
@@ -65,12 +68,19 @@ class InformationTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as UITableViewCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: UITableViewCell.reuseIdentifier)
+        cell.selectionStyle = .none
 
         let paragraph = content[indexPath.row]
 
         cell.textLabel?.text = paragraph.headline
         cell.detailTextLabel?.text = paragraph.content
+
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        cell.textLabel?.numberOfLines = 0
+
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.detailTextLabel?.numberOfLines = 0
 
         return cell
     }

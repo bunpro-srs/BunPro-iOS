@@ -12,13 +12,7 @@ import Protocols
 import SafariServices
 import UIKit
 
-final class SettingsTableViewController: UITableViewController, SegueHandler {
-    enum SegueIdentifier: String {
-        case privacy = "present privacy"
-        case about = "present about"
-        case terms = "present terms"
-    }
-
+final class SettingsTableViewController: UITableViewController {
     private enum Section: Int {
         case settings
         case information
@@ -123,8 +117,14 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
                 let url = URL(string: "mailto:feedback@mail.bunpro.jp")!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
-            case .about, .privacy, .terms:
-                break
+            case .about:
+                present(informationViewControllerScene(for: .about), animated: true, completion: nil)
+
+            case .privacy:
+                present(informationViewControllerScene(for: .privacy), animated: true, completion: nil)
+
+            case .terms:
+                present(informationViewControllerScene(for: .terms), animated: true, completion: nil)
             }
 
         case .appearance:
@@ -286,6 +286,16 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
         present(controller, animated: true, completion: nil)
     }
 
+    private func informationViewControllerScene(for category: InformationTableViewController.Category) -> UINavigationController {
+        let informationViewCtrl = InformationTableViewController()
+        informationViewCtrl.category = category
+
+        let navigationController = UINavigationController(rootViewController: informationViewCtrl)
+        navigationController.navigationBar.prefersLargeTitles = true
+
+        return navigationController
+    }
+
     private func updateUI() {
         guard let account = Account.currentAccount else { return }
 
@@ -316,19 +326,6 @@ final class SettingsTableViewController: UITableViewController, SegueHandler {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         tableView.beginUpdates()
         tableView.endUpdates()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(for: segue) {
-        case .privacy:
-            (segue.destination.content as? InformationTableViewController)?.category = .privacy
-
-        case .about:
-            (segue.destination.content as? InformationTableViewController)?.category = .about
-
-        case .terms:
-            (segue.destination.content as? InformationTableViewController)?.category = .terms
-        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
