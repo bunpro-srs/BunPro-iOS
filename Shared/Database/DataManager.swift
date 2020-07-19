@@ -34,6 +34,7 @@ final class DataManager {
             .publisher(for: Server.didLogoutNotification)
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
+                self?.database.resetAccount()
                 self?.database.resetReviews()
                 self?.scheduleUpdateProcedure()
             }

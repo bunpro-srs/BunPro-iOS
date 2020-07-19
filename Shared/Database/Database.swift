@@ -13,6 +13,7 @@ protocol DatabaseHandler {
     func updateGrammar(_ grammar: [BPKGrammar], completion: (() -> Void)?)
     func updateReviews(_ reviews: [BPKReview], completion: (() -> Void)?)
     func resetReviews()
+    func resetAccount()
 }
 
 final class Database {
@@ -75,6 +76,10 @@ final class Database {
         }
     }
 
+    func resetAccount() {
+        handler.resetAccount()
+    }
+    
     func resetReviews() {
         handler.resetReviews()
     }
@@ -181,6 +186,26 @@ private class CombineDatabase: DatabaseHandler {
         }
     }
 
+    func resetAccount() {
+        persistantContainer.performBackgroundTask { context in
+            context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+
+            let fetchRequest: NSFetchRequest<Account> = Account.fetchRequest()
+
+            do {
+                let accounts = try context.fetch(fetchRequest)
+                accounts.forEach { context.delete($0) }
+
+                if context.hasChanges {
+                    try context.save()
+                    context.reset()
+                }
+            } catch {
+                log.error(error.localizedDescription)
+            }
+        }
+    }
+    
     func resetReviews() {
         persistantContainer.performBackgroundTask { context in
             context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
