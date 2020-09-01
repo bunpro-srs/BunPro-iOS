@@ -14,6 +14,10 @@ extension Date {
         Calendar.autoupdatingCurrent.dateComponents([.hour], from: date, to: self).hour!
     }
 
+    var inOneHour: Date {
+        Calendar.autoupdatingCurrent.date(byAdding: .hour, value: 1, to: self)!
+    }
+
     var tomorrow: Date {
         Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: noon)!
     }

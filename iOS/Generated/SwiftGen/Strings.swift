@@ -52,6 +52,17 @@ internal enum L10n {
     internal static let sentences = L10n.tr("Localizable", "grammar.sentences")
   }
 
+  internal enum Information {
+    internal enum Category {
+      /// About
+      internal static let about = L10n.tr("Localizable", "information.category.about")
+      /// Privacy
+      internal static let privacy = L10n.tr("Localizable", "information.category.privacy")
+      /// Terms and Conditions
+      internal static let terms = L10n.tr("Localizable", "information.category.terms")
+    }
+  }
+
   internal enum Kanji {
     internal enum English {
       /// Show English
@@ -139,6 +150,24 @@ internal enum L10n {
   }
 
   internal enum Settings {
+    internal enum Community {
+      /// Community
+      internal static let action = L10n.tr("Localizable", "settings.community.action")
+    }
+    internal enum Configuration {
+      /// Bunny Mode
+      internal static let automaticadvancement = L10n.tr("Localizable", "settings.configuration.automaticadvancement")
+      /// Furigana
+      internal static let furigana = L10n.tr("Localizable", "settings.configuration.furigana")
+      /// Hide English
+      internal static let hidetranslation = L10n.tr("Localizable", "settings.configuration.hidetranslation")
+      /// Appearance
+      internal static let userinterfaceappearance = L10n.tr("Localizable", "settings.configuration.userinterfaceappearance")
+    }
+    internal enum Contact {
+      /// Contact
+      internal static let action = L10n.tr("Localizable", "settings.contact.action")
+    }
     internal enum Logout {
       /// Logout
       internal static let action = L10n.tr("Localizable", "settings.logout.action")

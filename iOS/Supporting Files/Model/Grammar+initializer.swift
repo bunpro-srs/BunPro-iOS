@@ -30,6 +30,17 @@ extension Grammar {
 }
 
 extension Grammar {
+    static func fetchRequest(predicate: NSPredicate) -> NSFetchRequest<Grammar> {
+        let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
+        request.predicate = predicate
+        request.sortDescriptors = [
+            NSSortDescriptor(key: #keyPath(Grammar.identifier), ascending: true)
+        ]
+        return request
+    }
+}
+
+extension Grammar {
     @objc var review: Review? {
         do {
             return try Review.review(for: self)
@@ -37,5 +48,11 @@ extension Grammar {
             log.error(error)
             return nil
         }
+    }
+}
+
+extension Grammar: Comparable {
+    public static func < (lhs: Grammar, rhs: Grammar) -> Bool {
+        lhs.level ?? "" < rhs.level ?? "" && lhs.lessonIdentifier ?? "" < rhs.lessonIdentifier ?? ""
     }
 }

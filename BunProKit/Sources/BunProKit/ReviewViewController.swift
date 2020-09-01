@@ -40,13 +40,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     
     weak var delegate: ReviewViewControllerDelegate?
     
-    public var website: Website = .main {
-        didSet {
-            guard oldValue != website else { return }
-
-            loadWebsite()
-        }
-    }
+    public var website: Website = .main
 
     private var webView: WKWebView! {
         didSet {
@@ -56,6 +50,11 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
     
     private var activityIndicator: UIActivityIndicatorView!
 
+    convenience init(website: Website) {
+        self.init()
+        self.website = website
+    }
+        
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,8 +63,10 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
         
         activityIndicator.hidesWhenStopped = true
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(doneButtonPressed(_:))),
+            UIBarButtonItem(customView: activityIndicator)
+        ]
         
         activityIndicator.startAnimating()
         

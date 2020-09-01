@@ -27,9 +27,8 @@ public final class WebsiteViewControllerProcedure: Procedure, ReviewViewControll
         guard !isCancelled else { return }
 
         DispatchQueue.main.async {
-            let controller = ReviewViewController()
+            let controller = ReviewViewController(website: self.website)
             controller.delegate = self
-            controller.website = self.website
 
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.modalPresentationStyle = .fullScreen

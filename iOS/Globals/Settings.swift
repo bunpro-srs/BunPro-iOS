@@ -6,7 +6,5 @@
 import Foundation
 
 enum Settings {
-    @Stored(key: "lastDatabaseUpdate", defaultValue: Date(timeIntervalSince1970: 0))
-
-    static var lastDatabaseUpdate: Date
+    @Stored(key: "lastDatabaseUpdate", defaultValue: Date(timeIntervalSince1970: 0)) static var lastDatabaseUpdate: Date
 }

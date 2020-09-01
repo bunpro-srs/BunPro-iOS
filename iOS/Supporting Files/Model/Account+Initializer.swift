@@ -13,7 +13,7 @@ extension Account {
 
         identifier = account.identifier
         name = account.name
-        bunnyMode = account.bunnyMode == State.on
+        bunnyMode = account.isBunnyModeActive
         furiganaMode = account.furigana.rawValue
         englishMode = account.hideEnglish == Active.yes
         reviewEnglishMode = account.reviewEnglish.rawValue

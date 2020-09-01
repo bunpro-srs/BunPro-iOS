@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum Active: String, Codable {
+public enum Active: String, Codable, CaseIterable {
     case yes = "Yes"
     case no = "No"
 
@@ -32,7 +32,7 @@ public enum Active: String, Codable {
     }
 }
 
-public enum Visible: String, Codable {
+public enum Visible: String, Codable, CaseIterable {
     case show = "Show"
     case hide = "Hide"
     case minimal = "Minimal"
@@ -65,34 +65,34 @@ public enum Visible: String, Codable {
     }
 }
 
-public enum State: String, Codable {
-    case on = "On"
-    case off = "Off"
+//public enum State: String, Codable, CaseIterable {
+//    case on = "On"
+//    case off = "Off"
+//
+//    public init(from decoder: Decoder) throws {
+//        guard let value = try? decoder.singleValueContainer().decode(String.self) else {
+//            self = .off
+//            return
+//        }
+//
+//        guard let state = State(rawValue: value) else {
+//            logger.warning("Invalid value for \(State.self): \(value)")
+//
+//            switch value {
+//            case #""On""#, "Show", #""Show""#:
+//                self = .on
+//
+//            default:
+//                self = .off
+//            }
+//            return
+//        }
+//
+//        self = state
+//    }
+//}
 
-    public init(from decoder: Decoder) throws {
-        guard let value = try? decoder.singleValueContainer().decode(String.self) else {
-            self = .off
-            return
-        }
-
-        guard let state = State(rawValue: value) else {
-            logger.warning("Invalid value for \(State.self): \(value)")
-
-            switch value {
-            case #""On""#, "Show", #""Show""#:
-                self = .on
-
-            default:
-                self = .off
-            }
-            return
-        }
-
-        self = state
-    }
-}
-
-public enum FuriganaMode: String, Codable {
+public enum FuriganaMode: String, Codable, CaseIterable {
     case on = "Show"
     case off = "Hide"
     case wanikani = "Wanikani"
@@ -142,7 +142,7 @@ public enum FuriganaMode: String, Codable {
     }
 }
 
-public enum Appearance: String, Codable {
+public enum Appearance: String, Codable, CaseIterable {
     case light
     case dark
     
@@ -182,7 +182,10 @@ public struct BPKAccount: Codable {
     public let reviewEnglish: Visible
     public let furigana: FuriganaMode
     public let name: String
-    public let bunnyMode: State
+    private let bunnyMode: String
+    public var isBunnyModeActive: Bool {
+        ["On", #""On""#, "Show", #""Show""#].contains(bunnyMode)
+    }
     public let appearance: Appearance
     public let subscriber: Bool
 }

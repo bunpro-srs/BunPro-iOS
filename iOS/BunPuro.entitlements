@@ -7,5 +7,9 @@
 		<string>webcredentials:bunpro.jp</string>
 		<string>webcredentials:www.bunpro.jp</string>
 	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>

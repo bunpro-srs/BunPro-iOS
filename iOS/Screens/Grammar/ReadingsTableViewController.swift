@@ -4,6 +4,7 @@
 //
 
 import CoreData
+import Protocols
 import SafariServices
 import UIKit
 
@@ -22,7 +23,7 @@ class ReadingsTableViewController: CoreDataFetchedResultsTableViewController<Lin
         let fetchRequest: NSFetchRequest<Link> = Link.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "grammar = %@", grammar!)
 
-        let sort = NSSortDescriptor(key: #keyPath(Link.id), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Link.site), ascending: true)
         fetchRequest.sortDescriptors = [sort]
 
         fetchedResultsController = NSFetchedResultsController<Link>(

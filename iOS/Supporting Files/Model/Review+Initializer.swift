@@ -43,6 +43,24 @@ extension Review {
     }
 
     static func reviews(for grammar: [Grammar]) throws -> [Review]? {
+        let request = Review.fetchRequest(for: grammar)
+
+        return try grammar.first?.managedObjectContext?.fetch(request)
+    }
+}
+
+extension Review {
+    static func fetchRequest(predicate: NSPredicate) -> NSFetchRequest<Review> {
+        let request: NSFetchRequest<Review> = Review.fetchRequest()
+        request.predicate = predicate
+        request.sortDescriptors = [
+            NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)
+        ]
+
+        return request
+    }
+
+    static func fetchRequest(for grammar: [Grammar]) -> NSFetchRequest<Review> {
         let request: NSFetchRequest<Review> = Review.fetchRequest()
 
         let grammarIdentifierPredicate = NSPredicate(format: "%K IN %@", #keyPath(Review.grammarIdentifier), grammar.map(\.identifier))
@@ -53,6 +71,12 @@ extension Review {
         request.predicate = compoundPredicate
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Review.identifier), ascending: true)]
 
-        return try grammar.first?.managedObjectContext?.fetch(request)
+        return request
+    }
+}
+
+extension Review: Comparable {
+    public static func < (lhs: Review, rhs: Review) -> Bool {
+        lhs.identifier < rhs.identifier
     }
 }

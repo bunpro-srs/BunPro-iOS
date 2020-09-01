@@ -5,7 +5,16 @@
     },
     {
         "headline": "What’s in it for me?",
-        "content": "・Grammar pages that explore multiple nuances, breakdowns, related grammar and supplemental resources to expand your grammar knowledge at your own pace.\n\n・Example sentences that use previously studied grammar to further build upon the grammar that you have learned.\n\n・Spaced repetition reviews that greatly improve your ability to reproduce what you have learned through manual input.\n\n・Study questions that change as you progress to quiz you in new and unique contexts every time, so you no longer simply memorize sentences.\n\n・Intelligent reviews that catch close or alternative answers to keep you motivated in your studies.\n\n・Related grammar structures that allow you to compare and contrast similar grammar, nuances, and example sentences side-by-side so that you can finally understand the differences between similar grammar points.\n\n・ Page numbers from a variety of textbooks so that you can follow along no matter your method of study."
+        "content": null,
+        "bulletpoints": [
+            "Grammar pages that explore multiple nuances, breakdowns, related grammar and supplemental resources to expand your grammar knowledge at your own pace.",
+            "Example sentences that use previously studied grammar to further build upon the grammar that you have learned.",
+            "Spaced repetition reviews that greatly improve your ability to reproduce what you have learned through manual input.",
+            "Study questions that change as you progress to quiz you in new and unique contexts every time, so you no longer simply memorize sentences.",
+            "Intelligent reviews that catch close or alternative answers to keep you motivated in your studies.",
+            "Related grammar structures that allow you to compare and contrast similar grammar, nuances, and example sentences side-by-side so that you can finally understand the differences between similar grammar points.",
+            "Page numbers from a variety of textbooks so that you can follow along no matter your method of study."
+        ]
     },
     {
         "headline": "So what?",

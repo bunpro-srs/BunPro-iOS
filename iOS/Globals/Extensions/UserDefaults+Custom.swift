@@ -15,11 +15,27 @@ extension UserDefaults {
 
 extension UserDefaults {
     @objc
-    enum UserInterfaceStyle: Int {
+    enum UserInterfaceStyle: Int, CaseIterable {
         case system
         case light
         case dark
         case bunpro
+
+        init(localizedTitle: String) {
+            switch localizedTitle {
+            case "System":
+                self = .system
+            case "Light":
+                self = .light
+            case "Dark":
+                self = .dark
+            case "Bunpro Theme":
+                self = .bunpro
+
+            default:
+                self = .system
+            }
+        }
 
         var systemStyle: UIUserInterfaceStyle {
             switch self {

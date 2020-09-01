@@ -33,16 +33,7 @@ internal enum StoryboardScene {
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Main.self)
-
-    internal static let mainTabBarController = SceneType<UIKit.UITabBarController>(storyboard: Main.self, identifier: "MainTabBarController")
-  }
-  internal enum Settings: StoryboardType {
-    internal static let storyboardName = "Settings"
-
-    internal static let initialScene = InitialSceneType<iOS.SettingsTableViewController>(storyboard: Settings.self)
-
-    internal static let settingsTableViewController = SceneType<iOS.SettingsTableViewController>(storyboard: Settings.self, identifier: "SettingsTableViewController")
+    internal static let searchTableViewController = SceneType<iOS.SearchTableViewController>(storyboard: Main.self, identifier: "SearchTableViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

@@ -96,6 +96,19 @@ final class DataManager {
     func immidiateStatusUpdate() {
         self.scheduleUpdateProcedure()
     }
+    
+    func updateSettings(_ settings: SetSettingsProcedure.Settings) {
+        let settingsProcedure = SetSettingsProcedure(presentingViewController: presentingViewController, settings: settings) { result in
+            switch result {
+            case let .success(account):
+                self.database.updateAccount(account, completion: nil)
+            case let .failure(error):
+                log.error(error.localizedDescription)
+            }
+        }
+        
+        Server.add(procedure: settingsProcedure)
+    }
 
     private func needsGrammarDatabaseUpdate() -> Bool {
         let lastUpdate = Settings.lastDatabaseUpdate

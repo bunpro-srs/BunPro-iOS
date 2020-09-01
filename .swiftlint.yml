@@ -16,7 +16,7 @@ opt_in_rules:
 - fatal_error_message
 - file_header
 - file_name
-- file_types_order
+#- file_types_order
 - first_where
 - function_default_parameter_at_end
 - implicit_return

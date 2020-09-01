@@ -66,7 +66,7 @@ class GrammarFetchedResultsController: NSObject {
         let request: NSFetchRequest<Link> = Link.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@", #keyPath(Link.grammar), grammar)
 
-        let sort = NSSortDescriptor(key: #keyPath(Link.id), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Link.site), ascending: true)
         request.sortDescriptors = [sort]
 
         readingsFetchedResultsController = NSFetchedResultsController(

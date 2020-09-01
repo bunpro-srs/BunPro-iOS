@@ -26,6 +26,12 @@
 
 "grammar.sentences" = "Sentences";
 
+"information.category.about" = "About";
+
+"information.category.privacy" = "Privacy";
+
+"information.category.terms" = "Terms and Conditions";
+
 "kanji.english.show" = "Show English";
 
 "kanji.header.readings" = "Kanji Readings";
@@ -73,6 +79,18 @@
 "search.grammar.scope.learned" = "Learned";
 
 "search.grammar.scope.unlearned" = "Unlearned";
+
+"settings.community.action" = "Community";
+
+"settings.configuration.automaticadvancement" = "Bunny Mode";
+
+"settings.configuration.furigana" = "Furigana";
+
+"settings.configuration.hidetranslation" = "Hide English";
+
+"settings.configuration.userinterfaceappearance" = "Appearance";
+
+"settings.contact.action" = "Contact";
 
 "settings.logout.action" = "Logout";
 

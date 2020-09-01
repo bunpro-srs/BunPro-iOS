@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     static var database: Database { (UIApplication.shared.delegate as! AppDelegate).database }
+    static var dataManager: DataManager? {
+        get { (UIApplication.shared.delegate as! AppDelegate).dataManager }
+        set { (UIApplication.shared.delegate as! AppDelegate).dataManager = newValue }
+    }
 
     private var modelName: String = "BunPro"
     lazy var database = Database(modelName: modelName)
@@ -60,19 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if let rootViewCtrl = window?.rootViewController {
-            dataManager = DataManager(presentingViewController: rootViewCtrl, database: database)
-        }
-
         return true
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        dataManager?.startStatusUpdates()
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        database.save()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -80,39 +72,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
-        if let type = NSUserActivity.ActivityType(rawValue: userActivityType) {
-            guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }
-                tabbarController.selectedIndex = 0
-
-            guard let viewCtrl = tabbarController.viewControllers?.first?.content else { return false }
-
-            switch viewCtrl {
-            case is DashboardTableViewController:
-                let statusViewCtrl = viewCtrl as? DashboardTableViewController
-
-                switch type {
-                case .study:
-                    statusViewCtrl?.presentReviewViewController(website: .study)
-
-                case .cram:
-                    statusViewCtrl?.presentReviewViewController(website: .cram)
-                }
-
-            case is ReviewViewController:
-                let reviewViewCtrl = viewCtrl as? ReviewViewController
-
-                switch type {
-                case .study:
-                    reviewViewCtrl?.website = .study
-
-                case .cram:
-                    reviewViewCtrl?.website = .cram
-                }
-
-            default:
-                return false
-            }
-        }
+//        if let type = NSUserActivity.ActivityType(rawValue: userActivityType) {
+//            guard let tabbarController = self.window?.rootViewController as? UITabBarController else { return false }
+//                tabbarController.selectedIndex = 0
+//
+//            guard let viewCtrl = tabbarController.viewControllers?.first?.content else { return false }
+//
+//            switch viewCtrl {
+//            case is DashboardTableViewController:
+//                let statusViewCtrl = viewCtrl as? DashboardTableViewController
+//
+//                switch type {
+//                case .study:
+//                    statusViewCtrl?.presentReviewViewController(website: .study)
+//
+//                case .cram:
+//                    statusViewCtrl?.presentReviewViewController(website: .cram)
+//                }
+//
+//            case is ReviewViewController:
+//                let reviewViewCtrl = viewCtrl as? ReviewViewController
+//
+//                switch type {
+//                case .study:
+//                    reviewViewCtrl?.website = .study
+//
+//                case .cram:
+//                    reviewViewCtrl?.website = .cram
+//                }
+//
+//            default:
+//                return false
+//            }
+//        }
 
         return false
     }
@@ -176,13 +168,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
-                .viewControllers?
-                .first { $0 is DashboardTableViewController } as? DashboardTableViewController
-
-            statusViewCtrl?.showReviewsOnViewDidAppear = true
-        }
+//        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+//            let statusViewCtrl = (window?.rootViewController as? UITabBarController)?
+//                .viewControllers?
+//                .first { $0 is DashboardTableViewController } as? DashboardTableViewController
+//
+//            statusViewCtrl?.showReviewsOnViewDidAppear = true
+//        }
 
         completionHandler()
     }
