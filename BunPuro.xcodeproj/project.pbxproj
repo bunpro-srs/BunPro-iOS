@@ -177,6 +177,7 @@
 		2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grammar+initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
+		2EC73FA124FE9B7E002B4009 /* BunPro 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BunPro 2.xcdatamodel"; sourceTree = "<group>"; };
 		2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiTableViewController.swift; sourceTree = "<group>"; };
 		2ECDB1DD236CB12C00B28A29 /* InformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		2ECDB1DF236CB1D000B28A29 /* privacy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = privacy.json; sourceTree = "<group>"; };
@@ -985,7 +986,7 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
@@ -1012,7 +1013,7 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
@@ -1167,10 +1168,11 @@
 		2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2EC73FA124FE9B7E002B4009 /* BunPro 2.xcdatamodel */,
 				2EA29AA32391AEF1003B50A9 /* BunPro 2.xcdatamodel */,
 				2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */,
 			);
-			currentVersion = 2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */;
+			currentVersion = 2EA29AA32391AEF1003B50A9 /* BunPro 2.xcdatamodel */;
 			path = BunPro.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

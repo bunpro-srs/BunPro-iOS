@@ -90,6 +90,9 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
     private func playSound(forSentenceAt indexPath: IndexPath) {
         guard let url = fetchedResultsController.object(at: indexPath).audioURL else { return }
 
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+
         if player == nil {
             player = AVPlayer(url: url)
             player?.volume = 1.0

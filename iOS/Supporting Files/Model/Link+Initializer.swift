@@ -12,7 +12,7 @@ extension Link {
     convenience init(link: BPKLink, grammar: Grammar, context: NSManagedObjectContext) {
         self.init(context: context)
 
-        id = link.identifier
+        identifier = link.identifier
         about = link.description
         site = link.site
 
