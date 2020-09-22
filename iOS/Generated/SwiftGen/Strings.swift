@@ -127,6 +127,24 @@ internal enum L10n {
     internal enum Grammar {
       /// Search Grammar
       internal static let placeholder = L10n.tr("Localizable", "search.grammar.placeholder")
+      internal enum Filter {
+        internal enum Option {
+          /// All
+          internal static let all = L10n.tr("Localizable", "search.grammar.filter.option.all")
+          /// N%d
+          internal static func level(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "search.grammar.filter.option.level", p1)
+          }
+        }
+        internal enum Title {
+          /// Filter: All
+          internal static let all = L10n.tr("Localizable", "search.grammar.filter.title.all")
+          /// Filter: N%d
+          internal static func level(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "search.grammar.filter.title.level", p1)
+          }
+        }
+      }
       internal enum Scope {
         /// All
         internal static let all = L10n.tr("Localizable", "search.grammar.scope.all")

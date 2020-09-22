@@ -7,7 +7,17 @@ import Combine
 import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchBarDelegate {
-    var sectionMode: SearchSectionMode = .byDifficulty
+    var sectionMode: SearchSectionMode = .byDifficulty {
+        didSet {
+            searchDataSource?.sectionMode = sectionMode
+            if let searchController = searchController {
+                updateSearchResults(for: searchController)
+            }
+            filterButton?.title = sectionMode.title
+        }
+    }
+
+    private var filterButton: UIBarButtonItem!
 
     private var searchController: UISearchController!
     private var searchDataSource: SearchDataSource!
@@ -21,6 +31,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
         navigationItem.title = L10n.Tabbar.search
 
+        setupFilterButton()
         setupNotifications()
 
         searchController = UISearchController(searchResultsController: nil)
@@ -116,6 +127,48 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         contextMenuConfiguration(for: searchDataSource.grammar(at: indexPath))
     }
 
+    private func setupFilterButton() {
+        if #available(iOS 14.0, *) {
+            var actions = [
+                UIAction(title: L10n.Search.Grammar.Filter.Option.all) { [weak self] _ in
+                    self?.sectionMode = .byDifficulty
+                }
+            ]
+
+            for level in [5, 4, 3, 2, 1] {
+                actions.append(
+                    UIAction(title: L10n.Search.Grammar.Filter.Option.level(level)) { [weak self] _ in
+                        self?.sectionMode = .byLevel(level)
+                    }
+                )
+            }
+
+            filterButton = UIBarButtonItem(
+                title: "Filter",
+                image: nil,
+                primaryAction: nil,
+                menu: UIMenu(
+                    title: "",
+                    image: nil,
+                    identifier: nil,
+                    options: .displayInline,
+                    children: actions
+                )
+            )
+        } else {
+            filterButton = UIBarButtonItem(
+                title: sectionMode.title,
+                style: .plain,
+                target: self,
+                action: #selector(filterButtonPressed(sender:))
+            )
+        }
+
+        filterButton.title = self.sectionMode.title
+
+        navigationItem.rightBarButtonItem = filterButton
+    }
+
     private func setupNotifications() {
         let notificationCenter = NotificationCenter.default
 
@@ -137,7 +190,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             .publisher(for: DataManager.didEndUpdating)
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.navigationItem.rightBarButtonItem = nil
+                self?.navigationItem.rightBarButtonItem = self?.filterButton
             }
             .store(in: &subscriptions)
 
@@ -145,7 +198,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             .publisher(for: DataManager.didModifyReview)
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.navigationItem.rightBarButtonItem = nil
+                self?.navigationItem.rightBarButtonItem = self?.filterButton
             }
             .store(in: &subscriptions)
     }
@@ -182,6 +235,31 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
 
         let grammarViewCtrl = segue.destination.content as? GrammarTableViewController
         grammarViewCtrl?.grammar = searchDataSource.grammar(at: indexPath)
+    }
+
+    @IBAction private func filterButtonPressed(sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.barButtonItem = filterButton
+
+        alertController.addAction(
+            UIAlertAction(title: L10n.Search.Grammar.Filter.Option.all, style: .default) { [weak self] _ in
+                self?.sectionMode = .byDifficulty
+            }
+        )
+
+        for level in [5, 4, 3, 2, 1] {
+            alertController.addAction(
+                UIAlertAction(title: L10n.Search.Grammar.Filter.Option.level(level), style: .default) { [weak self] _ in
+                    self?.sectionMode = .byLevel(level)
+                }
+            )
+        }
+
+        alertController.addAction(
+            UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
+        )
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -249,5 +327,17 @@ extension SearchTableViewController {
     private func toggleShowLearnedGrammar() {
         searchController.searchBar.selectedScopeButtonIndex = 2
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: searchController.searchBar.selectedScopeButtonIndex)
+    }
+}
+
+private extension SearchSectionMode {
+    var title: String {
+        switch self {
+        case .byDifficulty:
+            return L10n.Search.Grammar.Filter.Title.all
+
+        case let .byLevel(level):
+            return L10n.Search.Grammar.Filter.Title.level(level)
+        }
     }
 }

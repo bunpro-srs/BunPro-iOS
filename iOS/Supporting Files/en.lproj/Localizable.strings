@@ -65,6 +65,18 @@
 /* The string that indicates that a review is available */
 "reviewtime.now" = "Now";
 
+/* The filterbutton title for a all */
+"search.grammar.filter.option.all" = "All";
+
+/* The filterbutton title for a level */
+"search.grammar.filter.option.level" = "N%d";
+
+/* The filterbutton title for a all */
+"search.grammar.filter.title.all" = "Filter: All";
+
+/* The filterbutton title for a level */
+"search.grammar.filter.title.level" = "Filter: N%d";
+
 /* Search grammar placeholder */
 "search.grammar.placeholder" = "Search Grammar";
 
