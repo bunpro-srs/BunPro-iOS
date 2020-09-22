@@ -33,9 +33,7 @@ internal enum StoryboardScene {
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let initialScene = InitialSceneType<UIKit.UITabBarController>(storyboard: Main.self)
-
-    internal static let mainTabBarController = SceneType<UIKit.UITabBarController>(storyboard: Main.self, identifier: "MainTabBarController")
+    internal static let initialScene = InitialSceneType<iOS.MainSplitViewController>(storyboard: Main.self)
   }
   internal enum Settings: StoryboardType {
     internal static let storyboardName = "Settings"

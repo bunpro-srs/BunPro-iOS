@@ -6,7 +6,7 @@
 import Combine
 import UIKit
 
-class SearchTableViewController: UITableViewController, UISearchBarDelegate {
+class SearchTableViewController: UITableViewController, UISearchBarDelegate, IntentionallySelected {
     var sectionMode: SearchSectionMode = .byDifficulty {
         didSet {
             searchDataSource?.sectionMode = sectionMode
@@ -16,6 +16,8 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             filterButton?.title = sectionMode.title
         }
     }
+
+    var intentionallySelected: Bool = false
 
     private var filterButton: UIBarButtonItem!
 

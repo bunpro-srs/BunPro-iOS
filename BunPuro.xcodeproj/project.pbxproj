@@ -25,6 +25,7 @@
 		2E40190A24BA3E1F007B74C7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E40190924BA3E1F007B74C7 /* Settings.storyboard */; };
 		2E46864420694E8000DE4F06 /* HimitsuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E46864320694E8000DE4F06 /* HimitsuTableViewCell.swift */; };
 		2E528A21234898740061A92D /* UserDefaults+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E528A20234898740061A92D /* UserDefaults+Custom.swift */; };
+		2E688B04251A79E6003E93E1 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E688B03251A79E6003E93E1 /* MainSplitViewController.swift */; };
 		2E6C97082372269B00073707 /* StatusObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C97072372269B00073707 /* StatusObserver.swift */; };
 		2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */; };
 		2E7B368E2077DFE600542BB8 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */; };
@@ -135,6 +136,7 @@
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
 		2E528A20234898740061A92D /* UserDefaults+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Custom.swift"; sourceTree = "<group>"; };
 		2E59790E20C6E6AD0007E9BE /* BunPuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BunPuro-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E688B03251A79E6003E93E1 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		2E6C97072372269B00073707 /* StatusObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusObserver.swift; sourceTree = "<group>"; };
 		2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
 		2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		2E76350C24BB85B800E35072 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				2E688B03251A79E6003E93E1 /* MainSplitViewController.swift */,
 				2E67558A1FFFEA2900BD10EB /* Dasboard */,
 				2E67558B1FFFEA3C00BD10EB /* Grammar */,
 				2E67558C1FFFEA5000BD10EB /* Settings */,
@@ -742,6 +745,7 @@
 				A146F31C227033C3002DC511 /* GrammarFlowController.swift in Sources */,
 				2E8BC11823A1600C00DF1562 /* Stored.swift in Sources */,
 				2ECDB1E2236CB2FA00B28A29 /* Paragraph.swift in Sources */,
+				2E688B04251A79E6003E93E1 /* MainSplitViewController.swift in Sources */,
 				2E78A15F2017AEFE0040D928 /* BasicInfoCell.swift in Sources */,
 				2E32A9AB209EEF16003406CA /* SignUpTableViewCell.swift in Sources */,
 				2EBB70BF201655A6001AE42E /* Grammar+initializer.swift in Sources */,

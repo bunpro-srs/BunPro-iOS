@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vs4-nx-7ls">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,12 +13,12 @@
         <!--Status Table View Controller-->
         <scene sceneID="kSI-g3-WtJ">
             <objects>
-                <tableViewController id="OgJ-2b-cKe" userLabel="Status Table View Controller" customClass="DashboardTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="OgJ-2b-cKe" userLabel="Status Table View Controller" customClass="DashboardTableViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="zYh-s0-Zmd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatusTableViewCell" rowHeight="130" id="VaB-V6-a3h" customClass="StatusTableViewCell" customModule="BunPuro" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatusTableViewCell" rowHeight="130" id="VaB-V6-a3h" customClass="StatusTableViewCell" customModule="iOS" customModuleProvider="target">
                                 <rect key="frame" x="16" y="55.333332061767578" width="343" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VaB-V6-a3h" id="rpV-fk-xbg">
@@ -126,7 +126,7 @@
                                     <outlet property="reviewTomorrowLabel" destination="4e1-68-2Hr" id="644-cb-gEo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SignUpTableViewCell" id="rAU-wZ-a6K" customClass="SignUpTableViewCell" customModule="BunPuro" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SignUpTableViewCell" id="rAU-wZ-a6K" customClass="SignUpTableViewCell" customModule="iOS" customModuleProvider="target">
                                 <rect key="frame" x="16" y="185.33333206176758" width="343" height="42.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rAU-wZ-a6K" id="T5m-ay-J2d">
@@ -153,7 +153,7 @@
                                     <outlet property="titleLabel" destination="sUd-7z-kjF" id="Vir-EH-10d"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="JLPTProgressTableViewCell" rowHeight="60" id="cHJ-Qc-7mp" customClass="JLPTProgressTableViewCell" customModule="BunPuro" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="JLPTProgressTableViewCell" rowHeight="60" id="cHJ-Qc-7mp" customClass="JLPTProgressTableViewCell" customModule="iOS" customModuleProvider="target">
                                 <rect key="frame" x="16" y="228" width="343" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cHJ-Qc-7mp" id="xwp-qb-ZCJ">
@@ -203,7 +203,7 @@
                                     <outlet property="progressView" destination="mDL-WW-bV0" id="bIk-oM-8U8"/>
                                     <outlet property="subtitleLabel" destination="Rej-2W-djk" id="rlT-sa-F8H"/>
                                     <outlet property="titleLabel" destination="TxH-U7-oqL" id="F4L-iX-OZ8"/>
-                                    <segue destination="9qA-ba-rEL" kind="show" identifier="showJLPT" id="BGx-Vr-zzb"/>
+                                    <segue destination="jMr-YW-mZt" kind="showDetail" identifier="showJLPT" id="PCS-Hr-WDA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -229,12 +229,12 @@
         <!--Search Table View Controller-->
         <scene sceneID="dgT-7E-fBS">
             <objects>
-                <tableViewController definesPresentationContext="YES" id="9qA-ba-rEL" customClass="SearchTableViewController" customModule="BunPuro" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController definesPresentationContext="YES" id="9qA-ba-rEL" customClass="SearchTableViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" id="dZF-AK-4Ds">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GrammarTeaserCell" rowHeight="92" id="ygK-Hj-gGR" customClass="GrammarTeaserCell" customModule="BunPuro" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GrammarTeaserCell" rowHeight="92" id="ygK-Hj-gGR" customClass="GrammarTeaserCell" customModule="iOS" customModuleProvider="target">
                                 <rect key="frame" x="16" y="55.333332061767578" width="343" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ygK-Hj-gGR" id="QCu-ZS-a2c">
@@ -291,7 +291,7 @@
                                     <segue destination="7Yc-uN-aDr" kind="show" identifier="showGrammar" destinationCreationSelector="showGrammar:sender:" id="8Tl-dW-Q4E"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="JLPTProgressTableViewCell" rowHeight="60" id="4l3-6W-5Ha" customClass="JLPTProgressTableViewCell" customModule="BunPuro" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="JLPTProgressTableViewCell" rowHeight="60" id="4l3-6W-5Ha" customClass="JLPTProgressTableViewCell" customModule="iOS" customModuleProvider="target">
                                 <rect key="frame" x="16" y="147.33333206176758" width="343" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4l3-6W-5Ha" id="vDQ-wa-bF0">
@@ -360,23 +360,6 @@
             </objects>
             <point key="canvasLocation" x="1533.5999999999999" y="456.65024630541876"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="yl2-sM-qoP">
-            <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="W28-zg-YXA">
-                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Iyf-DW-p5E" kind="relationship" relationship="viewControllers" id="w4Q-6F-qjc"/>
-                        <segue destination="jMr-YW-mZt" kind="relationship" relationship="viewControllers" id="I9k-Oh-F19"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-393" y="-1"/>
-        </scene>
         <!--Status Navigation Controller-->
         <scene sceneID="MWQ-f3-ZRc">
             <objects>
@@ -395,6 +378,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xC-vc-DAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="626" y="-351"/>
+        </scene>
+        <!--Main Split View Controller-->
+        <scene sceneID="hVO-tt-Lat">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" presentsWithGesture="NO" id="Vs4-nx-7ls" customClass="MainSplitViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="Iyf-DW-p5E" kind="relationship" relationship="masterViewController" id="C95-Sy-8Lx"/>
+                        <segue destination="jMr-YW-mZt" kind="relationship" relationship="detailViewController" id="OMz-fZ-VE5"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oI3-zk-YRo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-513" y="44"/>
         </scene>
         <!--Search-->
         <scene sceneID="yBh-lu-KgS">
@@ -428,7 +424,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BGx-Vr-zzb"/>
+        <segue reference="OMz-fZ-VE5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Tint"/>
     <resources>

@@ -100,7 +100,7 @@ final class DashboardTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,8 +112,11 @@ final class DashboardTableViewController: UITableViewController {
                 return 0
             }
 
-        default:
+        case 1:
             return 5
+
+        default:
+            return 1
         }
     }
 
@@ -147,13 +150,22 @@ final class DashboardTableViewController: UITableViewController {
                 return cell
             }
 
-        default:
+        case 1:
             let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
 
             let level = 5 - indexPath.row
             let metric = fetchedResultsController.metricForLevel(5 - indexPath.row)
 
             updateJLPTCell(cell, level: level, metric: metric)
+
+            return cell
+
+        default:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as JLPTProgressTableViewCell
+
+            let metric = fetchedResultsController.metricForLevel(0)
+
+            updateJLPTCell(cell, level: nil, metric: metric)
 
             return cell
         }
@@ -221,7 +233,7 @@ final class DashboardTableViewController: UITableViewController {
     }
 
     func presentReviewViewController(website: Website = .review) {
-        let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: tabBarController!, website: website)
+        let reviewProcedure = WebsiteViewControllerProcedure(presentingViewController: splitViewController!, website: website)
 
         reviewProcedure.openGrammarHandler = { viewController, identifier in
             let request: NSFetchRequest<Grammar> = Grammar.fetchRequest()
@@ -311,8 +323,12 @@ final class DashboardTableViewController: UITableViewController {
 
     private typealias JLPTCellMetric = (complete: Int, max: Int, progress: Float)
 
-    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int, metric: JLPTCellMetric) {
-        cell.title = "N\(level)"
+    private func updateJLPTCell(_ cell: JLPTProgressTableViewCell, level: Int?, metric: JLPTCellMetric) {
+        if let level = level {
+            cell.title = "N\(level)"
+        } else {
+            cell.title = "All"
+        }
         cell.subtitle = "\(metric.complete) / \(metric.max)"
         cell.setProgress(metric.progress, animated: false)
     }
@@ -328,11 +344,18 @@ extension DashboardTableViewController: SegueHandler {
 
         switch segueIdentifier(for: segue) {
         case .showJLPT:
-            let level = 5 - indexPath.row
-
             let destination = segue.destination.content as? SearchTableViewController
-            destination?.sectionMode = .byLevel(level)
-            destination?.title = "N\(level)"
+            destination?.intentionallySelected = true
+
+            if indexPath.section == 1 {
+                let level = 5 - indexPath.row
+
+                destination?.sectionMode = .byLevel(level)
+                destination?.title = "N\(level)"
+            } else {
+                destination?.sectionMode = .byDifficulty
+                destination?.title = "All"
+            }
         }
     }
 }
