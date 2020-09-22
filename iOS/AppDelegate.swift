@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
 
-        center.requestAuthorization(options: [.badge, .sound, .alert]) { _, error in
+        center.requestAuthorization(options: [.badge, .sound, .alert, .provisional]) { _, error in
             guard error == nil else {
                 log.error(error!)
                 return
