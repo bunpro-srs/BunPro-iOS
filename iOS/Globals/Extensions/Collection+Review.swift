@@ -13,11 +13,6 @@ extension Collection where Iterator.Element == Review {
         return tmp == Date.distantPast ? nil: tmp
     }
 
-    public func reviews(at date: Date) -> [Review] {
-        let result = filter { $0.complete && $0.nextReviewDate!.minutes(from: date) <= 0 }
-        return result
-    }
-
     public var reviewsWithinNextHour: Int {
         let date = Date()
         let result = filter { $0.complete && $0.nextReviewDate!.minutes(from: date) < 60 }

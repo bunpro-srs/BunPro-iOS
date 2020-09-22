@@ -8,12 +8,7 @@ import UIKit
 
 extension UIImage {
     private enum SystemName: String {
-        case pencilCircle = "pencil.circle"
-        case pencilCircleFill = "pencil.circle.fill"
-        case magnifyingglassCircle = "magnifyingglass.circle"
-        case magnifyingglassCircleFill = "magnifyingglass.circle.fill"
         case ellipsisCircle = "ellipsis.circle"
-        case ellipsisCircleFill = "ellipsis.circle.fill"
         case playCircle = "play.circle"
         case trashFill = "trash.fill"
         case `repeat` = "repeat"
@@ -25,12 +20,7 @@ extension UIImage {
         }
     }
 
-    static let pencilCircle: UIImage = SystemName.pencilCircle.image
-    static let pencilCircleFill: UIImage = SystemName.pencilCircleFill.image
-    static let magnifyingglassCircle: UIImage = SystemName.magnifyingglassCircle.image
-    static let magnifyingglassCircleFill: UIImage = SystemName.magnifyingglassCircleFill.image
     static let ellipsisCircle: UIImage = SystemName.ellipsisCircle.image
-    static let ellipsisCircleFill: UIImage = SystemName.ellipsisCircleFill.image
     static let playCircle: UIImage = SystemName.playCircle.image
     static let trashFill: UIImage = SystemName.trashFill.image
     static let `repeat`: UIImage = SystemName.`repeat`.image

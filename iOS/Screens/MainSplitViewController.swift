@@ -12,10 +12,10 @@ protocol IntentionallySelected: AnyObject {
 class MainSplitViewController: UISplitViewController, UISplitViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         delegate = self
     }
-    
+
     func splitViewController(
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,
@@ -27,10 +27,10 @@ class MainSplitViewController: UISplitViewController, UISplitViewControllerDeleg
         else {
             return true
         }
-        
+
         return false
     }
-    
+
     @available(iOS 14.0, *)
     func splitViewController(
         _ splitViewController: UISplitViewController,
@@ -42,7 +42,7 @@ class MainSplitViewController: UISplitViewController, UISplitViewControllerDeleg
         else {
             return .primary
         }
-        
+
         return .secondary
     }
 }
