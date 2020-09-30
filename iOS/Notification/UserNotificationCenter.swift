@@ -27,22 +27,25 @@ struct UserNotificationCenter {
             case .authorized,
                  .provisional,
                  .ephemeral:
-                let content = UNMutableNotificationContent()
-                content.threadIdentifier = threadIdentifier
-                content.title = L10n.Notification.Review.title(reviewCount)
-                content.sound = UNNotificationSound.default
-                content.badge = AppDelegate.badgeNumber(date: date)
 
-                let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                let request = UNNotificationRequest(identifier: "\(nextReviewIdentifier)-\(date.timeIntervalSinceNow)", content: content, trigger: trigger)
+                DispatchQueue.main.async {
+                    let content = UNMutableNotificationContent()
+                    content.threadIdentifier = threadIdentifier
+                    content.title = L10n.Notification.Review.title(reviewCount)
+                    content.sound = UNNotificationSound.default
+                    content.badge = AppDelegate.badgeNumber(date: date)
 
-                center.add(request) { error in
-                    if let error = error {
-                        log.error(error)
+                    let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                    let request = UNNotificationRequest(identifier: "\(nextReviewIdentifier)-\(date.timeIntervalSinceNow)", content: content, trigger: trigger)
+
+                    center.add(request) { error in
+                        if let error = error {
+                            log.error(error)
+                        }
+
+                        log.info("Added notification for: \(date)")
                     }
-
-                    log.info("Added notification for: \(date)")
                 }
             case .notDetermined,
                  .denied:

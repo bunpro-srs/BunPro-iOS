@@ -10,6 +10,11 @@ protocol IntentionallySelected: AnyObject {
 }
 
 class MainSplitViewController: UISplitViewController, UISplitViewControllerDelegate {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        delegate = self
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +27,7 @@ class MainSplitViewController: UISplitViewController, UISplitViewControllerDeleg
         onto primaryViewController: UIViewController
     ) -> Bool {
         guard
-            let detail = splitViewController.viewControllers.last?.content as? IntentionallySelected,
+            let detail = secondaryViewController.content as? IntentionallySelected,
             detail.intentionallySelected
         else {
             return true

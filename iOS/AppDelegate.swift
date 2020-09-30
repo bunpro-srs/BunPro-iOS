@@ -175,6 +175,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     static func updateAppBadgeIcon() {
-        UIApplication.shared.applicationIconBadgeNumber = AppDelegate.badgeNumber()?.intValue ?? 0
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber = AppDelegate.badgeNumber()?.intValue ?? 0
+        }
     }
 }
