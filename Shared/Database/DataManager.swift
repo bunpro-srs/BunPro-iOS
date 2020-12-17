@@ -74,7 +74,8 @@ final class DataManager {
 
         stopStatusUpdates()
 
-        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { _ in
+        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             guard !self.isUpdating else { return }
 
             self.stopStatusUpdates()
