@@ -48,13 +48,13 @@ public class BunPuroProcedure<T: Codable>: GroupProcedure, OutputProcedure {
         }
         _transformProcedure = TransformProcedure<Data, T> {
             do {
-                _ = try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
+                _ = try JSONDecoder.customDecoder(withMiliseconds: self.hasMilliseconds).decode(T.self, from: $0)
             } catch {
                 let jsonObject = try JSONSerialization.jsonObject(with: $0, options: [.allowFragments])
                 logger.info(jsonObject)
             }
 
-            return try CustomDecoder.decode(T.self, from: $0, hasMilliseconds: self.hasMilliseconds)
+            return try JSONDecoder.customDecoder(withMiliseconds: self.hasMilliseconds).decode(T.self, from: $0)
         }
         _transformProcedure.injectPayload(fromNetwork: _networkProcedure)
 

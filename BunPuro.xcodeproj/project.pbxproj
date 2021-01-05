@@ -990,10 +990,11 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1017,10 +1018,11 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

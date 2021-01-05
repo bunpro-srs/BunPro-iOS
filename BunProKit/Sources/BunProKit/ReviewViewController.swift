@@ -22,16 +22,16 @@ public enum Website {
     var url: URL {
         switch self {
         case .main:
-            return URL(string: "https://www.bunpro.jp")!
+            return URL(string: "https://bunpro.jp")!
 
         case .review:
-            return URL(string: "https://www.bunpro.jp/app_study")!
+            return URL(string: "https://bunpro.jp/app_study")!
 
         case .study:
-            return URL(string: "https://www.bunpro.jp/app_learn")!
+            return URL(string: "https://bunpro.jp/app_learn")!
 
         case .cram:
-            return URL(string: "https://www.bunpro.jp/app_cram")!
+            return URL(string: "https://bunpro.jp/app_cram")!
         }
     }
 }
