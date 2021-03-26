@@ -15,8 +15,8 @@ struct DashboardView: View {
     @State private var isPresentingSelection = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView(.vertical, showsIndicators: true) {
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack(spacing: 0) {
                 ReviewStatusView()
                     .padding(.horizontal)
                     .onTapGesture {
@@ -24,6 +24,7 @@ struct DashboardView: View {
                     }
                 LevelsSection()
             }
+            .padding(.top)
         }
         .navigationBarTitle("Dashboard")
         .navigationBarItems(
