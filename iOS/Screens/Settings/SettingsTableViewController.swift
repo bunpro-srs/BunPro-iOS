@@ -118,13 +118,13 @@ final class SettingsTableViewController: UITableViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
             case .about:
-                present(informationViewControllerScene(for: .about), animated: true, completion: nil)
+                present(informationViewControllerScene(for: .about), animated: true)
 
             case .privacy:
-                present(informationViewControllerScene(for: .privacy), animated: true, completion: nil)
+                present(informationViewControllerScene(for: .privacy), animated: true)
 
             case .terms:
-                present(informationViewControllerScene(for: .terms), animated: true, completion: nil)
+                present(informationViewControllerScene(for: .terms), animated: true)
             }
 
         case .appearance:
@@ -178,7 +178,7 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceView = cell
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     private func didSelectEnglishSettingsCell(_ cell: UITableViewCell) {
@@ -203,7 +203,7 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceView = cell
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     private func didSelectBunnySettingsCell(_ cell: UITableViewCell) {
@@ -228,7 +228,7 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceView = cell
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     private func didSelectAppearanceCell(_ cell: UITableViewCell) {
@@ -261,7 +261,7 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceView = cell
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     private func didSelectLogoutCell(_ cell: UITableViewCell) {
@@ -283,7 +283,7 @@ final class SettingsTableViewController: UITableViewController {
         controller.popoverPresentationController?.sourceView = cell
         controller.popoverPresentationController?.sourceRect = cell.bounds
 
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     private func informationViewControllerScene(for category: InformationTableViewController.Category) -> UINavigationController {
@@ -336,7 +336,7 @@ final class SettingsTableViewController: UITableViewController {
 extension SettingsTableViewController: UINavigationControllerDelegate { }
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 

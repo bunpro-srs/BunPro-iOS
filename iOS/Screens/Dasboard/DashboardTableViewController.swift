@@ -96,7 +96,7 @@ final class DashboardTableViewController: UITableViewController {
         settingsViewCtrl.popoverPresentationController?.barButtonItem = sender
         settingsViewCtrl.presentationController?.delegate = self
 
-        present(settingsViewCtrl, animated: true, completion: nil)
+        present(settingsViewCtrl, animated: true)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -252,7 +252,7 @@ final class DashboardTableViewController: UITableViewController {
                     action: #selector(GrammarTableViewController.dismissSelf)
                 )
 
-                viewController.present(navigationCtrl, animated: true, completion: nil)
+                viewController.present(navigationCtrl, animated: true)
             }
         }
 
@@ -362,7 +362,7 @@ extension DashboardTableViewController: SegueHandler {
 
 extension DashboardTableViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 
@@ -433,6 +433,6 @@ extension DashboardTableViewController: UIAdaptivePresentationControllerDelegate
 
     @objc
     private func closeSettingsViewController() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }

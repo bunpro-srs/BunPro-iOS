@@ -60,7 +60,7 @@ class InformationTableViewController: UITableViewController {
     }
 
     @IBAction private func close() {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        presentingViewController?.dismiss(animated: true)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -261,7 +261,7 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate, Int
             UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil)
         )
 
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true)
     }
 }
 

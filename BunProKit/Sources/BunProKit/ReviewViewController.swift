@@ -119,7 +119,7 @@ public final class ReviewViewController: UIViewController, WKNavigationDelegate 
         } else {
             if let url = navigationAction.request.url {
                 let safariViewController = SFSafariViewController(url: url)
-                present(safariViewController, animated: true, completion: nil)
+                present(safariViewController, animated: true)
             }
             
             decisionHandler(.cancel)

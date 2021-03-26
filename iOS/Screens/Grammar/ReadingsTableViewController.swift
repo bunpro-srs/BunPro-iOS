@@ -62,7 +62,7 @@ class ReadingsTableViewController: CoreDataFetchedResultsTableViewController<Lin
         guard let url = fetchedResultsController.object(at: indexPath).url else { return }
 
         let safariViewCtrl = SFSafariViewController(url: url)
-        present(safariViewCtrl, animated: true, completion: nil)
+        present(safariViewCtrl, animated: true)
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
