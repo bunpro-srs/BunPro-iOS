@@ -33,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         Logger.shared.setup()
 
-        setupTabBarViewController()
-
         UserDefaults.standard
             .publisher(for: \.userInterfaceStyle, options: [.initial, .new])
             .receive(on: RunLoop.main)
@@ -57,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
 
-        center.requestAuthorization(options: [.badge, .sound, .alert]) { _, error in
+        center.requestAuthorization(options: [.badge, .sound, .alert, .provisional]) { _, error in
             guard error == nil else {
                 log.error(error!)
                 return
@@ -120,37 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static func modifyReview(_ modificationType: ModifyReviewProcedure.ModificationType) {
         (UIApplication.shared.delegate as? AppDelegate)?.dataManager?.modifyReview(modificationType)
     }
-
-    private func setupTabBarViewController() {
-        guard let viewControllers = (window?.rootViewController as? UITabBarController)?.viewControllers else { return }
-        for (index, viewController) in viewControllers.enumerated() {
-            switch index {
-            case 0:
-                viewController.tabBarItem = UITabBarItem(
-                    title: L10n.Tabbar.status,
-                    image: .pencilCircle,
-                    selectedImage: .pencilCircleFill
-                )
-
-            case 1:
-                viewController.tabBarItem = UITabBarItem(
-                    title: L10n.Tabbar.search,
-                    image: .magnifyingglassCircle,
-                    selectedImage: .magnifyingglassCircleFill
-                )
-
-            case 2:
-                viewController.tabBarItem = UITabBarItem(
-                    title: L10n.Tabbar.settings,
-                    image: .ellipsisCircle,
-                    selectedImage: .ellipsisCircleFill
-                )
-
-            default:
-                break
-            }
-        }
-    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -200,6 +167,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     static func updateAppBadgeIcon() {
-        UIApplication.shared.applicationIconBadgeNumber = AppDelegate.badgeNumber()?.intValue ?? 0
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber = AppDelegate.badgeNumber()?.intValue ?? 0
+        }
     }
 }

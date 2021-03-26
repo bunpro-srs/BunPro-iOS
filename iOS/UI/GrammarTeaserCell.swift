@@ -20,7 +20,7 @@ final class GrammarTeaserCell: UITableViewCell {
 
     @IBOutlet private weak var hankoImageView: UIImageView!
 
-    var isComplete: Bool = false {
+    var isComplete = false {
         didSet {
             hankoImageView?.tintColor = .lightGray
             hankoImageView.isHidden = !isComplete

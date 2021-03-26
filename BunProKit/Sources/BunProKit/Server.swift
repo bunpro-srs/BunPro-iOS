@@ -57,22 +57,31 @@ final class NetworkHandler {
     let queue = ProcedureQueue()
 }
 
-enum CustomDecoder {
-    static func decode<T>(_ type: T.Type, from data: Data, hasMilliseconds: Bool = false) throws -> T where T: Decodable {
+extension JSONDecoder {
+    
+    static var nonMilisecondsDecoder: JSONDecoder {
+        customDecoder(withMiliseconds: false)
+    }
+    
+    static var milisecondsDecoder: JSONDecoder {
+        customDecoder(withMiliseconds: true)
+    }
+    
+    static func customDecoder(withMiliseconds: Bool) -> JSONDecoder {
         let formatter = DateFormatter()
-
+        
         formatter.locale = Locale(identifier: "en_US")
-
-        if hasMilliseconds {
+        
+        if withMiliseconds {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         } else {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         }
-
+        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
-
-        return try decoder.decode(type, from: data)
+        
+        return decoder
     }
 }
 

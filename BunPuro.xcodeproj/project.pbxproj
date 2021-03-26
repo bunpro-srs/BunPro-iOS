@@ -151,6 +151,7 @@
 		2E48ABB520C1A3DD00BA660B /* BunPuro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BunPuro.entitlements; sourceTree = "<group>"; };
 		2E528A20234898740061A92D /* UserDefaults+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Custom.swift"; sourceTree = "<group>"; };
 		2E59790E20C6E6AD0007E9BE /* BunPuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BunPuro-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E688B03251A79E6003E93E1 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		2E6C97072372269B00073707 /* StatusObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusObserver.swift; sourceTree = "<group>"; };
 		2E78A15E2017AEFE0040D928 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
 		2E7B368D2077DFE600542BB8 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -204,6 +205,7 @@
 		2EBB70BE201655A6001AE42E /* Grammar+initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grammar+initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C420165DF6001AE42E /* Review+Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+Initializer.swift"; sourceTree = "<group>"; };
 		2EBB70C6201667FC001AE42E /* GrammarTeaserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarTeaserCell.swift; sourceTree = "<group>"; };
+		2EC73FA124FE9B7E002B4009 /* BunPro 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BunPro 2.xcdatamodel"; sourceTree = "<group>"; };
 		2ECBE3E9203B5B8B00F20EE3 /* KanjiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanjiTableViewController.swift; sourceTree = "<group>"; };
 		2ECDB1DF236CB1D000B28A29 /* privacy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = privacy.json; sourceTree = "<group>"; };
 		2ECDB1E1236CB2FA00B28A29 /* Paragraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				2EAD9DF41FA25DF100CE52CF /* iOSUITests */,
 				2E13066022BD8C1F00AA0C0D /* Frameworks */,
 				2EAD9DD11FA25DF100CE52CF /* Products */,
+				2ECF58FF260E4E43005719B8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -513,6 +516,14 @@
 				2ECDB1E5236CD89A00B28A29 /* terms.json */,
 			);
 			path = Information;
+			sourceTree = "<group>";
+		};
+		2ECF58FF260E4E43005719B8 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2E688B03251A79E6003E93E1 /* MainSplitViewController.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		A1D6C149226B56A200D25DF1 /* Generated */ = {
@@ -1045,10 +1056,11 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 79;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1073,10 +1085,11 @@
 				CODE_SIGN_ENTITLEMENTS = iOS/BunPuro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 79;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 549QX23F59;
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1245,10 +1258,11 @@
 		2EFB5F9A1FB38D8A004D3DF5 /* BunPro.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2EC73FA124FE9B7E002B4009 /* BunPro 2.xcdatamodel */,
 				2EA29AA32391AEF1003B50A9 /* BunPro 2.xcdatamodel */,
 				2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */,
 			);
-			currentVersion = 2EFB5F9B1FB38D8A004D3DF5 /* BunPro.xcdatamodel */;
+			currentVersion = 2EA29AA32391AEF1003B50A9 /* BunPro 2.xcdatamodel */;
 			path = BunPro.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

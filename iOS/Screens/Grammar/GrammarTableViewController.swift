@@ -83,7 +83,7 @@ final class GrammarTableViewController: UITableViewController, GrammarPresenter 
 
     @objc
     func dismissSelf() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 
     private func updateEditBarButtonState() {

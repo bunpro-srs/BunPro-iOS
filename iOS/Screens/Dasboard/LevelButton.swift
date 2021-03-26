@@ -102,20 +102,20 @@ struct ProgressCircle: View {
 
     var body: some View {
         ZStack {
-            if self.backgroundEnabled {
+            if backgroundEnabled {
                 Circle()
                     .stroke(lineWidth: self.lineWidth)
                     .foregroundColor(self.backgroundColor)
             }
 
             Circle()
-                .trim(from: 0, to: CGFloat(self.value / self.maxValue))
-                .stroke(style: self.style.strokeStyle(lineWidth: self.lineWidth))
-                .foregroundColor(self.foregroundColor)
+                .trim(from: 0, to: CGFloat(value / maxValue))
+                .stroke(style: style.strokeStyle(lineWidth: lineWidth))
+                .foregroundColor(foregroundColor)
                 .rotationEffect(Angle(degrees: -90))
-                .animation(.easeIn)
         }
         .padding(lineWidth / 2)
+        .drawingGroup()
     }
 }
 

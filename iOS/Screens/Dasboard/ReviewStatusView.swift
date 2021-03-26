@@ -39,7 +39,7 @@ struct ReviewStatusView: View {
 
     @FetchRequest private var upcomingReviews: FetchedResults<Review>
 
-    @State private var isUnfolded: Bool = true
+    @State private var isUnfolded = true
 
     private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
         .makeConnectable()
@@ -125,7 +125,6 @@ struct ReviewStatusView: View {
                             .rotationEffect(isUnfolded ? .degrees(90) : .zero)
                     }
                     .padding(24)
-                    .background(Color.green)
                 }
                 Spacer()
             }

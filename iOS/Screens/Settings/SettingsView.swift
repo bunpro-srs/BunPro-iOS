@@ -9,9 +9,9 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var settingsStore: SettingsStore
 
-    @SwiftUI.State private var isPresentingAbout: Bool = false
-    @SwiftUI.State private var isPresentingPrivacy: Bool = false
-    @SwiftUI.State private var isPresentingTerms: Bool = false
+    @SwiftUI.State private var isPresentingAbout = false
+    @SwiftUI.State private var isPresentingPrivacy = false
+    @SwiftUI.State private var isPresentingTerms = false
 
     @Binding var isPresenting: Bool
 

@@ -41,7 +41,7 @@ struct LoginView: View {
         }
         .frame(maxWidth: 414)
         .padding()
-        .padding(.bottom, keyboardResponder.currentHeight)
+        .padding(.bottom, keyboardResponder.currentHeight * 0.15)
         
         .animation(.default)
     }

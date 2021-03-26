@@ -9,8 +9,8 @@ import Foundation
 
 final class SettingsStore: ObservableObject {
     @Published var furiganaDisplayMode: BunProKit.FuriganaMode = .wanikani
-    @Published var areTranslationsHidden: Bool = false
-    @Published var isAutomaticAdvancementActive: Bool = false
+    @Published var areTranslationsHidden = false
+    @Published var isAutomaticAdvancementActive = false
     @Published var uiAppearanceMode: UserDefaults.UserInterfaceStyle = .system
 
     static var furiganaDisplayModes: [String] = BunProKit.FuriganaMode.allCases.map { $0.localizedString }

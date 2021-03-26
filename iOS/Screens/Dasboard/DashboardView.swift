@@ -10,9 +10,9 @@ import SwiftUI
 struct DashboardView: View {
     @EnvironmentObject var settingsStore: SettingsStore
 
-    @State private var isPresentingSettings: Bool = false
-    @State private var isPresentingReview: Bool = false
-    @State private var isPresentingSelection: Bool = false
+    @State private var isPresentingSettings = false
+    @State private var isPresentingReview = false
+    @State private var isPresentingSelection = false
 
     var body: some View {
         VStack(spacing: 0) {

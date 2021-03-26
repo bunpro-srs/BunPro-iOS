@@ -51,7 +51,7 @@ final class DataManager {
     }
 
     // Status Updates
-    private let updateTimeInterval = TimeInterval(60 * 5)
+    private let updateTimeInterval = TimeInterval(60 * 10)
     private var startImmediately: Bool = true
     var isUpdating: Bool = false {
         didSet {
@@ -60,9 +60,10 @@ final class DataManager {
             }
         }
     }
-    private var statusUpdateTimer: Timer? { didSet { statusUpdateTimer?.tolerance = 10.0 } }
 
     private var hasPendingReviewModification: Bool = false
+    
+    private var timerSubscription: AnyCancellable?
 
     func startStatusUpdates() {
         if startImmediately {
@@ -73,24 +74,18 @@ final class DataManager {
         guard !isUpdating else { return }
 
         stopStatusUpdates()
-
-        statusUpdateTimer = Timer.scheduledTimer(withTimeInterval: updateTimeInterval, repeats: true) { _ in
-            guard !self.isUpdating else { return }
-
-            self.stopStatusUpdates()
-
-            self.statusUpdateTimer = Timer(timeInterval: self.updateTimeInterval, repeats: true) { _ in
+        
+        timerSubscription = Timer.publish(every: updateTimeInterval, tolerance: 10.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self = self else { return }
                 guard !self.isUpdating else { return }
                 self.scheduleUpdateProcedure()
             }
-
-            RunLoop.main.add(self.statusUpdateTimer!, forMode: RunLoop.Mode.default)
-        }
     }
 
     func stopStatusUpdates() {
-        statusUpdateTimer?.invalidate()
-        statusUpdateTimer = nil
+        timerSubscription?.cancel()
     }
 
     func immidiateStatusUpdate() {

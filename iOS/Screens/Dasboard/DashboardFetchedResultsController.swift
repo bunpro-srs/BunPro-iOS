@@ -28,6 +28,10 @@ class DashboardFetchedResultsController: NSObject {
         let completeFetchRequest: NSFetchRequest<Grammar> = Grammar.fetchRequest()
         completeFetchRequest.predicate = NSPredicate(format: "%K = %@", #keyPath(Grammar.level), "JLPT\(level)")
 
+        if level == 0 {
+            completeFetchRequest.predicate = nil
+        }
+
         do {
             let grammarPoints = try AppDelegate.database.viewContext.fetch(completeFetchRequest)
 

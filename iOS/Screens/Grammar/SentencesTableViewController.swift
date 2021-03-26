@@ -4,6 +4,7 @@
 //
 
 import AVFoundation
+import Combine
 import CoreData
 import UIKit
 
@@ -12,12 +13,22 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
 
     private var player: AVPlayer?
 
+    private var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = L10n.Grammar.sentences
 
         setupFetchedResultsController()
+
+        NotificationCenter
+            .default
+            .publisher(for: NSNotification.Name.AVPlayerItemDidPlayToEndTime)
+            .sink { _ in
+                try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+            }
+            .store(in: &subscriptions)
     }
 
     private func setupFetchedResultsController() {
@@ -90,9 +101,14 @@ class SentencesTableViewController: CoreDataFetchedResultsTableViewController<Se
     private func playSound(forSentenceAt indexPath: IndexPath) {
         guard let url = fetchedResultsController.object(at: indexPath).audioURL else { return }
 
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+
         if player == nil {
             player = AVPlayer(url: url)
             player?.volume = 1.0
+
+            player?.actionAtItemEnd = .pause
         } else {
             player?.pause()
 

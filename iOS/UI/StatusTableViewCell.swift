@@ -26,7 +26,7 @@ final class StatusTableViewCell: UITableViewCell {
         return formatter
     }()
 
-    var isUpdating: Bool = false {
+    var isUpdating = false {
         didSet { isUpdating ? activityIndicatorView.startAnimating() : activityIndicatorView.stopAnimating() }
     }
 

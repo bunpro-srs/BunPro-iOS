@@ -9,7 +9,7 @@ final class HimitsuTableViewCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cloakView: UIVisualEffectView!
 
-    var isCloaked: Bool = true {
+    var isCloaked = true {
         didSet {
             cloakView.isHidden = isCloaked
         }

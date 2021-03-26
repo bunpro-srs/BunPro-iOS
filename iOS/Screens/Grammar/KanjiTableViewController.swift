@@ -10,7 +10,7 @@ final class KanjiTableViewController: UITableViewController {
     var english: String?
     var furigana = [Furigana]()
 
-    var showEnglish: Bool = false
+    var showEnglish = false
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
