@@ -81,7 +81,7 @@ extension JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         
-        return try decoder
+        return decoder
     }
 }
 

@@ -8,7 +8,7 @@ import UIKit
 import WebKit
 import SafariServices
 
-protocol ReviewViewControllerDelegate: class {
+protocol ReviewViewControllerDelegate: AnyObject {
     func reviewViewControllerDidFinish(_ controller: ReviewViewController)
     func reviewViewControllerWillOpenGrammar(_ controller: ReviewViewController, identifier: Int)
 }
