@@ -19,7 +19,7 @@ public struct BPKSentence: Codable {
     }
 
     public let identifier: Int64
-    public let grammarIdentifier: Int64
+    public let grammarIdentifier: Int64?
     public let japanese: String
     public let english: String
     public let structure: String
@@ -41,7 +41,7 @@ public struct BPKLink: Codable {
     }
 
     public let identifier: Int64
-    public let grammarIdentifier: Int64
+    public let grammarIdentifier: Int64?
     public let site: String
     public let description: String
     public let link: String

@@ -33,7 +33,7 @@ public struct BPKReview: Codable {
     public let identifier: Int64
     public let userIdentifier: Int64
     public let studyQuenstionIdentifier: Int64?
-    public let grammarIdentifier: Int64
+    public let grammarIdentifier: Int64?
     public let reviewType: ReviewType? // Self study does not have a type
     public let timesCorrect: Int64
     public let timesIncorrect: Int64

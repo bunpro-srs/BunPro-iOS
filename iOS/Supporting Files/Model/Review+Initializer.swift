@@ -15,7 +15,7 @@ extension Review {
         identifier = review.identifier
         complete = review.complete ?? true
         createdDate = review.createdDate
-        grammarIdentifier = review.grammarIdentifier
+        grammarIdentifier = review.grammarIdentifier ?? 0
         lastStudiedDate = review.lastStudiedDate
         nextReviewDate = review.nextReviewDate
         readingIdentifiers = review.readingsIdentifiers as NSArray?
